@@ -1,0 +1,144 @@
+{
+  "systems": [
+    {
+      "name": "analytics-prod",
+      "platform": "BigQuery",
+      "environment": "prod",
+      "schemas": [
+        {
+          "name": "raw",
+          "tables": [
+            {
+              "name": "orders",
+              "kind": "table",
+              "description": "Orders as loaded from the shop database",
+              "columns": [
+                {
+                  "name": "order_id",
+                  "data_type": "STRING",
+                  "nullable": false
+                },
+                {
+                  "name": "customer_id",
+                  "data_type": "STRING"
+                },
+                {
+                  "name": "amount_cents",
+                  "data_type": "INT64"
+                },
+                {
+                  "name": "status",
+                  "data_type": "STRING"
+                }
+              ]
+            },
+            {
+              "name": "customers",
+              "kind": "table",
+              "tags": [
+                "customer"
+              ],
+              "columns": [
+                {
+                  "name": "customer_id",
+                  "data_type": "STRING",
+                  "nullable": false
+                },
+                {
+                  "name": "full_name",
+                  "data_type": "STRING",
+                  "nullable": true,
+                  "description": "Customer name",
+                  "tags": [
+                    "customer",
+                    "pii-candidate"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "staging",
+          "tables": [
+            {
+              "name": "stg_orders",
+              "kind": "view",
+              "columns": [
+                {
+                  "name": "order_id",
+                  "data_type": "STRING"
+                },
+                {
+                  "name": "customer_id",
+                  "data_type": "STRING"
+                },
+                {
+                  "name": "amount",
+                  "data_type": "NUMERIC"
+                },
+                {
+                  "name": "status",
+                  "data_type": "STRING"
+                }
+              ]
+            },
+            {
+              "name": "stg_customers",
+              "kind": "view",
+              "columns": [
+                {
+                  "name": "customer_id",
+                  "data_type": "STRING"
+                },
+                {
+                  "name": "customer_name",
+                  "data_type": "STRING"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "marts",
+          "tables": [
+            {
+              "name": "fct_orders",
+              "kind": "table",
+              "description": "One row per order",
+              "columns": [
+                {
+                  "name": "order_id",
+                  "data_type": "STRING",
+                  "nullable": false
+                },
+                {
+                  "name": "customer_id",
+                  "data_type": "STRING"
+                },
+                {
+                  "name": "customer_name",
+                  "data_type": "STRING"
+                },
+                {
+                  "name": "amount",
+                  "data_type": "NUMERIC"
+                }
+              ]
+            },
+            {
+              "name": "orders_preview",
+              "kind": "view",
+              "columns": [
+                {
+                  "name": "order_id",
+                  "data_type": "STRING"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

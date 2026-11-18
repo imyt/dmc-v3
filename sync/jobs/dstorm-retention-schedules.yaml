@@ -1,0 +1,18 @@
+# S9 (INVENTED SCHEMA): the DQ Hub / DSTORM table and column names below are placeholders shaped like plausible source tables. The real ones must come from the data platform team.
+# Rule 8: explicit column list, never SELECT *; DQ Hub tables may hold profiled or failing sample values, which are never selected. Only rule metadata and aggregate results are read.
+# DSTORM retention schedules -> RetentionSchedule nodes (qualified name: the DSTORM schedule id).
+job: dstorm-retention-schedules
+connection: bq-dstorm
+schedule: "32 4 * * *"
+source:
+  query: "SELECT schedule_id, period, trigger_event, disposal_action FROM `${project}.${dataset}.retention_schedules`"
+  mode: full
+  page_size: 1000
+target:
+  type: RetentionSchedule
+  key: schedule_id
+  source: dstorm
+  map: { period: period, trigger_event: trigger_event, disposal_action: disposal_action }
+  on_missing: deprecate
+limits: { max_changes_pct: 30 }
+retries: { max: 2, backoff_seconds: 5 }

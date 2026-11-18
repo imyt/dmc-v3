@@ -1,0 +1,11 @@
+type: Assessment
+version: 1
+parent: ControlRecord
+identity:
+  qualified_name: datavisa-tool.assessment_id
+attributes:
+  outcome: { type: enum, values: [datavisa-required, datavisa-not-required], required: true, source: datavisa-tool }
+  assessed_on: { type: date, required: true, source: datavisa-tool }
+  review_due: { type: date, source: datavisa-tool }
+lifecycle: default
+controls: [privacy]

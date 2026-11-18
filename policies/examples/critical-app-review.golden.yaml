@@ -1,0 +1,10 @@
+cases:
+  - name: live critical app matches
+    asset: { criticality: critical, status: live }
+    expect: true
+  - name: retired app does not match
+    asset: { criticality: critical, status: retired }
+    expect: false
+  - name: low criticality does not match
+    asset: { criticality: low, status: live }
+    expect: false

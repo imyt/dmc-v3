@@ -1,0 +1,56 @@
+# Local environment: a mock source server (`pnpm run mock-sources`) stands in for ServiceNow.
+connections:
+  mock-servicenow: { type: rest, baseUrl: "http://localhost:8099/", allowInsecure: true, recordsPath: records, secret: local/none }
+# S5: there is no Collibra locally. The jobs resolve but stay off; the type ids are placeholders.
+  collibra: { baseUrl: "http://localhost:8099/", allowInsecure: true, recordsPath: results, paging: { style: offset }, secret: local/none, dataDomainTypeId: local, dataCategoryTypeId: local, businessTermTypeId: local, termCategoryRelationTypeId: local, categoryDomainRelationTypeId: local, ownerRoleId: local, stewardRoleId: local, ownerKeyField: emailAddress }
+# S11: ARIS, RRIS and the BCBS inventory. The access method is unknown, so all three read recorded inventories from the mock source server.
+  mock-aris: { type: rest, baseUrl: "http://localhost:8099/", allowInsecure: true, recordsPath: records, secret: local/none }
+  mock-rris: { type: rest, baseUrl: "http://localhost:8099/", allowInsecure: true, recordsPath: records, secret: local/none }
+  mock-bcbs: { type: rest, baseUrl: "http://localhost:8099/", allowInsecure: true, recordsPath: records, secret: local/none }
+# S8: dbt and Airflow lineage are read from recorded artifacts (the real manifest locations are not known yet).
+  lineage-files: { type: manifest, root: sync/fixtures, secret: local/none }
+# S2: BigQuery. Locally the job is off (no GCP project); UAT and prod overlays set the real project and dataset, and auth: key plus a secret only if workload identity is not available.
+  bq-servicenow: { type: bigquery, project: local-fixture, dataset: servicenow, secret: local/none }
+# S9: DQ Hub and DSTORM, one BigQuery connection per source dataset (names are placeholders until the data platform team confirms them). Jobs are off locally.
+  bq-dq-hub: { type: bigquery, project: local-fixture, dataset: dq_hub, secret: local/none }
+  bq-dstorm: { type: bigquery, project: local-fixture, dataset: dstorm, secret: local/none }
+# S10: the classification tool API and the DataVisa dataset. Locally the jobs are off; real endpoint, auth, project and dataset come from Privacy / security and the DataVisa and data platform teams.
+  classification-tool: { type: rest, baseUrl: "http://localhost:8099/", allowInsecure: true, recordsPath: records, paging: { style: offset }, secret: local/none }
+  bq-datavisa: { type: bigquery, project: local-fixture, dataset: datavisa, secret: local/none }
+# S7: Git JSON metadata is read from recorded repo checkouts (sync/fixtures/git/<application id>/dmc-metadata.json); the real Git connector (S3) is not approved yet.
+  git-repos: { type: manifest, root: sync/fixtures, git_repos: git, applications_file: applications.json, secret: local/none }
+# IdP people (idp-people): the identity provider API is unknown, so the job is off locally (the seed creates the local people from config/local-users.json). UAT and prod overlays set the real baseUrl, auth, recordsPath, paging and peoplePath.
+  idp: { type: rest, baseUrl: "http://localhost:8099/", allowInsecure: true, recordsPath: users, paging: { style: offset, offsetParam: startAt, limitParam: maxResults }, secret: local/none, peoplePath: /v1/users }
+jobs:
+  dbt-column-lineage: { dbt_target: dbt/target }
+  airflow-column-lineage: { airflow_events: airflow/lineage-events.json }
+  collibra-data-domains: { enabled: false }
+  collibra-data-categories: { enabled: false }
+  collibra-business-terms: { enabled: false }
+  collibra-term-categories: { enabled: false }
+  collibra-category-domains: { enabled: false }
+  collibra-owners: { enabled: false }
+  idp-people: { enabled: false }
+  collibra-stewards: { enabled: false }
+  aris-scopes: { connection: mock-aris, enabled: true }
+  rris-scopes: { connection: mock-rris, enabled: true }
+  bcbs-scopes: { connection: mock-bcbs, enabled: true }
+# S6: ONE ServiceNow writer per environment. Locally the REST stand-in servicenow-applications is on and every *-bq ServiceNow job is off (UAT and prod do the opposite). tests/sync-servicenow.test.ts fails if both write the same source.
+  servicenow-applications-bq: { enabled: false }
+  servicenow-application-owners-bq: { enabled: false }
+  servicenow-integrations-bq: { enabled: false }
+  servicenow-integration-source-bq: { enabled: false }
+  servicenow-integration-target-bq: { enabled: false }
+  dq-hub-rules: { enabled: false }
+  dq-hub-column-checks: { enabled: false }
+  dq-hub-table-checks: { enabled: false }
+  dstorm-record-classes: { enabled: false }
+  dstorm-retention-schedules: { enabled: false }
+  dstorm-retained-under: { enabled: false }
+  dstorm-legal-holds: { enabled: false }
+  dstorm-held-by: { enabled: false }
+  classification-tool-classes: { enabled: false }
+  classification-tool-column-classes: { enabled: false }
+  datavisa-assessments: { enabled: false }
+  datavisa-assessment-integrations: { enabled: false }
+  datavisa-visas: { enabled: false }

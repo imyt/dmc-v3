@@ -1,0 +1,6 @@
+{ "_comment": "S10 recorded fixture with an INVENTED shape for the classification tool's GET /v1/column-classifications. Real endpoints, auth and fields must come from the owning team. sample_value and matched_text are traps for the rule 8 test: they look like data values and must never be read.",
+  "records": [
+    { "assignment_id": "cc-1", "column": { "database": "analytics-prod", "schema": "staging", "table": "stg_customers", "column": "email" }, "class": { "class_id": "pii:email" }, "classified_at": "2026-03-02T08:00:00.000Z", "sample_value": "jane.doe@example.com", "matched_text": "4929 1234 5678 9012" },
+    { "assignment_id": "cc-2", "column": { "database": "analytics-prod", "schema": "staging", "table": "stg_customers", "column": "customer_name" }, "class": { "class_id": "pii:name" }, "classified_at": "2026-03-02T08:00:00.000Z", "sample_value": "Jane Doe" },
+    { "assignment_id": "cc-3", "column": { "database": "analytics-prod", "schema": "marts", "table": "fct_orders", "column": "amount" }, "class": { "class_id": "isr:restricted" }, "classified_at": "2026-03-03T08:00:00.000Z" }
+  ] }

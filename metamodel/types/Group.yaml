@@ -1,0 +1,10 @@
+type: Group
+version: 1
+parent: Party
+identity:
+  qualified_name: idp.group
+attributes:
+  name: { type: string, required: true, source: idp }
+  idp_group: { type: string, source: idp }
+lifecycle: default
+controls: []

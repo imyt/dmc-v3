@@ -1,0 +1,10 @@
+cases:
+  - name: integration with no dataset matches
+    asset: { qualified_name: servicenow.INT001, transfers: [] }
+    expect: true
+  - name: integration with a dataset does not match
+    asset: { qualified_name: servicenow.INT002, transfers: [{ qualified_name: ds.payments }] }
+    expect: false
+  - name: asset without the edge is an error, not a silent pass
+    asset: { qualified_name: servicenow.INT003 }
+    expect: error

@@ -1,0 +1,18 @@
+# S7: System contains Schema.
+# Both ends must exist: run after the node jobs (and after the ServiceNow applications job for owns). The repo is kept on the edge as its provenance.
+job: git-contains-schemas
+connection: git-repos
+schedule: "6 3 * * *"
+source: { query: "git-json ${git_repos} ${applications_file} contains-schemas", mode: full }
+target:
+  type: System
+  edge:
+    name: contains
+    qualified_name: "{qn}"
+    from: from
+    to: to
+  source: git-json
+  map: { repo: repo }
+  on_missing: deprecate
+limits: { max_changes_pct: 30 }
+retries: { max: 2, backoff_seconds: 5 }

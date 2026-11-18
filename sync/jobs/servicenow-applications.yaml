@@ -1,0 +1,15 @@
+# ADR 0026: `owned_by` must be the owner's STAFF ID (a string of 8 digits, leading zeros kept). An email is resolved to the staff ID by the worker; a short number is refused and reported, never padded.
+# UNCONFIRMED: which ServiceNow user field lands in `owned_by` (staff ID, user name or email): ask the ServiceNow owner. Delegates are a string list of staff IDs, kept as the metamodel defines (no edge, not resolved).
+# Synthetic stand-in for the ServiceNow applications job (task S6): reads the local mock source (sync/fixtures/applications.json).
+# Both this job and servicenow-applications-bq write source `servicenow`: run only one per environment (this one is enabled locally, the BigQuery one is disabled; tests/sync-servicenow.test.ts checks it).
+job: servicenow-applications
+connection: mock-servicenow
+schedule: "*/15 * * * *"
+source: { query: "/v1/applications", mode: full, page_size: 500 }
+target:
+  type: Application
+  key: sys_id
+  source: servicenow
+  map: { name: name, owner: owned_by, delegates: delegates, criticality: criticality, status: install_status, hosting_country: country }
+  on_missing: ignore
+retries: { max: 2, backoff_seconds: 5 }

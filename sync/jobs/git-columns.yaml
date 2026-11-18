@@ -1,0 +1,15 @@
+# S7: Columns (qualified name: system/schema/table/column). The dbt and Airflow lineage jobs (S8) use the same names.
+# Reads the application repos (one per application, found from the application list) through the manifest connector. Metadata only: names, types, tags, descriptions.
+# A full, complete run that no longer finds a record deprecates it (a removed repo or table); a partial run (an unreadable repo file) deprecates nothing.
+job: git-columns
+connection: git-repos
+schedule: "3 3 * * *"
+source: { query: "git-json ${git_repos} ${applications_file} columns", mode: full }
+target:
+  type: Column
+  key: qualified_name
+  source: git-json
+  map: { name: name, data_type: data_type, nullable: nullable, description: description, tags: tags }
+  on_missing: deprecate
+limits: { max_changes_pct: 30 }
+retries: { max: 2, backoff_seconds: 5 }

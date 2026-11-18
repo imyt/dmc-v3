@@ -1,0 +1,45 @@
+# Access control as data (docs/access-control.md). Changes only by merge.
+# roles: IdP group -> role. "<x>" in a group name captures a parameter (a domain, a control type).
+roles:
+  - { group: dmc-steward-<domain>, role: steward, param: domain }
+  - { group: dmc-scope-owner, role: scope-owner }
+  - { group: dmc-policy-author, role: policy-author }
+  - { group: dmc-control-owner-<control>, role: control-owner, param: control }
+  - { group: dmc-auditor, role: auditor }
+  - { group: dmc-platform-admin, role: admin }
+
+# rules: attribute rules in CEL. `principal` has id, groups, domains (steward), controls (control owner).
+# `object` is the facts the module resolved from the catalog for the thing being touched.
+rules:
+  application_ownership: "principal.id in object.applicationOwners"
+  domain_stewardship: "object.domain in principal.domains"
+  scope_ownership: "object.scopeOwner == principal.id || principal.id in object.scopeDelegates"
+  classification_stewardship: "object.unassigned == true || object.domain in principal.domains"
+  control_ownership: "object.control in principal.controls"
+  assignment: "object.assignee == principal.id || object.assignee in principal.groups"
+
+# actions: which roles may do them, on any object (any) or only where a rule passes.
+#   sod: nobody does it to something they requested themselves.
+#   service/scope: whether a non-human caller may do it without a person, and the scope it needs.
+#   write: refused for synced fields and locked objects.
+actions:
+  read:               { service: true, scope: dmc.read, roles: { viewer: any } }
+  edit_dmc_fields:    { write: true, roles: { app-owner: application_ownership, steward: domain_stewardship } }
+  edit_dataset:       { write: true, roles: { app-owner: application_ownership } }
+  link_elements:      { write: true, roles: { app-owner: application_ownership } }
+  scope_write:        { write: true, roles: { scope-owner: scope_ownership } }
+  edit_glossary:      { write: true, roles: { steward: domain_stewardship } }
+  create_domain:      { roles: { admin: any } }
+  decide_task:        { sod: true, roles: { assignee: assignment, app-owner: assignment, steward: assignment, scope-owner: assignment, control-owner: assignment, policy-author: assignment, admin: assignment } }
+  write_policy:       { roles: { policy-author: any, control-owner: control_ownership } }
+  sign_off_policy:    { sod: true, roles: { control-owner: control_ownership } }
+  pause_policy:       { roles: { control-owner: control_ownership, admin: any } }
+  write_requirement:  { write: true, roles: { policy-author: any, control-owner: control_ownership } }
+  read_evidence:      { roles: { control-owner: control_ownership, auditor: any, admin: any } }
+  decide_classification: { write: true, roles: { steward: classification_stewardship, admin: any } }
+  admin_control:      { roles: { admin: any } }
+  sync_admin:         { roles: { admin: any } }
+  review_metamodel:   { sod: true, roles: { admin: any } }
+  scope_amend:        { roles: { scope-owner: scope_ownership } }
+  scope_delegate:     { roles: { scope-owner: scope_ownership } }
+  signal_write:       { service: true, scope: dmc.signal.write, roles: {} }

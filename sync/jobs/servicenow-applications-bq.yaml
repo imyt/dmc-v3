@@ -1,0 +1,23 @@
+# ADR 0026: `owned_by` must be the owner's STAFF ID (a string of 8 digits, leading zeros kept). An email is resolved to the staff ID by the worker; a short number is refused and reported, never padded.
+# UNCONFIRMED: which ServiceNow user field the data platform lands in `owned_by` (staff ID, user name or email): ask the ServiceNow owner.
+# S6 (INVENTED SCHEMA): table and column names below are placeholders shaped like a plausible ServiceNow export. Project, dataset, table and column names come from the data platform team.
+# Delegates: ServiceNow holds two delegates per application. The metamodel keeps them as a string list (Application.delegates) of staff IDs, so there is no edge and no Person lookup. The table is assumed to land them as one
+# ARRAY<STRING> column `delegates` (the data platform may instead land two columns; then build the array in the query with ARRAY(SELECT d FROM UNNEST([delegate_1, delegate_2]) AS d WHERE d IS NOT NULL)).
+# Full read, not incremental: only a complete full run can see that a row is gone, and then (and only then) the application is deprecated (ADR 0013). The table is small (thousands of rows); the change limit stops a mass deprecation from a bad extract.
+# Both this job and servicenow-applications (REST, local stand-in) write source `servicenow`: run only one per environment (this one is disabled locally; tests/sync-servicenow.test.ts checks it).
+# Run order: this job first, then servicenow-application-owners-bq, servicenow-integrations-bq and the two integration edge jobs (an edge to a node that is not there yet is refused and retried, ADR 0024).
+job: servicenow-applications-bq
+connection: bq-servicenow
+schedule: "30 2 * * *"
+source:
+  query: "SELECT sys_id, name, owned_by, delegates, criticality, install_status, country FROM `${project}.${dataset}.applications`"
+  mode: full
+  page_size: 1000
+target:
+  type: Application
+  key: sys_id
+  source: servicenow
+  map: { name: name, owner: owned_by, delegates: delegates, criticality: criticality, status: install_status, hosting_country: country }
+  on_missing: deprecate
+limits: { max_changes_pct: 30 }
+retries: { max: 2, backoff_seconds: 5 }

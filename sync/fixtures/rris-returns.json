@@ -1,0 +1,6 @@
+{ "records": [
+  { "return_id": "rris-pra110", "title": "PRA110 Cash flow mismatch", "owner": { "staff_id": "43000004", "name": "Olive Okafor" }, "kind": "regulatory-return", "regime": "PRA" },
+  { "return_id": "rris-corep-lcr", "title": "COREP Liquidity coverage", "owner": { "staff_id": "43000004", "name": "Olive Okafor" }, "kind": "regulatory-return", "regime": "PRA" },
+  { "return_id": "rris-finrep-f01", "title": "FINREP Balance sheet", "owner": { "staff_id": "43000002", "name": "Ben Brooks" }, "kind": "regulatory-return", "regime": "EBA" },
+  { "return_id": "rris-hkma-liq", "title": "HKMA Liquidity monitoring", "owner": { "staff_id": "43000098", "name": "Unknown Person" }, "kind": "regulatory-return", "regime": "HKMA" }
+] }

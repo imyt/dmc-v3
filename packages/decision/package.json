@@ -1,0 +1,13 @@
+{
+  "name": "@dmc/decision",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "main": "src/index.ts",
+  "types": "src/index.ts",
+  "description": "bounded-context module: decision (own Postgres schema: decision)",
+  "dependencies": {
+    "@dmc/platform": "workspace:*",
+    "@dmc/contracts": "workspace:*"
+  }
+}

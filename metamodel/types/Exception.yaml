@@ -1,0 +1,16 @@
+type: Exception
+version: 1
+parent: GovernanceObject
+identity:
+  qualified_name: dmc.slug
+attributes:
+  kind: { type: string, required: true, source: dmc }
+  severity: { type: enum, values: [low, medium, high, critical], source: dmc }
+  status: { type: string, required: true, source: dmc }
+  due: { type: date, source: dmc }
+  assignee: { type: person, source: dmc }
+edges:
+  raised_on:
+    - { to: Any, cardinality: many-to-one }
+lifecycle: default
+controls: []

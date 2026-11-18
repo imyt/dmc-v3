@@ -1,0 +1,19 @@
+# S10: Integration assessed_by Assessment (PRV-3), from the same dataset. The cross-border check (L4) reads the first assessed_by edge of an integration, and the metamodel says the latest is current,
+# so this job reads a view that holds ONLY the current assessment of each integration. When a newer assessment replaces it, the old edge ends (a complete full run) and the new one is created.
+# ASSUMPTION (invented; the DataVisa team must provide such a view or say how "current" is decided): view `current_assessments` with integration (STRUCT id), assessment (STRUCT id), updated_at.
+# The integration id is the ServiceNow id (the qualified name of an Integration); run after the ServiceNow integrations job and datavisa-assessments: both ends must exist.
+job: datavisa-assessment-integrations
+connection: bq-datavisa
+schedule: "15 5 * * *"
+source:
+  query: "SELECT STRUCT(integration_id AS id) AS integration, STRUCT(assessment_id AS id) AS assessment, updated_at FROM `${project}.${dataset}.current_assessments`"
+  mode: full
+  page_size: 1000
+target:
+  type: Integration
+  source: datavisa-tool
+  edge: { name: assessed_by, qualified_name: "{id}", to_qualified_name: "{id}", from: integration, to: assessment }
+  map: { recorded: updated_at }
+  on_missing: deprecate
+limits: { max_changes_pct: 30 }
+retries: { max: 2, backoff_seconds: 5 }

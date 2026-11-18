@@ -1,0 +1,23 @@
+# S10: which PII and ISR class the classification tool gave each column: Column classified_as Classification, owned by the classification tool (source classification-tool), so it is authoritative (PRV-1) and replaces any class DMC proposed.
+# Run after classification-tool-classes and the S7 column jobs: both ends must exist.
+# ASSUMPTION (invented source shape; real endpoint, auth and fields must come from Privacy / security): GET /v1/column-classifications returns
+#   { records: [{ assignment_id, column: { database, schema, table, column }, class: { class_id }, classified_at }] }.
+# Only those fields are mapped. Anything else the API might send (sample or matched values) is never read into a signal, an attribute or a log (rule 8).
+# A complete full run that no longer finds an assignment ends the edge (the tool declassified the column).
+job: classification-tool-column-classes
+connection: classification-tool
+schedule: "30 4 * * *"
+source: { query: "/v1/column-classifications", mode: full, page_size: 1000 }
+target:
+  type: Column
+  source: classification-tool
+  edge:
+    name: classified_as
+    qualified_name: "{database}/{schema}/{table}/{column}"
+    to_qualified_name: "{class_id}"
+    from: column
+    to: class
+  map: { assignment: assignment_id }
+  on_missing: deprecate
+limits: { max_changes_pct: 30 }
+retries: { max: 3, backoff_seconds: 10 }

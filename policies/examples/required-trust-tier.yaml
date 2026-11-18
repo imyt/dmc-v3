@@ -1,0 +1,12 @@
+policy: required-trust-tier
+control: trust
+implements: TCR-0003
+mode: shadow
+scope:
+  type: Column
+when: column.trust_shortfall == true
+effect:
+  action: raise_exception
+  message: This asset is below the trust tier its scopes require; see its grades for what is holding it down
+route: data-owner
+escalate_after: 30d

@@ -1,0 +1,49 @@
+{
+  "name": "@dmc/app-web",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "main": "src/index.ts",
+  "types": "src/index.ts",
+  "description": "deployable: web (React SPA, Vite, shadcn/ui on React Aria)",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "test": "vitest run",
+    "test:visual": "playwright test"
+  },
+  "dependencies": {
+    "@dmc/sdk": "workspace:*",
+    "@phosphor-icons/react": "^2.1.10",
+    "@tanstack/react-router": "^1.170.46",
+    "@xyflow/react": "^13.0.2",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "cn": "^0.5.2",
+    "elkjs": "^0.12.1",
+    "react": "^19.0.0",
+    "react-aria-components": "^1.13.0",
+    "react-dom": "^19.0.0",
+    "shadcn": "^4.23.0",
+    "tailwind-merge": "^3.0.0",
+    "tw-animate-css": "^1.2.0"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.65.1",
+    "@tailwindcss/vite": "^4.0.0",
+    "@testing-library/jest-dom": "^6.6.0",
+    "@testing-library/react": "^16.1.0",
+    "@testing-library/user-event": "^14.5.0",
+    "@types/node": "^22.20.5",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "@vitejs/plugin-react": "^4.3.0",
+    "axe-core": "^4.14.1",
+    "jsdom": "^25.0.0",
+    "tailwindcss": "^4.0.0",
+    "typescript": "^5.9.3",
+    "vite": "^6.0.0",
+    "vitest": "^2.1.9"
+  }
+}

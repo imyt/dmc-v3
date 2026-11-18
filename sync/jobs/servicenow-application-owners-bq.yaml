@@ -1,0 +1,21 @@
+# S6 (INVENTED SCHEMA, see servicenow-applications-bq): Application owned_by Person, from the same applications table.
+# The owner attribute on the Application is written by servicenow-applications-bq; this job adds the edge so the owner is a real link to a Person node (CAT-9 style lookups, "who owns this" queries).
+# ADR 0026: `owned_by` is the staff ID (8 digits, text, leading zeros kept); an email is resolved by the worker through the Person email attribute; a short number is refused and reported, never padded.
+# The Person must exist (IdP Person job runs first). An owner that is not a Person yet is refused and retried (ADR 0024); the application itself is still written.
+# owned_by is many-to-one: when the owner changes, the old edge ends in this run (complete full run) and the new one is written by the next run (refused as a conflict until then, then retried).
+# Delegates are NOT edges: the metamodel keeps them as a string list on the application.
+job: servicenow-application-owners-bq
+connection: bq-servicenow
+schedule: "40 2 * * *"
+source:
+  query: "SELECT sys_id, owned_by FROM `${project}.${dataset}.applications` WHERE owned_by IS NOT NULL"
+  mode: full
+  page_size: 1000
+target:
+  type: Application
+  source: servicenow
+  edge: { name: owned_by, qualified_name: "{sys_id}", to_qualified_name: "{owned_by}", from: ".", to: "." }
+  map: { record: sys_id }
+  on_missing: deprecate
+limits: { max_changes_pct: 30 }
+retries: { max: 2, backoff_seconds: 5 }

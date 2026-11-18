@@ -1,0 +1,7 @@
+# Who gets the email when a task is assigned to a route or a group rather than to one person (U4).
+# A person's own address comes from their Person record (or, locally, config/local-users.json).
+# A route with no entry here and no person behind it is logged once as "no recipient".
+routes:
+  platform-governance: [platform-governance@example.test]
+  data-steward: [data-stewards@example.test]
+  governance-lead: [governance-lead@example.test]

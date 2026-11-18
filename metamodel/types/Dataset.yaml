@@ -1,0 +1,26 @@
+type: Dataset
+version: 1
+parent: Asset
+identity:
+  qualified_name: dmc.slug
+attributes:
+  name: { type: string, required: true, source: dmc }
+  description: { type: text, source: dmc }
+  business_context: { type: text, source: dmc }
+edges:
+  in_category:
+    - { to: DataCategory, cardinality: many-to-many }
+  realised_by:
+    - { to: Column, cardinality: many-to-many }
+  in_domain:
+    - { to: DataDomain, cardinality: many-to-one }
+  owned_by:
+    - { to: Party, cardinality: many-to-one }
+  stewarded_by:
+    - { to: Party, cardinality: many-to-one }
+  governed_by:
+    - { to: Policy, cardinality: many-to-many }
+  recorded_as:
+    - { to: RecordClass, cardinality: many-to-one }
+lifecycle: default
+controls: [privacy, retention]

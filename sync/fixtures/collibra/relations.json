@@ -1,0 +1,347 @@
+{
+  "total": 17,
+  "offset": 0,
+  "limit": 1000,
+  "results": [
+    {
+      "id": "r10000000-0000-4000-8000-000000000001",
+      "type": {
+        "id": "9a0000000-0000-4000-8000-000000000001",
+        "role": "is grouped by",
+        "coRole": "groups",
+        "resourceType": "RelationType"
+      },
+      "source": {
+        "id": "a30000000-0000-4000-8000-000000000001",
+        "name": "Closing balance",
+        "resourceType": "Asset"
+      },
+      "target": {
+        "id": "a20000000-0000-4000-8000-000000000002",
+        "name": "Account balance",
+        "resourceType": "Asset"
+      },
+      "resourceType": "BinaryFactTypeRelation"
+    },
+    {
+      "id": "r10000000-0000-4000-8000-000000000002",
+      "type": {
+        "id": "9a0000000-0000-4000-8000-000000000001",
+        "role": "is grouped by",
+        "coRole": "groups",
+        "resourceType": "RelationType"
+      },
+      "source": {
+        "id": "a30000000-0000-4000-8000-000000000002",
+        "name": "Opening balance",
+        "resourceType": "Asset"
+      },
+      "target": {
+        "id": "a20000000-0000-4000-8000-000000000002",
+        "name": "Account balance",
+        "resourceType": "Asset"
+      },
+      "resourceType": "BinaryFactTypeRelation"
+    },
+    {
+      "id": "r10000000-0000-4000-8000-000000000003",
+      "type": {
+        "id": "9a0000000-0000-4000-8000-000000000001",
+        "role": "is grouped by",
+        "coRole": "groups",
+        "resourceType": "RelationType"
+      },
+      "source": {
+        "id": "a30000000-0000-4000-8000-000000000003",
+        "name": "Exposure at default",
+        "resourceType": "Asset"
+      },
+      "target": {
+        "id": "a20000000-0000-4000-8000-000000000003",
+        "name": "Credit exposure",
+        "resourceType": "Asset"
+      },
+      "resourceType": "BinaryFactTypeRelation"
+    },
+    {
+      "id": "r10000000-0000-4000-8000-000000000004",
+      "type": {
+        "id": "9a0000000-0000-4000-8000-000000000001",
+        "role": "is grouped by",
+        "coRole": "groups",
+        "resourceType": "RelationType"
+      },
+      "source": {
+        "id": "a30000000-0000-4000-8000-000000000004",
+        "name": "Probability of default",
+        "resourceType": "Asset"
+      },
+      "target": {
+        "id": "a20000000-0000-4000-8000-000000000003",
+        "name": "Credit exposure",
+        "resourceType": "Asset"
+      },
+      "resourceType": "BinaryFactTypeRelation"
+    },
+    {
+      "id": "r10000000-0000-4000-8000-000000000005",
+      "type": {
+        "id": "9a0000000-0000-4000-8000-000000000001",
+        "role": "is grouped by",
+        "coRole": "groups",
+        "resourceType": "RelationType"
+      },
+      "source": {
+        "id": "a30000000-0000-4000-8000-000000000005",
+        "name": "Loss given default",
+        "resourceType": "Asset"
+      },
+      "target": {
+        "id": "a20000000-0000-4000-8000-000000000003",
+        "name": "Credit exposure",
+        "resourceType": "Asset"
+      },
+      "resourceType": "BinaryFactTypeRelation"
+    },
+    {
+      "id": "r10000000-0000-4000-8000-000000000006",
+      "type": {
+        "id": "9a0000000-0000-4000-8000-000000000001",
+        "role": "is grouped by",
+        "coRole": "groups",
+        "resourceType": "RelationType"
+      },
+      "source": {
+        "id": "a30000000-0000-4000-8000-000000000006",
+        "name": "Customer name",
+        "resourceType": "Asset"
+      },
+      "target": {
+        "id": "a20000000-0000-4000-8000-000000000001",
+        "name": "Customer personal data",
+        "resourceType": "Asset"
+      },
+      "resourceType": "BinaryFactTypeRelation"
+    },
+    {
+      "id": "r10000000-0000-4000-8000-000000000007",
+      "type": {
+        "id": "9a0000000-0000-4000-8000-000000000001",
+        "role": "is grouped by",
+        "coRole": "groups",
+        "resourceType": "RelationType"
+      },
+      "source": {
+        "id": "a30000000-0000-4000-8000-000000000007",
+        "name": "Date of birth",
+        "resourceType": "Asset"
+      },
+      "target": {
+        "id": "a20000000-0000-4000-8000-000000000001",
+        "name": "Customer personal data",
+        "resourceType": "Asset"
+      },
+      "resourceType": "BinaryFactTypeRelation"
+    },
+    {
+      "id": "r10000000-0000-4000-8000-000000000008",
+      "type": {
+        "id": "9a0000000-0000-4000-8000-000000000001",
+        "role": "is grouped by",
+        "coRole": "groups",
+        "resourceType": "RelationType"
+      },
+      "source": {
+        "id": "a30000000-0000-4000-8000-000000000008",
+        "name": "Mid price",
+        "resourceType": "Asset"
+      },
+      "target": {
+        "id": "a20000000-0000-4000-8000-000000000004",
+        "name": "Market data",
+        "resourceType": "Asset"
+      },
+      "resourceType": "BinaryFactTypeRelation"
+    },
+    {
+      "id": "r10000000-0000-4000-8000-000000000009",
+      "type": {
+        "id": "9a0000000-0000-4000-8000-000000000001",
+        "role": "is grouped by",
+        "coRole": "groups",
+        "resourceType": "RelationType"
+      },
+      "source": {
+        "id": "a30000000-0000-4000-8000-000000000009",
+        "name": "Yield curve",
+        "resourceType": "Asset"
+      },
+      "target": {
+        "id": "a20000000-0000-4000-8000-000000000004",
+        "name": "Market data",
+        "resourceType": "Asset"
+      },
+      "resourceType": "BinaryFactTypeRelation"
+    },
+    {
+      "id": "r10000000-0000-4000-8000-000000000010",
+      "type": {
+        "id": "9a0000000-0000-4000-8000-000000000001",
+        "role": "is grouped by",
+        "coRole": "groups",
+        "resourceType": "RelationType"
+      },
+      "source": {
+        "id": "a30000000-0000-4000-8000-000000000010",
+        "name": "Trade date",
+        "resourceType": "Asset"
+      },
+      "target": {
+        "id": "a20000000-0000-4000-8000-000000000005",
+        "name": "Trade",
+        "resourceType": "Asset"
+      },
+      "resourceType": "BinaryFactTypeRelation"
+    },
+    {
+      "id": "r10000000-0000-4000-8000-000000000011",
+      "type": {
+        "id": "9a0000000-0000-4000-8000-000000000001",
+        "role": "is grouped by",
+        "coRole": "groups",
+        "resourceType": "RelationType"
+      },
+      "source": {
+        "id": "a30000000-0000-4000-8000-000000000011",
+        "name": "Settlement date",
+        "resourceType": "Asset"
+      },
+      "target": {
+        "id": "a20000000-0000-4000-8000-000000000005",
+        "name": "Trade",
+        "resourceType": "Asset"
+      },
+      "resourceType": "BinaryFactTypeRelation"
+    },
+    {
+      "id": "r10000000-0000-4000-8000-000000000012",
+      "type": {
+        "id": "9a0000000-0000-4000-8000-000000000001",
+        "role": "is grouped by",
+        "coRole": "groups",
+        "resourceType": "RelationType"
+      },
+      "source": {
+        "id": "a30000000-0000-4000-8000-000000000012",
+        "name": "Counterparty",
+        "resourceType": "Asset"
+      },
+      "target": {
+        "id": "a20000000-0000-4000-8000-000000000005",
+        "name": "Trade",
+        "resourceType": "Asset"
+      },
+      "resourceType": "BinaryFactTypeRelation"
+    },
+    {
+      "id": "r10000000-0000-4000-8000-000000000100",
+      "type": {
+        "id": "9a0000000-0000-4000-8000-000000000002",
+        "role": "is part of",
+        "coRole": "contains",
+        "resourceType": "RelationType"
+      },
+      "source": {
+        "id": "a20000000-0000-4000-8000-000000000001",
+        "name": "Customer personal data",
+        "resourceType": "Asset"
+      },
+      "target": {
+        "id": "a10000000-0000-4000-8000-000000000003",
+        "name": "Customer",
+        "resourceType": "Asset"
+      },
+      "resourceType": "BinaryFactTypeRelation"
+    },
+    {
+      "id": "r10000000-0000-4000-8000-000000000101",
+      "type": {
+        "id": "9a0000000-0000-4000-8000-000000000002",
+        "role": "is part of",
+        "coRole": "contains",
+        "resourceType": "RelationType"
+      },
+      "source": {
+        "id": "a20000000-0000-4000-8000-000000000002",
+        "name": "Account balance",
+        "resourceType": "Asset"
+      },
+      "target": {
+        "id": "a10000000-0000-4000-8000-000000000001",
+        "name": "Finance",
+        "resourceType": "Asset"
+      },
+      "resourceType": "BinaryFactTypeRelation"
+    },
+    {
+      "id": "r10000000-0000-4000-8000-000000000102",
+      "type": {
+        "id": "9a0000000-0000-4000-8000-000000000002",
+        "role": "is part of",
+        "coRole": "contains",
+        "resourceType": "RelationType"
+      },
+      "source": {
+        "id": "a20000000-0000-4000-8000-000000000003",
+        "name": "Credit exposure",
+        "resourceType": "Asset"
+      },
+      "target": {
+        "id": "a10000000-0000-4000-8000-000000000002",
+        "name": "Risk",
+        "resourceType": "Asset"
+      },
+      "resourceType": "BinaryFactTypeRelation"
+    },
+    {
+      "id": "r10000000-0000-4000-8000-000000000103",
+      "type": {
+        "id": "9a0000000-0000-4000-8000-000000000002",
+        "role": "is part of",
+        "coRole": "contains",
+        "resourceType": "RelationType"
+      },
+      "source": {
+        "id": "a20000000-0000-4000-8000-000000000004",
+        "name": "Market data",
+        "resourceType": "Asset"
+      },
+      "target": {
+        "id": "a10000000-0000-4000-8000-000000000002",
+        "name": "Risk",
+        "resourceType": "Asset"
+      },
+      "resourceType": "BinaryFactTypeRelation"
+    },
+    {
+      "id": "r10000000-0000-4000-8000-000000000104",
+      "type": {
+        "id": "9a0000000-0000-4000-8000-000000000002",
+        "role": "is part of",
+        "coRole": "contains",
+        "resourceType": "RelationType"
+      },
+      "source": {
+        "id": "a20000000-0000-4000-8000-000000000005",
+        "name": "Trade",
+        "resourceType": "Asset"
+      },
+      "target": {
+        "id": "a10000000-0000-4000-8000-000000000001",
+        "name": "Finance",
+        "resourceType": "Asset"
+      },
+      "resourceType": "BinaryFactTypeRelation"
+    }
+  ]
+}

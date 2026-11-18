@@ -1,0 +1,6 @@
+{ "_comment": "S10 recorded fixture with an INVENTED shape for the classification tool's GET /v1/classes. Real endpoints, auth and fields must come from the owning team (Privacy / security).",
+  "records": [
+    { "class_id": "pii:email", "code": "email", "name": "Email address", "scheme": "PII", "level": "high", "updated_at": "2026-03-01T08:00:00.000Z" },
+    { "class_id": "pii:name", "code": "name", "name": "Person name", "scheme": "PII", "level": "medium", "updated_at": "2026-03-01T08:00:00.000Z" },
+    { "class_id": "isr:restricted", "code": "restricted", "name": "Restricted", "scheme": "ISR", "level": "3", "updated_at": "2026-03-01T08:00:00.000Z" }
+  ] }

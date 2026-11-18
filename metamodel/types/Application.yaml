@@ -1,0 +1,30 @@
+type: Application
+version: 1
+parent: Asset
+identity:
+  qualified_name: servicenow.sys_id
+attributes:
+  name: { type: string, required: true, source: servicenow }
+  owner: { type: person, required: true, source: servicenow }
+  delegates: { type: string-list, source: servicenow }
+  criticality: { type: enum, values: [low, medium, high, critical], source: servicenow }
+  status: { type: enum, values: [planned, live, retiring, retired], source: servicenow }
+  hosting_country: { type: country, required: true, source: servicenow }
+  description: { type: text, source: dmc }
+edges:
+  owns:
+    - { to: System, cardinality: one-to-many }
+  source_of:
+    - { to: Integration, cardinality: many-to-many }
+  target_of:
+    - { to: Integration, cardinality: many-to-many }
+  in_domain:
+    - { to: DataDomain, cardinality: many-to-one }
+  owned_by:
+    - { to: Party, cardinality: many-to-one }
+  stewarded_by:
+    - { to: Party, cardinality: many-to-one }
+  governed_by:
+    - { to: Policy, cardinality: many-to-many }
+lifecycle: default
+controls: [privacy, lineage]

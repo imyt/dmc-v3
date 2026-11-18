@@ -1,0 +1,6 @@
+{ "records": [
+  { "Report ID": "bcbs-rpt-credit-exposure", "Report Name": "Credit exposure report", "Report Owner SID": "43000004", "Report Kind": "report" },
+  { "Report ID": "bcbs-rpt-liquidity", "Report Name": "Liquidity position report", "Report Owner SID": "43000002", "Report Kind": "report" },
+  { "Report ID": "bcbs-met-ead", "Report Name": "Exposure at default", "Report Owner SID": "43000004", "Report Kind": "report-metric" },
+  { "Report ID": "bcbs-met-lcr", "Report Name": "Liquidity coverage ratio", "Report Owner SID": "43000002", "Report Kind": "report-metric" }
+] }

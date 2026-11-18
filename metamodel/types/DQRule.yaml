@@ -1,0 +1,12 @@
+type: DQRule
+version: 1
+parent: ControlRecord
+identity:
+  qualified_name: dq-hub.id
+attributes:
+  name: { type: string, required: true, source: dq-hub }
+  dimension: { type: string, source: dq-hub }
+  business_context: { type: text, source: dq-hub }
+  criticality: { type: enum, values: [low, medium, high, critical], source: dq-hub }
+lifecycle: default
+controls: [quality]

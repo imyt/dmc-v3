@@ -1,0 +1,14 @@
+type: DataVisa
+version: 1
+parent: ControlRecord
+identity:
+  qualified_name: datavisa-tool.id
+attributes:
+  source_country: { type: country, required: true, source: datavisa-tool }
+  target_country: { type: country, required: true, source: datavisa-tool }
+  data_categories: { type: string-list, required: true, source: datavisa-tool }
+  valid_from: { type: date, required: true, source: datavisa-tool }
+  valid_to: { type: date, source: datavisa-tool }
+  status: { type: string, source: datavisa-tool }
+lifecycle: default
+controls: [privacy]

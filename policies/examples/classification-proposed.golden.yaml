@@ -1,0 +1,7 @@
+cases:
+  - name: a proposal matches
+    asset: { qualified_name: a.s.t.c, proposed_classification: ['pii:email'] }
+    expect: true
+  - name: no proposal does not
+    asset: { qualified_name: a.s.t.c, proposed_classification: [] }
+    expect: false

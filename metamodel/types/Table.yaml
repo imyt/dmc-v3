@@ -1,0 +1,32 @@
+type: Table
+version: 1
+parent: Asset
+identity:
+  qualified_name: git.system/schema/table
+attributes:
+  name: { type: string, required: true, source: git-json }
+  kind: { type: enum, values: [table, view, file], source: git-json }
+  description: { type: text, source: git-json }
+  tags: { type: string-list, source: git-json }
+  trust_tier: { type: enum, values: [unverified, bronze, silver, gold], source: derived }
+  required_tier: { type: enum, values: [bronze, silver, gold], source: derived }
+  trust_shortfall: { type: boolean, source: derived }
+edges:
+  contains:
+    - { to: Column, cardinality: one-to-many }
+  classified_as:
+    - { to: Classification, cardinality: many-to-many }
+  in_domain:
+    - { to: DataDomain, cardinality: many-to-one }
+  owned_by:
+    - { to: Party, cardinality: many-to-one }
+  stewarded_by:
+    - { to: Party, cardinality: many-to-one }
+  checked_by:
+    - { to: DQRule, cardinality: many-to-many }
+  held_by:
+    - { to: LegalHold, cardinality: many-to-many }
+  governed_by:
+    - { to: Policy, cardinality: many-to-many }
+lifecycle: default
+controls: [privacy, lineage, retention, quality]

@@ -1,0 +1,12 @@
+policy: cross-border-covered
+control: privacy
+implements: TCR-0004
+mode: shadow
+scope:
+  type: CrossBorderTransfer
+when: cross_border_transfer.status != 'covered'
+effect:
+  action: raise_exception
+  message: This cross-border transfer has no assessment, or its DataVisa is missing or expired; see the transfer for which
+route: data-owner
+escalate_after: 10d

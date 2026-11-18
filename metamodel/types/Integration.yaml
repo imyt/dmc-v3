@@ -1,0 +1,24 @@
+type: Integration
+version: 1
+parent: Asset
+identity:
+  qualified_name: servicenow.id
+attributes:
+  mechanism: { type: string, source: servicenow }
+  frequency: { type: string, source: servicenow }
+  status: { type: string, source: servicenow }
+edges:
+  transfers:
+    - { to: Dataset, cardinality: one-to-many }
+  in_domain:
+    - { to: DataDomain, cardinality: many-to-one }
+  owned_by:
+    - { to: Party, cardinality: many-to-one }
+  stewarded_by:
+    - { to: Party, cardinality: many-to-one }
+  governed_by:
+    - { to: Policy, cardinality: many-to-many }
+  assessed_by:
+    - { to: Assessment, cardinality: one-to-many }
+lifecycle: default
+controls: [privacy, lineage]

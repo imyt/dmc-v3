@@ -1,0 +1,3 @@
+# UAT runs every policy in shadow until the control owner has signed it off.
+overrides:
+  application-has-owner: { mode: shadow }

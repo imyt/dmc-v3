@@ -1,0 +1,11 @@
+image:
+  repository: registry.local/dmc/api
+  tag: latest
+replicaCount: 2
+containerPort: 3000
+env: {}
+secretRefs: []   # names of existing secrets from the org secret store; never inline values
+resources:
+  requests: { cpu: 100m, memory: 256Mi }
+  limits: { memory: 512Mi }
+environment: local   # local | uat | prod

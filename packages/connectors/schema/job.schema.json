@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "DMC sync job",
+  "type": "object",
+  "required": ["job", "connection", "schedule", "source", "target"],
+  "additionalProperties": false,
+  "properties": {
+    "job": { "type": "string", "pattern": "^[a-z][a-z0-9-]*$" },
+    "connection": { "type": "string", "minLength": 1 },
+    "schedule": { "type": "string", "pattern": "^\\S+( \\S+){4}$", "description": "5-field cron" },
+    "source": {
+      "type": "object", "required": ["query", "mode"], "additionalProperties": false,
+      "properties": {
+        "query": { "type": "string", "minLength": 1 },
+        "mode": { "enum": ["incremental", "full"] },
+        "cursor": { "type": "string" },
+        "page_size": { "type": "integer", "minimum": 1, "maximum": 10000, "default": 1000 }
+      }
+    },
+    "target": {
+      "type": "object", "required": ["type", "map"], "additionalProperties": false,
+      "properties": {
+        "type": { "type": "string", "minLength": 1 },
+        "key": { "type": "string", "minLength": 1 },
+        "edge": {
+          "type": "object", "required": ["name", "qualified_name", "from", "to"], "additionalProperties": false,
+          "description": "an edge job: each record names two nodes of `type` and the edge between them; the edge name must exist in the metamodel",
+          "properties": {
+            "name": { "type": "string", "minLength": 1 },
+            "qualified_name": { "type": "string", "minLength": 1, "description": "template for a node's qualified name; {field} is filled from the record's from/to object" },
+            "to_qualified_name": { "type": "string", "minLength": 1, "description": "template for the `to` end when it is another kind of node than the `from` end (for example a Person by email); defaults to qualified_name" },
+            "from": { "type": "string", "minLength": 1 },
+            "to": { "type": "string", "minLength": 1 }
+          }
+        },
+        "map": {
+          "type": "object", "minProperties": 1,
+          "description": "attribute -> source field, or attribute -> { from: source field, values: { source value: DMC value } } to rename the source's values (a value not listed is refused and reported)",
+          "additionalProperties": { "oneOf": [
+            { "type": "string" },
+            { "type": "object", "required": ["from", "values"], "additionalProperties": false,
+              "properties": { "from": { "type": "string", "minLength": 1 }, "values": { "type": "object", "minProperties": 1, "additionalProperties": { "type": "string" } } } }
+          ] }
+        },
+        "source": { "type": "string", "minLength": 1, "description": "the source system name the metamodel uses for these attributes (for example servicenow); defaults to the job name" },
+        "on_missing": { "enum": ["deprecate", "ignore"], "default": "deprecate" }
+      }
+    },
+    "limits": { "type": "object", "additionalProperties": false, "properties": { "max_changes_pct": { "type": "number", "exclusiveMinimum": 0, "maximum": 100 } } },
+    "retries": {
+      "type": "object", "additionalProperties": false,
+      "properties": { "max": { "type": "integer", "minimum": 0, "maximum": 10 }, "backoff_seconds": { "type": "number", "minimum": 0 } }
+    }
+  }
+}

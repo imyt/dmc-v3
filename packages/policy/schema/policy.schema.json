@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://dmc.internal/policy.schema.json",
+  "title": "DMC policy",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["policy", "control", "mode", "scope", "when", "effect"],
+  "properties": {
+    "policy": { "type": "string", "pattern": "^[a-z][a-z0-9]*(-[a-z0-9]+)*$", "description": "slug; must match the file name" },
+    "control": { "type": "string", "minLength": 1 },
+    "implements": { "type": "string", "description": "id of the control requirement this policy implements" },
+    "mode": { "enum": ["shadow", "enforced"] },
+    "scope": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type"],
+      "properties": {
+        "type": { "type": "string" },
+        "concept": { "type": "string" },
+        "domain": { "type": "string" },
+        "scope": { "type": "string" }
+      }
+    },
+    "when": { "type": "string", "minLength": 1, "description": "CEL expression, true when the policy applies to the asset" },
+    "effect": {
+      "type": "object",
+      "required": ["action"],
+      "properties": {
+        "action": { "enum": ["raise_exception", "create_task", "set_attribute", "classify", "notify", "apply_change"] },
+        "message": { "type": "string" },
+        "attribute": { "type": "string" },
+        "value": {},
+        "concept": { "type": "string" }
+      },
+      "additionalProperties": false,
+      "allOf": [
+        { "if": { "properties": { "action": { "const": "raise_exception" } } }, "then": { "required": ["message"] } },
+        { "if": { "properties": { "action": { "const": "create_task" } } }, "then": { "required": ["message"] } },
+        { "if": { "properties": { "action": { "const": "set_attribute" } } }, "then": { "required": ["attribute", "value"] } },
+        { "if": { "properties": { "action": { "const": "classify" } } }, "then": { "required": ["concept"] } },
+        { "if": { "properties": { "action": { "const": "apply_change" } } }, "then": { "not": { "required": ["attribute", "value"] } } },
+        { "if": { "properties": { "action": { "const": "notify" } } }, "then": { "required": ["message"] } }
+      ]
+    },
+    "route": { "type": "string", "pattern": "^[a-z][a-z0-9-]*$" },
+    "escalate_after": { "type": "string", "pattern": "^[1-9][0-9]*[mhd]$" },
+    "autonomy": { "enum": ["propose", "act_notify", "act"], "default": "propose", "description": "ceiling; the effective level is min(ceiling, level allowed by confidence)" },
+    "confidence": { "type": "number", "minimum": 0, "maximum": 1, "default": 1 }
+  }
+}

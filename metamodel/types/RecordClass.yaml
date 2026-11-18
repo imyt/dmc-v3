@@ -1,0 +1,18 @@
+type: RecordClass
+version: 1
+parent: Concept
+identity:
+  qualified_name: scheme:code
+attributes:
+  code: { type: string, required: true, source: dstorm }
+  name: { type: string, required: true, source: dstorm }
+  description: { type: text, source: dstorm }
+edges:
+  retained_under:
+    - { to: RetentionSchedule, cardinality: many-to-one }
+  is_a:
+    - { to: Concept, cardinality: many-to-one }
+  relates_to:
+    - { to: DataCategory, cardinality: many-to-many }
+lifecycle: default
+controls: [retention]

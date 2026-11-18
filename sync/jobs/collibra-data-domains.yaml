@@ -1,0 +1,15 @@
+# Task S5. Collibra Data Domains into DMC until cutover (ADR 0018; flip config/source-of-truth.yaml and disable this job in the same change).
+# Assumes the asset list carries the asset's attribute values under `attributes` (a Collibra asset view); see the open questions in the S5 report.
+# `typeId` is the Collibra asset type id; it differs per Collibra instance and is set in the environment overlay.
+job: collibra-data-domains
+connection: collibra
+schedule: "0 2 * * *"
+source: { query: "/rest/2.0/assets?typeId=${dataDomainTypeId}&sortField=NAME&sortOrder=ASC", mode: full, page_size: 500 }
+target:
+  type: DataDomain
+  key: id
+  source: collibra
+  map: { name: name, description: attributes.description }
+  on_missing: deprecate
+limits: { max_changes_pct: 20 }
+retries: { max: 3, backoff_seconds: 10 }

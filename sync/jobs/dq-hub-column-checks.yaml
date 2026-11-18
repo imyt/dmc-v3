@@ -1,0 +1,29 @@
+# S9 (INVENTED SCHEMA): the DQ Hub / DSTORM table and column names below are placeholders shaped like plausible source tables. The real ones must come from the data platform team.
+# Rule 8: explicit column list, never SELECT *; DQ Hub tables may hold profiled or failing sample values, which are never selected. Only rule metadata and aggregate results are read.
+# Column checked_by DQRule, with the latest aggregate result on the edge (threshold, pass rate, counts, run time, status). Run after git-columns and dq-hub-rules.
+# No change limit: results change every run by nature. The metamodel declares no result store or edge attributes; see the S9 report.
+job: dq-hub-column-checks
+connection: bq-dq-hub
+schedule: "20 4 * * *"
+source:
+  query: "SELECT system_name, schema_name, table_name, column_name, rule_id, threshold, pass_rate, rows_checked, rows_failed, run_at, run_status FROM `${project}.${dataset}.column_results_latest`"
+  mode: full
+  page_size: 1000
+target:
+  type: Column
+  source: dq-hub
+  edge:
+    name: checked_by
+    qualified_name: "{system_name}/{schema_name}/{table_name}/{column_name}"
+    to_qualified_name: "{rule_id}"
+    from: "."
+    to: "."
+  map:
+    threshold: threshold
+    pass_rate: pass_rate
+    rows_checked: rows_checked
+    rows_failed: rows_failed
+    last_run_at: run_at
+    status: { from: run_status, values: { PASSED: passed, FAILED: failed, ERROR: error } }
+  on_missing: deprecate
+retries: { max: 2, backoff_seconds: 5 }

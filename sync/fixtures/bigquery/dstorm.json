@@ -1,0 +1,25 @@
+{
+  "local-fixture.dstorm": {
+    "record_classes": [
+      { "record_class_key": "dstorm:RC-TRADE", "code": "RC-TRADE", "name": "Trade records", "description": "Records of executed trades.", "updated_at": "2026-05-01T08:00:00.000Z" },
+      { "record_class_key": "dstorm:RC-CUST", "code": "RC-CUST", "name": "Customer correspondence", "description": "Letters and statements.", "updated_at": "2026-05-02T08:00:00.000Z" },
+      { "record_class_key": "dstorm:RC-MISC", "code": "RC-MISC", "name": "Unscheduled records", "description": "No schedule assigned yet.", "updated_at": "2026-05-03T08:00:00.000Z" }
+    ],
+    "record_class_schedules": [
+      { "record_class_key": "dstorm:RC-TRADE", "schedule_id": "RS-7Y", "effective_from": "2024-01-01" },
+      { "record_class_key": "dstorm:RC-CUST", "schedule_id": "RS-6Y", "effective_from": "2024-01-01" }
+    ],
+    "retention_schedules": [
+      { "schedule_id": "RS-7Y", "period": "P7Y", "trigger_event": "end of trade", "disposal_action": "destroy", "updated_at": "2026-05-01T08:00:00.000Z" },
+      { "schedule_id": "RS-6Y", "period": "P6Y", "trigger_event": "end of relationship", "disposal_action": "review", "updated_at": "2026-05-02T08:00:00.000Z" }
+    ],
+    "legal_holds": [
+      { "hold_id": "LH-2026-014", "reason": "Regulatory enquiry into order handling", "start_date": "2026-09-01", "end_date": null, "updated_at": "2026-09-01T08:00:00.000Z" },
+      { "hold_id": "LH-2025-003", "reason": "Closed litigation", "start_date": "2025-02-01", "end_date": "2026-03-31", "updated_at": "2026-03-31T08:00:00.000Z" }
+    ],
+    "legal_hold_scope": [
+      { "hold_id": "LH-2026-014", "scope_type": "TABLE", "system_name": "shop-oltp", "schema_name": "public", "table_name": "orders", "added_on": "2026-09-02" },
+      { "hold_id": "LH-2026-014", "scope_type": "TABLE", "system_name": "shop-oltp", "schema_name": "public", "table_name": "customers", "added_on": "2026-09-02" }
+    ]
+  }
+}

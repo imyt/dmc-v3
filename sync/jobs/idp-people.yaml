@@ -1,0 +1,20 @@
+# People from the identity provider (IdP): creates and maintains the Person nodes, keyed by the STAFF ID (ADR 0026), so an owner named by email in another job (Collibra, ServiceNow) resolves outside local.
+# ASSUMED, NOT CONFIRMED: the IdP's API is unknown. This job reads it through the generic REST connector (S4) and was built against an INVENTED fixture, sync/fixtures/idp/users.json, shaped like a typical paged directory API.
+#   The real endpoint (`peoplePath`), auth, paging, records path and the four field names below (employeeId, mail, displayName, department) must come from the identity team. Only this file, the overlay and the fixture change.
+#   If the directory also lists disabled accounts or non-staff (contractors, service accounts), the real query must filter them: a person missing from a complete run is deprecated as a leaver.
+# Key: the staff ID is a string of exactly 8 digits with leading zeros. A record whose value is not exactly 8 digits (including a JSON number) is refused and reported by the catalog; it is never padded or trimmed.
+# Metadata only: the four Person attributes (email, staff ID, name, department) and nothing else. No phone, address or manager chain is mapped, whatever the API returns.
+# Leavers: a person missing from a COMPLETE full run is deprecated, never deleted. The change limit stops a run that would deprecate (or change) more than the share below, e.g. when the directory answers with a truncated list.
+# An email held by two people is refused and reported (the worker's PersonRefResolver), because an owner email must resolve to one person.
+job: idp-people
+connection: idp
+schedule: "20 1 * * *"
+source: { query: "${peoplePath}", mode: full, page_size: 500 }
+target:
+  type: Person
+  key: employeeId
+  source: idp
+  map: { email: mail, staff_id: employeeId, name: displayName, department: department }
+  on_missing: deprecate
+limits: { max_changes_pct: 10 }
+retries: { max: 3, backoff_seconds: 10 }

@@ -1,0 +1,85 @@
+{
+  "total": 3,
+  "offset": 0,
+  "limit": 1000,
+  "results": [
+    {
+      "id": "a10000000-0000-4000-8000-000000000001",
+      "name": "Finance",
+      "displayName": "Finance",
+      "type": {
+        "id": "d10000000-0000-4000-8000-000000000000",
+        "name": "Data Domain",
+        "resourceType": "AssetType"
+      },
+      "status": {
+        "id": "b10000000-0000-4000-8000-000000000001",
+        "name": "Approved",
+        "resourceType": "Status"
+      },
+      "domain": {
+        "id": "f10000000-0000-4000-8000-000000000002",
+        "name": "Glossary",
+        "resourceType": "Domain"
+      },
+      "createdOn": 1700000001000,
+      "lastModifiedOn": 1730000000000,
+      "resourceType": "Asset",
+      "attributes": {
+        "description": "Money, positions and the books"
+      }
+    },
+    {
+      "id": "a10000000-0000-4000-8000-000000000002",
+      "name": "Risk",
+      "displayName": "Risk",
+      "type": {
+        "id": "d10000000-0000-4000-8000-000000000000",
+        "name": "Data Domain",
+        "resourceType": "AssetType"
+      },
+      "status": {
+        "id": "b10000000-0000-4000-8000-000000000001",
+        "name": "Approved",
+        "resourceType": "Status"
+      },
+      "domain": {
+        "id": "f10000000-0000-4000-8000-000000000002",
+        "name": "Glossary",
+        "resourceType": "Domain"
+      },
+      "createdOn": 1700000002000,
+      "lastModifiedOn": 1730000000001,
+      "resourceType": "Asset",
+      "attributes": {
+        "description": "Exposure and capital"
+      }
+    },
+    {
+      "id": "a10000000-0000-4000-8000-000000000003",
+      "name": "Customer",
+      "displayName": "Customer",
+      "type": {
+        "id": "d10000000-0000-4000-8000-000000000000",
+        "name": "Data Domain",
+        "resourceType": "AssetType"
+      },
+      "status": {
+        "id": "b10000000-0000-4000-8000-000000000001",
+        "name": "Approved",
+        "resourceType": "Status"
+      },
+      "domain": {
+        "id": "f10000000-0000-4000-8000-000000000002",
+        "name": "Glossary",
+        "resourceType": "Domain"
+      },
+      "createdOn": 1700000003000,
+      "lastModifiedOn": 1730000000002,
+      "resourceType": "Asset",
+      "attributes": {
+        "description": "Who we serve and what we know about them"
+      }
+    }
+  ]
+}

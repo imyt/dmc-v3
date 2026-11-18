@@ -1,0 +1,12 @@
+policy: application-has-owner
+control: ownership
+mode: enforced
+scope:
+  type: Application
+when: "!has(application.owner) || application.owner == ''"
+effect:
+  action: raise_exception
+  message: Every application needs an owner
+route: platform-governance
+escalate_after: 5d
+autonomy: act_notify

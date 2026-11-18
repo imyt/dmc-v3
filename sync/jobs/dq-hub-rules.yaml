@@ -1,0 +1,22 @@
+# S9 (INVENTED SCHEMA): the DQ Hub / DSTORM table and column names below are placeholders shaped like plausible source tables. The real ones must come from the data platform team.
+# Rule 8: explicit column list, never SELECT *; DQ Hub tables may hold profiled or failing sample values, which are never selected. Only rule metadata and aggregate results are read.
+# DQ Hub rules -> DQRule nodes (qualified name: the DQ Hub rule id). Severity labels are mapped to the metamodel criticality values.
+job: dq-hub-rules
+connection: bq-dq-hub
+schedule: "10 4 * * *"
+source:
+  query: "SELECT rule_id, rule_name, dimension, business_context, severity FROM `${project}.${dataset}.rules`"
+  mode: full
+  page_size: 1000
+target:
+  type: DQRule
+  key: rule_id
+  source: dq-hub
+  map:
+    name: rule_name
+    dimension: dimension
+    business_context: business_context
+    criticality: { from: severity, values: { Low: low, Medium: medium, High: high, Critical: critical } }
+  on_missing: deprecate
+limits: { max_changes_pct: 30 }
+retries: { max: 2, backoff_seconds: 5 }

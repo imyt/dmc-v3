@@ -1,0 +1,13 @@
+# Task S5. Collibra Data Categories into DMC until cutover (ADR 0018).
+job: collibra-data-categories
+connection: collibra
+schedule: "5 2 * * *"
+source: { query: "/rest/2.0/assets?typeId=${dataCategoryTypeId}&sortField=NAME&sortOrder=ASC", mode: full, page_size: 500 }
+target:
+  type: DataCategory
+  key: id
+  source: collibra
+  map: { name: name, definition: attributes.definition }
+  on_missing: deprecate
+limits: { max_changes_pct: 20 }
+retries: { max: 3, backoff_seconds: 10 }

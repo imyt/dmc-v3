@@ -1,0 +1,24 @@
+# S9 (INVENTED SCHEMA): the DQ Hub / DSTORM table and column names below are placeholders shaped like plausible source tables. The real ones must come from the data platform team.
+# Rule 8: explicit column list, never SELECT *; DQ Hub tables may hold profiled or failing sample values, which are never selected. Only rule metadata and aggregate results are read.
+# RecordClass retained_under RetentionSchedule. A dataset reaches its schedule through its record class (Dataset recorded_as RecordClass is mastered in DMC, not synced).
+# Run after the two node jobs.
+job: dstorm-retained-under
+connection: bq-dstorm
+schedule: "40 4 * * *"
+source:
+  query: "SELECT record_class_key, schedule_id, effective_from FROM `${project}.${dataset}.record_class_schedules`"
+  mode: full
+  page_size: 1000
+target:
+  type: RecordClass
+  source: dstorm
+  edge:
+    name: retained_under
+    qualified_name: "{record_class_key}"
+    to_qualified_name: "{schedule_id}"
+    from: "."
+    to: "."
+  map: { effective_from: effective_from }
+  on_missing: deprecate
+limits: { max_changes_pct: 30 }
+retries: { max: 2, backoff_seconds: 5 }

@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "DMC sync environment overlay",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "connections": {
+      "type": "object",
+      "additionalProperties": { "type": "object", "required": ["secret"], "properties": { "secret": { "type": "string", "minLength": 1 } } }
+    },
+    "jobs": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "properties": { "connection": { "type": "string" }, "schedule": { "type": "string" }, "enabled": { "type": "boolean" } }
+      }
+    }
+  }
+}

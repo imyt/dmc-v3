@@ -1,0 +1,24 @@
+type: Scope
+version: 1
+parent: GovernanceObject
+identity:
+  qualified_name: dmc.slug
+attributes:
+  name: { type: string, required: true, source: scope-sources }
+  owner: { type: string, identifies: Person, source: scope-sources }
+  kind: { type: enum, values: [regulatory-return, report, report-metric, business-process], required: true, source: scope-sources }
+  regulation: { type: string, source: dmc }
+  required_tier: { type: enum, values: [bronze, silver, gold], source: dmc }
+  criticality: { type: enum, values: [low, medium, high, critical], source: dmc }
+  version: { type: integer, source: dmc }
+  status: { type: enum, values: [draft, submitted, amended], source: dmc }
+  locked_at: { type: datetime, source: dmc }
+edges:
+  includes:
+    - { to: ScopeGroup, cardinality: one-to-many }
+  flows_through:
+    - { to: Integration, cardinality: many-to-many }
+  subject_to:
+    - { to: Regulation, cardinality: many-to-many }
+lifecycle: default
+controls: [lineage]

@@ -1,0 +1,15 @@
+type: Policy
+version: 1
+parent: GovernanceObject
+identity:
+  qualified_name: dmc.slug
+attributes:
+  control_type: { type: string, required: true, source: dmc }
+  mode: { type: enum, values: [shadow, enforced], required: true, source: dmc }
+  version: { type: integer, required: true, source: dmc }
+  state: { type: string, required: true, source: dmc }
+edges:
+  implements:
+    - { to: ControlRequirement, cardinality: many-to-many }
+lifecycle: default
+controls: []

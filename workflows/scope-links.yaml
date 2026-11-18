@@ -1,0 +1,16 @@
+# One of these runs for each application on a submitted scope's flows (task C3).
+# The application owner links their tables and columns to the scope's business elements, then says they are done,
+# or that their application holds none of them. After 14 days it escalates to the scope owner.
+workflow: scope-links
+version: 1
+start: link
+steps:
+  link:
+    type: task
+    title: Link your tables and columns to this scope
+    assignee: route
+    sla: 14d
+    escalate_to: "ctx:scope_owner"
+    decisions: { done: linked, none_held: nothing_to_link }
+  linked: { type: end, outcome: linked }
+  nothing_to_link: { type: end, outcome: nothing_to_link }

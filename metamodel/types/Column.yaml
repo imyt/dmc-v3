@@ -1,0 +1,39 @@
+type: Column
+version: 1
+parent: Asset
+identity:
+  qualified_name: git.system/schema/table/column
+attributes:
+  name: { type: string, required: true, source: git-json }
+  data_type: { type: string, source: git-json }
+  nullable: { type: boolean, source: git-json }
+  description: { type: text, source: git-json }
+  tags: { type: string-list, source: git-json }
+  criticality: { type: enum, values: [low, medium, high, critical], source: derived }
+  trust_tier: { type: enum, values: [unverified, bronze, silver, gold], source: derived }
+  required_tier: { type: enum, values: [bronze, silver, gold], source: derived }
+  trust_shortfall: { type: boolean, source: derived }
+  proposed_classification: { type: string-list, source: derived }
+  proposed_from: { type: string-list, source: derived }
+  rejected_classification: { type: string-list, source: dmc }
+edges:
+  derives_from:
+    - { to: Column, cardinality: many-to-many }
+  classified_as:
+    - { to: Classification, cardinality: many-to-many }
+  represents:
+    - { to: BusinessTerm, cardinality: many-to-one }
+  in_domain:
+    - { to: DataDomain, cardinality: many-to-one }
+  owned_by:
+    - { to: Party, cardinality: many-to-one }
+  stewarded_by:
+    - { to: Party, cardinality: many-to-one }
+  checked_by:
+    - { to: DQRule, cardinality: many-to-many }
+  governed_by:
+    - { to: Policy, cardinality: many-to-many }
+inherit:
+  - { attribute: criticality, along: implemented_by, direction: in }
+lifecycle: default
+controls: [privacy, lineage, quality]

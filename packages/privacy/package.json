@@ -1,0 +1,9 @@
+{
+  "name": "@dmc/privacy",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "main": "src/index.ts",
+  "types": "src/index.ts",
+  "description": "bounded-context module: privacy (own Postgres schema: privacy)"
+}

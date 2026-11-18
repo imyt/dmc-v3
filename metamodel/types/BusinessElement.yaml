@@ -1,0 +1,15 @@
+type: BusinessElement
+version: 1
+parent: GovernanceObject
+identity:
+  qualified_name: dmc.slug
+attributes:
+  name: { type: string, required: true, source: dmc }
+  definition: { type: text, source: dmc }
+  criticality: { type: enum, values: [low, medium, high, critical], source: dmc }
+edges:
+  implemented_by:
+    - { to: Column, cardinality: many-to-many }
+    - { to: Table, cardinality: many-to-many }
+lifecycle: default
+controls: [lineage]

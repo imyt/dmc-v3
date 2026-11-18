@@ -1,0 +1,14 @@
+# Task S11 (RRIS). The access method for this system is not known yet, so it reads a recorded inventory (sync/fixtures/rris-returns.json) through the REST connector.
+# Scope name, owner and kind are owned by the scope sources; groups, elements, flows and tier stay with DMC (CAT-9).
+job: rris-scopes
+connection: mock-rris
+schedule: "0 2 * * *"
+source: { query: "/v1/rris-returns", mode: full, page_size: 500 }
+target:
+  type: Scope
+  key: return_id
+  source: scope-sources
+  map: { name: title, owner: owner.staff_id, kind: kind }
+  on_missing: deprecate
+limits: { max_changes_pct: 30 }
+retries: { max: 2, backoff_seconds: 5 }

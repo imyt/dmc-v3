@@ -1,0 +1,25 @@
+type: System
+version: 1
+parent: Asset
+identity:
+  qualified_name: git.system
+attributes:
+  name: { type: string, required: true, source: git-json }
+  platform: { type: string, source: git-json }
+  environment: { type: string, source: git-json }
+  hosting_country: { type: country, source: derived }
+edges:
+  contains:
+    - { to: Schema, cardinality: one-to-many }
+  in_domain:
+    - { to: DataDomain, cardinality: many-to-one }
+  owned_by:
+    - { to: Party, cardinality: many-to-one }
+  stewarded_by:
+    - { to: Party, cardinality: many-to-one }
+  governed_by:
+    - { to: Policy, cardinality: many-to-many }
+inherit:
+  - { attribute: hosting_country, along: owns, direction: in }
+lifecycle: default
+controls: [privacy, lineage]

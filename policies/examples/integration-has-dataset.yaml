@@ -1,0 +1,12 @@
+policy: integration-has-dataset
+control: data-movement
+implements: TCR-0001
+mode: shadow
+scope:
+  type: Integration
+when: size(integration.transfers) == 0
+effect:
+  action: raise_exception
+  message: Link at least one dataset to this integration
+route: application-owner
+escalate_after: 10d

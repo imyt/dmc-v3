@@ -1,0 +1,807 @@
+{
+  "components": {
+    "schemas": {
+      "ApplicationAttributes": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "owner": {
+            "type": "string",
+            "minLength": 1
+          },
+          "delegates": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "criticality": {
+            "enum": [
+              "low",
+              "medium",
+              "high",
+              "critical"
+            ]
+          },
+          "status": {
+            "enum": [
+              "planned",
+              "live",
+              "retiring",
+              "retired"
+            ]
+          },
+          "hosting_country": {
+            "type": "string",
+            "pattern": "^[A-Z]{2}$"
+          },
+          "description": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "owner",
+          "hosting_country"
+        ]
+      },
+      "AssessmentAttributes": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "outcome": {
+            "enum": [
+              "datavisa-required",
+              "datavisa-not-required"
+            ]
+          },
+          "assessed_on": {
+            "type": "string",
+            "format": "date"
+          },
+          "review_due": {
+            "type": "string",
+            "format": "date"
+          }
+        },
+        "required": [
+          "outcome",
+          "assessed_on"
+        ]
+      },
+      "BusinessElementAttributes": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "definition": {
+            "type": "string"
+          },
+          "criticality": {
+            "enum": [
+              "low",
+              "medium",
+              "high",
+              "critical"
+            ]
+          }
+        },
+        "required": [
+          "name"
+        ]
+      },
+      "BusinessTermAttributes": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "definition": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "name"
+        ]
+      },
+      "ClassificationAttributes": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "scheme": {
+            "enum": [
+              "pii",
+              "isr",
+              "business"
+            ]
+          },
+          "level": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "code",
+          "name",
+          "scheme"
+        ]
+      },
+      "ColumnAttributes": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "data_type": {
+            "type": "string"
+          },
+          "nullable": {
+            "type": "boolean"
+          },
+          "description": {
+            "type": "string"
+          },
+          "tags": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "criticality": {
+            "enum": [
+              "low",
+              "medium",
+              "high",
+              "critical"
+            ]
+          },
+          "trust_tier": {
+            "enum": [
+              "unverified",
+              "bronze",
+              "silver",
+              "gold"
+            ]
+          },
+          "required_tier": {
+            "enum": [
+              "bronze",
+              "silver",
+              "gold"
+            ]
+          },
+          "trust_shortfall": {
+            "type": "boolean"
+          },
+          "proposed_classification": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "proposed_from": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "rejected_classification": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "name"
+        ]
+      },
+      "ControlRequirementAttributes": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "reference_id": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "kind": {
+            "enum": [
+              "operating-instruction",
+              "technical-control-requirement"
+            ]
+          },
+          "owner": {
+            "type": "string",
+            "minLength": 1
+          },
+          "confluence_link": {
+            "type": "string",
+            "format": "uri"
+          },
+          "version": {
+            "type": "integer"
+          }
+        },
+        "required": [
+          "reference_id",
+          "title",
+          "kind",
+          "version"
+        ]
+      },
+      "CrossBorderTransferAttributes": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "from_country": {
+            "type": "string",
+            "pattern": "^[A-Z]{2}$"
+          },
+          "to_country": {
+            "type": "string",
+            "pattern": "^[A-Z]{2}$"
+          },
+          "data_categories": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "status": {
+            "enum": [
+              "covered",
+              "missing",
+              "expired"
+            ]
+          },
+          "problem": {
+            "type": "string"
+          },
+          "uncovered": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "detail": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "from_country",
+          "to_country",
+          "data_categories",
+          "status"
+        ]
+      },
+      "DataCategoryAttributes": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "definition": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "name"
+        ]
+      },
+      "DataDomainAttributes": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "name"
+        ]
+      },
+      "DataProductAttributes": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "fabric_id": {
+            "type": "string"
+          },
+          "owner": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "required": [
+          "name"
+        ]
+      },
+      "DatasetAttributes": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "business_context": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "name"
+        ]
+      },
+      "DataVisaAttributes": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "source_country": {
+            "type": "string",
+            "pattern": "^[A-Z]{2}$"
+          },
+          "target_country": {
+            "type": "string",
+            "pattern": "^[A-Z]{2}$"
+          },
+          "data_categories": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "valid_from": {
+            "type": "string",
+            "format": "date"
+          },
+          "valid_to": {
+            "type": "string",
+            "format": "date"
+          },
+          "status": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "source_country",
+          "target_country",
+          "data_categories",
+          "valid_from"
+        ]
+      },
+      "DelegationAttributes": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "owner": {
+            "type": "string"
+          },
+          "delegate": {
+            "type": "string"
+          },
+          "covers": {
+            "enum": [
+              "one-scope",
+              "all-scopes"
+            ]
+          },
+          "valid_from": {
+            "type": "string",
+            "format": "date"
+          },
+          "valid_to": {
+            "type": "string",
+            "format": "date"
+          },
+          "reason": {
+            "type": "string"
+          },
+          "reminded_on": {
+            "type": "string",
+            "format": "date"
+          },
+          "ended_reason": {
+            "enum": [
+              "revoked",
+              "owner-changed"
+            ]
+          }
+        },
+        "required": [
+          "owner",
+          "delegate",
+          "covers",
+          "valid_from",
+          "valid_to"
+        ]
+      },
+      "DQRuleAttributes": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "dimension": {
+            "type": "string"
+          },
+          "business_context": {
+            "type": "string"
+          },
+          "criticality": {
+            "enum": [
+              "low",
+              "medium",
+              "high",
+              "critical"
+            ]
+          }
+        },
+        "required": [
+          "name"
+        ]
+      },
+      "ExceptionAttributes": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "kind": {
+            "type": "string"
+          },
+          "severity": {
+            "enum": [
+              "low",
+              "medium",
+              "high",
+              "critical"
+            ]
+          },
+          "status": {
+            "type": "string"
+          },
+          "due": {
+            "type": "string",
+            "format": "date"
+          },
+          "assignee": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "required": [
+          "kind",
+          "status"
+        ]
+      },
+      "GroupAttributes": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "idp_group": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "name"
+        ]
+      },
+      "IntegrationAttributes": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "mechanism": {
+            "type": "string"
+          },
+          "frequency": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          }
+        }
+      },
+      "LegalHoldAttributes": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "reason": {
+            "type": "string"
+          },
+          "start": {
+            "type": "string",
+            "format": "date"
+          },
+          "end": {
+            "type": "string",
+            "format": "date"
+          }
+        },
+        "required": [
+          "start"
+        ]
+      },
+      "PersonAttributes": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "email": {
+            "type": "string"
+          },
+          "staff_id": {
+            "type": "string",
+            "pattern": "^\\d{8}$"
+          },
+          "name": {
+            "type": "string"
+          },
+          "department": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "email"
+        ]
+      },
+      "PolicyAttributes": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "control_type": {
+            "type": "string"
+          },
+          "mode": {
+            "enum": [
+              "shadow",
+              "enforced"
+            ]
+          },
+          "version": {
+            "type": "integer"
+          },
+          "state": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "control_type",
+          "mode",
+          "version",
+          "state"
+        ]
+      },
+      "RecordClassAttributes": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "code",
+          "name"
+        ]
+      },
+      "RegulationAttributes": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "code",
+          "name"
+        ]
+      },
+      "RetentionScheduleAttributes": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "period": {
+            "type": "string"
+          },
+          "trigger_event": {
+            "type": "string"
+          },
+          "disposal_action": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "period"
+        ]
+      },
+      "SchemaAttributes": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "name": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "name"
+        ]
+      },
+      "ScopeAttributes": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "owner": {
+            "type": "string"
+          },
+          "kind": {
+            "enum": [
+              "regulatory-return",
+              "report",
+              "report-metric",
+              "business-process"
+            ]
+          },
+          "regulation": {
+            "type": "string"
+          },
+          "required_tier": {
+            "enum": [
+              "bronze",
+              "silver",
+              "gold"
+            ]
+          },
+          "criticality": {
+            "enum": [
+              "low",
+              "medium",
+              "high",
+              "critical"
+            ]
+          },
+          "version": {
+            "type": "integer"
+          },
+          "status": {
+            "enum": [
+              "draft",
+              "submitted",
+              "amended"
+            ]
+          },
+          "locked_at": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "required": [
+          "name",
+          "kind"
+        ]
+      },
+      "ScopeGroupAttributes": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "order": {
+            "type": "integer"
+          }
+        },
+        "required": [
+          "name"
+        ]
+      },
+      "SystemAttributes": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "platform": {
+            "type": "string"
+          },
+          "environment": {
+            "type": "string"
+          },
+          "hosting_country": {
+            "type": "string",
+            "pattern": "^[A-Z]{2}$"
+          }
+        },
+        "required": [
+          "name"
+        ]
+      },
+      "TableAttributes": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "kind": {
+            "enum": [
+              "table",
+              "view",
+              "file"
+            ]
+          },
+          "description": {
+            "type": "string"
+          },
+          "tags": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "trust_tier": {
+            "enum": [
+              "unverified",
+              "bronze",
+              "silver",
+              "gold"
+            ]
+          },
+          "required_tier": {
+            "enum": [
+              "bronze",
+              "silver",
+              "gold"
+            ]
+          },
+          "trust_shortfall": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "name"
+        ]
+      }
+    }
+  }
+}

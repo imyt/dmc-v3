@@ -1,0 +1,11 @@
+type: RetentionSchedule
+version: 1
+parent: ControlRecord
+identity:
+  qualified_name: dstorm.id
+attributes:
+  period: { type: string, required: true, source: dstorm }
+  trigger_event: { type: string, source: dstorm }
+  disposal_action: { type: string, source: dstorm }
+lifecycle: default
+controls: [retention]

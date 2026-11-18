@@ -1,0 +1,13 @@
+type: Regulation
+version: 1
+parent: Concept
+identity:
+  qualified_name: scheme:code
+attributes:
+  code: { type: string, required: true, source: dmc }
+  name: { type: string, required: true, source: dmc }
+edges:
+  is_a:
+    - { to: Concept, cardinality: many-to-one }
+lifecycle: default
+controls: []

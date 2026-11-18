@@ -1,0 +1,137 @@
+{
+  "total": 5,
+  "offset": 0,
+  "limit": 1000,
+  "results": [
+    {
+      "id": "a20000000-0000-4000-8000-000000000001",
+      "name": "Customer personal data",
+      "displayName": "Customer personal data",
+      "type": {
+        "id": "c10000000-0000-4000-8000-000000000000",
+        "name": "Data Category",
+        "resourceType": "AssetType"
+      },
+      "status": {
+        "id": "b10000000-0000-4000-8000-000000000001",
+        "name": "Approved",
+        "resourceType": "Status"
+      },
+      "domain": {
+        "id": "f10000000-0000-4000-8000-000000000002",
+        "name": "Glossary",
+        "resourceType": "Domain"
+      },
+      "createdOn": 1700000001000,
+      "lastModifiedOn": 1731000000000,
+      "resourceType": "Asset",
+      "attributes": {
+        "definition": "Data that identifies a customer"
+      }
+    },
+    {
+      "id": "a20000000-0000-4000-8000-000000000002",
+      "name": "Account balance",
+      "displayName": "Account balance",
+      "type": {
+        "id": "c10000000-0000-4000-8000-000000000000",
+        "name": "Data Category",
+        "resourceType": "AssetType"
+      },
+      "status": {
+        "id": "b10000000-0000-4000-8000-000000000001",
+        "name": "Approved",
+        "resourceType": "Status"
+      },
+      "domain": {
+        "id": "f10000000-0000-4000-8000-000000000002",
+        "name": "Glossary",
+        "resourceType": "Domain"
+      },
+      "createdOn": 1700000002000,
+      "lastModifiedOn": 1731000000001,
+      "resourceType": "Asset",
+      "attributes": {
+        "definition": "Money held on an account"
+      }
+    },
+    {
+      "id": "a20000000-0000-4000-8000-000000000003",
+      "name": "Credit exposure",
+      "displayName": "Credit exposure",
+      "type": {
+        "id": "c10000000-0000-4000-8000-000000000000",
+        "name": "Data Category",
+        "resourceType": "AssetType"
+      },
+      "status": {
+        "id": "b10000000-0000-4000-8000-000000000001",
+        "name": "Approved",
+        "resourceType": "Status"
+      },
+      "domain": {
+        "id": "f10000000-0000-4000-8000-000000000002",
+        "name": "Glossary",
+        "resourceType": "Domain"
+      },
+      "createdOn": 1700000003000,
+      "lastModifiedOn": 1731000000002,
+      "resourceType": "Asset",
+      "attributes": {
+        "definition": "Amount at risk with a counterparty"
+      }
+    },
+    {
+      "id": "a20000000-0000-4000-8000-000000000004",
+      "name": "Market data",
+      "displayName": "Market data",
+      "type": {
+        "id": "c10000000-0000-4000-8000-000000000000",
+        "name": "Data Category",
+        "resourceType": "AssetType"
+      },
+      "status": {
+        "id": "b10000000-0000-4000-8000-000000000001",
+        "name": "Approved",
+        "resourceType": "Status"
+      },
+      "domain": {
+        "id": "f10000000-0000-4000-8000-000000000002",
+        "name": "Glossary",
+        "resourceType": "Domain"
+      },
+      "createdOn": 1700000004000,
+      "lastModifiedOn": 1731000000003,
+      "resourceType": "Asset",
+      "attributes": {
+        "definition": "Prices and rates from external feeds"
+      }
+    },
+    {
+      "id": "a20000000-0000-4000-8000-000000000005",
+      "name": "Trade",
+      "displayName": "Trade",
+      "type": {
+        "id": "c10000000-0000-4000-8000-000000000000",
+        "name": "Data Category",
+        "resourceType": "AssetType"
+      },
+      "status": {
+        "id": "b10000000-0000-4000-8000-000000000001",
+        "name": "Approved",
+        "resourceType": "Status"
+      },
+      "domain": {
+        "id": "f10000000-0000-4000-8000-000000000002",
+        "name": "Glossary",
+        "resourceType": "Domain"
+      },
+      "createdOn": 1700000005000,
+      "lastModifiedOn": 1731000000004,
+      "resourceType": "Asset",
+      "attributes": {
+        "definition": "An agreed exchange of instruments"
+      }
+    }
+  ]
+}

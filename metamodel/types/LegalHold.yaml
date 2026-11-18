@@ -1,0 +1,11 @@
+type: LegalHold
+version: 1
+parent: ControlRecord
+identity:
+  qualified_name: legal-hold.id
+attributes:
+  reason: { type: text, source: legal-hold-tools }
+  start: { type: date, required: true, source: legal-hold-tools }
+  end: { type: date, source: legal-hold-tools }
+lifecycle: default
+controls: [retention]

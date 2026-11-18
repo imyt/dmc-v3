@@ -1,0 +1,15 @@
+# S7: Tables (qualified name: system/schema/table).
+# Reads the application repos (one per application, found from the application list) through the manifest connector. Metadata only: names, types, tags, descriptions.
+# A full, complete run that no longer finds a record deprecates it (a removed repo or table); a partial run (an unreadable repo file) deprecates nothing.
+job: git-tables
+connection: git-repos
+schedule: "2 3 * * *"
+source: { query: "git-json ${git_repos} ${applications_file} tables", mode: full }
+target:
+  type: Table
+  key: qualified_name
+  source: git-json
+  map: { name: name, kind: kind, description: description, tags: tags }
+  on_missing: deprecate
+limits: { max_changes_pct: 30 }
+retries: { max: 2, backoff_seconds: 5 }

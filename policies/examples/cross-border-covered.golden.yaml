@@ -1,0 +1,10 @@
+cases:
+  - name: missing cover matches
+    asset: { qualified_name: int-1--gb-us, status: missing }
+    expect: true
+  - name: expired cover matches
+    asset: { qualified_name: int-1--gb-us, status: expired }
+    expect: true
+  - name: covered does not
+    asset: { qualified_name: int-1--gb-us, status: covered }
+    expect: false

@@ -1,0 +1,14 @@
+# Task S11 (BCBS inventory). The access method for this system is not known yet, so it reads a recorded inventory (sync/fixtures/bcbs-inventory.json) through the REST connector.
+# Scope name, owner and kind are owned by the scope sources; groups, elements, flows and tier stay with DMC (CAT-9).
+job: bcbs-scopes
+connection: mock-bcbs
+schedule: "0 2 * * *"
+source: { query: "/v1/bcbs-inventory", mode: full, page_size: 500 }
+target:
+  type: Scope
+  key: "Report ID"
+  source: scope-sources
+  map: { name: "Report Name", owner: "Report Owner SID", kind: "Report Kind" }
+  on_missing: deprecate
+limits: { max_changes_pct: 30 }
+retries: { max: 2, backoff_seconds: 5 }

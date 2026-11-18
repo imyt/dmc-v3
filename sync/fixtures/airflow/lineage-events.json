@@ -1,0 +1,26 @@
+[
+  { "eventType": "START", "eventTime": "2026-11-17T02:00:00Z", "producer": "https://github.com/apache/airflow/tree/providers-openlineage",
+    "job": { "namespace": "airflow-prod", "name": "orders_ingest.load_raw_orders" }, "run": { "runId": "0193a1b0-0000-7000-8000-000000000001" }, "inputs": [], "outputs": [] },
+  { "eventType": "COMPLETE", "eventTime": "2026-11-17T02:04:10Z", "producer": "https://github.com/apache/airflow/tree/providers-openlineage",
+    "job": { "namespace": "airflow-prod", "name": "orders_ingest.load_raw_orders" }, "run": { "runId": "0193a1b0-0000-7000-8000-000000000001" },
+    "inputs": [{ "namespace": "bigquery", "name": "shop-oltp.public.orders" }],
+    "outputs": [{ "namespace": "bigquery", "name": "analytics-prod.raw.orders", "facets": { "columnLineage": { "fields": {
+      "order_id": { "inputFields": [{ "namespace": "bigquery", "name": "shop-oltp.public.orders", "field": "id", "transformations": [{ "type": "DIRECT", "subtype": "IDENTITY" }] }] },
+      "customer_id": { "inputFields": [{ "namespace": "bigquery", "name": "shop-oltp.public.orders", "field": "customer_ref", "transformations": [{ "type": "DIRECT", "subtype": "IDENTITY" }] }] },
+      "amount_cents": { "inputFields": [{ "namespace": "bigquery", "name": "shop-oltp.public.orders", "field": "total", "transformations": [{ "type": "DIRECT", "subtype": "TRANSFORMATION" }] }] },
+      "status": { "inputFields": [{ "namespace": "bigquery", "name": "shop-oltp.public.orders", "field": "state", "transformations": [{ "type": "INDIRECT", "subtype": "FILTER" }] }] }
+    } } } }] },
+  { "eventType": "FAIL", "eventTime": "2026-11-17T03:00:00Z", "producer": "https://github.com/apache/airflow/tree/providers-openlineage",
+    "job": { "namespace": "airflow-prod", "name": "orders_ingest.load_raw_customers" }, "run": { "runId": "0193a1b0-0000-7000-8000-000000000002" },
+    "inputs": [], "outputs": [{ "namespace": "bigquery", "name": "analytics-prod.raw.customers", "facets": { "columnLineage": { "fields": {
+      "customer_id": { "inputFields": [{ "namespace": "bigquery", "name": "shop-oltp.public.customers", "field": "id" }] } } } } }] },
+  { "eventType": "COMPLETE", "eventTime": "2026-11-17T03:10:00Z", "producer": "https://github.com/apache/airflow/tree/providers-openlineage",
+    "job": { "namespace": "airflow-prod", "name": "orders_ingest.load_raw_customers" }, "run": { "runId": "0193a1b0-0000-7000-8000-000000000003" },
+    "inputs": [{ "namespace": "bigquery", "name": "shop-oltp.public.customers" }],
+    "outputs": [{ "namespace": "bigquery", "name": "analytics-prod.raw.customers", "facets": { "columnLineage": { "fields": {
+      "customer_id": { "inputFields": [{ "namespace": "bigquery", "name": "shop-oltp.public.customers", "field": "id", "transformations": [{ "type": "DIRECT", "subtype": "IDENTITY" }] }] },
+      "full_name": { "inputFields": [
+        { "namespace": "bigquery", "name": "shop-oltp.public.customers", "field": "first_name", "transformations": [{ "type": "DIRECT", "subtype": "TRANSFORMATION" }] },
+        { "namespace": "bigquery", "name": "shop-oltp.public.customers", "field": "last_name", "transformations": [{ "type": "DIRECT", "subtype": "TRANSFORMATION" }] }] }
+    } } } }] }
+]

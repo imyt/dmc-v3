@@ -1,0 +1,20 @@
+# S10: the PII and ISR classes themselves, read from the classification tool's REST API (S4 connector). Codes and hierarchy are synced as-is; DMC defines no PII or ISR classes of its own (docs/metamodel.md).
+# ASSUMPTION (invented source shape, to be replaced by the real API from Privacy / security): GET /v1/classes returns { records: [{ class_id, code, name, scheme: "PII"|"ISR", level, updated_at }] }.
+# `class_id` is assumed to be "<scheme>:<code>" in lower case, the qualified name the metamodel gives a Classification (for example pii:email). Real endpoint, auth, paging and field names must come from the owning team.
+# Metadata only (rule 8): the job maps class labels, never anything a classifier matched in the data.
+job: classification-tool-classes
+connection: classification-tool
+schedule: "15 4 * * *"
+source: { query: "/v1/classes", mode: full, page_size: 500 }
+target:
+  type: Classification
+  key: class_id
+  source: classification-tool
+  map:
+    code: code
+    name: name
+    scheme: { from: scheme, values: { PII: pii, ISR: isr } }
+    level: level
+  on_missing: deprecate
+limits: { max_changes_pct: 30 }
+retries: { max: 3, backoff_seconds: 10 }

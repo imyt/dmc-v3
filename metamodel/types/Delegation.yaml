@@ -1,0 +1,20 @@
+type: Delegation
+version: 1
+parent: GovernanceObject
+identity:
+  qualified_name: dmc.slug
+attributes:
+  owner: { type: string, required: true, source: dmc }
+  delegate: { type: string, required: true, source: dmc }
+  covers: { type: enum, values: [one-scope, all-scopes], required: true, source: dmc }
+  valid_from: { type: date, required: true, source: dmc }
+  valid_to: { type: date, required: true, source: dmc }
+  reason: { type: text, source: dmc }
+  reminded_on: { type: date, source: dmc }
+  ended_reason: { type: enum, values: [revoked, owner-changed], source: dmc }
+edges:
+  delegates:
+    - { to: Person, cardinality: many-to-one }
+    - { to: Scope, cardinality: many-to-many }
+lifecycle: default
+controls: []

@@ -1,0 +1,20 @@
+{
+  "_comment": "S10 recorded fixture with INVENTED tables and columns for the DataVisa dataset. Real project, dataset, table and column names must come from the DataVisa and data platform teams. reviewer_comment is a trap for the rule 8 test: it looks like a data value and must never be read.",
+  "local-fixture.datavisa": {
+    "assessments": [
+      { "assessment_id": "as-old", "outcome": "NOT_REQUIRED", "assessed_on": "2025-01-10", "review_due": "2026-01-10", "updated_at": "2025-01-10T08:00:00.000Z" },
+      { "assessment_id": "as-ok", "outcome": "REQUIRED", "assessed_on": "2026-02-01", "review_due": "2027-02-01", "updated_at": "2026-02-01T08:00:00.000Z", "reviewer_comment": "Customer J. Smith, account 4111 1111 1111 1111" },
+      { "assessment_id": "as-novisa", "outcome": "REQUIRED", "assessed_on": "2026-02-02", "review_due": "2027-02-02", "updated_at": "2026-02-02T08:00:00.000Z" },
+      { "assessment_id": "as-notreq", "outcome": "NOT_REQUIRED", "assessed_on": "2026-02-03", "updated_at": "2026-02-03T08:00:00.000Z" }
+    ],
+    "current_assessments": [
+      { "integration": { "id": "int-ok" }, "assessment": { "id": "as-ok" }, "updated_at": "2026-02-01T08:00:00.000Z" },
+      { "integration": { "id": "int-novisa" }, "assessment": { "id": "as-novisa" }, "updated_at": "2026-02-02T08:00:00.000Z" },
+      { "integration": { "id": "int-notreq" }, "assessment": { "id": "as-notreq" }, "updated_at": "2026-02-03T08:00:00.000Z" }
+    ],
+    "datavisas": [
+      { "visa_id": "dv-gb-hk", "source_country": "GB", "target_country": "HK", "data_categories": ["Personal data"], "valid_from": "2026-01-01", "valid_to": "2027-12-31", "status": "active", "updated_at": "2026-01-01T08:00:00.000Z" },
+      { "visa_id": "dv-us-gb", "source_country": "US", "target_country": "GB", "data_categories": ["Personal data"], "valid_from": "2026-01-01", "status": "active", "updated_at": "2026-01-02T08:00:00.000Z" }
+    ]
+  }
+}

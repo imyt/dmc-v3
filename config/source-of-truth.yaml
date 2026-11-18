@@ -1,0 +1,7 @@
+# Who owns each type that is still maintained in Collibra (docs/implementation-plan.md, cutover step 4).
+# Flip a type to `dmc` when its stewards start editing here; Collibra becomes read-only for that type and the sync job stops writing it.
+# Changes only by merge, and the sync job for that type is disabled in the same change.
+source_of_truth:
+  BusinessTerm: collibra
+  DataCategory: collibra
+  DataDomain: collibra

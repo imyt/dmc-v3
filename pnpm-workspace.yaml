@@ -1,0 +1,9 @@
+packages:
+  - 'packages/*'
+  - 'apps/*'
+
+# embedded-postgres downloads its binaries in a postinstall step
+onlyBuiltDependencies:
+  - embedded-postgres
+  - "@embedded-postgres/linux-x64"
+  - esbuild

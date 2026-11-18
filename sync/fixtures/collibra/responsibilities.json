@@ -1,0 +1,407 @@
+{
+  "total": 20,
+  "offset": 0,
+  "limit": 1000,
+  "results": [
+    {
+      "id": "r20000000-0000-4000-8000-000000000001",
+      "role": {
+        "id": "9b0000000-0000-4000-8000-000000000001",
+        "name": "Owner",
+        "resourceType": "Role"
+      },
+      "owner": {
+        "id": "u10000000-0000-4000-8000-000000000001",
+        "resourceType": "User",
+        "userName": "a.owner",
+        "emailAddress": "a.owner@example.com"
+      },
+      "baseResource": {
+        "id": "a10000000-0000-4000-8000-000000000001",
+        "name": "Finance",
+        "resourceType": "Asset"
+      },
+      "resourceType": "ResourceRole"
+    },
+    {
+      "id": "r20000000-0000-4000-8000-000000000002",
+      "role": {
+        "id": "9b0000000-0000-4000-8000-000000000001",
+        "name": "Owner",
+        "resourceType": "Role"
+      },
+      "owner": {
+        "id": "u10000000-0000-4000-8000-000000000001",
+        "resourceType": "User",
+        "userName": "a.owner",
+        "emailAddress": "a.owner@example.com"
+      },
+      "baseResource": {
+        "id": "a10000000-0000-4000-8000-000000000002",
+        "name": "Risk",
+        "resourceType": "Asset"
+      },
+      "resourceType": "ResourceRole"
+    },
+    {
+      "id": "r20000000-0000-4000-8000-000000000003",
+      "role": {
+        "id": "9b0000000-0000-4000-8000-000000000001",
+        "name": "Owner",
+        "resourceType": "Role"
+      },
+      "owner": {
+        "id": "u10000000-0000-4000-8000-000000000001",
+        "resourceType": "User",
+        "userName": "a.owner",
+        "emailAddress": "a.owner@example.com"
+      },
+      "baseResource": {
+        "id": "a10000000-0000-4000-8000-000000000003",
+        "name": "Customer",
+        "resourceType": "Asset"
+      },
+      "resourceType": "ResourceRole"
+    },
+    {
+      "id": "r20000000-0000-4000-8000-000000000004",
+      "role": {
+        "id": "9b0000000-0000-4000-8000-000000000001",
+        "name": "Owner",
+        "resourceType": "Role"
+      },
+      "owner": {
+        "id": "u10000000-0000-4000-8000-000000000001",
+        "resourceType": "User",
+        "userName": "a.owner",
+        "emailAddress": "a.owner@example.com"
+      },
+      "baseResource": {
+        "id": "a20000000-0000-4000-8000-000000000001",
+        "name": "Customer personal data",
+        "resourceType": "Asset"
+      },
+      "resourceType": "ResourceRole"
+    },
+    {
+      "id": "r20000000-0000-4000-8000-000000000005",
+      "role": {
+        "id": "9b0000000-0000-4000-8000-000000000001",
+        "name": "Owner",
+        "resourceType": "Role"
+      },
+      "owner": {
+        "id": "u10000000-0000-4000-8000-000000000001",
+        "resourceType": "User",
+        "userName": "a.owner",
+        "emailAddress": "a.owner@example.com"
+      },
+      "baseResource": {
+        "id": "a20000000-0000-4000-8000-000000000002",
+        "name": "Account balance",
+        "resourceType": "Asset"
+      },
+      "resourceType": "ResourceRole"
+    },
+    {
+      "id": "r20000000-0000-4000-8000-000000000006",
+      "role": {
+        "id": "9b0000000-0000-4000-8000-000000000001",
+        "name": "Owner",
+        "resourceType": "Role"
+      },
+      "owner": {
+        "id": "u10000000-0000-4000-8000-000000000001",
+        "resourceType": "User",
+        "userName": "a.owner",
+        "emailAddress": "a.owner@example.com"
+      },
+      "baseResource": {
+        "id": "a20000000-0000-4000-8000-000000000003",
+        "name": "Credit exposure",
+        "resourceType": "Asset"
+      },
+      "resourceType": "ResourceRole"
+    },
+    {
+      "id": "r20000000-0000-4000-8000-000000000007",
+      "role": {
+        "id": "9b0000000-0000-4000-8000-000000000001",
+        "name": "Owner",
+        "resourceType": "Role"
+      },
+      "owner": {
+        "id": "u10000000-0000-4000-8000-000000000001",
+        "resourceType": "User",
+        "userName": "a.owner",
+        "emailAddress": "a.owner@example.com"
+      },
+      "baseResource": {
+        "id": "a20000000-0000-4000-8000-000000000004",
+        "name": "Market data",
+        "resourceType": "Asset"
+      },
+      "resourceType": "ResourceRole"
+    },
+    {
+      "id": "r20000000-0000-4000-8000-000000000008",
+      "role": {
+        "id": "9b0000000-0000-4000-8000-000000000001",
+        "name": "Owner",
+        "resourceType": "Role"
+      },
+      "owner": {
+        "id": "u10000000-0000-4000-8000-000000000001",
+        "resourceType": "User",
+        "userName": "a.owner",
+        "emailAddress": "a.owner@example.com"
+      },
+      "baseResource": {
+        "id": "a20000000-0000-4000-8000-000000000005",
+        "name": "Trade",
+        "resourceType": "Asset"
+      },
+      "resourceType": "ResourceRole"
+    },
+    {
+      "id": "r20000000-0000-4000-8000-000000000009",
+      "role": {
+        "id": "9b0000000-0000-4000-8000-000000000002",
+        "name": "Steward",
+        "resourceType": "Role"
+      },
+      "owner": {
+        "id": "u10000000-0000-4000-8000-000000000001",
+        "resourceType": "User",
+        "userName": "a.owner",
+        "emailAddress": "a.owner@example.com"
+      },
+      "baseResource": {
+        "id": "a30000000-0000-4000-8000-000000000001",
+        "name": "Closing balance",
+        "resourceType": "Asset"
+      },
+      "resourceType": "ResourceRole"
+    },
+    {
+      "id": "r20000000-0000-4000-8000-000000000010",
+      "role": {
+        "id": "9b0000000-0000-4000-8000-000000000002",
+        "name": "Steward",
+        "resourceType": "Role"
+      },
+      "owner": {
+        "id": "u10000000-0000-4000-8000-000000000002",
+        "resourceType": "User",
+        "userName": "b.steward",
+        "emailAddress": "b.steward@example.com"
+      },
+      "baseResource": {
+        "id": "a30000000-0000-4000-8000-000000000002",
+        "name": "Opening balance",
+        "resourceType": "Asset"
+      },
+      "resourceType": "ResourceRole"
+    },
+    {
+      "id": "r20000000-0000-4000-8000-000000000011",
+      "role": {
+        "id": "9b0000000-0000-4000-8000-000000000002",
+        "name": "Steward",
+        "resourceType": "Role"
+      },
+      "owner": {
+        "id": "u10000000-0000-4000-8000-000000000001",
+        "resourceType": "User",
+        "userName": "a.owner",
+        "emailAddress": "a.owner@example.com"
+      },
+      "baseResource": {
+        "id": "a30000000-0000-4000-8000-000000000003",
+        "name": "Exposure at default",
+        "resourceType": "Asset"
+      },
+      "resourceType": "ResourceRole"
+    },
+    {
+      "id": "r20000000-0000-4000-8000-000000000012",
+      "role": {
+        "id": "9b0000000-0000-4000-8000-000000000002",
+        "name": "Steward",
+        "resourceType": "Role"
+      },
+      "owner": {
+        "id": "u10000000-0000-4000-8000-000000000002",
+        "resourceType": "User",
+        "userName": "b.steward",
+        "emailAddress": "b.steward@example.com"
+      },
+      "baseResource": {
+        "id": "a30000000-0000-4000-8000-000000000004",
+        "name": "Probability of default",
+        "resourceType": "Asset"
+      },
+      "resourceType": "ResourceRole"
+    },
+    {
+      "id": "r20000000-0000-4000-8000-000000000013",
+      "role": {
+        "id": "9b0000000-0000-4000-8000-000000000002",
+        "name": "Steward",
+        "resourceType": "Role"
+      },
+      "owner": {
+        "id": "u10000000-0000-4000-8000-000000000001",
+        "resourceType": "User",
+        "userName": "a.owner",
+        "emailAddress": "a.owner@example.com"
+      },
+      "baseResource": {
+        "id": "a30000000-0000-4000-8000-000000000005",
+        "name": "Loss given default",
+        "resourceType": "Asset"
+      },
+      "resourceType": "ResourceRole"
+    },
+    {
+      "id": "r20000000-0000-4000-8000-000000000014",
+      "role": {
+        "id": "9b0000000-0000-4000-8000-000000000002",
+        "name": "Steward",
+        "resourceType": "Role"
+      },
+      "owner": {
+        "id": "u10000000-0000-4000-8000-000000000002",
+        "resourceType": "User",
+        "userName": "b.steward",
+        "emailAddress": "b.steward@example.com"
+      },
+      "baseResource": {
+        "id": "a30000000-0000-4000-8000-000000000006",
+        "name": "Customer name",
+        "resourceType": "Asset"
+      },
+      "resourceType": "ResourceRole"
+    },
+    {
+      "id": "r20000000-0000-4000-8000-000000000015",
+      "role": {
+        "id": "9b0000000-0000-4000-8000-000000000002",
+        "name": "Steward",
+        "resourceType": "Role"
+      },
+      "owner": {
+        "id": "u10000000-0000-4000-8000-000000000001",
+        "resourceType": "User",
+        "userName": "a.owner",
+        "emailAddress": "a.owner@example.com"
+      },
+      "baseResource": {
+        "id": "a30000000-0000-4000-8000-000000000007",
+        "name": "Date of birth",
+        "resourceType": "Asset"
+      },
+      "resourceType": "ResourceRole"
+    },
+    {
+      "id": "r20000000-0000-4000-8000-000000000016",
+      "role": {
+        "id": "9b0000000-0000-4000-8000-000000000002",
+        "name": "Steward",
+        "resourceType": "Role"
+      },
+      "owner": {
+        "id": "u10000000-0000-4000-8000-000000000002",
+        "resourceType": "User",
+        "userName": "b.steward",
+        "emailAddress": "b.steward@example.com"
+      },
+      "baseResource": {
+        "id": "a30000000-0000-4000-8000-000000000008",
+        "name": "Mid price",
+        "resourceType": "Asset"
+      },
+      "resourceType": "ResourceRole"
+    },
+    {
+      "id": "r20000000-0000-4000-8000-000000000017",
+      "role": {
+        "id": "9b0000000-0000-4000-8000-000000000002",
+        "name": "Steward",
+        "resourceType": "Role"
+      },
+      "owner": {
+        "id": "u10000000-0000-4000-8000-000000000001",
+        "resourceType": "User",
+        "userName": "a.owner",
+        "emailAddress": "a.owner@example.com"
+      },
+      "baseResource": {
+        "id": "a30000000-0000-4000-8000-000000000009",
+        "name": "Yield curve",
+        "resourceType": "Asset"
+      },
+      "resourceType": "ResourceRole"
+    },
+    {
+      "id": "r20000000-0000-4000-8000-000000000018",
+      "role": {
+        "id": "9b0000000-0000-4000-8000-000000000002",
+        "name": "Steward",
+        "resourceType": "Role"
+      },
+      "owner": {
+        "id": "u10000000-0000-4000-8000-000000000002",
+        "resourceType": "User",
+        "userName": "b.steward",
+        "emailAddress": "b.steward@example.com"
+      },
+      "baseResource": {
+        "id": "a30000000-0000-4000-8000-000000000010",
+        "name": "Trade date",
+        "resourceType": "Asset"
+      },
+      "resourceType": "ResourceRole"
+    },
+    {
+      "id": "r20000000-0000-4000-8000-000000000019",
+      "role": {
+        "id": "9b0000000-0000-4000-8000-000000000002",
+        "name": "Steward",
+        "resourceType": "Role"
+      },
+      "owner": {
+        "id": "u10000000-0000-4000-8000-000000000001",
+        "resourceType": "User",
+        "userName": "a.owner",
+        "emailAddress": "a.owner@example.com"
+      },
+      "baseResource": {
+        "id": "a30000000-0000-4000-8000-000000000011",
+        "name": "Settlement date",
+        "resourceType": "Asset"
+      },
+      "resourceType": "ResourceRole"
+    },
+    {
+      "id": "r20000000-0000-4000-8000-000000000020",
+      "role": {
+        "id": "9b0000000-0000-4000-8000-000000000002",
+        "name": "Steward",
+        "resourceType": "Role"
+      },
+      "owner": {
+        "id": "u10000000-0000-4000-8000-000000000002",
+        "resourceType": "User",
+        "userName": "b.steward",
+        "emailAddress": "b.steward@example.com"
+      },
+      "baseResource": {
+        "id": "a30000000-0000-4000-8000-000000000012",
+        "name": "Counterparty",
+        "resourceType": "Asset"
+      },
+      "resourceType": "ResourceRole"
+    }
+  ]
+}

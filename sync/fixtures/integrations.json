@@ -1,0 +1,7 @@
+{ "records": [
+  { "sys_id": "int-payments-to-ledger", "name": "Payments to ledger", "mechanism": "api", "frequency": "real-time", "status": "live", "source_app": "app-payments-hub", "target_app": "app-core-banking" },
+  { "sys_id": "int-ledger-to-risk", "name": "Ledger to risk", "mechanism": "batch", "frequency": "daily", "status": "live", "source_app": "app-core-banking", "target_app": "app-risk-engine" },
+  { "sys_id": "int-risk-to-reporting", "name": "Risk to reporting", "mechanism": "batch", "frequency": "daily", "status": "live", "source_app": "app-risk-engine", "target_app": "app-reg-reporting" },
+  { "sys_id": "int-ledger-to-lake", "name": "Ledger to lake", "mechanism": "file", "frequency": "daily", "status": "live", "source_app": "app-core-banking", "target_app": "app-data-lake" },
+  { "sys_id": "int-crm-to-payments", "name": "CRM to payments", "mechanism": "api", "frequency": "hourly", "status": "planned", "source_app": "app-crm", "target_app": "app-payments-hub" }
+] }

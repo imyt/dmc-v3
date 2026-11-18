@@ -1,0 +1,14 @@
+# Task S5. Collibra relations Data Category -> Data Domain into DMC as part_of edges until cutover (ADR 0018). See collibra-term-categories for the ordering and cutover rules.
+# ASSUMPTION (not confirmed by the Collibra admin): the relation type is "is part of" (source: the category, target: the domain). Its id is `categoryDomainRelationTypeId` in the overlay.
+job: collibra-category-domains
+connection: collibra
+schedule: "32 2 * * *"
+source: { query: "/rest/2.0/relations?relationTypeId=${categoryDomainRelationTypeId}&sortField=ID&sortOrder=ASC", mode: full, page_size: 500 }
+target:
+  type: DataCategory
+  source: collibra
+  edge: { name: part_of, qualified_name: "{id}", from: source, to: target }
+  map: { relation: id }
+  on_missing: deprecate
+limits: { max_changes_pct: 20 }
+retries: { max: 3, backoff_seconds: 10 }

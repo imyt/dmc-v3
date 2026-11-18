@@ -1,0 +1,13 @@
+type: ScopeGroup
+version: 1
+parent: GovernanceObject
+identity:
+  qualified_name: dmc.slug
+attributes:
+  name: { type: string, required: true, source: dmc }
+  order: { type: integer, source: dmc }
+edges:
+  includes:
+    - { to: BusinessElement, cardinality: one-to-many }
+lifecycle: default
+controls: []

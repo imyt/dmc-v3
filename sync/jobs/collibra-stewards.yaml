@@ -1,0 +1,14 @@
+# Task S5. Collibra "Steward" responsibilities as stewarded_by edges to the Person (by staff ID; see collibra-owners) until cutover (ADR 0018). See collibra-owners for the rules.
+# ASSUMPTION (not confirmed by the Collibra admin): the role is named "Steward". Its id is `stewardRoleId` in the overlay.
+job: collibra-stewards
+connection: collibra
+schedule: "45 2 * * *"
+source: { query: "/rest/2.0/responsibilities?roleIds=${stewardRoleId}&sortField=ID&sortOrder=ASC", mode: full, page_size: 500 }
+target:
+  type: BusinessTerm
+  source: collibra
+  edge: { name: stewarded_by, qualified_name: "{id}", to_qualified_name: "{${ownerKeyField}}", from: baseResource, to: owner }
+  map: { responsibility: id }
+  on_missing: deprecate
+limits: { max_changes_pct: 20 }
+retries: { max: 3, backoff_seconds: 10 }

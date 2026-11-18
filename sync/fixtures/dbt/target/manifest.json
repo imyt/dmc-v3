@@ -1,0 +1,40 @@
+{
+  "metadata": { "dbt_schema_version": "https://schemas.getdbt.com/dbt/manifest/v12.json", "project_name": "shop", "adapter_type": "bigquery" },
+  "sources": {
+    "source.shop.raw.orders": { "resource_type": "source", "package_name": "shop", "source_name": "raw", "name": "orders", "identifier": "orders", "database": "analytics-prod", "schema": "raw", "columns": {} },
+    "source.shop.raw.customers": { "resource_type": "source", "package_name": "shop", "source_name": "raw", "name": "customers", "identifier": "customers", "database": "analytics-prod", "schema": "raw", "columns": {} }
+  },
+  "nodes": {
+    "model.shop.stg_orders": {
+      "resource_type": "model", "package_name": "shop", "name": "stg_orders", "alias": "stg_orders", "database": "analytics-prod", "schema": "staging",
+      "depends_on": { "nodes": ["source.shop.raw.orders"] },
+      "columns": {
+        "amount": { "name": "amount", "meta": { "derives_from": [{ "node": "source.shop.raw.orders", "column": "amount_cents" }] } }
+      }
+    },
+    "model.shop.stg_customers": {
+      "resource_type": "model", "package_name": "shop", "name": "stg_customers", "alias": "stg_customers", "database": "analytics-prod", "schema": "staging",
+      "depends_on": { "nodes": ["source.shop.raw.customers"] },
+      "columns": {
+        "customer_name": { "name": "customer_name", "meta": { "derives_from": [{ "node": "source.shop.raw.customers", "column": "full_name" }] } }
+      }
+    },
+    "model.shop.fct_orders": {
+      "resource_type": "model", "package_name": "shop", "name": "fct_orders", "alias": "fct_orders", "database": "analytics-prod", "schema": "marts",
+      "depends_on": { "nodes": ["model.shop.stg_orders", "model.shop.stg_customers"] },
+      "columns": {
+        "customer_name": { "name": "customer_name", "meta": { "derives_from": [{ "node": "model.shop.stg_customers", "column": "customer_name" }] } },
+        "amount": { "name": "amount", "meta": { "derives_from": [{ "node": "model.shop.stg_orders", "column": "amount" }] } }
+      }
+    },
+    "model.shop.orders_preview": {
+      "resource_type": "model", "package_name": "shop", "name": "orders_preview", "alias": "orders_preview", "database": "analytics-prod", "schema": "marts",
+      "depends_on": { "nodes": ["model.shop.fct_orders"] },
+      "columns": {}
+    },
+    "test.shop.not_null_stg_orders_order_id": {
+      "resource_type": "test", "package_name": "shop", "name": "not_null_stg_orders_order_id", "database": "analytics-prod", "schema": "staging",
+      "depends_on": { "nodes": ["model.shop.stg_orders"] }, "columns": {}
+    }
+  }
+}

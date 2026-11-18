@@ -1,0 +1,17 @@
+{
+  "metadata": { "dbt_schema_version": "https://schemas.getdbt.com/dbt/catalog/v1.json" },
+  "sources": {
+    "source.shop.raw.orders": { "metadata": { "database": "analytics-prod", "schema": "raw", "name": "orders", "type": "BASE TABLE" },
+      "columns": { "order_id": { "name": "order_id", "type": "STRING", "index": 1 }, "customer_id": { "name": "customer_id", "type": "STRING", "index": 2 }, "amount_cents": { "name": "amount_cents", "type": "INT64", "index": 3 }, "status": { "name": "status", "type": "STRING", "index": 4 } } },
+    "source.shop.raw.customers": { "metadata": { "database": "analytics-prod", "schema": "raw", "name": "customers", "type": "BASE TABLE" },
+      "columns": { "customer_id": { "name": "customer_id", "type": "STRING", "index": 1 }, "full_name": { "name": "full_name", "type": "STRING", "index": 2 } } }
+  },
+  "nodes": {
+    "model.shop.stg_orders": { "metadata": { "database": "analytics-prod", "schema": "staging", "name": "stg_orders", "type": "VIEW" },
+      "columns": { "order_id": { "name": "order_id", "type": "STRING", "index": 1 }, "customer_id": { "name": "customer_id", "type": "STRING", "index": 2 }, "amount": { "name": "amount", "type": "NUMERIC", "index": 3 }, "status": { "name": "status", "type": "STRING", "index": 4 } } },
+    "model.shop.stg_customers": { "metadata": { "database": "analytics-prod", "schema": "staging", "name": "stg_customers", "type": "VIEW" },
+      "columns": { "customer_id": { "name": "customer_id", "type": "STRING", "index": 1 }, "customer_name": { "name": "customer_name", "type": "STRING", "index": 2 } } },
+    "model.shop.fct_orders": { "metadata": { "database": "analytics-prod", "schema": "marts", "name": "fct_orders", "type": "BASE TABLE" },
+      "columns": { "order_id": { "name": "order_id", "type": "STRING", "index": 1 }, "customer_id": { "name": "customer_id", "type": "STRING", "index": 2 }, "customer_name": { "name": "customer_name", "type": "STRING", "index": 3 }, "amount": { "name": "amount", "type": "NUMERIC", "index": 4 } } }
+  }
+}

@@ -1,0 +1,16 @@
+# Task S5. Collibra relations Business Term -> Data Category into DMC as part_of edges until cutover (ADR 0018).
+# Runs after the three node jobs (02:00-02:10): an edge needs both ends in the catalog. A node and its edges are both Collibra's until the type is switched to DMC (config/source-of-truth.yaml);
+# after that the catalog refuses Collibra's edge writes for that type, and this job is disabled in the same change.
+# ASSUMPTION (not confirmed by the Collibra admin): the relation type is "is grouped by" (source: the term, target: the category). Its id is `termCategoryRelationTypeId` in the overlay.
+job: collibra-term-categories
+connection: collibra
+schedule: "30 2 * * *"
+source: { query: "/rest/2.0/relations?relationTypeId=${termCategoryRelationTypeId}&sortField=ID&sortOrder=ASC", mode: full, page_size: 500 }
+target:
+  type: BusinessTerm
+  source: collibra
+  edge: { name: part_of, qualified_name: "{id}", from: source, to: target }
+  map: { relation: id }
+  on_missing: deprecate
+limits: { max_changes_pct: 20 }
+retries: { max: 3, backoff_seconds: 10 }

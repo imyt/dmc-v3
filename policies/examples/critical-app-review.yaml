@@ -1,0 +1,11 @@
+policy: critical-app-review
+control: criticality
+mode: shadow
+scope:
+  type: Application
+when: application.criticality == 'critical' && application.status != 'retired'
+effect:
+  action: create_task
+  message: Confirm the criticality of this application
+route: application-owner
+escalate_after: 30d

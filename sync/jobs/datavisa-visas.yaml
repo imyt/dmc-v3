@@ -1,0 +1,19 @@
+# S10: DataVisas (PRV-4) from the same BigQuery dataset, keyed by the DataVisa tool's own id.
+# ASSUMPTION (invented table and columns; real names must come from the DataVisa team): table `datavisas` with visa_id, source_country and target_country (ISO 3166 alpha-2),
+#   data_categories (REPEATED STRING: the Data Category names or codes the visa covers), valid_from (DATE), valid_to (DATE), status (STRING), updated_at (TIMESTAMP).
+# `status` is passed as the tool writes it; the cross-border check treats revoked, withdrawn and rejected as not valid. A deleted or withdrawn visa that vanishes from the table is deprecated only by a full run, so this job is incremental and ignores missing.
+job: datavisa-visas
+connection: bq-datavisa
+schedule: "30 5 * * *"
+source:
+  query: "SELECT visa_id, source_country, target_country, data_categories, valid_from, valid_to, status, updated_at FROM `${project}.${dataset}.datavisas` WHERE @since IS NULL OR updated_at > @since"
+  mode: incremental
+  cursor: updated_at
+  page_size: 1000
+target:
+  type: DataVisa
+  key: visa_id
+  source: datavisa-tool
+  map: { source_country: source_country, target_country: target_country, data_categories: data_categories, valid_from: valid_from, valid_to: valid_to, status: status }
+  on_missing: ignore
+retries: { max: 2, backoff_seconds: 5 }

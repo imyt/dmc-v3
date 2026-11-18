@@ -1,0 +1,20 @@
+# S8: column lineage from the dbt artifacts (manifest.json + catalog.json). The overlay sets where they are (${dbt_target}).
+# Each edge is Column derives_from Column; the dbt model that builds the column is the job name on the edge.
+# A full, complete run that no longer finds an edge ends it; a partial run ends nothing.
+# A column's qualified name is system/schema/table/column as written in the Git JSON (docs/metamodel.md); the S7 jobs create the same names, so run S7 first.
+job: dbt-column-lineage
+connection: lineage-files
+schedule: "30 3 * * *"
+source: { query: "dbt ${dbt_target}", mode: full }
+target:
+  type: Column
+  source: dbt
+  edge:
+    name: derives_from
+    qualified_name: "{database}/{schema}/{table}/{column}"
+    from: derived
+    to: upstream
+  map: { job: job, confidence: confidence, origin: origin }
+  on_missing: deprecate
+limits: { max_changes_pct: 50 }
+retries: { max: 2, backoff_seconds: 5 }

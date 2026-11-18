@@ -1,0 +1,46 @@
+{
+  "name": "data-management-centre",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "lint": "node scripts/lint.mjs",
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "test": "vitest run",
+    "boundaries": "node scripts/check-boundaries.mjs",
+    "perf": "vitest run --config vitest.perf.config.ts",
+    "ci": "pnpm run lint && pnpm run typecheck && pnpm run typecheck:web && pnpm run sdk:check && pnpm run metamodel:check && pnpm run policies:check && pnpm run boundaries && pnpm run test && pnpm run test:web",
+    "gen:sdk": "node scripts/gen-sdk.mjs",
+    "sdk:check": "node scripts/gen-sdk.mjs --check",
+    "gen:metamodel": "vite-node scripts/gen-metamodel.ts",
+    "metamodel:check": "vite-node scripts/gen-metamodel.ts -- --check",
+    "policies:check": "vite-node scripts/check-policies.ts",
+    "typecheck:web": "pnpm --filter @dmc/app-web run typecheck",
+    "test:web": "pnpm --filter @dmc/app-web run test",
+    "api": "vite-node scripts/run.ts api",
+    "worker": "vite-node scripts/run.ts worker",
+    "migrate": "vite-node scripts/run.ts migrate",
+    "build": "node scripts/build.mjs",
+    "seed": "vite-node scripts/seed.ts",
+    "mock-sources": "vite-node scripts/mock-sources.ts"
+  },
+  "devDependencies": {
+    "@opentelemetry/api": "~1.9.0",
+    "@opentelemetry/context-async-hooks": "^1.30.0",
+    "@opentelemetry/core": "^1.30.0",
+    "@opentelemetry/sdk-trace-base": "^1.30.0",
+    "@types/node": "^22.0.0",
+    "embedded-postgres": "^18.6.0-beta.19",
+    "esbuild": "0.25.12",
+    "openapi-typescript": "^7.4.0",
+    "pg": "^8.23.1",
+    "pg-boss": "^12.38.2",
+    "typescript": "^5.6.0",
+    "vite-node": "^2.1.9",
+    "vitest": "^2.1.0"
+  },
+  "engines": {
+    "node": ">=22",
+    "pnpm": ">=10"
+  },
+  "packageManager": "pnpm@10.34.9"
+}

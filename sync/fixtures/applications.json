@@ -1,0 +1,8 @@
+{ "records": [
+  { "sys_id": "app-payments-hub", "name": "Payments Hub", "owned_by": "43000001", "delegates": ["43000003"], "criticality": "critical", "install_status": "live", "country": "GB" },
+  { "sys_id": "app-core-banking", "name": "Core Banking", "owned_by": "43000002", "delegates": [], "criticality": "critical", "install_status": "live", "country": "HK" },
+  { "sys_id": "app-risk-engine", "name": "Risk Engine", "owned_by": "43000002", "delegates": [], "criticality": "high", "install_status": "live", "country": "GB" },
+  { "sys_id": "app-data-lake", "name": "Data Lake", "owned_by": "43000001", "delegates": [], "criticality": "medium", "install_status": "live", "country": "GB" },
+  { "sys_id": "app-reg-reporting", "name": "Regulatory Reporting", "owned_by": "43000004", "delegates": [], "criticality": "high", "install_status": "live", "country": "GB" },
+  { "sys_id": "app-crm", "name": "Customer CRM", "owned_by": "43000003", "delegates": [], "criticality": "medium", "install_status": "planned", "country": "IN" }
+] }

@@ -1,0 +1,16 @@
+{
+  "_comment": "INVENTED. A recorded-style fixture shaped like a typical paged directory API (envelope with totalResults and a users list, offset paging with startAt/maxResults). The real identity provider's endpoint, auth, paging and field names are unknown and must come from the identity team; change this fixture and sync/jobs/idp-people.yaml together when they do. employeeId is the 8-digit staff ID: a STRING with leading zeros (ADR 0026). phone and manager are here on purpose: the job must not map them (metadata only: email, staff ID, name, department). All names and numbers are made up.",
+  "totalResults": 10,
+  "users": [
+    { "employeeId": "00123456", "mail": "alice.archer@example.test", "displayName": "Alice Archer", "department": "Finance", "phone": "000-0001", "manager": "04300004" },
+    { "employeeId": "04300004", "mail": "bilal.brooks@example.test", "displayName": "Bilal Brooks", "department": "Risk", "phone": "000-0002", "manager": "00123456" },
+    { "employeeId": "00000007", "mail": "mei.chow@example.test", "displayName": "Mei Ling Chow", "department": "Technology", "phone": "000-0003", "manager": "00123456" },
+    { "employeeId": "00450012", "mail": "a.owner@example.com", "displayName": "A Owner", "department": "Data Office", "phone": "000-0004", "manager": "00123456" },
+    { "employeeId": "00450013", "mail": "b.steward@example.com", "displayName": "B Steward", "department": "Data Office", "phone": "000-0005", "manager": "00123456" },
+    { "employeeId": "10000001", "mail": "chidi.eze@example.test", "displayName": "Chidi Eze", "department": "Operations", "phone": "000-0006", "manager": "04300004" },
+    { "employeeId": "00999999", "mail": "dara.doyle@example.test", "displayName": "Dara Doyle", "department": "Finance", "phone": "000-0007", "manager": "00123456" },
+    { "employeeId": "02000020", "mail": "eli.evans@example.test", "displayName": "Eli Evans", "department": "Compliance", "phone": "000-0008", "manager": "04300004" },
+    { "employeeId": "00000100", "mail": "fay.fox@example.test", "displayName": "Fay Fox", "department": "Technology", "phone": "000-0009", "manager": "00000007" },
+    { "employeeId": "03141592", "mail": "gus.green@example.test", "displayName": "Gus Green", "department": "Risk", "phone": "000-0010", "manager": "04300004" }
+  ]
+}

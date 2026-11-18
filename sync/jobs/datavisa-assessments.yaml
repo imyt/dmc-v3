@@ -1,0 +1,22 @@
+# S10: DataVisa tool Assessments (PRV-3), read from the BigQuery dataset where the DataVisa team lands them (S2 connector). One Assessment per row, keyed by the tool's own assessment id.
+# ASSUMPTION (invented table and columns; project, dataset, table and column names must come from the DataVisa team and the data platform team): table `assessments` with
+#   assessment_id, outcome ("REQUIRED" | "NOT_REQUIRED"), assessed_on (DATE), review_due (DATE), updated_at (TIMESTAMP).
+# The outcome label is renamed by a value map; a label not listed is a visible error for that record, never a guess. Project and dataset come from the connection in each environment's overlay.
+job: datavisa-assessments
+connection: bq-datavisa
+schedule: "0 5 * * *"
+source:
+  query: "SELECT assessment_id, outcome, assessed_on, review_due, updated_at FROM `${project}.${dataset}.assessments` WHERE @since IS NULL OR updated_at > @since"
+  mode: incremental
+  cursor: updated_at
+  page_size: 1000
+target:
+  type: Assessment
+  key: assessment_id
+  source: datavisa-tool
+  map:
+    outcome: { from: outcome, values: { REQUIRED: datavisa-required, NOT_REQUIRED: datavisa-not-required } }
+    assessed_on: assessed_on
+    review_due: review_due
+  on_missing: ignore
+retries: { max: 2, backoff_seconds: 5 }

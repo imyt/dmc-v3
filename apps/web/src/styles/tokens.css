@@ -1,0 +1,212 @@
+/*
+ * DMC design tokens (DESIGN.md §3). The only place colours, type and radius are defined.
+ * Names follow the shadcn convention; light and dark share them. Values marked "confirm" await the brand team.
+ * Swapping the brand font or logo is a change to this file and /public/brand only.
+ */
+
+:root {
+  /* Brand */
+  --brand: #db0011;
+  --brand-text: #db0011;
+  --brand-foreground: #ffffff;
+  --header: #ffffff;
+  --header-foreground: #000000;
+
+  /* Surfaces and text */
+  --background: #ffffff;
+  --foreground: #000000;
+  --card: #ffffff;
+  --card-foreground: #000000;
+  --popover: #ffffff;
+  --popover-foreground: #000000;
+  --muted: #f3f3f3;
+  --muted-foreground: #5c5c5c;
+  --accent: #f3f3f3;
+  --accent-foreground: #000000;
+  --secondary: #ebebeb;
+  --secondary-foreground: #000000;
+
+  /* Lines and focus */
+  --border: #d4d4d4;
+  --input: #767676; /* form borders need 3:1 against the page (WCAG 1.4.11) */
+  --ring: var(--brand);
+
+  /* Actions */
+  --primary: var(--brand);
+  --primary-foreground: var(--brand-foreground);
+  --destructive: #9e0010;
+
+  /* State: always shown next to a word, never alone */
+  --success: #1b6e37;
+  --warning: #8a5300;
+  --critical: #b3001a;
+  --info: #0a56a3;
+
+  /* Trust tiers (badge fill; text on them is --tier-foreground) */
+  --tier-gold: #c79a1f;
+  --tier-silver: #9ba1a8;
+  --tier-bronze: #b0703c;
+  --tier-unverified: #6e6e6e;
+  --tier-foreground: #000000;
+
+  --chart-1: #db0011;
+  --chart-2: #0a56a3;
+  --chart-3: #1b6e37;
+  --chart-4: #8a5300;
+  --chart-5: #5c5c5c;
+
+  /* Layout */
+  --radius: 4px;        /* controls, cards, inputs. Set to 0 for fully square Sera corners */
+  --radius-badge: 2px;
+  --content-max: 1280px;
+  --panel-edit: 480px;
+  --panel-wide: 720px;
+
+  /* Type */
+  --font-brand: "Univers Next for HSBC", Arial, Helvetica, sans-serif;
+  --font-mono: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+}
+
+.dark {
+  --brand: #db0011;
+  --brand-text: #ff5c66; /* meets 4.5:1 on the dark background; confirm */
+  --brand-foreground: #ffffff;
+  --header: #0b0b0b;
+  --header-foreground: #ffffff;
+
+  --background: #121212;
+  --foreground: #f2f2f2;
+  --card: #1c1c1c;
+  --card-foreground: #f2f2f2;
+  --popover: #1c1c1c;
+  --popover-foreground: #f2f2f2;
+  --muted: #262626;
+  --muted-foreground: #a8a8a8;
+  --accent: #2a2a2a;
+  --accent-foreground: #f2f2f2;
+  --secondary: #2a2a2a;
+  --secondary-foreground: #f2f2f2;
+
+  --border: #3a3a3a;
+  --input: #8c8c8c;
+  --ring: var(--brand-text);
+
+  --destructive: #ff7b72;
+
+  --success: #4cc38a;
+  --warning: #f2b84b;
+  --critical: #ff6b6b;
+  --info: #6cb4ff;
+
+  --tier-gold: #e0b84a;
+  --tier-silver: #bcc2c9;
+  --tier-bronze: #cf9462;
+  --tier-unverified: #9a9a9a;
+  --tier-foreground: #000000;
+
+  --chart-1: #ff5c66;
+  --chart-2: #6cb4ff;
+  --chart-3: #4cc38a;
+  --chart-4: #f2b84b;
+  --chart-5: #a8a8a8;
+}
+
+@theme inline {
+  --font-sans: var(--font-brand);
+  --font-heading: var(--font-brand);
+  --font-mono: var(--font-mono);
+
+  --color-brand: var(--brand);
+  --color-brand-text: var(--brand-text);
+  --color-brand-foreground: var(--brand-foreground);
+  --color-header: var(--header);
+  --color-header-foreground: var(--header-foreground);
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --color-critical: var(--critical);
+  --color-info: var(--info);
+  --color-tier-gold: var(--tier-gold);
+  --color-tier-silver: var(--tier-silver);
+  --color-tier-bronze: var(--tier-bronze);
+  --color-tier-unverified: var(--tier-unverified);
+  --color-tier-foreground: var(--tier-foreground);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--background);
+  --color-sidebar-foreground: var(--foreground);
+  --color-sidebar-border: var(--border);
+  --color-sidebar-accent: var(--accent);
+  --color-sidebar-accent-foreground: var(--accent-foreground);
+  --color-sidebar-primary: var(--primary);
+  --color-sidebar-primary-foreground: var(--primary-foreground);
+  --color-sidebar-ring: var(--ring);
+
+  --radius-sm: var(--radius-badge);
+  --radius-md: var(--radius);
+  --radius-lg: var(--radius);
+  --radius-xl: var(--radius);
+  --radius-2xl: var(--radius);
+  --radius-3xl: var(--radius);
+  --radius-4xl: var(--radius);
+}
+
+/*
+ * Sera -> DMC overrides (DESIGN.md §2). Sera hard-codes square corners and uppercase tracked headings in its
+ * components, which stay untouched in components/ui; these rules apply the DMC choices from outside.
+ */
+@layer components {
+  [data-slot="button"],
+  [data-slot="input"],
+  [data-slot="textarea"],
+  [data-slot="input-group"],
+  [data-slot="popover-content"],
+  [data-slot="dropdown-menu-content"],
+  [data-slot="dialog-content"],
+  [data-slot="command"] {
+    border-radius: var(--radius);
+  }
+  [data-slot="badge"] {
+    border-radius: var(--radius-badge);
+  }
+  /* sentence case; uppercase is for small labels and eyebrows only (.eyebrow) */
+  [data-slot="button"],
+  [data-slot^="dropdown-menu-"],
+  [data-slot="dialog-title"],
+  [data-slot="sheet-title"],
+  [data-slot="popover-title"],
+  [data-slot="command-item"],
+  [data-slot="tabs-trigger"] {
+    text-transform: none;
+    letter-spacing: normal;
+  }
+  .eyebrow {
+    font-size: 0.75rem;
+    line-height: 1rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted-foreground);
+  }
+}

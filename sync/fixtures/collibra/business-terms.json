@@ -1,0 +1,317 @@
+{
+  "total": 12,
+  "offset": 0,
+  "limit": 1000,
+  "results": [
+    {
+      "id": "a30000000-0000-4000-8000-000000000001",
+      "name": "Closing balance",
+      "displayName": "Closing balance",
+      "type": {
+        "id": "e10000000-0000-4000-8000-000000000000",
+        "name": "Business Term",
+        "resourceType": "AssetType"
+      },
+      "status": {
+        "id": "b10000000-0000-4000-8000-000000000001",
+        "name": "Approved",
+        "resourceType": "Status"
+      },
+      "domain": {
+        "id": "f10000000-0000-4000-8000-000000000002",
+        "name": "Glossary",
+        "resourceType": "Domain"
+      },
+      "createdOn": 1700000001000,
+      "lastModifiedOn": 1732000000000,
+      "resourceType": "Asset",
+      "attributes": {
+        "definition": "Balance at the end of the day"
+      }
+    },
+    {
+      "id": "a30000000-0000-4000-8000-000000000002",
+      "name": "Opening balance",
+      "displayName": "Opening balance",
+      "type": {
+        "id": "e10000000-0000-4000-8000-000000000000",
+        "name": "Business Term",
+        "resourceType": "AssetType"
+      },
+      "status": {
+        "id": "b10000000-0000-4000-8000-000000000001",
+        "name": "Approved",
+        "resourceType": "Status"
+      },
+      "domain": {
+        "id": "f10000000-0000-4000-8000-000000000002",
+        "name": "Glossary",
+        "resourceType": "Domain"
+      },
+      "createdOn": 1700000002000,
+      "lastModifiedOn": 1732000000001,
+      "resourceType": "Asset",
+      "attributes": {
+        "definition": "Balance at the start of the day"
+      }
+    },
+    {
+      "id": "a30000000-0000-4000-8000-000000000003",
+      "name": "Exposure at default",
+      "displayName": "Exposure at default",
+      "type": {
+        "id": "e10000000-0000-4000-8000-000000000000",
+        "name": "Business Term",
+        "resourceType": "AssetType"
+      },
+      "status": {
+        "id": "b10000000-0000-4000-8000-000000000001",
+        "name": "Approved",
+        "resourceType": "Status"
+      },
+      "domain": {
+        "id": "f10000000-0000-4000-8000-000000000002",
+        "name": "Glossary",
+        "resourceType": "Domain"
+      },
+      "createdOn": 1700000003000,
+      "lastModifiedOn": 1732000000002,
+      "resourceType": "Asset",
+      "attributes": {
+        "definition": "Expected exposure if the counterparty defaults"
+      }
+    },
+    {
+      "id": "a30000000-0000-4000-8000-000000000004",
+      "name": "Probability of default",
+      "displayName": "Probability of default",
+      "type": {
+        "id": "e10000000-0000-4000-8000-000000000000",
+        "name": "Business Term",
+        "resourceType": "AssetType"
+      },
+      "status": {
+        "id": "b10000000-0000-4000-8000-000000000001",
+        "name": "Approved",
+        "resourceType": "Status"
+      },
+      "domain": {
+        "id": "f10000000-0000-4000-8000-000000000002",
+        "name": "Glossary",
+        "resourceType": "Domain"
+      },
+      "createdOn": 1700000004000,
+      "lastModifiedOn": 1732000000003,
+      "resourceType": "Asset",
+      "attributes": {
+        "definition": "Likelihood a counterparty defaults within a year"
+      }
+    },
+    {
+      "id": "a30000000-0000-4000-8000-000000000005",
+      "name": "Loss given default",
+      "displayName": "Loss given default",
+      "type": {
+        "id": "e10000000-0000-4000-8000-000000000000",
+        "name": "Business Term",
+        "resourceType": "AssetType"
+      },
+      "status": {
+        "id": "b10000000-0000-4000-8000-000000000002",
+        "name": "Candidate",
+        "resourceType": "Status"
+      },
+      "domain": {
+        "id": "f10000000-0000-4000-8000-000000000002",
+        "name": "Glossary",
+        "resourceType": "Domain"
+      },
+      "createdOn": 1700000005000,
+      "lastModifiedOn": 1732000000004,
+      "resourceType": "Asset",
+      "attributes": {}
+    },
+    {
+      "id": "a30000000-0000-4000-8000-000000000006",
+      "name": "Customer name",
+      "displayName": "Customer name",
+      "type": {
+        "id": "e10000000-0000-4000-8000-000000000000",
+        "name": "Business Term",
+        "resourceType": "AssetType"
+      },
+      "status": {
+        "id": "b10000000-0000-4000-8000-000000000001",
+        "name": "Approved",
+        "resourceType": "Status"
+      },
+      "domain": {
+        "id": "f10000000-0000-4000-8000-000000000002",
+        "name": "Glossary",
+        "resourceType": "Domain"
+      },
+      "createdOn": 1700000006000,
+      "lastModifiedOn": 1732000000005,
+      "resourceType": "Asset",
+      "attributes": {
+        "definition": "Legal name of a customer"
+      }
+    },
+    {
+      "id": "a30000000-0000-4000-8000-000000000007",
+      "name": "Date of birth",
+      "displayName": "Date of birth",
+      "type": {
+        "id": "e10000000-0000-4000-8000-000000000000",
+        "name": "Business Term",
+        "resourceType": "AssetType"
+      },
+      "status": {
+        "id": "b10000000-0000-4000-8000-000000000001",
+        "name": "Approved",
+        "resourceType": "Status"
+      },
+      "domain": {
+        "id": "f10000000-0000-4000-8000-000000000002",
+        "name": "Glossary",
+        "resourceType": "Domain"
+      },
+      "createdOn": 1700000007000,
+      "lastModifiedOn": 1732000000006,
+      "resourceType": "Asset",
+      "attributes": {
+        "definition": "Date a natural person was born"
+      }
+    },
+    {
+      "id": "a30000000-0000-4000-8000-000000000008",
+      "name": "Mid price",
+      "displayName": "Mid price",
+      "type": {
+        "id": "e10000000-0000-4000-8000-000000000000",
+        "name": "Business Term",
+        "resourceType": "AssetType"
+      },
+      "status": {
+        "id": "b10000000-0000-4000-8000-000000000001",
+        "name": "Approved",
+        "resourceType": "Status"
+      },
+      "domain": {
+        "id": "f10000000-0000-4000-8000-000000000002",
+        "name": "Glossary",
+        "resourceType": "Domain"
+      },
+      "createdOn": 1700000008000,
+      "lastModifiedOn": 1732000000007,
+      "resourceType": "Asset",
+      "attributes": {
+        "definition": "Average of bid and ask"
+      }
+    },
+    {
+      "id": "a30000000-0000-4000-8000-000000000009",
+      "name": "Yield curve",
+      "displayName": "Yield curve",
+      "type": {
+        "id": "e10000000-0000-4000-8000-000000000000",
+        "name": "Business Term",
+        "resourceType": "AssetType"
+      },
+      "status": {
+        "id": "b10000000-0000-4000-8000-000000000002",
+        "name": "Candidate",
+        "resourceType": "Status"
+      },
+      "domain": {
+        "id": "f10000000-0000-4000-8000-000000000002",
+        "name": "Glossary",
+        "resourceType": "Domain"
+      },
+      "createdOn": 1700000009000,
+      "lastModifiedOn": 1732000000008,
+      "resourceType": "Asset",
+      "attributes": {
+        "definition": "Rates by maturity for one issuer"
+      }
+    },
+    {
+      "id": "a30000000-0000-4000-8000-000000000010",
+      "name": "Trade date",
+      "displayName": "Trade date",
+      "type": {
+        "id": "e10000000-0000-4000-8000-000000000000",
+        "name": "Business Term",
+        "resourceType": "AssetType"
+      },
+      "status": {
+        "id": "b10000000-0000-4000-8000-000000000001",
+        "name": "Approved",
+        "resourceType": "Status"
+      },
+      "domain": {
+        "id": "f10000000-0000-4000-8000-000000000002",
+        "name": "Glossary",
+        "resourceType": "Domain"
+      },
+      "createdOn": 1700000010000,
+      "lastModifiedOn": 1732000000009,
+      "resourceType": "Asset",
+      "attributes": {
+        "definition": "Day a trade was agreed"
+      }
+    },
+    {
+      "id": "a30000000-0000-4000-8000-000000000011",
+      "name": "Settlement date",
+      "displayName": "Settlement date",
+      "type": {
+        "id": "e10000000-0000-4000-8000-000000000000",
+        "name": "Business Term",
+        "resourceType": "AssetType"
+      },
+      "status": {
+        "id": "b10000000-0000-4000-8000-000000000001",
+        "name": "Approved",
+        "resourceType": "Status"
+      },
+      "domain": {
+        "id": "f10000000-0000-4000-8000-000000000002",
+        "name": "Glossary",
+        "resourceType": "Domain"
+      },
+      "createdOn": 1700000011000,
+      "lastModifiedOn": 1732000000010,
+      "resourceType": "Asset",
+      "attributes": {
+        "definition": "Day a trade is settled"
+      }
+    },
+    {
+      "id": "a30000000-0000-4000-8000-000000000012",
+      "name": "Counterparty",
+      "displayName": "Counterparty",
+      "type": {
+        "id": "e10000000-0000-4000-8000-000000000000",
+        "name": "Business Term",
+        "resourceType": "AssetType"
+      },
+      "status": {
+        "id": "b10000000-0000-4000-8000-000000000001",
+        "name": "Approved",
+        "resourceType": "Status"
+      },
+      "domain": {
+        "id": "f10000000-0000-4000-8000-000000000002",
+        "name": "Glossary",
+        "resourceType": "Domain"
+      },
+      "createdOn": 1700000012000,
+      "lastModifiedOn": 1732000000011,
+      "resourceType": "Asset",
+      "attributes": {
+        "definition": "The other party to a trade"
+      }
+    }
+  ]
+}

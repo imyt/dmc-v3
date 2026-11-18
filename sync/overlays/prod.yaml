@@ -1,0 +1,78 @@
+# PROD environment overlay. EVERY value marked REPLACE_ME is a PLACEHOLDER: there are no real hosts, projects or secrets in this file yet, and every job is OFF (enabled: false).
+# The worker refuses to enable a job whose connection or parameters still contain REPLACE_ME (packages/connectors resolveJob), so a placeholder can never pass as a real value.
+# To bring a source live: the owning team supplies its values, a reviewed change replaces them here, sets that job's `enabled: true`, and keeps exactly ONE ServiceNow writer on (the *-bq jobs, or the REST fallback, never both).
+# Secrets are references (`secret:`) resolved from the worker's environment, never the secret itself. Connection names differ from local.yaml where local uses a mock- name (mock-aris -> aris, mock-servicenow -> servicenow).
+connections:
+# Identity team: the IdP API (idp-people). baseUrl, auth, recordsPath, paging and peoplePath are all unknown today (the job was built against an invented fixture).
+  idp: { type: rest, baseUrl: REPLACE_ME_IDP_BASE_URL, recordsPath: REPLACE_ME_IDP_RECORDS_PATH, paging: { style: REPLACE_ME_IDP_PAGING_STYLE }, secret: REPLACE_ME_SECRET_REF/prod-idp, peoplePath: REPLACE_ME_IDP_PEOPLE_PATH }
+# Collibra admin: Collibra REST base URL, the service account secret, the ids of the asset types, relation types and roles, and the user field that identifies a person (userName or emailAddress, ADR 0026).
+  collibra: { baseUrl: REPLACE_ME_COLLIBRA_BASE_URL, recordsPath: results, paging: { style: offset }, secret: REPLACE_ME_SECRET_REF/prod-collibra, dataDomainTypeId: REPLACE_ME_ID, dataCategoryTypeId: REPLACE_ME_ID, businessTermTypeId: REPLACE_ME_ID, termCategoryRelationTypeId: REPLACE_ME_ID, categoryDomainRelationTypeId: REPLACE_ME_ID, ownerRoleId: REPLACE_ME_ID, stewardRoleId: REPLACE_ME_ID, ownerKeyField: REPLACE_ME_USERNAME_OR_EMAILADDRESS }
+# Data platform team: one BigQuery connection per source dataset: GCP project, dataset and service account (put `auth: key` and a secret only if workload identity is not available).
+  bq-servicenow: { type: bigquery, project: REPLACE_ME_GCP_PROJECT, dataset: REPLACE_ME_SERVICENOW_DATASET, secret: REPLACE_ME_SECRET_REF/prod-bq-servicenow }
+  bq-dq-hub: { type: bigquery, project: REPLACE_ME_GCP_PROJECT, dataset: REPLACE_ME_DQ_HUB_DATASET, secret: REPLACE_ME_SECRET_REF/prod-bq-dq-hub }
+  bq-dstorm: { type: bigquery, project: REPLACE_ME_GCP_PROJECT, dataset: REPLACE_ME_DSTORM_DATASET, secret: REPLACE_ME_SECRET_REF/prod-bq-dstorm }
+# DataVisa team with the data platform team: the DataVisa dataset.
+  bq-datavisa: { type: bigquery, project: REPLACE_ME_GCP_PROJECT, dataset: REPLACE_ME_DATAVISA_DATASET, secret: REPLACE_ME_SECRET_REF/prod-bq-datavisa }
+# Privacy / security team: the classification tool API (endpoint, auth, records path, paging).
+  classification-tool: { type: rest, baseUrl: REPLACE_ME_CLASSIFICATION_TOOL_BASE_URL, recordsPath: REPLACE_ME_RECORDS_PATH, paging: { style: REPLACE_ME_PAGING_STYLE }, secret: REPLACE_ME_SECRET_REF/prod-classification-tool }
+# Engineering: where the Git JSON metadata checkouts live (the real Git connector, S3, is not approved yet), and the dbt and Airflow lineage artifacts (root of the recorded files).
+  git-repos: { type: manifest, root: REPLACE_ME_GIT_CHECKOUT_ROOT, git_repos: REPLACE_ME_GIT_REPOS_DIR, applications_file: REPLACE_ME_APPLICATIONS_FILE, secret: REPLACE_ME_SECRET_REF/prod-git-repos }
+  lineage-files: { type: manifest, root: REPLACE_ME_LINEAGE_ARTIFACT_ROOT, secret: REPLACE_ME_SECRET_REF/prod-lineage-files }
+# Owning teams: ARIS, RRIS and the BCBS inventory. The access method is unknown; each team supplies the endpoint and auth.
+  aris: { type: rest, baseUrl: REPLACE_ME_ARIS_BASE_URL, recordsPath: REPLACE_ME_RECORDS_PATH, secret: REPLACE_ME_SECRET_REF/prod-aris }
+  rris: { type: rest, baseUrl: REPLACE_ME_RRIS_BASE_URL, recordsPath: REPLACE_ME_RECORDS_PATH, secret: REPLACE_ME_SECRET_REF/prod-rris }
+  bcbs: { type: rest, baseUrl: REPLACE_ME_BCBS_BASE_URL, recordsPath: REPLACE_ME_RECORDS_PATH, secret: REPLACE_ME_SECRET_REF/prod-bcbs }
+# ServiceNow owner / data platform team: REST fallback only (the *-bq jobs on bq-servicenow are the plan). Leave servicenow-applications off when the BigQuery jobs are on.
+  servicenow: { type: rest, baseUrl: REPLACE_ME_SERVICENOW_BASE_URL, recordsPath: REPLACE_ME_RECORDS_PATH, secret: REPLACE_ME_SECRET_REF/prod-servicenow }
+jobs:
+# Engineering
+  airflow-column-lineage: { airflow_events: REPLACE_ME_AIRFLOW_EVENTS_PATH, enabled: false }
+# Owning team (ARIS / RRIS / BCBS)
+  aris-scopes: { connection: aris, enabled: false }
+  bcbs-scopes: { connection: bcbs, enabled: false }
+# Privacy / security team
+  classification-tool-classes: { enabled: false }
+  classification-tool-column-classes: { enabled: false }
+# Collibra admin
+  collibra-business-terms: { enabled: false }
+  collibra-category-domains: { enabled: false }
+  collibra-data-categories: { enabled: false }
+  collibra-data-domains: { enabled: false }
+  collibra-owners: { enabled: false }
+  collibra-stewards: { enabled: false }
+  collibra-term-categories: { enabled: false }
+# DataVisa team and data platform team
+  datavisa-assessment-integrations: { enabled: false }
+  datavisa-assessments: { enabled: false }
+  datavisa-visas: { enabled: false }
+# Engineering
+  dbt-column-lineage: { dbt_target: REPLACE_ME_DBT_TARGET_PATH, enabled: false }
+# Data platform team (dataset), source owner confirms the tables
+  dq-hub-column-checks: { enabled: false }
+  dq-hub-rules: { enabled: false }
+  dq-hub-table-checks: { enabled: false }
+  dstorm-held-by: { enabled: false }
+  dstorm-legal-holds: { enabled: false }
+  dstorm-record-classes: { enabled: false }
+  dstorm-retained-under: { enabled: false }
+  dstorm-retention-schedules: { enabled: false }
+# Engineering
+  git-columns: { enabled: false }
+  git-contains-columns: { enabled: false }
+  git-contains-schemas: { enabled: false }
+  git-contains-tables: { enabled: false }
+  git-owns: { enabled: false }
+  git-schemas: { enabled: false }
+  git-systems: { enabled: false }
+  git-tables: { enabled: false }
+# Identity team
+  idp-people: { enabled: false }
+# Owning team (ARIS / RRIS / BCBS)
+  rris-scopes: { connection: rris, enabled: false }
+# Data platform team (BigQuery landing) / ServiceNow owner
+  servicenow-application-owners-bq: { enabled: false }
+  servicenow-applications: { connection: servicenow, enabled: false }
+  servicenow-applications-bq: { enabled: false }
+  servicenow-integration-source-bq: { enabled: false }
+  servicenow-integration-target-bq: { enabled: false }
+  servicenow-integrations-bq: { enabled: false }

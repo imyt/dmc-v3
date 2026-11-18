@@ -1,0 +1,19 @@
+# Task S5. Collibra "Owner" responsibilities as owned_by edges to the Person (by staff ID, see below) until cutover (ADR 0018).
+# One job for all glossary types: a responsibility list cannot be filtered by the asset's type. `type` is only the label on the signal; the metamodel checks each edge from the types of its two ends.
+# A type switched to DMC is refused by the catalog (its edges are DMC's), so the other types keep syncing; disable this job when the last type is switched.
+# ADR 0026: a Person is keyed by the STAFF ID (a string of 8 digits, leading zeros kept). The user field that identifies the person is the overlay parameter `ownerKeyField`:
+#   userName if Collibra user names are staff IDs (UNCONFIRMED: ask the Collibra admin), else emailAddress, which the worker resolves to the staff ID through the Person email attribute.
+#   A value that is all digits but not 8 long is refused and reported (never padded); a group (no user field) counts as an error.
+# ASSUMPTION (not confirmed by the Collibra admin): the role is named "Owner". Its id is `ownerRoleId` in the overlay.
+job: collibra-owners
+connection: collibra
+schedule: "40 2 * * *"
+source: { query: "/rest/2.0/responsibilities?roleIds=${ownerRoleId}&sortField=ID&sortOrder=ASC", mode: full, page_size: 500 }
+target:
+  type: BusinessTerm
+  source: collibra
+  edge: { name: owned_by, qualified_name: "{id}", to_qualified_name: "{${ownerKeyField}}", from: baseResource, to: owner }
+  map: { responsibility: id }
+  on_missing: deprecate
+limits: { max_changes_pct: 20 }
+retries: { max: 3, backoff_seconds: 10 }

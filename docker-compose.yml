@@ -1,0 +1,67 @@
+# Local stack. `docker compose up -d` starts the databases only (what `pnpm run api` and `pnpm run worker` need).
+# `docker compose --profile full up --build` also builds and runs migrate, the API, the worker, the mock sources and the web app on :8080.
+services:
+  postgres:
+    image: postgres:18
+    environment: { POSTGRES_USER: dmc, POSTGRES_PASSWORD: dmc, POSTGRES_DB: dmc }
+    ports: ["5432:5432"]
+    volumes: [pgdata:/var/lib/postgresql]
+    healthcheck: { test: ["CMD-SHELL", "pg_isready -U dmc"], interval: 5s, retries: 10 }
+  audit-postgres:
+    image: postgres:18
+    environment: { POSTGRES_USER: audit, POSTGRES_PASSWORD: audit, POSTGRES_DB: audit }
+    ports: ["5433:5432"]
+    volumes: [auditdata:/var/lib/postgresql]
+    healthcheck: { test: ["CMD-SHELL", "pg_isready -U audit"], interval: 5s, retries: 10 }
+  # catches every email DMC sends locally: SMTP on 1025, inbox at http://localhost:8025
+  mailpit:
+    image: axllent/mailpit
+    ports: ["1025:1025", "8025:8025"]
+
+  migrate:
+    profiles: [full]
+    build: { context: ., dockerfile: deploy/docker/server.Dockerfile }
+    command: ["migrate"]
+    environment: &dmc-env
+      DMC_ENVIRONMENT: local
+      DMC_DB_HOST: postgres
+      DMC_DB_PORT: "5432"
+      DMC_DB_NAME: dmc
+      DMC_DB_ADMIN_USER: dmc
+      DMC_DB_ADMIN_PASSWORD: dmc
+      DMC_AUDIT_DB_HOST: audit-postgres
+      DMC_AUDIT_DB_PORT: "5432"
+      DMC_SMTP_HOST: mailpit
+      DMC_SMTP_PORT: "1025"
+    depends_on: { postgres: { condition: service_healthy }, audit-postgres: { condition: service_healthy } }
+  api:
+    profiles: [full]
+    build: { context: ., dockerfile: deploy/docker/server.Dockerfile }
+    command: ["api"]
+    environment: { <<: *dmc-env, DMC_HTTP_HOST: 0.0.0.0, DMC_HTTP_PORT: "3000" }
+    ports: ["3000:3000"]
+    depends_on: { migrate: { condition: service_completed_successfully } }
+  worker:
+    profiles: [full]
+    build: { context: ., dockerfile: deploy/docker/server.Dockerfile }
+    command: ["worker"]
+    environment: *dmc-env
+    depends_on: { migrate: { condition: service_completed_successfully } }
+  # shares the worker's network so the local overlay's http://localhost:8099/ reaches it
+  mock-sources:
+    profiles: [full]
+    image: node:22-slim
+    network_mode: "service:worker"
+    environment: { DMC_MOCK_FIXTURES: /fixtures }
+    volumes: ["./sync/fixtures:/fixtures:ro", "./scripts/mock-sources.ts:/app/mock-sources.ts:ro"]
+    command: ["node", "--experimental-strip-types", "/app/mock-sources.ts"]
+    depends_on: [worker]
+  web:
+    profiles: [full]
+    build: { context: ., dockerfile: deploy/docker/web.Dockerfile }
+    environment: { DMC_API_URL: "http://api:3000" }
+    ports: ["8080:8080"]
+    depends_on: [api]
+volumes:
+  pgdata: {}
+  auditdata: {}

@@ -1,0 +1,12 @@
+policy: classification-proposed
+control: classification
+implements: TCR-0005
+mode: shadow
+scope:
+  type: Column
+when: size(column.proposed_classification) > 0
+effect:
+  action: raise_exception
+  message: A classification is proposed for this column from the columns it is built from; confirm or reject it
+route: data-steward
+escalate_after: 14d

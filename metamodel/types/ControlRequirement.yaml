@@ -1,0 +1,14 @@
+type: ControlRequirement
+version: 1
+parent: GovernanceObject
+identity:
+  qualified_name: dmc.slug
+attributes:
+  reference_id: { type: string, required: true, source: dmc }
+  title: { type: string, required: true, source: dmc }
+  kind: { type: enum, values: [operating-instruction, technical-control-requirement], required: true, source: dmc }
+  owner: { type: person, source: dmc }
+  confluence_link: { type: url, source: dmc }
+  version: { type: integer, required: true, source: dmc }
+lifecycle: default
+controls: []

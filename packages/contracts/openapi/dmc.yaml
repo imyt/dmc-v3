@@ -1,0 +1,1190 @@
+openapi: 3.1.0
+info:
+  title: DMC API
+  version: 0.1.0
+  description: Conventions every module API follows. Module paths are added under /v1/<module>/.
+servers:
+  - url: /
+paths:
+  /v1/health:
+    get:
+      operationId: getHealth
+      summary: Liveness and version
+      responses:
+        '200':
+          description: Service is up
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Health' }
+        default: { $ref: '#/components/responses/Problem' }
+  /v1/examples:
+    get:
+      operationId: listExamples
+      summary: Template for list endpoints (cursor pagination)
+      parameters:
+        - $ref: '#/components/parameters/Limit'
+        - $ref: '#/components/parameters/Cursor'
+      responses:
+        '200':
+          description: One page
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/ExamplePage' }
+        default: { $ref: '#/components/responses/Problem' }
+    post:
+      operationId: createExample
+      summary: Template for write endpoints (dry_run, idempotency)
+      parameters:
+        - $ref: '#/components/parameters/DryRun'
+        - $ref: '#/components/parameters/IdempotencyKey'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/ExampleInput' }
+      responses:
+        '201':
+          description: Created, or a preview when dry_run=true
+          headers:
+            ETag: { $ref: '#/components/headers/ETag' }
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Example' }
+        default: { $ref: '#/components/responses/Problem' }
+  /v1/examples/{id}:
+    patch:
+      operationId: updateExample
+      summary: Template for updates (If-Match required)
+      parameters:
+        - { name: id, in: path, required: true, schema: { type: string } }
+        - $ref: '#/components/parameters/DryRun'
+        - $ref: '#/components/parameters/IfMatch'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/ExampleInput' }
+      responses:
+        '200':
+          description: Updated
+          headers:
+            ETag: { $ref: '#/components/headers/ETag' }
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Example' }
+        default: { $ref: '#/components/responses/Problem' }
+  /v1/search:
+    get:
+      operationId: search
+      summary: Full-text search over the catalog. Every word is a prefix, so results appear as the person types.
+      parameters:
+        - { name: q, in: query, required: true, schema: { type: string, minLength: 1 } }
+        - { name: type, in: query, description: Comma-separated types, schema: { type: string } }
+        - { name: lifecycle, in: query, description: Comma-separated lifecycle states, schema: { type: string } }
+        - { name: limit, in: query, schema: { type: integer, minimum: 1, maximum: 100, default: 20 } }
+        - { name: offset, in: query, schema: { type: integer, minimum: 0, maximum: 1000, default: 0 } }
+      responses:
+        '200': { description: Hits and facets, content: { application/json: { schema: { $ref: '#/components/schemas/SearchResult' } } } }
+        default: { $ref: '#/components/responses/Problem' }
+  /v1/nodes:
+    get:
+      operationId: listNodes
+      summary: List catalog nodes of one type (cursor pagination, ordered by qualified name)
+      parameters:
+        - { name: type, in: query, required: true, schema: { type: string } }
+        - $ref: '#/components/parameters/Limit'
+        - $ref: '#/components/parameters/Cursor'
+        - $ref: '#/components/parameters/ValidAt'
+        - $ref: '#/components/parameters/KnownAt'
+      responses:
+        '200':
+          description: One page
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/NodePage' }
+        default: { $ref: '#/components/responses/Problem' }
+    post:
+      operationId: createGlossaryNode
+      summary: Create a glossary node (data domain, category or term). Only attributes DMC owns can be set; before a type's cutover they belong to Collibra.
+      parameters:
+        - $ref: '#/components/parameters/DryRun'
+        - $ref: '#/components/parameters/IdempotencyKey'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [type, qualified_name]
+              additionalProperties: false
+              properties:
+                type: { enum: [BusinessTerm, DataCategory, DataDomain] }
+                qualified_name: { type: string }
+                attributes: { type: object, additionalProperties: true }
+                part_of: { type: string, description: The category (for a term) or domain (for a category) it belongs to }
+      responses:
+        '200': { description: Preview when dry_run=true, content: { application/json: { schema: { type: object } } } }
+        '201':
+          description: Created
+          headers:
+            ETag: { $ref: '#/components/headers/ETag' }
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Node' }
+        default: { $ref: '#/components/responses/Problem' }
+  /v1/nodes/{qualified_name}:
+    get:
+      operationId: getNode
+      summary: One node with its allowed actions. The qualified name is URL-encoded.
+      parameters:
+        - $ref: '#/components/parameters/QualifiedName'
+        - $ref: '#/components/parameters/ValidAt'
+        - $ref: '#/components/parameters/KnownAt'
+      responses:
+        '200':
+          description: The node
+          headers:
+            ETag: { $ref: '#/components/headers/ETag' }
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Node' }
+        default: { $ref: '#/components/responses/Problem' }
+    patch:
+      operationId: editNode
+      summary: >-
+        Edit DMC-owned fields. A person's edit applies at once. An agent or script (service account, or acting for a person)
+        only proposes: a policy with the apply_change effect decides whether it is applied or goes to review.
+      parameters:
+        - $ref: '#/components/parameters/QualifiedName'
+        - $ref: '#/components/parameters/DryRun'
+        - $ref: '#/components/parameters/IdempotencyKey'
+        - $ref: '#/components/parameters/IfMatch'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [attributes]
+              additionalProperties: false
+              properties:
+                attributes: { type: object, minProperties: 1, additionalProperties: true }
+      responses:
+        '200':
+          description: Applied (a person), or a preview when dry_run=true
+          headers:
+            ETag: { $ref: '#/components/headers/ETag' }
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Node' }
+        '202':
+          description: Proposed (an agent or script); nothing is written until a policy or a reviewer applies it
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [status, qualified_name, fields]
+                properties:
+                  status: { const: proposed }
+                  qualified_name: { type: string }
+                  fields: { type: array, items: { type: string } }
+                  dry_run: { type: boolean }
+        default: { $ref: '#/components/responses/Problem' }
+  /v1/nodes/{qualified_name}/relationships:
+    get:
+      operationId: listNodeRelationships
+      summary: Edges of a node, in either direction
+      parameters:
+        - $ref: '#/components/parameters/QualifiedName'
+        - { name: name, in: query, description: Edge name, for example in_domain, schema: { type: string } }
+        - { name: direction, in: query, schema: { enum: [out, in], default: out } }
+        - $ref: '#/components/parameters/ValidAt'
+        - $ref: '#/components/parameters/KnownAt'
+      responses:
+        '200':
+          description: Edges with the qualified name at the other end
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/EdgeList' }
+        default: { $ref: '#/components/responses/Problem' }
+  /v1/nodes/{qualified_name}/lineage:
+    get:
+      operationId: getNodeLineage
+      summary: Column-to-column lineage, capped in depth and size
+      parameters:
+        - $ref: '#/components/parameters/QualifiedName'
+        - { name: direction, in: query, description: 'upstream: what it is built from. downstream: what is built from it', schema: { enum: [upstream, downstream], default: upstream } }
+        - { name: depth, in: query, schema: { type: integer, minimum: 1, maximum: 20, default: 10 } }
+        - { name: max_nodes, in: query, schema: { type: integer, minimum: 1, maximum: 20000, default: 5000 } }
+        - { name: min_confidence, in: query, description: Ignore edges the source is less sure of, schema: { type: number, minimum: 0, maximum: 1 } }
+      responses:
+        '200': { description: The walk, content: { application/json: { schema: { $ref: '#/components/schemas/Lineage' } } } }
+        default: { $ref: '#/components/responses/Problem' }
+  /v1/nodes/{qualified_name}/impact:
+    get:
+      operationId: getNodeImpact
+      summary: What changing this node would reach, downstream
+      parameters:
+        - $ref: '#/components/parameters/QualifiedName'
+        - { name: depth, in: query, schema: { type: integer, minimum: 1, maximum: 20, default: 10 } }
+        - { name: max_nodes, in: query, schema: { type: integer, minimum: 1, maximum: 20000, default: 5000 } }
+        - { name: min_confidence, in: query, schema: { type: number, minimum: 0, maximum: 1 } }
+      responses:
+        '200': { description: Summary, content: { application/json: { schema: { $ref: '#/components/schemas/Impact' } } } }
+        default: { $ref: '#/components/responses/Problem' }
+  /v1/nodes/{qualified_name}/evidence:
+    get:
+      operationId: listNodeEvidence
+      summary: Every ledger entry about this node, oldest first (auditors, admins, control owners)
+      parameters:
+        - $ref: '#/components/parameters/QualifiedName'
+        - { name: kind, in: query, description: Only entries of this kind, for example decision.made, schema: { type: string } }
+        - { name: limit, in: query, schema: { type: integer, minimum: 1, maximum: 200, default: 50 } }
+        - { name: cursor, in: query, schema: { type: string } }
+      responses:
+        '200':
+          description: One page of entries
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/EvidencePage' }
+        default: { $ref: '#/components/responses/Problem' }
+  /v1/nodes/{qualified_name}/evidence/proof:
+    get:
+      operationId: exportNodeProof
+      summary: A self-contained proof for this node that anyone can check without access to DMC
+      parameters:
+        - $ref: '#/components/parameters/QualifiedName'
+      responses:
+        '200':
+          description: The entries, every chain link between them, and the ledger head at export time
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/ProofBundle' }
+        default: { $ref: '#/components/responses/Problem' }
+  /v1/requirements:
+    post:
+      operationId: saveRequirement
+      summary: Register a control requirement, or save a higher version of one. A higher version flags the policies that implement it for review.
+      parameters:
+        - $ref: '#/components/parameters/DryRun'
+        - $ref: '#/components/parameters/IdempotencyKey'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/RequirementInput' }
+      responses:
+        '200': { description: Saved or previewed, content: { application/json: { schema: { $ref: '#/components/schemas/RequirementReport' } } } }
+        '201': { description: Created, content: { application/json: { schema: { $ref: '#/components/schemas/RequirementReport' } } } }
+        default: { $ref: '#/components/responses/Problem' }
+  /v1/requirements/import:
+    post:
+      operationId: importRequirements
+      summary: Register many requirements from a CSV. Every row is checked first; one bad row saves nothing.
+      parameters:
+        - $ref: '#/components/parameters/DryRun'
+        - $ref: '#/components/parameters/IdempotencyKey'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [csv]
+              additionalProperties: false
+              properties:
+                csv: { type: string, description: 'First row names the columns: reference_id, title, kind, owner, confluence_link, version' }
+      responses:
+        '200': { description: Saved or previewed, content: { application/json: { schema: { $ref: '#/components/schemas/RequirementReport' } } } }
+        '201': { description: Created, content: { application/json: { schema: { $ref: '#/components/schemas/RequirementReport' } } } }
+        default: { $ref: '#/components/responses/Problem' }
+  /v1/requirements/coverage:
+    get:
+      operationId: getRequirementCoverage
+      summary: Requirements with no policy, with shadow policies only, and with enforced policies
+      responses:
+        '200': { description: Coverage, content: { application/json: { schema: { $ref: '#/components/schemas/RequirementCoverage' } } } }
+        default: { $ref: '#/components/responses/Problem' }
+  /v1/inbox:
+    get:
+      operationId: listInbox
+      summary: Tasks assigned to you or to a group you are in, escalated and overdue first
+      responses:
+        '200': { description: Your open tasks, content: { application/json: { schema: { $ref: '#/components/schemas/Inbox' } } } }
+        default: { $ref: '#/components/responses/Problem' }
+  /v1/inbox/{id}/decision:
+    post:
+      operationId: decideInboxTask
+      summary: Decide a task in one action (the assignee only; people, not agents)
+      parameters:
+        - { name: id, in: path, required: true, schema: { type: string } }
+        - { name: Idempotency-Key, in: header, required: false, schema: { type: string } }
+      requestBody:
+        required: true
+        content: { application/json: { schema: { type: object, required: [decision], properties: { decision: { type: string } } } } }
+      responses:
+        '200': { description: Decided (replayed when the same decision was already recorded), content: { application/json: { schema: { type: object, required: [replayed], properties: { replayed: { type: boolean } } } } } }
+        default: { $ref: '#/components/responses/Problem' }
+  /v1/scopes/{qualified_name}:
+    get:
+      operationId: getScope
+      summary: A scope with its groups, elements and flows, now or as DMC knew it at known_at
+      parameters:
+        - { name: qualified_name, in: path, required: true, schema: { type: string } }
+        - { name: known_at, in: query, required: false, schema: { type: string, format: date-time } }
+      responses:
+        '200': { description: The scope, content: { application/json: { schema: { $ref: '#/components/schemas/ScopeDetail' } } } }
+        default: { $ref: '#/components/responses/Problem' }
+  /v1/scopes/{qualified_name}/groups:
+    post:
+      operationId: addScopeGroup
+      summary: Add a group of business elements (the owner or a delegate; not while locked)
+      parameters:
+        - { name: qualified_name, in: path, required: true, schema: { type: string } }
+        - { name: Idempotency-Key, in: header, required: false, schema: { type: string } }
+        - $ref: '#/components/parameters/DryRun'
+      requestBody:
+        required: true
+        content: { application/json: { schema: { type: object, required: [name], properties: { name: { type: string }, order: { type: integer } } } } }
+      responses:
+        '201': { description: Done, content: { application/json: { schema: { $ref: '#/components/schemas/ScopeCreated' } } } }
+        default: { $ref: '#/components/responses/Problem' }
+  /v1/scopes/{qualified_name}/groups/{group}/elements:
+    post:
+      operationId: addScopeElement
+      summary: Add a business element to a group
+      parameters:
+        - { name: qualified_name, in: path, required: true, schema: { type: string } }
+        - { name: group, in: path, required: true, schema: { type: string } }
+        - { name: Idempotency-Key, in: header, required: false, schema: { type: string } }
+        - $ref: '#/components/parameters/DryRun'
+      requestBody:
+        required: true
+        content: { application/json: { schema: { type: object, required: [name], properties: { name: { type: string }, definition: { type: string }, criticality: { type: string, enum: [low, medium, high, critical] } } } } }
+      responses:
+        '201': { description: Done, content: { application/json: { schema: { $ref: '#/components/schemas/ScopeCreated' } } } }
+        default: { $ref: '#/components/responses/Problem' }
+  /v1/scopes/{qualified_name}/flows:
+    put:
+      operationId: setScopeFlows
+      summary: Replace the integrations the scope flows through
+      parameters:
+        - { name: qualified_name, in: path, required: true, schema: { type: string } }
+        - { name: Idempotency-Key, in: header, required: false, schema: { type: string } }
+        - $ref: '#/components/parameters/DryRun'
+      requestBody:
+        required: true
+        content: { application/json: { schema: { type: object, required: [integrations], properties: { integrations: { type: array, items: { type: string } } } } } }
+      responses:
+        '200': { description: Done, content: { application/json: { schema: { $ref: '#/components/schemas/ScopeFlows' } } } }
+        default: { $ref: '#/components/responses/Problem' }
+  /v1/scopes/{qualified_name}/submit:
+    post:
+      operationId: submitScope
+      summary: Submit and lock the scope
+      parameters:
+        - { name: qualified_name, in: path, required: true, schema: { type: string } }
+        - { name: Idempotency-Key, in: header, required: false, schema: { type: string } }
+        - $ref: '#/components/parameters/DryRun'
+      responses:
+        '200': { description: Done, content: { application/json: { schema: { $ref: '#/components/schemas/ScopeAck' } } } }
+        default: { $ref: '#/components/responses/Problem' }
+  /v1/scopes/{qualified_name}/amend:
+    post:
+      operationId: amendScope
+      summary: Reopen a submitted scope as the next version
+      parameters:
+        - { name: qualified_name, in: path, required: true, schema: { type: string } }
+        - { name: Idempotency-Key, in: header, required: false, schema: { type: string } }
+        - $ref: '#/components/parameters/DryRun'
+      responses:
+        '200': { description: Done, content: { application/json: { schema: { $ref: '#/components/schemas/ScopeAck' } } } }
+        default: { $ref: '#/components/responses/Problem' }
+  /v1/scopes/{qualified_name}/required-tier:
+    put:
+      operationId: setScopeRequiredTier
+      summary: The scope owner chooses the trust tier its assets must reach
+      parameters:
+        - { name: qualified_name, in: path, required: true, schema: { type: string } }
+        - { name: Idempotency-Key, in: header, required: false, schema: { type: string } }
+        - $ref: '#/components/parameters/DryRun'
+      requestBody:
+        required: true
+        content: { application/json: { schema: { type: object, required: [required_tier], properties: { required_tier: { type: string, enum: [bronze, silver, gold] } } } } }
+      responses:
+        '200': { description: Set, content: { application/json: { schema: { type: object, properties: { dry_run: { type: boolean }, qualified_name: { type: string }, required_tier: { type: string } } } } } }
+        default: { $ref: '#/components/responses/Problem' }
+  /v1/scopes/{qualified_name}/links:
+    post:
+      operationId: linkScopeElement
+      summary: An application owner links a business element of a submitted scope to a column or table (an agent acting for them proposes)
+      parameters:
+        - { name: qualified_name, in: path, required: true, schema: { type: string } }
+        - { name: Idempotency-Key, in: header, required: false, schema: { type: string } }
+        - $ref: '#/components/parameters/DryRun'
+      requestBody:
+        required: true
+        content: { application/json: { schema: { type: object, required: [element, target, app], properties: { element: { type: string }, target: { type: string }, app: { type: string } } } } }
+      responses:
+        '201': { description: Linked, content: { application/json: { schema: { $ref: '#/components/schemas/ScopeLink' } } } }
+        default: { $ref: '#/components/responses/Problem' }
+  /v1/scopes/{qualified_name}/links/confirm:
+    post:
+      operationId: confirmScopeLink
+      summary: The application owner confirms a proposed link
+      parameters:
+        - { name: qualified_name, in: path, required: true, schema: { type: string } }
+      requestBody:
+        required: true
+        content: { application/json: { schema: { type: object, required: [element, target], properties: { element: { type: string }, target: { type: string } } } } }
+      responses:
+        '200': { description: Confirmed, content: { application/json: { schema: { $ref: '#/components/schemas/ScopeLink' } } } }
+        default: { $ref: '#/components/responses/Problem' }
+  /v1/scopes/{qualified_name}/completeness:
+    get:
+      operationId: getScopeCompleteness
+      summary: Whether every element is linked and every application on the flows has finished its task
+      parameters:
+        - { name: qualified_name, in: path, required: true, schema: { type: string } }
+      responses:
+        '200': { description: Completeness, content: { application/json: { schema: { $ref: '#/components/schemas/ScopeCompleteness' } } } }
+        default: { $ref: '#/components/responses/Problem' }
+  /v1/integrations/{qualified_name}/datasets:
+    get:
+      operationId: listIntegrationDatasets
+      summary: The datasets an integration carries, with category, record class and column links
+      parameters:
+        - { name: qualified_name, in: path, required: true, schema: { type: string } }
+      responses:
+        '200': { description: Datasets, content: { application/json: { schema: { $ref: '#/components/schemas/IntegrationDatasets' } } } }
+        default: { $ref: '#/components/responses/Problem' }
+    post:
+      operationId: createDataset
+      summary: An application owner adds a dataset to an integration
+      parameters:
+        - { name: qualified_name, in: path, required: true, schema: { type: string } }
+        - { name: Idempotency-Key, in: header, required: false, schema: { type: string } }
+        - $ref: '#/components/parameters/DryRun'
+      requestBody:
+        required: true
+        content: { application/json: { schema: { $ref: '#/components/schemas/DatasetInput' } } }
+      responses:
+        '201': { description: Created, content: { application/json: { schema: { $ref: '#/components/schemas/DatasetAck' } } } }
+        default: { $ref: '#/components/responses/Problem' }
+  /v1/datasets/{qualified_name}:
+    patch:
+      operationId: updateDataset
+      summary: Change a dataset; lists sent replace the ones held
+      parameters:
+        - { name: qualified_name, in: path, required: true, schema: { type: string } }
+        - { name: Idempotency-Key, in: header, required: false, schema: { type: string } }
+        - $ref: '#/components/parameters/DryRun'
+      requestBody:
+        required: true
+        content: { application/json: { schema: { $ref: '#/components/schemas/DatasetInput' } } }
+      responses:
+        '200': { description: Updated, content: { application/json: { schema: { $ref: '#/components/schemas/DatasetAck' } } } }
+        default: { $ref: '#/components/responses/Problem' }
+  /v1/policies/check:
+    post:
+      operationId: checkPolicyDraft
+      summary: Check a policy draft without saving it
+      requestBody:
+        required: true
+        content: { application/json: { schema: { $ref: '#/components/schemas/PolicyDraft' } } }
+      responses:
+        '200': { description: Report, content: { application/json: { schema: { $ref: '#/components/schemas/PolicyDraftReport' } } } }
+        default: { $ref: '#/components/responses/Problem' }
+  /v1/policies/propose:
+    post:
+      operationId: proposePolicy
+      summary: Save a passing draft as a pull request with the dry-run report attached
+      requestBody:
+        required: true
+        content: { application/json: { schema: { $ref: '#/components/schemas/PolicyDraft' } } }
+      responses:
+        '201': { description: Pull request opened, content: { application/json: { schema: { $ref: '#/components/schemas/PolicyProposal' } } } }
+        default: { $ref: '#/components/responses/Problem' }
+  /v1/auth/mock-login:
+    post:
+      operationId: mockLogin
+      summary: Local only. Sets the session cookie the corporate sign-in would set; not found in any other environment
+      requestBody:
+        required: true
+        content: { application/json: { schema: { type: object, required: [staffID, displayName, groups], properties: { staffID: { type: string }, displayName: { type: string }, groups: { type: array, items: { type: string } } } } } }
+      responses:
+        '200': { description: 'Signed in, cookie set', content: { application/json: { schema: { $ref: '#/components/schemas/Me' } } } }
+        default: { $ref: '#/components/responses/Problem' }
+  /v1/auth/me:
+    get:
+      operationId: getMe
+      summary: Who the session says you are
+      responses:
+        '200': { description: The caller, content: { application/json: { schema: { $ref: '#/components/schemas/Me' } } } }
+        default: { $ref: '#/components/responses/Problem' }
+  /v1/auth/logout:
+    post:
+      operationId: logout
+      summary: Clear the session cookie
+      responses:
+        '204': { description: Signed out }
+        default: { $ref: '#/components/responses/Problem' }
+  /v1/classifications/proposals:
+    get:
+      operationId: listClassificationProposals
+      summary: Classifications proposed along lineage, waiting for a steward
+      parameters:
+        - { name: mine, in: query, required: false, description: Only those the caller may decide, schema: { type: boolean } }
+      responses:
+        '200': { description: Open proposals, content: { application/json: { schema: { $ref: '#/components/schemas/ClassificationProposals' } } } }
+        default: { $ref: '#/components/responses/Problem' }
+  /v1/classifications/proposals/{id}/decision:
+    post:
+      operationId: decideClassificationProposal
+      summary: A steward accepts (writes the classification) or rejects (never proposed again) a proposal
+      parameters:
+        - { name: id, in: path, required: true, schema: { type: string } }
+        - { name: Idempotency-Key, in: header, required: false, schema: { type: string } }
+        - $ref: '#/components/parameters/DryRun'
+      requestBody:
+        required: true
+        content: { application/json: { schema: { type: object, required: [decision], properties: { decision: { type: string, enum: [accept, reject] } } } } }
+      responses:
+        '200': { description: Decided, content: { application/json: { schema: { $ref: '#/components/schemas/ClassificationDecision' } } } }
+        default: { $ref: '#/components/responses/Problem' }
+  /v1/admin/status:
+    get:
+      operationId: getAdminStatus
+      summary: Versions, whether enforcement is running, and each policy's mode and pause state (administrators)
+      responses:
+        '200': { description: Status, content: { application/json: { schema: { $ref: '#/components/schemas/AdminStatus' } } } }
+        default: { $ref: '#/components/responses/Problem' }
+  /v1/admin/enforcement:
+    post:
+      operationId: setEnforcementPaused
+      summary: Pause or resume all enforcement. Paused policies still record shadow results but raise nothing (administrators)
+      parameters:
+        - { name: Idempotency-Key, in: header, required: false, schema: { type: string } }
+      requestBody:
+        required: true
+        content: { application/json: { schema: { type: object, required: [paused], properties: { paused: { type: boolean } } } } }
+      responses:
+        '200': { description: Done, content: { application/json: { schema: { type: object, required: [enforcement, changed], properties: { enforcement: { type: string, enum: [running, paused] }, changed: { type: boolean } } } } } }
+        default: { $ref: '#/components/responses/Problem' }
+  /v1/admin/policies/{id}/pause:
+    post:
+      operationId: setPolicyPaused
+      summary: Pause or resume one policy (its control owner, or an administrator)
+      parameters:
+        - { name: id, in: path, required: true, schema: { type: string } }
+        - { name: Idempotency-Key, in: header, required: false, schema: { type: string } }
+      requestBody:
+        required: true
+        content: { application/json: { schema: { type: object, required: [paused], properties: { paused: { type: boolean } } } } }
+      responses:
+        '200': { description: Done, content: { application/json: { schema: { type: object, required: [id, paused, changed], properties: { id: { type: string }, paused: { type: boolean }, changed: { type: boolean } } } } } }
+        default: { $ref: '#/components/responses/Problem' }
+  /v1/dashboard/measures:
+    get:
+      operationId: getDashboardMeasures
+      summary: The success measures DMC can work out today, with their one-year targets
+      responses:
+        '200': { description: Measures, content: { application/json: { schema: { $ref: '#/components/schemas/DashboardMeasures' } } } }
+        default: { $ref: '#/components/responses/Problem' }
+  /v1/delegations:
+    get:
+      operationId: listDelegations
+      summary: Delegations you granted and delegations you hold
+      responses:
+        '200': { description: Yours, content: { application/json: { schema: { $ref: '#/components/schemas/DelegationList' } } } }
+        default: { $ref: '#/components/responses/Problem' }
+    post:
+      operationId: grantDelegation
+      summary: Delegate a scope, or all your scopes, to a named person for at most 12 months (owners only)
+      parameters:
+        - { name: Idempotency-Key, in: header, required: false, schema: { type: string } }
+        - $ref: '#/components/parameters/DryRun'
+      requestBody:
+        required: true
+        content: { application/json: { schema: { type: object, required: [delegate, covers, valid_to], properties: { delegate: { type: string }, covers: { type: string, enum: [one-scope, all-scopes] }, scope: { type: string }, valid_from: { type: string }, valid_to: { type: string }, reason: { type: string } } } } }
+      responses:
+        '201': { description: Granted, content: { application/json: { schema: { $ref: '#/components/schemas/Delegation' } } } }
+        default: { $ref: '#/components/responses/Problem' }
+  /v1/delegations/{id}:
+    delete:
+      operationId: revokeDelegation
+      summary: Revoke a delegation (the owner who granted it)
+      parameters:
+        - { name: id, in: path, required: true, schema: { type: string } }
+      responses:
+        '200': { description: Revoked, content: { application/json: { schema: { type: object, required: [qualified_name, ended], properties: { qualified_name: { type: string }, ended: { type: string } } } } } }
+        default: { $ref: '#/components/responses/Problem' }
+  /v1/evidence/verify:
+    get:
+      operationId: verifyLedger
+      summary: Recompute the chain now (auditors, admins)
+      parameters:
+        - { name: from_seq, in: query, schema: { type: integer, minimum: 1 } }
+        - { name: to_seq, in: query, schema: { type: integer, minimum: 1 } }
+      responses:
+        '200':
+          description: Result
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [ok, checked]
+                properties:
+                  ok: { type: boolean }
+                  checked: { type: integer }
+                  first_bad_seq: { type: integer }
+                  reason: { type: string }
+        default: { $ref: '#/components/responses/Problem' }
+  /v1/nodes/{qualified_name}/history:
+    get:
+      operationId: getNodeHistory
+      summary: Every recorded version of a node, oldest first
+      parameters:
+        - $ref: '#/components/parameters/QualifiedName'
+      responses:
+        '200':
+          description: Versions
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/NodeHistory' }
+        default: { $ref: '#/components/responses/Problem' }
+components:
+  parameters:
+    QualifiedName:
+      name: qualified_name
+      in: path
+      required: true
+      schema: { type: string }
+    ValidAt:
+      name: valid_at
+      in: query
+      description: Show the state as it was true at this time
+      schema: { type: string, format: date-time }
+    KnownAt:
+      name: known_at
+      in: query
+      description: Show the state as DMC knew it at this time
+      schema: { type: string, format: date-time }
+    Limit:
+      name: limit
+      in: query
+      schema: { type: integer, minimum: 1, maximum: 200, default: 50 }
+    Cursor:
+      name: cursor
+      in: query
+      description: Opaque value from the previous page's next_cursor
+      schema: { type: string }
+    DryRun:
+      name: dry_run
+      in: query
+      description: Validate and authorise only; nothing is written and no evidence is recorded
+      schema: { type: boolean, default: false }
+    IdempotencyKey:
+      name: Idempotency-Key
+      in: header
+      required: true
+      description: Same key and same body returns the first result; same key and different body is a 422
+      schema: { type: string, minLength: 8, maxLength: 128 }
+    IfMatch:
+      name: If-Match
+      in: header
+      required: true
+      description: ETag from the last read; a mismatch returns 412
+      schema: { type: string }
+  headers:
+    ETag:
+      schema: { type: string }
+  responses:
+    Problem:
+      description: Error (RFC 9457 problem details)
+      content:
+        application/problem+json:
+          schema: { $ref: '#/components/schemas/Problem' }
+  schemas:
+    Health:
+      type: object
+      additionalProperties: false
+      required: [status, version]
+      properties:
+        status: { enum: [ok] }
+        version: { type: string }
+    Problem:
+      type: object
+      required: [type, title, status, code]
+      properties:
+        type: { type: string }
+        title: { type: string }
+        status: { type: integer }
+        code:
+          enum: [validation_failed, unauthenticated, forbidden, not_found, conflict, precondition_failed, precondition_required, idempotency_mismatch, rate_limited, internal]
+        detail: { type: string }
+        trace_id: { type: string }
+        errors:
+          type: array
+          items:
+            type: object
+            required: [path, message]
+            properties:
+              path: { type: string }
+              message: { type: string }
+    Page:
+      type: object
+      required: [items]
+      properties:
+        items: { type: array }
+        next_cursor: { type: [string, 'null'] }
+    ExampleInput:
+      type: object
+      additionalProperties: false
+      required: [name]
+      properties:
+        name: { type: string, minLength: 1 }
+    Example:
+      type: object
+      additionalProperties: false
+      required: [id, name, version]
+      properties:
+        id: { type: string }
+        name: { type: string }
+        version: { type: integer }
+    ExamplePage:
+      allOf:
+        - { $ref: '#/components/schemas/Page' }
+        - type: object
+          properties:
+            items: { type: array, items: { $ref: '#/components/schemas/Example' } }
+    AllowedAction:
+      type: object
+      additionalProperties: false
+      required: [id, allowed]
+      properties:
+        id: { type: string }
+        allowed: { type: boolean }
+        reason: { type: string }
+    Node:
+      type: object
+      additionalProperties: false
+      required: [id, type, qualified_name, lifecycle, attributes, attribute_sources, provenance, valid_from, valid_to, recorded_from, allowed_actions]
+      properties:
+        id: { type: string }
+        type: { type: string }
+        qualified_name: { type: string }
+        lifecycle: { enum: [discovered, proposed, confirmed, deprecated] }
+        attributes: { type: object }
+        attribute_sources:
+          type: object
+          description: The tool that owns each attribute; `dmc` means it can be edited here
+          additionalProperties: { type: string }
+        provenance:
+          type: object
+          additionalProperties:
+            type: object
+            required: [by, at]
+            properties: { by: { type: string }, at: { type: string } }
+        valid_from: { type: string }
+        valid_to: { type: [string, 'null'] }
+        recorded_from: { type: string }
+        allowed_actions: { type: array, items: { $ref: '#/components/schemas/AllowedAction' } }
+    NodePage:
+      allOf:
+        - { $ref: '#/components/schemas/Page' }
+        - type: object
+          properties:
+            items: { type: array, items: { $ref: '#/components/schemas/Node' } }
+    Edge:
+      type: object
+      additionalProperties: false
+      required: [name, from, to, lifecycle, source, valid_from, valid_to]
+      properties:
+        name: { type: string }
+        from: { type: string, description: Qualified name }
+        to: { type: string, description: Qualified name }
+        lifecycle: { enum: [discovered, proposed, confirmed, deprecated] }
+        source: { type: string }
+        valid_from: { type: string }
+        valid_to: { type: [string, 'null'] }
+    EdgeList:
+      type: object
+      additionalProperties: false
+      required: [items]
+      properties:
+        items: { type: array, items: { $ref: '#/components/schemas/Edge' } }
+    NodeVersion:
+      type: object
+      additionalProperties: false
+      required: [lifecycle, attributes, valid_from, valid_to, recorded_from, actor]
+      properties:
+        lifecycle: { enum: [discovered, proposed, confirmed, deprecated] }
+        attributes: { type: object }
+        valid_from: { type: string }
+        valid_to: { type: [string, 'null'] }
+        recorded_from: { type: string }
+        actor: { type: string }
+    RequirementInput:
+      type: object
+      required: [reference_id, title, kind]
+      additionalProperties: false
+      properties:
+        reference_id: { type: string }
+        title: { type: string }
+        kind: { enum: [operating-instruction, technical-control-requirement] }
+        owner: { type: string }
+        confluence_link: { type: string }
+        version: { type: integer, minimum: 1 }
+    RequirementReport:
+      type: object
+      required: [dry_run, rows, created, updated, unchanged, flagged_policies]
+      properties:
+        dry_run: { type: boolean }
+        rows:
+          type: array
+          items:
+            type: object
+            required: [line, reference_id, qualified_name, status, version]
+            properties:
+              line: { type: integer }
+              reference_id: { type: string }
+              qualified_name: { type: string }
+              status: { enum: [created, updated, unchanged] }
+              version: { type: integer }
+        created: { type: integer }
+        updated: { type: integer }
+        unchanged: { type: integer }
+        flagged_policies: { type: array, items: { type: string } }
+    RequirementCoverage:
+      type: object
+      required: [items, summary, unknown_references]
+      properties:
+        items:
+          type: array
+          items:
+            type: object
+            required: [reference_id, title, kind, version, qualified_name, status, policies]
+            properties:
+              reference_id: { type: string }
+              title: { type: string }
+              kind: { type: string }
+              version: { type: integer }
+              qualified_name: { type: string }
+              status: { enum: [none, shadow_only, enforced] }
+              policies: { type: array, items: { type: object, required: [id, mode], properties: { id: { type: string }, mode: { type: string } } } }
+        summary: { type: object, required: [none, shadow_only, enforced], properties: { none: { type: integer }, shadow_only: { type: integer }, enforced: { type: integer } } }
+        unknown_references: { type: array, items: { type: object, required: [policy, implements], properties: { policy: { type: string }, implements: { type: string } } } }
+    ScopeCreated:
+      type: object
+      required: [qualified_name, name]
+      properties: { qualified_name: { type: string }, name: { type: string } }
+    ScopeFlows:
+      type: object
+      required: [integrations]
+      properties: { integrations: { type: array, items: { type: string } } }
+    ScopeAck:
+      type: object
+      properties:
+        dry_run: { type: boolean }
+        qualified_name: { type: string }
+        version: { type: integer }
+        status: { type: string, enum: [draft, submitted, amended] }
+    ScopeDetail:
+      type: object
+      required: [qualified_name, name, version, status, locked, versions, groups, flows]
+      properties:
+        qualified_name: { type: string }
+        name: { type: string }
+        owner: { type: string }
+        kind: { type: string }
+        criticality: { type: string }
+        required_tier: { type: string, enum: [bronze, silver, gold] }
+        version: { type: integer }
+        status: { type: string }
+        locked: { type: boolean }
+        locked_at: { type: string }
+        versions:
+          type: array
+          items: { type: object, required: [version, submitted_at], properties: { version: { type: integer }, submitted_at: { type: string, format: date-time } } }
+        groups:
+          type: array
+          items:
+            type: object
+            required: [qualified_name, name, order, elements]
+            properties:
+              qualified_name: { type: string }
+              name: { type: string }
+              order: { type: integer }
+              elements:
+                type: array
+                items: { type: object, required: [qualified_name, name, links], properties: { qualified_name: { type: string }, name: { type: string }, definition: { type: string }, criticality: { type: string }, links: { type: array, items: { type: object, required: [target, state], properties: { target: { type: string }, app: { type: string }, state: { type: string } } } } } }
+        flows: { type: array, items: { type: string } }
+    DatasetInput:
+      type: object
+      properties:
+        name: { type: string }
+        description: { type: string }
+        business_context: { type: string }
+        categories: { type: array, items: { type: string } }
+        record_class: { type: [string, 'null'] }
+        columns: { type: array, items: { type: string } }
+    DatasetAck:
+      type: object
+      properties:
+        dry_run: { type: boolean }
+        qualified_name: { type: string }
+        name: { type: string }
+    IntegrationDatasets:
+      type: object
+      required: [integration, datasets]
+      properties:
+        integration: { type: string }
+        datasets:
+          type: array
+          items:
+            type: object
+            required: [qualified_name, name, categories, columns, can_edit]
+            properties:
+              qualified_name: { type: string }
+              name: { type: string }
+              description: { type: string }
+              business_context: { type: string }
+              categories: { type: array, items: { type: string } }
+              record_class: { type: string }
+              columns: { type: array, items: { type: string } }
+              can_edit: { type: boolean }
+    PolicyDraft:
+      type: object
+      required: [yaml]
+      properties:
+        yaml: { type: string }
+        golden: { type: string }
+        message: { type: string }
+    PolicyDraftReport:
+      type: object
+      required: [ok, problems, cases, conflicts]
+      properties:
+        ok: { type: boolean }
+        policy: { type: object, required: [id, control, mode, type], properties: { id: { type: string }, control: { type: string }, mode: { type: string }, type: { type: string }, implements: { type: string } } }
+        problems: { type: array, items: { type: string } }
+        cases: { type: array, items: { type: object, required: [name, pass], properties: { name: { type: string }, pass: { type: boolean }, detail: { type: string } } } }
+        conflicts: { type: array, items: { type: object, required: [a, b, reason, overlap], properties: { a: { type: string }, b: { type: string }, reason: { type: string }, overlap: { type: string } } } }
+        dryRun: { type: object, required: [type, sampled, matched, errors, matches, note], properties: { type: { type: string }, sampled: { type: integer }, matched: { type: integer }, errors: { type: integer }, matches: { type: array, items: { type: string } }, note: { type: string } } }
+    PolicyProposal:
+      type: object
+      required: [id, url, report]
+      properties:
+        id: { type: string }
+        url: { type: string }
+        report: { $ref: '#/components/schemas/PolicyDraftReport' }
+    ClassificationProposals:
+      type: object
+      required: [proposals]
+      properties:
+        proposals:
+          type: array
+          items:
+            type: object
+            required: [id, column, code, via, can_decide]
+            properties:
+              id: { type: string }
+              column: { type: string }
+              code: { type: string }
+              name: { type: string }
+              via: { type: array, items: { type: string }, description: The classified columns it was proposed from }
+              can_decide: { type: boolean }
+    ClassificationDecision:
+      type: object
+      properties:
+        dry_run: { type: boolean }
+        column: { type: string }
+        code: { type: string }
+        decision: { type: string, enum: [accepted, rejected] }
+        remaining: { type: integer, description: Proposals still open on the column }
+    AdminStatus:
+      type: object
+      required: [version, metamodel_version, enforcement, policies]
+      properties:
+        version: { type: string }
+        metamodel_version: { type: string }
+        enforcement: { type: string, enum: [running, paused] }
+        policies:
+          type: array
+          items: { type: object, required: [id, mode, paused], properties: { id: { type: string }, mode: { type: string, enum: [shadow, enforced] }, paused: { type: boolean } } }
+    DashboardMeasures:
+      type: object
+      required: [measures]
+      properties:
+        measures:
+          type: array
+          items:
+            type: object
+            required: [id, label, value, target, unit]
+            properties:
+              id: { type: string }
+              label: { type: string }
+              value: { type: number }
+              target: { type: [number, 'null'] }
+              unit: { type: string, enum: [percent, count, days] }
+              detail: { type: string }
+    Me:
+      type: object
+      required: [id, display_name, kind, groups, roles]
+      properties:
+        id: { type: string }
+        display_name: { type: string }
+        kind: { type: string }
+        groups: { type: array, items: { type: string } }
+        roles: { type: array, items: { type: string }, description: Roles held, from Active Directory groups and from what the data says (owning an application or a scope) }
+    ScopeLink:
+      type: object
+      required: [element, target, state]
+      properties:
+        dry_run: { type: boolean }
+        element: { type: string }
+        target: { type: string }
+        app: { type: string }
+        state: { type: string, enum: [proposed, confirmed] }
+    ScopeCompleteness:
+      type: object
+      required: [qualified_name, version, submitted, complete, elements, applications]
+      properties:
+        qualified_name: { type: string }
+        version: { type: integer }
+        submitted: { type: boolean }
+        complete: { type: boolean }
+        elements:
+          type: object
+          required: [total, linked, unlinked]
+          properties: { total: { type: integer }, linked: { type: integer }, unlinked: { type: array, items: { type: string } } }
+        applications:
+          type: array
+          items:
+            type: object
+            required: [application, name, task, links]
+            properties:
+              application: { type: string }
+              name: { type: string }
+              owner: { type: string }
+              task: { type: string, enum: [open, done, none_held, missing] }
+              task_id: { type: string }
+              escalated: { type: boolean }
+              due_at: { type: string, format: date-time }
+              links: { type: integer }
+    Delegation:
+      type: object
+      required: [qualified_name, owner, delegate, covers, valid_from, valid_to, active]
+      properties:
+        qualified_name: { type: string }
+        owner: { type: string }
+        delegate: { type: string }
+        covers: { type: string, enum: [one-scope, all-scopes] }
+        scope: { type: string }
+        valid_from: { type: string }
+        valid_to: { type: string }
+        reason: { type: string }
+        active: { type: boolean }
+    DelegationList:
+      type: object
+      required: [granted, received]
+      properties:
+        granted: { type: array, items: { $ref: '#/components/schemas/Delegation' } }
+        received: { type: array, items: { $ref: '#/components/schemas/Delegation' } }
+    Inbox:
+      type: object
+      required: [items, count]
+      properties:
+        count: { type: integer }
+        items:
+          type: array
+          items:
+            type: object
+            required: [id, assignee, kind, title, message, subject_ref, decisions, raised_at, escalated]
+            properties:
+              id: { type: string }
+              assignee: { type: string }
+              exception_id: { type: string }
+              kind: { type: string }
+              severity: { type: string, enum: [low, medium, high, critical] }
+              title: { type: string }
+              message: { type: string }
+              subject_ref: { type: string }
+              decisions: { type: array, items: { type: string } }
+              raised_at: { type: string, format: date-time }
+              due_at: { type: string, format: date-time }
+              escalated: { type: boolean }
+    SearchResult:
+      type: object
+      required: [hits, facets, facets_sampled]
+      properties:
+        hits:
+          type: array
+          items: { type: object, required: [qualified_name, type, name, lifecycle], properties: { qualified_name: { type: string }, type: { type: string }, name: { type: string }, lifecycle: { type: string } } }
+        facets:
+          type: object
+          required: [type, lifecycle]
+          properties:
+            type: { type: object, additionalProperties: { type: integer } }
+            lifecycle: { type: object, additionalProperties: { type: integer } }
+        facets_sampled: { type: boolean }
+    Lineage:
+      type: object
+      required: [root, direction, truncated, nodes, edges]
+      properties:
+        root: { type: string }
+        direction: { enum: [upstream, downstream] }
+        truncated: { type: object, required: [depth, nodes], properties: { depth: { type: boolean }, nodes: { type: boolean } } }
+        nodes:
+          type: array
+          items: { type: object, required: [qualified_name, type, depth], properties: { qualified_name: { type: string }, type: { type: string }, depth: { type: integer }, container: { type: string } } }
+        edges:
+          type: array
+          items: { type: object, required: [from, to, source], properties: { from: { type: string }, to: { type: string }, source: { type: string }, job: { type: string }, confidence: { type: number } } }
+    Impact:
+      type: object
+      required: [root, affected, truncated, by_type, by_container, nearest]
+      properties:
+        root: { type: string }
+        affected: { type: integer }
+        truncated: { type: object, required: [depth, nodes], properties: { depth: { type: boolean }, nodes: { type: boolean } } }
+        by_type: { type: object, additionalProperties: { type: integer } }
+        by_container: { type: array, items: { type: object, required: [container, count], properties: { container: { type: string }, count: { type: integer } } } }
+        nearest: { type: array, items: { type: object, required: [qualified_name, type, depth], properties: { qualified_name: { type: string }, type: { type: string }, depth: { type: integer }, container: { type: string } } } }
+    EvidenceEntry:
+      type: object
+      required: [seq, kind, subject_ref, actor, source_module, occurred_at, payload, payload_hash, prev_hash, hash]
+      properties:
+        seq: { type: integer }
+        kind: { type: string }
+        subject_ref: { type: string }
+        actor: { type: string }
+        source_module: { type: string }
+        occurred_at: { type: string }
+        payload: {}
+        payload_hash: { type: string }
+        prev_hash: { type: string }
+        hash: { type: string }
+    EvidencePage:
+      type: object
+      required: [items, next_cursor]
+      properties:
+        items: { type: array, items: { $ref: '#/components/schemas/EvidenceEntry' } }
+        next_cursor: { type: [string, 'null'] }
+    ProofBundle:
+      type: object
+      required: [version, subjects, exportedAt, entries, chain, anchorPrev, head]
+      properties:
+        version: { const: 1 }
+        subjects: { type: array, items: { type: string } }
+        exportedAt: { type: string }
+        entries: { type: array, items: { type: object } }
+        chain: { type: array, items: { type: object, required: [seq, payloadHash, hash], properties: { seq: { type: integer }, payloadHash: { type: string }, hash: { type: string } } } }
+        anchorPrev: { type: string }
+        head: { type: [object, 'null'] }
+    NodeHistory:
+      type: object
+      additionalProperties: false
+      required: [items]
+      properties:
+        items: { type: array, items: { $ref: '#/components/schemas/NodeVersion' } }

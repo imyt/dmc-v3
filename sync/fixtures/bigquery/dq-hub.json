@@ -1,0 +1,18 @@
+{
+  "local-fixture.dq_hub": {
+    "rules": [
+      { "rule_id": "DQ-0001", "rule_name": "Order id is never null", "dimension": "completeness", "business_context": "Every order must be traceable to a customer purchase.", "severity": "Critical", "updated_at": "2026-06-01T08:00:00.000Z", "profiled_example_value": "CANARY-RULE-SAMPLE-9001" },
+      { "rule_id": "DQ-0002", "rule_name": "Order total is positive", "dimension": "validity", "business_context": "Negative totals break settlement.", "severity": "High", "updated_at": "2026-06-02T08:00:00.000Z", "profiled_example_value": "CANARY-RULE-SAMPLE-9002" },
+      { "rule_id": "DQ-0003", "rule_name": "Customer first name is populated", "dimension": "completeness", "business_context": "Needed for statements.", "severity": "Medium", "updated_at": "2026-06-03T08:00:00.000Z", "profiled_example_value": "CANARY-RULE-SAMPLE-9003" },
+      { "rule_id": "DQ-0004", "rule_name": "Orders table loaded daily", "dimension": "timeliness", "business_context": "Reports read the table each morning.", "severity": "High", "updated_at": "2026-06-04T08:00:00.000Z", "profiled_example_value": "CANARY-RULE-SAMPLE-9004" }
+    ],
+    "column_results_latest": [
+      { "rule_id": "DQ-0001", "system_name": "shop-oltp", "schema_name": "public", "table_name": "orders", "column_name": "id", "threshold": 0.99, "pass_rate": 1.0, "rows_checked": 1200345, "rows_failed": 0, "run_at": "2026-11-17T02:00:00.000Z", "run_status": "PASSED", "failing_sample_value": "CANARY-SAMPLE-4417-ID" },
+      { "rule_id": "DQ-0002", "system_name": "shop-oltp", "schema_name": "public", "table_name": "orders", "column_name": "total", "threshold": 0.99, "pass_rate": 0.962, "rows_checked": 1200345, "rows_failed": 45613, "run_at": "2026-11-17T02:00:00.000Z", "run_status": "FAILED", "failing_sample_value": "CANARY-SAMPLE-4417-TOTAL -12.50" },
+      { "rule_id": "DQ-0003", "system_name": "shop-oltp", "schema_name": "public", "table_name": "customers", "column_name": "first_name", "threshold": 0.95, "pass_rate": 0.991, "rows_checked": 80211, "rows_failed": 722, "run_at": "2026-11-17T02:05:00.000Z", "run_status": "PASSED", "failing_sample_value": "CANARY-SAMPLE-4417-jane.doe@example.com" }
+    ],
+    "table_results_latest": [
+      { "rule_id": "DQ-0004", "system_name": "shop-oltp", "schema_name": "public", "table_name": "orders", "threshold": 1.0, "pass_rate": 1.0, "rows_checked": 1, "rows_failed": 0, "run_at": "2026-11-17T02:10:00.000Z", "run_status": "PASSED", "failing_sample_value": "CANARY-SAMPLE-4417-TABLE" }
+    ]
+  }
+}

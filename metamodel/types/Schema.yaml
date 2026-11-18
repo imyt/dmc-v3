@@ -1,0 +1,20 @@
+type: Schema
+version: 1
+parent: Asset
+identity:
+  qualified_name: git.system/schema
+attributes:
+  name: { type: string, required: true, source: git-json }
+edges:
+  contains:
+    - { to: Table, cardinality: one-to-many }
+  in_domain:
+    - { to: DataDomain, cardinality: many-to-one }
+  owned_by:
+    - { to: Party, cardinality: many-to-one }
+  stewarded_by:
+    - { to: Party, cardinality: many-to-one }
+  governed_by:
+    - { to: Policy, cardinality: many-to-many }
+lifecycle: default
+controls: [lineage]

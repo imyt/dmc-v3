@@ -1,0 +1,13 @@
+[
+  {"staffID": "43000001", "displayName": "Amy Adams", "role": "Application owner (Payments Hub)", "groups": [], "email": "amy.adams@example.test"},
+  {"staffID": "43000002", "displayName": "Ben Brooks", "role": "Application owner (Core Banking)", "groups": [], "email": "ben.brooks@example.test"},
+  {"staffID": "43000003", "displayName": "Dan Davies", "role": "Application delegate (Payments Hub)", "groups": [], "email": "dan.davies@example.test"},
+  {"staffID": "43000004", "displayName": "Olive Okafor", "role": "Scope owner", "groups": ["dmc-scope-owner"], "email": "olive.okafor@example.test"},
+  {"staffID": "43000005", "displayName": "Sam Shah", "role": "Data steward, finance", "groups": ["dmc-steward-finance"], "email": "sam.shah@example.test"},
+  {"staffID": "43000006", "displayName": "Priya Patel", "role": "Policy author", "groups": ["dmc-policy-author"], "email": "priya.patel@example.test"},
+  {"staffID": "43000007", "displayName": "Carl Cho", "role": "Control owner, privacy", "groups": ["dmc-control-owner-privacy"], "email": "carl.cho@example.test"},
+  {"staffID": "43000008", "displayName": "Ava Archer", "role": "Auditor", "groups": ["dmc-auditor"], "email": "ava.archer@example.test"},
+  {"staffID": "43000009", "displayName": "Anil Admin", "role": "Platform admin", "groups": ["dmc-platform-admin"], "email": "anil.admin@example.test"},
+  {"staffID": "43000010", "displayName": "Vera Vance", "role": "Viewer", "groups": [], "email": "vera.vance@example.test"},
+  {"staffID": "04300011", "displayName": "Zoe Zeroes", "role": "Viewer (staff ID with leading zeros, ADR 0026)", "groups": [], "email": "zoe.zeroes@example.test"}
+]

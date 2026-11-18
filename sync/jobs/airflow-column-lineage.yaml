@@ -1,0 +1,18 @@
+# S8: column lineage from Airflow's OpenLineage events (COMPLETE events with a column-lineage facet). The overlay sets the export file (${airflow_events}).
+# The job name on the edge is the Airflow "dag.task". The export is a window of recent runs, so a missing edge proves nothing: nothing is ended.
+# A column's qualified name is system/schema/table/column as written in the Git JSON (docs/metamodel.md); the S7 jobs create the same names, so run S7 first.
+job: airflow-column-lineage
+connection: lineage-files
+schedule: "45 3 * * *"
+source: { query: "openlineage ${airflow_events}", mode: full }
+target:
+  type: Column
+  source: airflow
+  edge:
+    name: derives_from
+    qualified_name: "{database}/{schema}/{table}/{column}"
+    from: derived
+    to: upstream
+  map: { job: job, confidence: confidence, origin: origin }
+  on_missing: ignore
+retries: { max: 2, backoff_seconds: 5 }

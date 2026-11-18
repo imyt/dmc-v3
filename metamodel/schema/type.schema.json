@@ -1,0 +1,89 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://dmc.internal/metamodel/type.schema.json",
+  "title": "DMC metamodel type definition",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["type", "version", "parent", "identity", "attributes", "lifecycle", "controls"],
+  "properties": {
+    "type": { "type": "string", "pattern": "^[A-Z][A-Za-z0-9]*$" },
+    "version": { "type": "integer", "minimum": 1 },
+    "parent": { "enum": ["Asset", "Concept", "ControlRecord", "GovernanceObject", "Party"] },
+    "identity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["qualified_name"],
+      "properties": {
+        "qualified_name": { "type": "string", "minLength": 1 },
+        "pattern": { "type": "string", "minLength": 1, "description": "regular expression every qualified name of this type must match (checked when a node is created)" }
+      }
+    },
+    "attributes": {
+      "type": "object",
+      "propertyNames": { "pattern": "^[a-z][a-z0-9_]*$" },
+      "additionalProperties": { "$ref": "#/$defs/attribute" }
+    },
+    "edges": {
+      "type": "object",
+      "propertyNames": { "pattern": "^[a-z][a-z0-9_]*$" },
+      "additionalProperties": {
+        "type": "array",
+        "minItems": 1,
+        "items": { "$ref": "#/$defs/edge" }
+      }
+    },
+    "inherit": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["attribute", "along", "direction"],
+        "properties": {
+          "attribute": { "type": "string" },
+          "along": { "type": "string" },
+          "direction": { "enum": ["in", "out"] }
+        }
+      }
+    },
+    "lifecycle": { "const": "default" },
+    "controls": { "type": "array", "items": { "enum": ["privacy", "lineage", "retention", "quality"] }, "uniqueItems": true }
+  },
+  "$defs": {
+    "attribute": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type", "source"],
+      "properties": {
+        "type": { "enum": ["string", "text", "enum", "boolean", "integer", "date", "datetime", "country", "person", "url", "string-list"] },
+        "values": { "type": "array", "items": { "type": "string" }, "minItems": 1, "uniqueItems": true },
+        "required": { "type": "boolean" },
+        "pattern": { "type": "string", "minLength": 1, "description": "regular expression a string value must match" },
+        "identifies": { "type": "string", "pattern": "^[A-Z][A-Za-z0-9]*$", "description": "the value is the key of a node of this type (a string attribute that names a Person, for example); a sync normalises it before it is written" },
+        "source": {
+          "enum": ["servicenow", "git-json", "dmc", "collibra", "classification-tool", "dq-hub", "dstorm", "legal-hold-tools", "datavisa-tool", "scope-sources", "idp", "derived", "fabric"]
+        }
+      },
+      "if": { "properties": { "type": { "const": "enum" } } },
+      "then": { "required": ["values"] },
+      "else": { "not": { "required": ["values"] } }
+    },
+    "edge": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["to", "cardinality"],
+      "properties": {
+        "to": { "type": "string" },
+        "cardinality": { "enum": ["one-to-one", "one-to-many", "many-to-one", "many-to-many"] },
+        "propagate": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["concepts", "min_confidence"],
+          "properties": {
+            "concepts": { "type": "array", "items": { "type": "string" }, "minItems": 1 },
+            "min_confidence": { "type": "number", "minimum": 0, "maximum": 1 }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,10 @@
+cases:
+  - name: missing owner matches
+    asset: { qualified_name: servicenow.APP1, name: Payments }
+    expect: true
+  - name: empty owner matches
+    asset: { qualified_name: servicenow.APP2, owner: '' }
+    expect: true
+  - name: owner present does not match
+    asset: { qualified_name: servicenow.APP3, owner: alice@example.com }
+    expect: false

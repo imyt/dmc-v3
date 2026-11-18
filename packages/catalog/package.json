@@ -1,0 +1,16 @@
+{
+  "name": "@dmc/catalog",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "main": "src/index.ts",
+  "types": "src/index.ts",
+  "description": "bounded-context module: catalog (own Postgres schema: catalog)",
+  "dependencies": {
+    "@dmc/contracts": "workspace:*",
+    "@dmc/platform": "workspace:*",
+    "ajv": "^8.17.1",
+    "ajv-formats": "^3.0.1",
+    "yaml": "^2.6.0"
+  }
+}

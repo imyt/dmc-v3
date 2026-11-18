@@ -1,0 +1,29 @@
+{
+  "_comment": "S6 recorded fixture with INVENTED tables and columns shaped like plausible ServiceNow exports (applications with owner and delegates; integrations with source and target application). Real project, dataset, table and column names must come from the data platform team. int-lake-to-fx points at an application that is not in the table, on purpose: the integration edge is refused and retried. Owners and delegates are staff IDs (quoted 8-digit text; 04300004 keeps its leading zero).",
+  "local-fixture.servicenow": {
+    "applications": [
+      { "sys_id": "app-payments-hub", "name": "Payments Hub", "owned_by": "43000001", "delegates": ["43000003", "04300004"], "criticality": "critical", "install_status": "live", "country": "GB", "sys_updated_on": "2026-03-01T08:00:00.000Z" },
+      { "sys_id": "app-core-banking", "name": "Core Banking", "owned_by": "43000002", "delegates": ["43000001", "43000003"], "criticality": "critical", "install_status": "live", "country": "HK", "sys_updated_on": "2026-03-02T08:00:00.000Z" },
+      { "sys_id": "app-risk-engine", "name": "Risk Engine", "owned_by": "43000002", "delegates": ["43000004"], "criticality": "high", "install_status": "live", "country": "GB", "sys_updated_on": "2026-03-03T08:00:00.000Z" },
+      { "sys_id": "app-data-lake", "name": "Data Lake", "owned_by": "43000001", "delegates": [], "criticality": "high", "install_status": "live", "country": "GB", "sys_updated_on": "2026-03-04T08:00:00.000Z" },
+      { "sys_id": "app-legacy-ledger", "name": "Legacy Ledger", "owned_by": "43000003", "delegates": ["43000002", "43000004"], "criticality": "medium", "install_status": "retiring", "country": "SG", "sys_updated_on": "2026-03-05T08:00:00.000Z" }
+    ],
+    "integrations": [
+      { "sys_id": "int-payments-to-ledger", "mechanism": "api", "frequency": "real-time", "status": "live", "source_app": "app-payments-hub", "target_app": "app-core-banking", "sys_updated_on": "2026-03-01T08:00:00.000Z" },
+      { "sys_id": "int-ledger-to-risk", "mechanism": "batch", "frequency": "daily", "status": "live", "source_app": "app-core-banking", "target_app": "app-risk-engine", "sys_updated_on": "2026-03-02T08:00:00.000Z" },
+      { "sys_id": "int-ledger-to-lake", "mechanism": "file", "frequency": "daily", "status": "live", "source_app": "app-core-banking", "target_app": "app-data-lake", "sys_updated_on": "2026-03-03T08:00:00.000Z" },
+      { "sys_id": "int-lake-to-fx", "mechanism": "api", "frequency": "hourly", "status": "planned", "source_app": "app-data-lake", "target_app": "app-fx-gateway", "sys_updated_on": "2026-03-04T08:00:00.000Z" }
+    ]
+  },
+  "dmc-uat-servicenow.sn_uat": {
+    "applications": [
+      { "sys_id": "uat-app-1", "name": "UAT Payments", "owned_by": "43000001", "delegates": [], "criticality": "high", "install_status": "live", "country": "GB", "sys_updated_on": "2026-04-01T08:00:00.000Z" },
+      { "sys_id": "uat-app-2", "name": "UAT Ledger", "owned_by": "43000002", "delegates": [], "criticality": "low", "install_status": "planned", "country": "HK", "sys_updated_on": "2026-04-02T08:00:00.000Z" }
+    ]
+  },
+  "dmc-prod-servicenow.sn_prod": {
+    "applications": [
+      { "sys_id": "prod-app-1", "name": "Prod Payments", "owned_by": "43000001", "delegates": [], "criticality": "critical", "install_status": "live", "country": "GB", "sys_updated_on": "2026-05-01T08:00:00.000Z" }
+    ]
+  }
+}

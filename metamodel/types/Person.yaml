@@ -1,0 +1,14 @@
+type: Person
+version: 2
+parent: Party
+# ADR 0026: the key is the staff ID, a STRING of exactly 8 digits that often starts with zeros (00123456). Quote it in YAML, never parse it as a number.
+identity:
+  qualified_name: idp.staff_id
+  pattern: '^\d{8}$'
+attributes:
+  email: { type: string, required: true, source: idp }
+  staff_id: { type: string, pattern: '^\d{8}$', source: idp }
+  name: { type: string, source: idp }
+  department: { type: string, source: idp }
+lifecycle: default
+controls: []

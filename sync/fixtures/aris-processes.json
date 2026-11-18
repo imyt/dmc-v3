@@ -1,0 +1,6 @@
+{ "records": [
+  { "process_id": "aris-proc-0101", "process_name": "Customer onboarding", "process_owner_sid": "43000004", "kind": "business-process", "process_status": "released" },
+  { "process_id": "aris-proc-0102", "process_name": "Payment screening", "process_owner_sid": "43000004", "kind": "business-process", "process_status": "released" },
+  { "process_id": "aris-proc-0103", "process_name": "Liquidity risk monitoring", "process_owner_sid": "43000002", "kind": "business-process", "process_status": "released" },
+  { "process_id": "aris-proc-0104", "process_name": "Month-end close", "process_owner_sid": "43000099", "kind": "business-process", "process_status": "draft" }
+] }

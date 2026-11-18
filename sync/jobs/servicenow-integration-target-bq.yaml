@@ -1,0 +1,17 @@
+# S6 (INVENTED SCHEMA, see servicenow-integrations-bq): Application target_of Integration. Both ends must exist: run after servicenow-applications-bq and servicenow-integrations-bq.
+# An integration whose target application is not in the catalog (unknown, or not synced yet) is refused and reported, not recorded as seen, and sent again next run (ADR 0024).
+job: servicenow-integration-target-bq
+connection: bq-servicenow
+schedule: "58 2 * * *"
+source:
+  query: "SELECT sys_id, target_app FROM `${project}.${dataset}.integrations` WHERE target_app IS NOT NULL"
+  mode: full
+  page_size: 1000
+target:
+  type: Application
+  source: servicenow
+  edge: { name: target_of, qualified_name: "{target_app}", to_qualified_name: "{sys_id}", from: ".", to: "." }
+  map: { record: sys_id }
+  on_missing: deprecate
+limits: { max_changes_pct: 30 }
+retries: { max: 2, backoff_seconds: 5 }

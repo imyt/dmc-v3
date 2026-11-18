@@ -1,0 +1,13 @@
+# Task S5. Collibra Business Terms into DMC until cutover (ADR 0018).
+job: collibra-business-terms
+connection: collibra
+schedule: "10 2 * * *"
+source: { query: "/rest/2.0/assets?typeId=${businessTermTypeId}&sortField=NAME&sortOrder=ASC", mode: full, page_size: 500 }
+target:
+  type: BusinessTerm
+  key: id
+  source: collibra
+  map: { name: name, definition: attributes.definition, status: status.name }
+  on_missing: deprecate
+limits: { max_changes_pct: 20 }
+retries: { max: 3, backoff_seconds: 10 }

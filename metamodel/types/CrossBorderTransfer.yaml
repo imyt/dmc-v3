@@ -1,0 +1,20 @@
+type: CrossBorderTransfer
+version: 1
+parent: ControlRecord
+identity:
+  qualified_name: derived.slug
+attributes:
+  from_country: { type: country, required: true, source: derived }
+  to_country: { type: country, required: true, source: derived }
+  data_categories: { type: string-list, required: true, source: derived }
+  status: { type: enum, values: [covered, missing, expired], required: true, source: derived }
+  problem: { type: string, source: derived }
+  uncovered: { type: string-list, source: derived }
+  detail: { type: text, source: derived }
+edges:
+  over:
+    - { to: Integration, cardinality: many-to-one }
+  covered_by:
+    - { to: DataVisa, cardinality: many-to-one }
+lifecycle: default
+controls: [privacy]

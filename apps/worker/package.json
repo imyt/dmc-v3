@@ -1,0 +1,31 @@
+{
+  "name": "@dmc/app-worker",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "main": "src/index.ts",
+  "types": "src/index.ts",
+  "description": "deployable: worker",
+  "dependencies": {
+    "@dmc/actions": "workspace:*",
+    "@dmc/catalog": "workspace:*",
+    "@dmc/connectors": "workspace:*",
+    "@dmc/contracts": "workspace:*",
+    "@dmc/decision": "workspace:*",
+    "@dmc/evidence": "workspace:*",
+    "@dmc/lineage": "workspace:*",
+    "@dmc/platform": "workspace:*",
+    "@dmc/policy": "workspace:*",
+    "@dmc/privacy": "workspace:*",
+    "@dmc/trust": "workspace:*",
+    "@dmc/workflow": "workspace:*",
+    "nodemailer": "^10.6.0",
+    "pg": "^8.23.1",
+    "pg-boss": "^12.0.0",
+    "yaml": "^2.9.1"
+  },
+  "devDependencies": {
+    "@types/nodemailer": "^8.0.2",
+    "@types/pg": "^8.23.1"
+  }
+}

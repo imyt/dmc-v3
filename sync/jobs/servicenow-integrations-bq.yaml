@@ -1,0 +1,19 @@
+# S6 (INVENTED SCHEMA): table `integrations` (one row per application interface, as a plausible ServiceNow export would hold it). Real names come from the data platform team.
+# Integration nodes only; the edges to the two applications are the jobs servicenow-integration-source-bq and servicenow-integration-target-bq (source_of / target_of run Application -> Integration in the metamodel).
+# The Integration type has no name attribute, so none is mapped. Mechanism, frequency and status are free strings in the metamodel. Metadata only: no payload or sample columns are selected.
+# Full read: a row that disappears deprecates its integration, on a complete full run only. Source `servicenow` is shared with the applications job: see servicenow-applications-bq for the one-writer-per-environment rule.
+job: servicenow-integrations-bq
+connection: bq-servicenow
+schedule: "50 2 * * *"
+source:
+  query: "SELECT sys_id, mechanism, frequency, status FROM `${project}.${dataset}.integrations`"
+  mode: full
+  page_size: 1000
+target:
+  type: Integration
+  key: sys_id
+  source: servicenow
+  map: { mechanism: mechanism, frequency: frequency, status: status }
+  on_missing: deprecate
+limits: { max_changes_pct: 30 }
+retries: { max: 2, backoff_seconds: 5 }

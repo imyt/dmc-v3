@@ -1,0 +1,7 @@
+cases:
+  - name: below the required tier matches
+    asset: { qualified_name: a.s.t.c, trust_shortfall: true }
+    expect: true
+  - name: at the required tier does not
+    asset: { qualified_name: a.s.t.c, trust_shortfall: false }
+    expect: false

@@ -1,0 +1,13 @@
+# Task S5. How Collibra relations and responsibilities map onto metamodel edges, for the reconciliation report.
+# The edge jobs (collibra-term-categories, collibra-category-domains, collibra-owners, collibra-stewards) read the same links by the ids of these relation types and roles (overlay).
+# The role names below are ASSUMPTIONS until the Collibra admin confirms them.
+# Not a sync job (the worker reads only sync/jobs). The edge names are checked against the metamodel when the report runs.
+relations:
+  - { role: is grouped by, edge: part_of, from: BusinessTerm, to: DataCategory }
+  - { role: is part of, edge: part_of, from: DataCategory, to: DataDomain }
+responsibilities:
+  Owner: owned_by
+  Steward: stewarded_by
+# ADR 0026: the field of the responsibility's user that identifies the person. Must equal `ownerKeyField` in the overlay of the owner and steward jobs.
+# userName if Collibra user names are staff IDs (UNCONFIRMED: Collibra admin), else emailAddress (resolved to the staff ID through the Person email).
+personKeyField: emailAddress

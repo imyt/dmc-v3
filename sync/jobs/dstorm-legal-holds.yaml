@@ -1,0 +1,18 @@
+# S9 (INVENTED SCHEMA): the DQ Hub / DSTORM table and column names below are placeholders shaped like plausible source tables. The real ones must come from the data platform team.
+# Rule 8: explicit column list, never SELECT *; DQ Hub tables may hold profiled or failing sample values, which are never selected. Only rule metadata and aggregate results are read.
+# Legal holds -> LegalHold nodes (qualified name: the hold id). The metamodel names legal-hold-tools as the owning source, so the job writes as that source although the data is read from the DSTORM dataset.
+job: dstorm-legal-holds
+connection: bq-dstorm
+schedule: "35 4 * * *"
+source:
+  query: "SELECT hold_id, reason, start_date, end_date FROM `${project}.${dataset}.legal_holds`"
+  mode: full
+  page_size: 1000
+target:
+  type: LegalHold
+  key: hold_id
+  source: legal-hold-tools
+  map: { reason: reason, start: start_date, end: end_date }
+  on_missing: deprecate
+limits: { max_changes_pct: 30 }
+retries: { max: 2, backoff_seconds: 5 }

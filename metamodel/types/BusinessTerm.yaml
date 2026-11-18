@@ -1,0 +1,20 @@
+type: BusinessTerm
+version: 1
+parent: Concept
+identity:
+  qualified_name: scheme:code
+attributes:
+  name: { type: string, required: true, source: collibra }
+  definition: { type: text, source: collibra }
+  status: { type: string, source: collibra }
+edges:
+  part_of:
+    - { to: DataCategory, cardinality: many-to-one }
+  is_a:
+    - { to: Concept, cardinality: many-to-one }
+  owned_by:
+    - { to: Party, cardinality: many-to-one }
+  stewarded_by:
+    - { to: Party, cardinality: many-to-one }
+lifecycle: default
+controls: []

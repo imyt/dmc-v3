@@ -1,0 +1,15 @@
+type: Classification
+version: 1
+parent: Concept
+identity:
+  qualified_name: scheme:code
+attributes:
+  code: { type: string, required: true, source: classification-tool }
+  name: { type: string, required: true, source: classification-tool }
+  scheme: { type: enum, values: [pii, isr, business], required: true, source: classification-tool }
+  level: { type: string, source: classification-tool }
+edges:
+  is_a:
+    - { to: Concept, cardinality: many-to-one }
+lifecycle: default
+controls: []

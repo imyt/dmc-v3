@@ -1,0 +1,31 @@
+{
+  "systems": [
+    {
+      "name": "risk-calc",
+      "platform": "Oracle",
+      "environment": "prod",
+      "schemas": [
+        {
+          "name": "exposure",
+          "tables": [
+            {
+              "name": "limits",
+              "kind": "table",
+              "columns": [
+                {
+                  "name": "limit_id",
+                  "data_type": "NUMBER",
+                  "nullable": false
+                },
+                {
+                  "name": "amount",
+                  "data_type": "NUMBER"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
