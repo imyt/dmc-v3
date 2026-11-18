@@ -11,7 +11,11 @@ export function ObjectRoute() {
   const data = useData();
   const state = useAsync(async () => {
     const [node, out, incoming, history] = await Promise.all([data.node(qn), data.relationships(qn, 'out'), data.relationships(qn, 'in'), data.history(qn)]);
-    return toObjectModel(node, out, incoming, history);
+    // name and type of whatever is at the other end of each edge, so the tables say more than an identifier (a failed lookup just leaves the identifier)
+    const ends = [...new Set([...out.items.map((e) => e.to), ...incoming.items.map((e) => e.from)])].slice(0, 60);
+    const found = await Promise.all(ends.map((q) => data.node(q).catch(() => undefined)));
+    const related = Object.fromEntries(found.flatMap((n, i) => (n ? [[ends[i]!, n]] : [])));
+    return toObjectModel(node, out, incoming, history, related);
   }, [qn]);
 
   if (state.status === 'loading') return <div className="mx-auto max-w-[var(--content-max)] px-8 py-8"><LoadingState label="Loading object" /></div>;

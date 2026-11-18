@@ -29,22 +29,25 @@ export class PersonRefResolver implements SignalSink {
       const e = s.kind === 'sync.upsert' && s.subjectType === 'Person' && typeof s.asset.email === 'string' ? s.asset.email.trim().toLowerCase() : '';
       if (e) inBatch.set(e, [...(inBatch.get(e) ?? []), s.subjectRef.slice('Person:'.length)]);
     }
-    let index: Map<string, string | null> | undefined;
+    let index: Map<string, string | null> | undefined; let activeIndex: Map<string, string | null> | undefined;
     const c = await this.d.connect();
-    const byEmail = async () => {
-      if (index) return index;
-      const people: { qualifiedName: string; email?: unknown }[] = [];
+    const load = async () => {
+      const people: { qualifiedName: string; email?: unknown; lifecycle?: string }[] = [];
       for (let after: string | undefined; ;) {
         const page = await this.d.store.listByType(c, 'Person', { limit: PAGE, ...(after ? { afterQn: after } : {}) });
-        people.push(...page.slice(0, PAGE).map((p) => ({ qualifiedName: p.qualifiedName, email: p.attributes.email })));
+        people.push(...page.slice(0, PAGE).map((p) => ({ qualifiedName: p.qualifiedName, email: p.attributes.email, lifecycle: p.lifecycle })));
         if (page.length <= PAGE) break;
         after = page[PAGE - 1]!.qualifiedName;
       }
-      return (index = emailIndex(people));
+      index = emailIndex(people); activeIndex = emailIndex(people, { activeOnly: true });
     };
+    /** resolution: an active Person first, a deprecated one only when no active Person has the email (ADR 0027) */
+    const byEmail = async () => { if (!index) await load(); return index!; };
+    /** duplicate check: a deprecated Person's email is free for a new hire */
+    const byActiveEmail = async () => { if (!activeIndex) await load(); return activeIndex!; };
     try {
       for (const s of signals) {
-        const r = await this.one(c, s, byEmail, inBatch);
+        const r = await this.one(c, s, byEmail, byActiveEmail, inBatch);
         if ('error' in r) { rejected.push(s.key); await this.d.onReject?.(s, r.error); } else out.push(r.signal);
       }
     } finally { c.release(); }
@@ -53,11 +56,11 @@ export class PersonRefResolver implements SignalSink {
     return all.length ? { rejected: all } : {};
   }
 
-  private async one(c: Queryable, s: Signal, byEmail: () => Promise<Map<string, string | null>>, inBatch: Map<string, string[]>): Promise<{ signal: Signal } | { error: string }> {
+  private async one(c: Queryable, s: Signal, byEmail: () => Promise<Map<string, string | null>>, byActiveEmail: () => Promise<Map<string, string | null>>, inBatch: Map<string, string[]>): Promise<{ signal: Signal } | { error: string }> {
     if (s.kind === 'sync.upsert' && s.subjectType === 'Person' && typeof s.asset.email === 'string' && s.asset.email.trim()) {
       const e = s.asset.email.trim().toLowerCase(); const key = s.subjectRef.slice('Person:'.length);
       if ((inBatch.get(e) ?? []).length > 1) return { error: `email ${e} is given to more than one Person in this run (${inBatch.get(e)!.join(', ')}): refused, fix it in the source` };
-      const held = (await byEmail()).get(e);
+      const held = (await byActiveEmail()).get(e);
       if (held === null || (held !== undefined && held !== key)) return { error: `email ${e} already belongs to ${held === null ? 'more than one other Person' : `Person ${held}`}: refused, an email must identify one person` };
     }
     if (s.kind === 'sync.upsert' && this.d.registry.has(s.subjectType)) {
@@ -66,7 +69,7 @@ export class PersonRefResolver implements SignalSink {
       for (const [name, def] of Object.entries(attrs)) {
         if (def.type !== 'person' && def.identifies !== 'Person') continue;
         const v = asset[name];
-        if (v === undefined || v === null || (typeof v === 'string' && v.trim() === '')) continue; // no owner at all is the owner check's business, not a data error here
+        if (v === undefined || v === null || (typeof v === 'string' && v.trim() === '')) continue; // no owner at all is the owner check's business, not a data error here (a NULL or blank is turned into a clear by the job mapping, ADR 0027)
         const r = resolvePersonRef(v, this.pattern, classifyPersonRef(v, this.pattern).kind === 'email' ? await byEmail() : new Map());
         if ('error' in r) return { error: `${name}: ${r.error}` };
         asset[name] = r.id;

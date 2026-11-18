@@ -13,3 +13,4 @@ export * from './bigquery-fixture.js';
 export * from './bigquery-google.js';
 export * from './git-json.js';
 export * from './writers.js';
+export * from './admin.js';

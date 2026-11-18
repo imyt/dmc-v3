@@ -1,4 +1,4 @@
-import { Outlet, createRootRoute, createRoute, createRouter, createMemoryHistory, type RouterHistory } from '@tanstack/react-router';
+import { Outlet, createRootRoute, createRoute, createRouter, createMemoryHistory, redirect, type RouterHistory } from '@tanstack/react-router';
 import { AppShell, type AppShellProps } from '@/components/patterns/app-shell';
 import type { Role } from '@/components/patterns/app-shell/nav-config';
 import { Home, Placeholder } from '@/features/home/home';
@@ -9,11 +9,13 @@ import { DataProvider, useOptionalData, type DataSource } from '@/lib/data';
 import { ScopeListRoute, ScopeRoute } from '@/features/scopes/scopes-route';
 import { DatasetsRoute } from '@/features/datasets/datasets-route';
 import { RequirementsRoute } from '@/features/requirements/requirements-route';
-import { AuditRoute } from '@/features/audit/audit-route';
+import { EvidenceRoute } from '@/features/evidence/evidence-route';
+import { PoliciesRoute } from '@/features/policies/policies-route';
 import { DashboardRoute } from '@/features/dashboard/dashboard-route';
 import { HelpRoute } from '@/features/help/help-route';
 import { ClassificationsRoute } from '@/features/classifications/classifications-route';
 import { AdminRoute } from '@/features/admin/admin-route';
+import { SyncRoute } from '@/features/sync/sync-route';
 import { Gallery } from '@/gallery/gallery';
 import { LineageRoute } from '@/features/lineage/lineage-route';
 import { AuthGate } from '@/features/auth/auth-gate';
@@ -35,22 +37,25 @@ export function buildRouter(opts: { shell?: Omit<AppShellProps, 'children'>; his
   });
   const object = createRoute({ getParentRoute: () => root, path: '/o/$qn', component: ObjectRoute });
   const inbox = createRoute({ getParentRoute: () => root, path: '/inbox', component: InboxGate });
-  const catalog = createRoute({ getParentRoute: () => root, path: '/catalog', component: () => <Placeholder title="Catalog" /> });
+  // browsing the catalog is Search plus the object page (U1): the old /catalog address goes to Search
+  const catalog = createRoute({ getParentRoute: () => root, path: '/catalog', beforeLoad: () => { throw redirect({ to: '/search', search: { q: '' } }); } });
   const scopes = createRoute({ getParentRoute: () => root, path: '/scopes', component: () => (useOptionalData() ? <ScopeListRoute /> : <Placeholder title="Scopes" />) });
   const scope = createRoute({ getParentRoute: () => root, path: '/scopes/$qn', component: function C() { const { qn } = scope.useParams(); return <ScopeRoute qn={qn} />; } });
   const datasets = createRoute({ getParentRoute: () => root, path: '/integrations/$qn/datasets', component: function C() { const { qn } = datasets.useParams(); return <DatasetsRoute integration={qn} />; } });
   const requirements = createRoute({ getParentRoute: () => root, path: '/requirements', component: RequirementsRoute });
-  const audit = createRoute({ getParentRoute: () => root, path: '/audit', component: AuditRoute });
+  // the auditor view lives at /evidence; the earlier /audit address redirects there
+  const audit = createRoute({ getParentRoute: () => root, path: '/audit', beforeLoad: () => { throw redirect({ to: '/evidence', search: { qn: undefined } }); } });
   const dashboard = createRoute({ getParentRoute: () => root, path: '/dashboard', component: DashboardRoute });
   const help = createRoute({ getParentRoute: () => root, path: '/help/$role', component: function C() { const { role } = help.useParams(); return <HelpRoute role={role} />; } });
   const helpIndex = createRoute({ getParentRoute: () => root, path: '/help', component: () => <HelpRoute role="" /> });
-  const policies = createRoute({ getParentRoute: () => root, path: '/policies', component: () => <Placeholder title="Policies" /> });
-  const evidence = createRoute({ getParentRoute: () => root, path: '/evidence', component: () => <Placeholder title="Evidence" /> });
+  const policies = createRoute({ getParentRoute: () => root, path: '/policies', component: PoliciesRoute });
+  const evidence = createRoute({ getParentRoute: () => root, path: '/evidence', validateSearch: (s: Record<string, unknown>) => ({ qn: typeof s.qn === 'string' ? s.qn : undefined }), component: EvidenceRoute });
   const admin = createRoute({ getParentRoute: () => root, path: '/admin', component: () => (useOptionalData() ? <AdminRoute /> : <Placeholder title="Admin" />) });
+  const adminSync = createRoute({ getParentRoute: () => root, path: '/admin/sync', component: () => (useOptionalData() ? <SyncRoute /> : <Placeholder title="Sync" />) });
   const lineage = createRoute({ getParentRoute: () => root, path: '/lineage/$qn', component: function C() { const { qn } = lineage.useParams(); return useOptionalData() ? <LineageRoute qn={qn} /> : <Placeholder title="Lineage" />; } });
   const classifications = createRoute({ getParentRoute: () => root, path: '/classifications', component: () => (useOptionalData() ? <ClassificationsRoute /> : <Placeholder title="Classifications" />) });
   const gallery = createRoute({ getParentRoute: () => root, path: '/gallery', component: Gallery });
-  return createRouter({ routeTree: root.addChildren([home, search, object, inbox, catalog, scopes, scope, datasets, requirements, audit, dashboard, help, helpIndex, policies, evidence, admin, lineage, classifications, gallery]), history: opts.history });
+  return createRouter({ routeTree: root.addChildren([home, search, object, inbox, catalog, scopes, scope, datasets, requirements, audit, dashboard, help, helpIndex, policies, evidence, admin, adminSync, lineage, classifications, gallery]), history: opts.history });
 }
 
 export type AppRouter = ReturnType<typeof buildRouter>;

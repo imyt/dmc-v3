@@ -11,7 +11,8 @@ export function mergeLineage(g: Graph, l: ApiLineage): Graph {
   const nodes = new Map(g.nodes); const edges = new Map(g.edges);
   for (const n of l.nodes) nodes.set(n.qualified_name, { qn: n.qualified_name, type: n.type, ...(n.container ? { container: n.container } : {}) });
   if (!nodes.has(l.root)) nodes.set(l.root, { qn: l.root, type: 'Column' });
-  for (const e of l.edges) edges.set(`${e.from}>${e.to}`, { from: e.from, to: e.to, source: e.source, ...(e.job ? { job: e.job } : {}) });
+  // The API says what depends on what: `from` is built from `to`. The canvas and the table read in the direction the data flows, so each link is turned round here.
+  for (const e of l.edges) edges.set(`${e.to}>${e.from}`, { from: e.to, to: e.from, source: e.source, ...(e.job ? { job: e.job } : {}) });
   return { root: g.root, nodes, edges };
 }
 

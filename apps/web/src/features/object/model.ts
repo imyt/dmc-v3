@@ -2,6 +2,8 @@ import type { ObjectModel } from '@/components/patterns/object-page';
 import type { Lifecycle } from '@/components/patterns/status-badge';
 import type { TimelineEvent } from '@/components/patterns/timeline';
 import type { ApiEdgeList, ApiHistory, ApiNode } from '@/lib/data';
+import { looksLikeStaffId, PersonRef, PersonRefs } from '@/lib/people';
+import { createElement, type ReactNode } from 'react';
 
 /** "BusinessTerm" → "Business term"; "hosting_country" → "Hosting country". */
 export const humanise = (s: string): string => {
@@ -26,18 +28,29 @@ function summarise(prev: Record<string, unknown> | undefined, now: Record<string
   return parts.join(' and ') || 'updated this record';
 }
 
+/** The word for who is at the other end of an edge to a person: "Owner has left". */
+const ROLE_OF_EDGE: Record<string, string> = { owned_by: 'Owner', stewarded_by: 'Steward' };
+
 /**
  * The object page is driven by the metamodel: every attribute the type declares becomes a field, its source says where it comes from,
  * and nothing here knows what a dataset or a term is.
  */
-export function toObjectModel(node: ApiNode, out: ApiEdgeList, incoming: ApiEdgeList, history: ApiHistory): ObjectModel {
+export function toObjectModel(node: ApiNode, out: ApiEdgeList, incoming: ApiEdgeList, history: ApiHistory, related: Record<string, ApiNode> = {}): ObjectModel {
   const attrs = node.attributes as Record<string, unknown>;
   const prov = node.provenance as Record<string, { by: string; at: string }>;
   const sources = node.attribute_sources as Record<string, string>;
 
+  // An attribute holding staff IDs (an owner, the delegates) shows the person's name, and says so when they have left.
+  const valueOf = (id: string): ReactNode => {
+    const v = attrs[id];
+    const role = humanise(id).replace(/s$/, '');
+    if (looksLikeStaffId(v) && v !== node.qualified_name) return createElement(PersonRef, { id: v, role }); // a Person's own staff ID is just their key
+    if (Array.isArray(v) && v.length > 0 && v.every(looksLikeStaffId)) return createElement(PersonRefs, { ids: v, role });
+    return show(v);
+  };
   const fields = Object.keys(sources).map((id) => {
     const owner = sources[id]!;
-    return { id, label: humanise(id), value: show(attrs[id]), ...(owner !== 'dmc' ? { source: { tool: owner, syncedAt: prov[id]?.at ?? '' } } : {}) };
+    return { id, label: humanise(id), value: valueOf(id), ...(owner !== 'dmc' ? { source: { tool: owner, syncedAt: prov[id]?.at ?? '' } } : {}) };
   });
 
   const group = (edges: ApiEdgeList, dir: 'out' | 'in') => {
@@ -45,7 +58,11 @@ export function toObjectModel(node: ApiNode, out: ApiEdgeList, incoming: ApiEdge
     for (const e of edges.items) {
       const other = dir === 'out' ? e.to : e.from;
       const key = dir === 'out' ? e.name : `${e.name}:in`;
-      by.set(key, [...(by.get(key) ?? []), { id: `${key}/${other}`, label: other, typeLabel: dir === 'out' ? 'Outgoing' : 'Incoming', href: objectHref(other) }]);
+      const role = ROLE_OF_EDGE[e.name] ?? 'Person';
+      const o = related[other];
+      const nm = o && typeof o.attributes.name === 'string' && o.attributes.name ? o.attributes.name : other;
+      by.set(key, [...(by.get(key) ?? []), { id: `${key}/${other}`, label: nm, typeLabel: o ? humanise(o.type) : dir === 'out' ? 'Outgoing' : 'Incoming', href: objectHref(other),
+        ...(looksLikeStaffId(other) ? { node: createElement(PersonRef, { id: other, role }) } : {}) }]);
     }
     return [...by].map(([key, items]) => ({ id: key, label: key.endsWith(':in') ? `${humanise(key.slice(0, -3))} (from other objects)` : humanise(key), items }));
   };

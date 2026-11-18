@@ -1,4 +1,4 @@
-import { Warning, CheckCircle, CircleDashed, DotOutline, Eye, Info, ShieldCheck, XCircle, type Icon } from '@phosphor-icons/react';
+import { Warning, CheckCircle, CircleDashed, DotOutline, Eye, Info, ShieldCheck, UserMinus, XCircle, type Icon } from '@phosphor-icons/react';
 import { cn } from '@/lib/utils';
 
 /** P10. Colour is never the only signal: every badge has an icon and text. */
@@ -6,6 +6,8 @@ export type Lifecycle = 'draft' | 'proposed' | 'active' | 'deprecated' | 'retire
 export type Severity = 'low' | 'medium' | 'high' | 'critical';
 export type PolicyMode = 'shadow' | 'enforced';
 export type Tier = 'gold' | 'silver' | 'bronze' | 'unverified';
+/** A person the catalog still names but who has left the organisation (their Person record is deprecated). */
+export type PersonStatus = 'left';
 
 interface Look { label: string; icon: Icon; className: string }
 
@@ -33,13 +35,19 @@ const TIER: Record<Tier, Look> = {
   unverified: { label: 'Unverified', icon: CircleDashed, className: 'border-tier-unverified bg-tier-unverified text-tier-foreground' },
 };
 
-type Props =
+const PERSON: Record<PersonStatus, Look> = {
+  left: { label: 'Has left', icon: UserMinus, className: 'border-warning text-warning' },
+};
+
+type Props = (
   | { kind: 'state'; value: Lifecycle } | { kind: 'severity'; value: Severity }
-  | { kind: 'mode'; value: PolicyMode } | { kind: 'tier'; value: Tier };
+  | { kind: 'mode'; value: PolicyMode } | { kind: 'tier'; value: Tier } | { kind: 'person'; value: PersonStatus }
+) & { /** replaces the default words, for example "Owner has left" */ label?: string };
 
 export function StatusBadge(p: Props) {
-  const table = { state: STATE, severity: SEVERITY, mode: MODE, tier: TIER }[p.kind] as Record<string, Look>;
-  const { label, icon: Icon, className } = table[p.value]!;
+  const table = { state: STATE, severity: SEVERITY, mode: MODE, tier: TIER, person: PERSON }[p.kind] as Record<string, Look>;
+  const { label: defaultLabel, icon: Icon, className } = table[p.value]!;
+  const label = p.label ?? defaultLabel;
   return (
     <span data-kind={p.kind} data-value={p.value} className={cn('inline-flex items-center gap-1 rounded-[var(--radius-badge)] border px-1.5 py-0.5 text-xs font-semibold', className)}>
       <Icon aria-hidden className="size-3.5" />{label}

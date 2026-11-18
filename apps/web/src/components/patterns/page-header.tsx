@@ -4,7 +4,7 @@ import { Link } from '@tanstack/react-router';
 export interface Crumb { label: string; to?: string }
 
 /** P21. Breadcrumbs, title, description and actions in the full-width band at the top of every page. */
-export function PageHeader({ eyebrow, title, description, actions, crumbs }: { eyebrow?: string; title: string; description?: string; actions?: ReactNode; crumbs?: Crumb[] }) {
+export function PageHeader({ eyebrow, title, description, actions, crumbs }: { eyebrow?: string; title: string; description?: ReactNode; actions?: ReactNode; crumbs?: Crumb[] }) {
   return (
     <div className="border-b border-border bg-muted">
       <div className="mx-auto max-w-[var(--content-max)] px-8 py-8">
@@ -27,7 +27,7 @@ export function PageHeader({ eyebrow, title, description, actions, crumbs }: { e
           <div>
             {eyebrow && <p className="eyebrow mb-2">{eyebrow}</p>}
             <h1 className="text-[32px] leading-10">{title}</h1>
-            {description && <p className="mt-2 max-w-prose text-muted-foreground">{description}</p>}
+            {description && <div className="mt-2 max-w-prose text-muted-foreground">{description}</div>}
           </div>
           {actions && <div className="flex gap-2">{actions}</div>}
         </div>

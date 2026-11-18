@@ -5,7 +5,7 @@ export const ROLES = {
   'app-owner': { title: 'Application owner', steps: ['Open your inbox: link tasks and exceptions for your applications wait there.', 'Add the datasets each of your integrations carries, with category and record class.', 'Link business elements of submitted scopes to your columns, then say you are done.'], first: { to: '/inbox', label: 'Open your inbox' } },
   'scope-owner': { title: 'Scope owner', steps: ['Create groups of business elements and say which integrations the data flows through.', 'Submit the scope: it locks and application owners get their tasks.', 'Amend it later to make the next version; earlier versions stay on record.'], first: { to: '/scopes', label: 'Open your scopes' } },
   steward: { title: 'Data steward', steps: ['Look after the glossary of your domain: categories and terms.', 'Resolve exceptions routed to you from your inbox.'], first: { to: '/search', label: 'Search the catalogue' } },
-  auditor: { title: 'Auditor', steps: ['Verify the ledger chain whenever you need to.', 'Trace one object to see every recorded step and who decided.', 'Export a proof bundle you can check offline.'], first: { to: '/audit', label: 'Open audit' } },
+  auditor: { title: 'Auditor', steps: ['Verify the ledger chain whenever you need to.', 'Trace one object to see every recorded step and who decided.', 'Export a proof bundle you can check offline.'], first: { to: '/evidence', label: 'Open evidence' } },
   admin: { title: 'Administrator', steps: ['Check the running version and the metamodel in use.', 'Policies are paused through the policy console once it is available.'], first: { to: '/admin', label: 'Open admin' } },
 } as const;
 export type Role = keyof typeof ROLES;

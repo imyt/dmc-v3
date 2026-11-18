@@ -8,10 +8,11 @@ export interface MetricProps {
   /** change since the previous period, in the same unit */
   delta?: number; breakdownLabel?: string; breakdown?: MetricBreakdown[];
   /** true when a higher value is better (default) */ higherIsBetter?: boolean;
+  /** what the number is made of, for example "3 of 6 applications in the catalog" */ detail?: string;
 }
 
 /** P23. A measure with target, trend and breakdown. The table is the accessible equivalent of the bars. */
-export function MetricPanel({ title, value, target, unit = '%', delta, breakdown, breakdownLabel = 'Breakdown', higherIsBetter = true }: MetricProps) {
+export function MetricPanel({ title, value, target, unit = '%', delta, breakdown, breakdownLabel = 'Breakdown', higherIsBetter = true, detail }: MetricProps) {
   const [table, setTable] = useState(false);
   const id = useId();
   const meets = higherIsBetter ? value >= target : value <= target;
@@ -25,6 +26,13 @@ export function MetricPanel({ title, value, target, unit = '%', delta, breakdown
         <span className="text-sm">Target {target}{unit} <strong className={meets ? 'text-success' : 'text-destructive'}>{meets ? 'met' : 'not met'}</strong></span>
         {delta != null && <span className="flex items-center gap-1 text-sm"><Trend aria-hidden className="size-4" />{delta > 0 ? '+' : ''}{delta}{unit} vs last period</span>}
       </p>
+      {detail && <p className="mt-1 text-sm text-muted-foreground">{detail}</p>}
+      {!breakdown && (
+        <div aria-hidden className="relative mt-3 h-2 bg-muted">
+          <span className="absolute inset-y-0 left-0 bg-brand" style={{ width: `${max === 0 ? 0 : Math.min(100, (value / max) * 100)}%` }} />
+          <span className="absolute inset-y-[-3px] w-0.5 bg-foreground" style={{ left: `${max === 0 ? 0 : (target / max) * 100}%` }} />
+        </div>
+      )}
       {breakdown && (
         <div className="mt-4">
           <div className="mb-2 flex items-center justify-between"><h4 className="text-sm font-semibold">{breakdownLabel}</h4>

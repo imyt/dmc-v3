@@ -4,6 +4,8 @@ import type { ResolvedJob } from './definition.js';
 import type { SyncService } from './service.js';
 
 export const SYNC_QUEUE = 'sync.run';
+export const SYNC_APPROVE_QUEUE = 'sync.approve';
+export interface SyncApproveData { runId: string; actor: string }
 export interface SyncJobData { job: string; environment: string; trigger: 'schedule' | 'manual'; actor?: string }
 
 /** One schedule per enabled job and environment. Disabled jobs lose their schedule. */
@@ -23,6 +25,14 @@ export async function runNow(boss: PgBoss, job: string, environment: string, act
 
 export async function startSyncWorker(boss: PgBoss, svc: SyncService, getDb: () => Promise<{ db: Queryable; release(): void }>): Promise<void> {
   await boss.createQueue(SYNC_QUEUE);
+  // S12: an admin accepted a run the change limit held; the worker has the sinks that carry its signals out
+  await boss.createQueue(SYNC_APPROVE_QUEUE);
+  await boss.work<SyncApproveData>(SYNC_APPROVE_QUEUE, async (jobs) => {
+    for (const j of jobs) {
+      const c = await getDb();
+      try { await svc.approve(c.db, j.data.runId, j.data.actor); } finally { c.release(); }
+    }
+  });
   await boss.work<SyncJobData>(SYNC_QUEUE, async (jobs) => {
     for (const j of jobs) {
       const c = await getDb();

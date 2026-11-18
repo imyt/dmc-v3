@@ -5,6 +5,11 @@
   `helm template dmc-api charts/api -f env/uat.yaml`
 - Environment values live in `env/` (local, uat, prod). Secrets are referenced by name (`secretRefs`), never inlined.
 - No Kubernetes CronJobs: schedules run through pg-boss.
+- BigQuery (ADR 0025): the server image installs `@google-cloud/bigquery` beside the bundle (the version is pinned in `docker/server.Dockerfile` and must equal `packages/connectors/package.json`). In the cluster authenticate with workload identity; a service-account key is used only through a `secretRef`. A connection reaches one project and dataset, so each source (ServiceNow, DQ Hub, DSTORM, DataVisa) needs its own connection in the overlay.
+- Sync overlays: `sync/overlays/uat.yaml` and `prod.yaml` list every connection and job with `REPLACE_ME` values and every job off. A job with a placeholder cannot be enabled. Replace the values per environment, then enable jobs one at a time from the Sync admin screen's data (the screen pauses, runs and approves; it does not edit jobs).
+- Migrations: run `migrate` after every code change that adds a migration, including against a long-lived local database (`pnpm run migrate` with the `DMC_DB_*` variables below). A missing migration shows as a bare 500 on the page that reads the new table.
+- Load checks: `pnpm run perf` runs the ledger, search and lineage load checks (separate from `pnpm run ci`; slow). Run it on UAT-like hardware before prod.
+- Web development: Vite reads `DMC_API_URL` (default `http://localhost:8080`) and `DMC_WEB_PORT` (default 5173), so a second web server can point at another API.
 
 ## Running the processes
 

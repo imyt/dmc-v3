@@ -4,7 +4,7 @@ import userEvent from '@testing-library/user-event';
 import { RouterProvider, createMemoryHistory } from '@tanstack/react-router';
 import { buildRouter } from '@/router';
 import type { AppShellProps } from './app-shell';
-import { visibleItems } from './nav-config';
+import { NAV_ITEMS, visibleItems } from './nav-config';
 
 async function mount(shell: Omit<AppShellProps, 'children'> = {}, path = '/') {
   const router = buildRouter({ shell, history: createMemoryHistory({ initialEntries: [path] }) });
@@ -35,8 +35,8 @@ describe('app shell (P1)', () => {
   });
 
   it('marks the current page', async () => {
-    await mount({ env: 'prod' }, '/catalog');
-    expect(await screen.findByRole('link', { name: 'Catalog' })).toHaveAttribute('aria-current', 'page');
+    await mount({ env: 'prod' }, '/search');
+    expect(await screen.findByRole('link', { name: 'Search' })).toHaveAttribute('aria-current', 'page');
     expect(screen.getByRole('link', { name: 'Home' })).not.toHaveAttribute('aria-current', 'page');
   });
 
@@ -70,18 +70,22 @@ describe('app shell (P1)', () => {
 describe('navigation by role', () => {
   it('hides admin areas from a steward', () => {
     const labels = visibleItems(['steward']).map((i) => i.label);
-    expect(labels).toContain('Catalog');
+    expect(labels).toContain('Search');
     expect(labels).not.toContain('Admin');
     expect(labels).not.toContain('Evidence');
   });
+  it('has no Catalog item and no page that says coming soon: browsing is Search', () => {
+    expect(visibleItems('all').map((i) => i.label)).not.toContain('Catalog');
+    expect(visibleItems('all').map((i) => i.to)).toContain('/evidence');
+  });
   it('gives each role its own menu', () => {
     const l = (r: never[] | string[]) => visibleItems(r as never).map((i) => i.label);
-    expect(l(['viewer'])).toEqual(['Home', 'Search', 'Inbox', 'Catalog']);
+    expect(l(['viewer'])).toEqual(['Home', 'Search', 'Inbox']);
     expect(l(['steward'])).toContain('Classifications');
     expect(l(['auditor'])).toEqual(expect.arrayContaining(['Evidence', 'Dashboard']));
     expect(l(['auditor'])).not.toContain('Admin');
     expect(l(['scope-owner'])).toContain('Scopes');
     expect(l(['policy-author'])).toEqual(expect.arrayContaining(['Policies', 'Requirements']));
   });
-  it('shows everything to admin', () => expect(visibleItems(['admin'])).toHaveLength(11));
+  it('shows everything to admin', () => expect(visibleItems(['admin'])).toHaveLength(NAV_ITEMS.length));
 });

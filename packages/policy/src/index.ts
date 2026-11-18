@@ -7,3 +7,4 @@ export * from './shadow.js';
 export * from './service.js';
 export * from './editor.js';
 export * from './control.js';
+export * from './sources.js';

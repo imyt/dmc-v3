@@ -1,6 +1,6 @@
-import { Body, Controller, HttpCode, Inject, Post, Req, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, HttpCode, Inject, Param, Post, Req, UseGuards } from '@nestjs/common';
 import { ApiError } from '@dmc/platform';
-import { checkDraft, renderReport } from '@dmc/policy';
+import { checkDraft, renderReport, type PolicySource } from '@dmc/policy';
 import { AuthGuard } from './auth.js';
 import { DEPS, type ApiDeps, type AuthedRequest } from './context.js';
 
@@ -21,6 +21,42 @@ export class PoliciesController {
     if (!decision.allowed) throw new ApiError('forbidden', decision.reason);
     if (req.principal.kind !== 'person' || req.principal.actingFor) throw new ApiError('forbidden', 'Policies are written by people');
     return decision.subject;
+  }
+
+  private reader(req: AuthedRequest): void {
+    const decision = this.d.authz.authorize(req.principal, 'read_policy');
+    if (!decision.allowed) throw new ApiError('forbidden', decision.reason);
+  }
+
+  private async sources(): Promise<{ source: PolicySource; paused: boolean }[]> {
+    if (!this.d.policySources) throw new ApiError('conflict', 'The policy sources are not available in this process');
+    // paused comes from the control state itself (not the admin-only status endpoint); a process without the switches cannot pause anything
+    const state = this.d.admin ? await this.d.admin.state() : { enforcementPaused: false, pausedPolicies: [] as string[] };
+    return this.d.policySources().map((source) => ({ source, paused: state.enforcementPaused || state.pausedPolicies.includes(source.id) }));
+  }
+
+  private summary({ source: s, paused }: { source: PolicySource; paused: boolean }) {
+    return { id: s.id, control: s.control, type: s.type, ...(s.implements ? { implements: s.implements } : {}), mode: s.mode, source_mode: s.sourceMode, paused, effective: s.effective };
+  }
+
+  /**
+   * Read-only: the policies as stored in the policies folder, with the mode in force here and the pause state. This changes no state,
+   * so it writes no outbox row (rule 6 covers state changes). The files are policy rules, metadata only (rule 8).
+   */
+  @Get()
+  async list(@Req() req: AuthedRequest) {
+    this.reader(req);
+    return { items: (await this.sources()).map((x) => this.summary(x)) };
+  }
+
+  /** One policy with its YAML, its golden cases as stored and a checksum of both. Read-only, like the list. */
+  @Get(':id')
+  async one(@Req() req: AuthedRequest, @Param('id') id: string) {
+    this.reader(req);
+    const found = (await this.sources()).find((x) => x.source.id === id);
+    if (!found) throw new ApiError('not_found', `No policy ${id}`);
+    const { source: s } = found;
+    return { ...this.summary(found), path: s.path, yaml: s.yaml, golden: s.golden, checksum: s.checksum };
   }
 
   private text(b: DraftBody): { yaml: string; golden?: string } {

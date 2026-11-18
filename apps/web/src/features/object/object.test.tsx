@@ -21,7 +21,7 @@ const history = { items: [
 
 const fake = (over: Partial<DataSource> = {}): DataSource => ({
   search: async () => ({ hits: [{ qualified_name: 'BusinessTerm:Customer', type: 'BusinessTerm', name: 'Customer', lifecycle: 'confirmed' }, { qualified_name: 'Dataset:crm.accounts', type: 'Dataset', name: 'accounts', lifecycle: 'discovered' }], facets: { type: { BusinessTerm: 1, Dataset: 1 }, lifecycle: { confirmed: 1, discovered: 1 } }, facets_sampled: false }),
-  node: async () => node,
+  node: async (qn: string) => { if (qn === node.qualified_name) return node; throw new ApiProblem(404, 'not found'); },
   relationships: async (_qn: string, dir: string) => edges(dir === 'out' ? [{ name: 'describes', from: 'BusinessTerm:Customer', to: 'Dataset:crm.accounts' }] : []),
   history: async () => history,
   inbox: async () => ({ items: [], count: 0 }),

@@ -13,3 +13,5 @@ Copy these into this folder as Markdown (each doc's Export menu → Markdown). I
 
 `archive/system-design-v4-draft.md` is the earlier, pre-MVP system design; superseded.
 Architecture decisions go in `adr/`.
+
+Current build status against the plan: [status.md](./status.md).

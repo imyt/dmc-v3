@@ -16,13 +16,22 @@ export type ApiRequirementReport = components['schemas']['RequirementReport'];
 export interface AuthUser { displayName: string; staffID: string; groups: string[]; /** what DMC maps the groups to (steward, scope-owner, admin, ...); absent from an older API */ roles?: string[] }
 export interface ClassificationProposal { id: string; subject: string; classification: string; reason: string; source?: string; status: 'open' | 'accepted' | 'rejected' }
 export interface AdminStatus { version: string; metamodel_version: string; enforcement: 'running' | 'paused'; policies: { id: string; mode: string; paused: boolean }[] }
-export interface DashboardMeasure { id: string; label: string; value: number; target: number; unit?: string }
+/** One success measure. `target` is the one-year target, or null for a measure DMC tracks without one. */
+export type DashboardMeasure = components['schemas']['DashboardMeasures']['measures'][number];
 export type ApiCompleteness = components['schemas']['ScopeCompleteness'];
 export type ApiDatasets = components['schemas']['IntegrationDatasets'];
 export type ApiDatasetInput = components['schemas']['DatasetInput'];
 export type ApiCoverage = components['schemas']['RequirementCoverage'];
 export type ApiEvidence = components['schemas']['EvidencePage'];
 export type ApiProof = components['schemas']['ProofBundle'];
+export type ApiSyncJob = components['schemas']['SyncJob'];
+export type ApiSyncRun = components['schemas']['SyncRun'];
+export interface ApiSyncRunPage { items: ApiSyncRun[]; next_cursor: string | null }
+export type ApiPolicyReport = components['schemas']['PolicyDraftReport'];
+export type ApiPolicyProposal = components['schemas']['PolicyProposal'];
+export type ApiPolicySummary = components['schemas']['PolicySummary'];
+export type ApiPolicyDetail = components['schemas']['PolicyDetail'];
+export interface PolicyDraft { yaml: string; golden?: string }
 
 /** What the API said when it refused: shown to the person, with the request id for support. */
 export class ApiProblem extends Error {
@@ -33,6 +42,8 @@ export class ApiProblem extends Error {
 export interface DataSource {
   search(q: string, opts?: { types?: string[]; lifecycles?: string[]; limit?: number }): Promise<ApiSearch>;
   node(qn: string): Promise<ApiNode>;
+  /** Every node of one type, in qualified-name order (all pages, capped). The empty-search trick does not work: search needs a word. */
+  listNodes(type: string): Promise<ApiNode[]>;
   relationships(qn: string, direction: 'out' | 'in'): Promise<ApiEdgeList>;
   history(qn: string): Promise<ApiHistory>;
   inbox(): Promise<ApiInbox>;
@@ -47,7 +58,8 @@ export interface DataSource {
   saveDataset(integration: string, qn: string | undefined, input: ApiDatasetInput): Promise<unknown>;
   requirementCoverage(): Promise<ApiCoverage>;
   verifyLedger(): Promise<{ ok: boolean; checked: number; first_bad_seq?: number }>;
-  nodeEvidence(qn: string): Promise<ApiEvidence>;
+  /** One page of ledger entries about the object, oldest first; pass the previous page's `next_cursor` for the next. */
+  nodeEvidence(qn: string, cursor?: string): Promise<ApiEvidence>;
   nodeProof(qn: string): Promise<ApiProof>;
   health(): Promise<{ status: string; version: string }>;
   confirmScopeLink(qn: string, link: { element: string; target: string }): Promise<unknown>;
@@ -65,9 +77,24 @@ export interface DataSource {
   classificationProposals(): Promise<ClassificationProposal[]>;
   decideClassification(id: string, decision: 'accept' | 'reject'): Promise<unknown>;
   adminStatus(): Promise<AdminStatus>;
+  /** P3: compile, golden cases, conflicts and a dry run over sample assets. Saves nothing. */
+  /** Every policy with the mode in force, pause state and whether it is effective here (policy author, control owner, auditor, admin). */
+  listPolicies(): Promise<ApiPolicySummary[]>;
+  /** One policy with its stored YAML, golden cases and checksum. */
+  getPolicy(id: string): Promise<ApiPolicyDetail>;
+  checkPolicy(draft: PolicyDraft): Promise<ApiPolicyReport>;
+  /** P3: a passing draft becomes a pull request with the report attached. */
+  proposePolicy(draft: PolicyDraft & { message?: string }): Promise<ApiPolicyProposal>;
   setEnforcement(paused: boolean): Promise<unknown>;
   pausePolicy(id: string, paused: boolean): Promise<unknown>;
   dashboardMeasures(): Promise<DashboardMeasure[]>;
+  /** S12: sync jobs in every environment, runs of one job, and the three presses (each carries the ETag it was read with) */
+  syncJobs(): Promise<ApiSyncJob[]>;
+  syncRuns(environment: string, name: string, cursor?: string): Promise<ApiSyncRunPage>;
+  syncRun(id: string): Promise<ApiSyncRun>;
+  setSyncPaused(job: Pick<ApiSyncJob, 'environment' | 'name' | 'etag'>, paused: boolean): Promise<ApiSyncJob>;
+  runSyncNow(job: Pick<ApiSyncJob, 'environment' | 'name'>): Promise<void>;
+  approveSyncRun(run: Pick<ApiSyncRun, 'id' | 'etag'>): Promise<void>;
 }
 
 export function createDataSource(baseUrl: string, getToken?: () => string | undefined): DataSource {
@@ -91,6 +118,17 @@ export function createDataSource(baseUrl: string, getToken?: () => string | unde
       return ok(await client.GET('/v1/search', { params: { query: { q, type: o.types?.join(','), lifecycle: o.lifecycles?.join(','), limit: o.limit } } }));
     },
     async node(qn) { return ok(await client.GET('/v1/nodes/{qualified_name}', { params: { path: { qualified_name: qn } } })); },
+    async listNodes(type) {
+      const out: ApiNode[] = [];
+      let cursor: string | undefined;
+      for (let page = 0; page < 20; page++) {
+        const r = ok(await client.GET('/v1/nodes', { params: { query: { type, limit: 200, ...(cursor ? { cursor } : {}) } } }));
+        out.push(...(r.items ?? []));
+        cursor = r.next_cursor ?? undefined;
+        if (!cursor) break;
+      }
+      return out;
+    },
     async relationships(qn, direction) { return ok(await client.GET('/v1/nodes/{qualified_name}/relationships', { params: { path: { qualified_name: qn }, query: { direction } } })); },
     async inbox() { return ok(await client.GET('/v1/inbox')); },
     async decide(id, decision, key) {
@@ -112,7 +150,7 @@ export function createDataSource(baseUrl: string, getToken?: () => string | unde
     },
     async requirementCoverage() { return ok(await client.GET('/v1/requirements/coverage')); },
     async verifyLedger() { return ok(await client.GET('/v1/evidence/verify', { params: { query: {} } } as never)) as never; },
-    async nodeEvidence(qn) { return ok(await client.GET('/v1/nodes/{qualified_name}/evidence', { params: { path: { qualified_name: qn }, query: { limit: 50 } } } as never)); },
+    async nodeEvidence(qn, cursor) { return ok(await client.GET('/v1/nodes/{qualified_name}/evidence', { params: { path: { qualified_name: qn }, query: { limit: 50, ...(cursor ? { cursor } : {}) } } } as never)); },
     async nodeProof(qn) { return ok(await client.GET('/v1/nodes/{qualified_name}/evidence/proof', { params: { path: { qualified_name: qn } } })); },
     async health() { return ok(await client.GET('/v1/health')); },
     async confirmScopeLink(qn, link) { return ok(await client.POST('/v1/scopes/{qualified_name}/links/confirm', { params: { path: { qualified_name: qn } }, body: link } as never)); },
@@ -126,10 +164,20 @@ export function createDataSource(baseUrl: string, getToken?: () => string | unde
     async logout() { await raw('POST', '/v1/auth/logout'); },
     async classificationProposals() { const b = (await raw<ClassificationProposal[] | { items?: ClassificationProposal[]; proposals?: ClassificationProposal[] }>('GET', '/v1/classifications/proposals')).body; return Array.isArray(b) ? b : b?.items ?? b?.proposals ?? []; },
     async decideClassification(id, decision) { return (await raw('POST', `/v1/classifications/proposals/${encodeURIComponent(id)}/decision`, { decision }, { 'Idempotency-Key': `cp:${id}:${decision}` })).body; },
+    async listPolicies() { return ok(await client.GET('/v1/policies')).items; },
+    async getPolicy(id) { return ok(await client.GET('/v1/policies/{id}', { params: { path: { id } } })); },
+    async checkPolicy(draft) { return ok(await client.POST('/v1/policies/check', { body: draft })); },
+    async proposePolicy(draft) { return ok(await client.POST('/v1/policies/propose', { body: draft })); },
     async adminStatus() { return (await raw<AdminStatus>('GET', '/v1/admin/status')).body as AdminStatus; },
     async setEnforcement(paused) { return (await raw('POST', '/v1/admin/enforcement', { paused }, { 'Idempotency-Key': `en:${paused}:${Date.now()}` })).body; },
     async pausePolicy(id, paused) { return (await raw('POST', `/v1/admin/policies/${encodeURIComponent(id)}/pause`, { paused }, { 'Idempotency-Key': `pp:${id}:${paused}:${Date.now()}` })).body; },
-    async dashboardMeasures() { const b = (await raw<DashboardMeasure[] | { items?: DashboardMeasure[]; measures?: DashboardMeasure[] }>('GET', '/v1/dashboard/measures')).body; return Array.isArray(b) ? b : b?.items ?? b?.measures ?? []; },
+    async dashboardMeasures() { return ok(await client.GET('/v1/dashboard/measures')).measures; },
+    async syncJobs() { return ok(await client.GET('/v1/sync/jobs')).items; },
+    async syncRuns(environment, name, cursor) { return ok(await client.GET('/v1/sync/jobs/{environment}/{name}/runs', { params: { path: { environment, name }, query: { limit: 20, ...(cursor ? { cursor } : {}) } } })); },
+    async syncRun(id) { return ok(await client.GET('/v1/sync/runs/{id}', { params: { path: { id } } })); },
+    async setSyncPaused(job, paused) { return ok(await client.POST('/v1/sync/jobs/{environment}/{name}/pause', { params: { path: { environment: job.environment, name: job.name }, header: { 'Idempotency-Key': `sp:${job.environment}:${job.name}:${paused}:${Date.now()}`, 'If-Match': job.etag } }, body: { paused } })); },
+    async runSyncNow(job) { ok(await client.POST('/v1/sync/jobs/{environment}/{name}/run', { params: { path: { environment: job.environment, name: job.name }, header: { 'Idempotency-Key': `sr:${job.environment}:${job.name}:${Date.now()}` } } })); },
+    async approveSyncRun(run) { ok(await client.POST('/v1/sync/runs/{id}/approve', { params: { path: { id: run.id }, header: { 'Idempotency-Key': `sa:${run.id}:${Date.now()}`, 'If-Match': run.etag } } })); },
     async history(qn) { return ok(await client.GET('/v1/nodes/{qualified_name}/history', { params: { path: { qualified_name: qn } } })); },
   };
 }

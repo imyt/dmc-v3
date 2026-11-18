@@ -11,6 +11,12 @@ export interface EnvOverlay {
   disabled?: string[];
 }
 
+/** `env/<environment>.yaml` under `dir`, or an empty overlay when the environment has none. */
+export function readOverlay(dir: string, environment: string): EnvOverlay {
+  const overlayPath = join(dir, 'env', `${environment}.yaml`);
+  return existsSync(overlayPath) ? (parse(readFileSync(overlayPath, 'utf8')) as EnvOverlay) ?? {} : {};
+}
+
 /** Loads every policy under `dir`, applies `env/<environment>.yaml`, and returns the active set. Throws if anything fails to compile or its golden tests fail. */
 export function loadPolicies(dir: string, registry: Registry, environment: string): PolicyIR[] {
   const reports = runPolicyDir(dir, registry);
@@ -18,7 +24,7 @@ export function loadPolicies(dir: string, registry: Registry, environment: strin
   if (bad.length) throw new PolicyError(dir, bad);
 
   const overlayPath = join(dir, 'env', `${environment}.yaml`);
-  const overlay: EnvOverlay = existsSync(overlayPath) ? (parse(readFileSync(overlayPath, 'utf8')) as EnvOverlay) ?? {} : {};
+  const overlay = readOverlay(dir, environment);
   const policies = reports.filter((r) => r.policy && !r.file.startsWith('env')).map((r) => r.policy!);
   const ids = new Set(policies.map((p) => p.id));
   const unknown = [...Object.keys(overlay.overrides ?? {}), ...(overlay.disabled ?? [])].filter((i) => !ids.has(i));

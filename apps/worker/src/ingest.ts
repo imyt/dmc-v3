@@ -1,4 +1,4 @@
-import type { Queryable } from '@dmc/platform';
+import { ApiError, type Queryable } from '@dmc/platform';
 import type { Signal, SignalSink, SubmitResult } from '@dmc/contracts';
 import type { CatalogStore } from '@dmc/catalog';
 
@@ -86,6 +86,9 @@ export class CatalogIngest implements SignalSink {
     const actor = s.actor ?? `sync/${s.source}`;
     return this.d.store.tx(c, async (): Promise<Signal> => {
       if (s.kind === 'sync.missing') {
+        // a type switched to DMC is no longer deprecated by the tool that used to own it, even when its job is still enabled (ADR 0018)
+        const writer = await this.d.sourceOf(s.source);
+        if (this.d.store.isFormerOwner(s.subjectType, writer)) throw new ApiError('conflict', `${s.subjectType} is maintained in DMC now; ${writer} no longer deprecates its nodes`);
         if (await this.d.store.getNode(c, qn)) await this.d.store.setLifecycle(c, qn, 'deprecated', actor);
         const gone = await this.d.store.getNode(c, qn);
         return { ...s, asset: { ...(gone?.attributes ?? {}), qualified_name: qn, lifecycle: 'deprecated' } };

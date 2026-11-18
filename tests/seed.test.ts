@@ -34,6 +34,9 @@ describe('synthetic seed', () => {
     const sc = await store.getNode(cat, 'scope-pra110');
     expect(sc?.attributes).toMatchObject({ status: 'submitted', required_tier: 'gold', owner: '43000004' });
     expect((await store.getNode(cat, 'app-payments-hub'))?.attributes.delegates).toEqual(['43000003']);
+    // someone who has left still owns a scope, so the web app has an "Owner has left" flag to show locally
+    expect(await store.getNode(cat, '43000098')).toMatchObject({ type: 'Person', lifecycle: 'deprecated' });
+    expect(await store.getNode(cat, 'scope-legacy-loans')).toMatchObject({ attributes: { owner: '43000098' } });
   });
 
   it('the local sync job and overlay resolve against the fixtures', () => {

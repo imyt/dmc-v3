@@ -178,6 +178,37 @@ export interface AdminPort {
   setPolicy(id: string, paused: boolean, actor: string): Promise<boolean>;
 }
 
+/** S12. What the sync admin screen shows of a run. Counts are numbers only; no source values (rule 8). */
+export interface SyncRunView {
+  id: string; job: string; environment: string; trigger: 'schedule' | 'manual';
+  status: 'running' | 'succeeded' | 'failed' | 'paused_limit' | 'discarded' | 'skipped';
+  mode: string; complete: boolean; startedAt: string; finishedAt: string | null;
+  counts: { read: number; created: number; updated: number; unchanged: number; missing: number; errors: number; refused: number };
+  note: string | null; etag: string;
+}
+/** A job in one environment. `connection` is the connection's name and `connectionType` its kind; the connection's configuration and secret are never shown. */
+export interface SyncJobView {
+  name: string; environment: string; version: number; enabled: boolean; paused: boolean; schedule: string;
+  connection: string; connectionType: string | null; mode: string; maxChangesPct: number | null;
+  lastRun: SyncRunView | null; lastSuccessAt: string | null; awaitingReview: string | null; etag: string;
+}
+/**
+ * S12. The connectors module as the API sees it: reads of its own schema, the pause switch, and requests to the worker.
+ * Runs happen in the worker (the same pg-boss queue the schedule uses); the API only enqueues. Each method that changes state records who did it.
+ */
+export interface SyncAdminPort {
+  jobs(): Promise<SyncJobView[]>;
+  job(environment: string, name: string): Promise<SyncJobView | undefined>;
+  runs(environment: string, name: string, page: { limit: number; before?: { startedAt: string; id: string } }): Promise<SyncRunView[]>;
+  run(id: string): Promise<SyncRunView | undefined>;
+  /** false when it was already so */
+  setPaused(environment: string, name: string, paused: boolean, actor: string): Promise<boolean>;
+  /** Queues a run for the worker. `conflict` says why it was not queued. */
+  runNow(environment: string, name: string, actor: string): Promise<{ queued: true; queueId: string } | { queued: false; conflict: string }>;
+  /** Queues the approval of a run held by the change limit. */
+  approve(runId: string, actor: string): Promise<{ queued: true } | { queued: false; conflict: string }>;
+}
+
 /** U5. What only the workflow and decision modules know, for the management measures. */
 export interface OperationalStats {
   /** ages in days of the exceptions open now, and how many are past their due date */

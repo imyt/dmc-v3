@@ -13,6 +13,7 @@ const done = { qualified_name: 's1', version: 1, submitted: true, complete: fals
 const hit = (qualified_name: string, type: string) => ({ qualified_name, type, name: qualified_name, lifecycle: 'active' });
 const fake = (over: Record<string, unknown> = {}) => ({
   search: async (_q: string, o: { types?: string[] } = {}) => ({ hits: o.types?.[0] === 'Integration' ? [hit('int-1', 'Integration'), hit('int-2', 'Integration')] : o.types?.[0] === 'Column' ? [hit('col-1', 'Column')] : [], facets: { type: {}, lifecycle: {} }, facets_sampled: false }),
+  listNodes: async (type: string) => (type === 'Integration' ? ['int-1', 'int-2'] : type === 'Column' ? ['col-1'] : []).map((q) => ({ qualified_name: q, type, attributes: {} })),
   inbox: async () => ({ items: [], count: 0 }), scope: async () => scope, scopeCompleteness: async () => done,
   datasets: async () => ({ integration: 'int-1', datasets: [{ qualified_name: 'int-1--accounts', name: 'Accounts', categories: ['gl:pii'], columns: ['col-1'], record_class: 'rc-1', business_context: 'Credit', can_edit: true }] }),
   requirementCoverage: async () => ({ items: [], summary: { none: 0, shadow_only: 0, enforced: 0 }, unknown_references: [] }),
@@ -140,7 +141,8 @@ describe('L5 lineage', () => {
   const walk = (root: string, direction: 'upstream' | 'downstream', pairs: [string, string][], container?: Record<string, string>) => ({
     root, direction, truncated: { depth: false, nodes: false },
     nodes: [...new Set(pairs.flat())].map((n) => ({ qualified_name: n, type: 'Column', depth: 1, ...(container?.[n] ? { container: container[n] } : {}) })),
-    edges: pairs.map(([from, to]) => ({ from, to, source: 'dbt', job: 'nightly' })),
+    // pairs are [upstream, downstream]; the API names the dependent first: `from` is built from `to`
+    edges: pairs.map(([up, down]) => ({ from: down, to: up, source: 'dbt', job: 'nightly' })),
   });
   it('merges walks without losing what is shown, and rolls columns up to tables', () => {
     const c = { 'a.x': 'a', 'a.y': 'a', 'b.z': 'b', 's.q': 's' };
@@ -172,7 +174,7 @@ describe('P17 canvas', () => {
     class RO { observe() {} unobserve() {} disconnect() {} }
     vi.stubGlobal('ResizeObserver', RO);
     vi.stubGlobal('DOMMatrixReadOnly', class { m22 = 1; constructor() {} });
-    const ds = fake({ lineage: async (qn: string, d: string) => ({ root: qn, direction: d, truncated: { depth: false, nodes: false }, nodes: [{ qualified_name: qn, type: 'Column', depth: 0 }, ...(d === 'upstream' ? [{ qualified_name: 'a.up', type: 'Column', depth: 1 }] : [])], edges: d === 'upstream' ? [{ from: 'a.up', to: qn, source: 'dbt' }] : [] }) });
+    const ds = fake({ lineage: async (qn: string, d: string) => ({ root: qn, direction: d, truncated: { depth: false, nodes: false }, nodes: [{ qualified_name: qn, type: 'Column', depth: 0 }, ...(d === 'upstream' ? [{ qualified_name: 'a.up', type: 'Column', depth: 1 }] : [])], edges: d === 'upstream' ? [{ from: qn, to: 'a.up', source: 'dbt' }] : [] }) });
     render(<RouterProvider router={buildRouter({ data: ds, history: createMemoryHistory({ initialEntries: ['/lineage/b.z'] }) })} />);
     expect(await screen.findByRole('group', { name: /Lineage canvas/ }, { timeout: 5000 })).toBeInTheDocument();
     await waitFor(() => expect(document.querySelectorAll('.react-flow__node').length).toBe(2), { timeout: 5000 });

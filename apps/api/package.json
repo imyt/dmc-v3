@@ -8,6 +8,7 @@
   "description": "deployable: api",
   "dependencies": {
     "@dmc/catalog": "workspace:*",
+    "@dmc/connectors": "workspace:*",
     "@dmc/contracts": "workspace:*",
     "@dmc/decision": "workspace:*",
     "@dmc/evidence": "workspace:*",

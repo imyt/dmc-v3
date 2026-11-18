@@ -60,6 +60,8 @@ export function checkBoundaries(root) {
           if (target !== pkg.dir && !target.startsWith(pkg.dir + sep)) {
             violations.push({ file: rel, spec, rule: 'relative import leaves its package; import by package name' });
           }
+        } else if (spec.startsWith('/') || spec.startsWith('file:') || /^[A-Za-z]:[\\/]/.test(spec)) {
+          violations.push({ file: rel, spec, rule: 'absolute path import; import by package name' });
         } else if (spec.startsWith('@dmc/')) {
           const [, target, ...deep] = spec.split('/');
           if (deep.length) {

@@ -46,6 +46,7 @@ Application Owner is the one role granted by data rather than by group: anyone S
 | Edit glossary: terms, categories, domains (after cutover) |  |  | Own |  |  |  |  |  |
 | Accept or reject a classification proposed along lineage (columns with no domain: any steward) |  |  | Own |  |  |  |  | Yes |
 | Decide an exception or workflow task assigned to them |  | Own | Own | Own |  | Own |  |  |
+| Read policies: their mode, pause state, YAML and golden cases |  |  |  |  | Yes | Yes | Yes | Yes |
 | Write policies in the editor (opens a pull request) |  |  |  |  | Yes | Own |  |  |
 | Sign off a policy in UAT (the DMC platform team then merges) |  |  |  |  |  | Own |  |  |
 | Pause a policy or use its kill switch |  |  |  |  |  | Own |  | Yes |

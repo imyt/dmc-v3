@@ -77,7 +77,18 @@ export class CatalogStore {
     // identity.pattern is data in the type's YAML (Person: the staff ID, exactly 8 digits); the key is a string and is never padded or reformatted
     if (!existing && def.identity.pattern && !new RegExp(def.identity.pattern).test(a.qualifiedName))
       throw new ApiError('validation_failed', `${a.qualifiedName} is not a valid ${a.type} key: it must match ${def.identity.pattern}`, [{ path: 'qualified_name', message: `must match ${def.identity.pattern}${/^\d+$/.test(a.qualifiedName) ? ' (all digits but the wrong length: leading zeros may have been lost; it is not padded)' : ''}` }]);
-    const problems = this.validate(a.type, a.attributes, a.writer, { partial: !!existing });
+    // A sync writer sends null for a value its source has cleared (ADR 0027). Null never reaches the shape check: on a create it is "not set" (a no-op), on an update it clears the attribute,
+    // and it is refused only for an attribute the type requires. Ownership is still checked for the cleared name.
+    const sync = a.writer.kind === 'sync' ? a.writer.source : undefined;
+    const cleared = sync ? Object.keys(a.attributes).filter((k) => a.attributes[k] === null) : [];
+    const given = cleared.length ? Object.fromEntries(Object.entries(a.attributes).filter(([, v]) => v !== null)) : a.attributes;
+    const problems = this.validate(a.type, given, a.writer, { partial: !!existing });
+    for (const k of cleared) {
+      const d = def.attributes[k];
+      if (!d) problems.push({ path: k, message: 'is not an attribute of this type' });
+      else if (d.source !== sync) problems.push({ path: k, message: `is read-only here: its source is ${d.source}` });
+      else if (d.required && existing) problems.push({ path: k, message: 'is required and cannot be cleared' });
+    }
     if (problems.length) throw new ApiError('validation_failed', 'Attributes are invalid', problems);
 
     let id = existing?.id;
@@ -97,7 +108,7 @@ export class CatalogStore {
     const merged: Record<string, unknown> = { ...(cur?.attributes ?? {}) };
     const prov: Record<string, { by: string; at: string }> = { ...(cur?.provenance ?? {}) };
     for (const [k, v] of Object.entries(a.attributes)) {
-      if (v === null) { delete merged[k]; delete prov[k]; continue; }
+      if (v === null) { if (existing) { delete merged[k]; delete prov[k]; } continue; }
       if (canonical(merged[k]) !== canonical(v)) prov[k] = { by: writerLabel(a.writer), at: now.toISOString() };
       merged[k] = v;
     }
@@ -120,9 +131,12 @@ export class CatalogStore {
       on conflict (node_id) do update set lifecycle = excluded.lifecycle, name = excluded.name, doc = excluded.doc`,
       [id, a.type, lifecycle, a.qualifiedName, ix.name, ix.rest]);
     await writeOutbox(tx, T, { type: existing ? 'node.updated' : 'node.created', subjectRef: `node/${id}`, actor: a.actor,
-      payload: { qualified_name: a.qualifiedName, node_type: a.type, changed: Object.keys(a.attributes), lifecycle } });
+      payload: { qualified_name: a.qualifiedName, node_type: a.type, changed: Object.keys(a.attributes).filter((k) => !(a.attributes[k] === null && !existing)), lifecycle } });
     return { id, created: !existing, changed: true };
   }
+
+  /** True when `source` used to own `type` and no longer does (ADR 0018): it must not write the type's lifecycle or edges. */
+  isFormerOwner(type: string, source: string): boolean { return this.reg.formerOwners(type).includes(source); }
 
   async setLifecycle(tx: Queryable, qualifiedName: string, next: Lifecycle, actor: string): Promise<void> {
     const n = await this.getNode(tx, qualifiedName);

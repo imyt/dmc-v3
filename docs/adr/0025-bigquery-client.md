@@ -5,7 +5,7 @@ Status: accepted. The owner confirmed the dependency on 2026-11-18 (rule 11). `@
 ## Decision
 Add `@google-cloud/bigquery` as a dependency of `@dmc/connectors` only (not of any other module, and not of `apps/web`). It is loaded in one file, `packages/connectors/src/bigquery-google.ts`, by a lazy dynamic import on the first read of a BigQuery connection. Everything else in the module (the connector, the query checks, the fixture client) is written over `BigQueryClientPort`, a small interface the module owns, so nothing outside that file sees a Google type.
 
-Until a human confirms this ADR the package is **not installed**. The connector, its tests and the worker's registration of connector type `bigquery` work without it; a BigQuery connection that is actually used fails with "the BigQuery client library is not installed".
+The owner accepted this ADR and the package is installed (see the status line). The connector, its tests and the worker's registration of connector type `bigquery` work against the port without a network; the adapter has not yet been run against a real project.
 
 Checked on the npm registry on 2026-11-18: latest version 9.6.1 (published 2026-11-09), licence Apache-2.0, `engines.node >= 22` (the repo requires >= 22), maintained by Google (googleapis/google-cloud-node). Pin the major version (9.x) when installing.
 

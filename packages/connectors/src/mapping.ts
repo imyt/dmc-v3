@@ -44,13 +44,17 @@ function mapEdge(rec: SourceRecord, target: JobDef['target'], e: NonNullable<Job
   return { key: `${from}${EDGE_KEY_SEP}${to}`, attrs, hash: createHash('sha256').update(stableStringify(attrs)).digest('hex') };
 }
 
-/** Copies the mapped fields into `attrs`. A field with a value map renames the source's value; a value the map does not list is an error (returned), never dropped silently. */
+/**
+ * Copies the mapped fields into `attrs`. A field with a value map renames the source's value; a value the map does not list is an error (returned), never dropped silently.
+ * A NULL column (and, for a plain field, a blank string) is an explicit null: the source says the value is gone, so the sync clears it (ADR 0027). A field the record does not have at all is skipped.
+ */
 function mapAttributes(rec: SourceRecord, map: JobDef['target']['map'], attrs: Record<string, unknown>): string | undefined {
   for (const [to, rule] of Object.entries(map)) {
     const path = typeof rule === 'string' ? rule : rule.from;
     const v = pick(rec, path);
-    if (v === undefined || v === null) continue; // a NULL column (BigQuery) is a field the record lacks, e.g. an open legal hold has no end date
-    if (typeof rule === 'string') { attrs[to] = v; continue; }
+    if (v === undefined) continue;
+    if (v === null) { attrs[to] = null; continue; } // part of the hash, so a cleared value is a change
+    if (typeof rule === 'string') { attrs[to] = typeof v === 'string' && v.trim() === '' ? null : v; continue; }
     const key = String(v);
     if (!Object.hasOwn(rule.values, key)) return `value "${key}" of "${path}" has no mapping for ${to}`;
     attrs[to] = rule.values[key];

@@ -31,6 +31,7 @@ actions:
   edit_glossary:      { write: true, roles: { steward: domain_stewardship } }
   create_domain:      { roles: { admin: any } }
   decide_task:        { sod: true, roles: { assignee: assignment, app-owner: assignment, steward: assignment, scope-owner: assignment, control-owner: assignment, policy-author: assignment, admin: assignment } }
+  read_policy:        { roles: { policy-author: any, control-owner: any, auditor: any, admin: any } }
   write_policy:       { roles: { policy-author: any, control-owner: control_ownership } }
   sign_off_policy:    { sod: true, roles: { control-owner: control_ownership } }
   pause_policy:       { roles: { control-owner: control_ownership, admin: any } }

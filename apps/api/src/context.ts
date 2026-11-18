@@ -1,6 +1,6 @@
 import type { Authz, IdempotencyStore, Principal, Queryable, Registry } from '@dmc/platform';
-import type { AdminPort, OperationalStats, ChangeRequestPort, ExceptionPort, InboxPort, SignalSink } from '@dmc/contracts';
-import type { PolicyIR } from '@dmc/policy';
+import type { AdminPort, SyncAdminPort, OperationalStats, ChangeRequestPort, ExceptionPort, InboxPort, SignalSink } from '@dmc/contracts';
+import type { PolicyIR, PolicySource } from '@dmc/policy';
 import type { CatalogStore } from '@dmc/catalog';
 
 export interface Connection extends Queryable { release(): void }
@@ -17,8 +17,12 @@ export interface ApiDeps {
   authz: Authz;
   /** the loaded policies, as far as coverage needs to see them */
   policies(): { id: string; implements?: string; control?: string; mode: 'shadow' | 'enforced' }[];
+  /** every policy file with its YAML and golden cases, read at start-up like `policies`; without it the policy read endpoints answer that they are not available */
+  policySources?(): PolicySource[];
   /** the pause switches; without it the admin endpoints answer that they are not available */
   admin?: AdminPort;
+  /** the sync admin screen (S12): jobs, runs, pause, run now, approve; without it those endpoints answer that they are not available */
+  sync?: SyncAdminPort;
   /** exception and decision figures for the dashboard measures; without it those measures are left out */
   stats?(): Promise<OperationalStats>;
   /** the policy editor: the policies in force, and where a saved draft goes as a pull request */

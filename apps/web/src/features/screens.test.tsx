@@ -58,7 +58,7 @@ describe('C6 screens', () => {
 
 describe('U3, U5, U2, U7', () => {
   it('auditor verifies the chain and traces an object', async () => {
-    await mount(fake(), '/audit');
+    await mount(fake(), '/evidence');
     await userEvent.click(screen.getByRole('button', { name: 'Verify the ledger now' }));
     expect(await screen.findByText(/chain is intact: 42/)).toBeInTheDocument();
     await userEvent.type(screen.getByLabelText('Qualified name of the object'), 'app-a');
@@ -67,7 +67,7 @@ describe('U3, U5, U2, U7', () => {
     expect(screen.getByRole('button', { name: 'Export proof bundle' })).toBeInTheDocument();
   });
   it('dashboard shows every measure with its target', async () => {
-    await mount(fake({ dashboardMeasures: async () => [{ id: 'cov', label: 'Requirements enforced', value: 75, target: 100 }, { id: 'apps', label: 'Applications taken on', value: 12, target: 60 }] }), '/dashboard');
+    await mount(fake({ dashboardMeasures: async () => [{ id: 'cov', label: 'Requirements enforced', value: 75, target: 100, unit: 'percent' }, { id: 'apps', label: 'Applications taken on', value: 12, target: 60, unit: 'percent' }] }), '/dashboard');
     expect(await screen.findByText('Requirements enforced')).toBeInTheDocument();
     expect(screen.getByText('Applications taken on')).toBeInTheDocument();
     expect(screen.getAllByText(/Target 100%/).length).toBe(1);
@@ -124,6 +124,6 @@ describe('U3, U5, U2, U7', () => {
   it('help has a page for each role', async () => {
     await mount(fake(), '/help/auditor');
     expect(await screen.findByText(/Export a proof bundle/)).toBeInTheDocument();
-    expect(screen.getByRole('link', { name: 'Open audit' })).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: 'Open evidence' })).toBeInTheDocument();
   });
 });

@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { FieldWithSource, type FieldSource } from './field-with-source';
+import { PersonRef } from '@/lib/people';
 import { PageHeader, type Crumb } from './page-header';
 import { PermissionAction, type AllowedAction } from './permission-action';
 import { StatusBadge, type Lifecycle, type Tier } from './status-badge';
@@ -18,7 +19,7 @@ export interface ObjectModel {
   owner?: string;
   tier?: Tier;
   fields: { id: string; label: string; value: ReactNode; source?: FieldSource; onRequestChange?(): void }[];
-  relationships: { id: string; label: string; items: { id: string; label: string; typeLabel: string; href?: string }[] }[];
+  relationships: { id: string; label: string; items: { id: string; label: string; typeLabel: string; href?: string; /** replaces the link, for a person shown with their name and whether they have left */ node?: ReactNode }[] }[];
   controls: { id: string; label: string; status: 'met' | 'not-met' | 'unknown' }[];
   events: TimelineEvent[];
   actions: AllowedAction[];
@@ -34,7 +35,7 @@ export function ObjectPage({ model, crumbs, onAction }: { model: ObjectModel; cr
         eyebrow={model.typeLabel}
         title={model.name}
         crumbs={crumbs}
-        description={model.owner ? `Owner: ${model.owner}` : undefined}
+        description={model.owner ? <>Owner: <PersonRef id={model.owner} role="Owner" /></> : undefined}
         actions={<>
           <StatusBadge kind="state" value={model.state} />
           {model.tier && <StatusBadge kind="tier" value={model.tier} />}
@@ -57,7 +58,7 @@ export function ObjectPage({ model, crumbs, onAction }: { model: ObjectModel; cr
             {model.relationships.map((r) => (
               <section key={r.id} aria-label={r.label}>
                 <h3 className="mb-2 font-semibold">{r.label} ({r.items.length})</h3>
-                <ul className="divide-y divide-border border border-border">{r.items.map((i) => <li key={i.id} className="flex justify-between px-3 py-2">{i.href ? <a className="text-brand-text underline underline-offset-2" href={i.href}>{i.label}</a> : i.label}<span className="text-muted-foreground">{i.typeLabel}</span></li>)}</ul>
+                <ul className="divide-y divide-border border border-border">{r.items.map((i) => <li key={i.id} className="flex justify-between px-3 py-2">{i.node ?? (i.href ? <a className="text-brand-text underline underline-offset-2" href={i.href}>{i.label}</a> : i.label)}<span className="text-muted-foreground">{i.typeLabel}</span></li>)}</ul>
               </section>
             ))}
           </TabsContent>

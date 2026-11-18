@@ -1,9 +1,10 @@
 import { FileChangeRequests } from './file-change-requests.js';
 import { PgBoss } from 'pg-boss';
 import { connect, createLogger, loadConfig, loadRuntime, modulePool, repoPath, type AppConfig, type Logger } from '@dmc/platform';
+import { SyncAdmin } from '@dmc/connectors';
 import { CatalogStore, PostgresIdempotency } from '@dmc/catalog';
 import { DecisionService } from '@dmc/decision';
-import { PolicyControl, PolicyIndex, PolicyService, loadPolicies } from '@dmc/policy';
+import { PolicyControl, PolicyIndex, PolicyService, listPolicySources, loadPolicies } from '@dmc/policy';
 import { ExceptionService, PgBossScheduler, WorkflowEngine, WorkflowInbox, routeResolver } from '@dmc/workflow';
 import { createApi } from './app.js';
 import { cookieAuthenticator } from './auth.js';
@@ -22,9 +23,10 @@ export async function startApi(cfg: AppConfig, opts: { authenticate?: ApiDeps['a
 
   const { registry, authz } = loadRuntime(cfg);
   const policies = loadPolicies(repoPath(cfg, 'policies'), registry, cfg.environment);
+  const sources = listPolicySources(repoPath(cfg, 'policies'), registry, cfg.environment);
   const index = new PolicyIndex(policies);
 
-  const pools = { catalog: modulePool(cfg, 'catalog'), evidence: modulePool(cfg, 'evidence', 2), decision: modulePool(cfg, 'decision'), policy: modulePool(cfg, 'policy'), workflow: modulePool(cfg, 'workflow') };
+  const pools = { catalog: modulePool(cfg, 'catalog'), evidence: modulePool(cfg, 'evidence', 2), decision: modulePool(cfg, 'decision'), policy: modulePool(cfg, 'policy'), workflow: modulePool(cfg, 'workflow'), connectors: modulePool(cfg, 'connectors', 2) };
   const own = !opts.boss;
   const boss = opts.boss ?? new PgBoss({ host: cfg.db.host, port: cfg.db.port, database: cfg.db.name, user: cfg.db.adminUser, password: cfg.db.adminPassword });
   if (own) { boss.on('error', (e: Error) => log.error('queue error', { error: e.message })); await boss.start(); }
@@ -49,6 +51,7 @@ export async function startApi(cfg: AppConfig, opts: { authenticate?: ApiDeps['a
   const app = await createApi({
     version: process.env.npm_package_version ?? '0.0.0', registry, authz, authenticate, session,
     store: new CatalogStore(registry), connect: connectCatalog, connectEvidence: connect(pools.evidence),
+    policySources: () => sources,
     policies: () => policies.map((p) => ({ id: p.id, implements: p.implements, control: p.control, mode: p.mode })),
     exceptions: { raise: (r) => withWorkflow((db) => exceptions.raise(db, r)), withdraw: (r) => withWorkflow((db) => exceptions.withdraw(db, r)) },
     inbox: new WorkflowInbox(engine, connectWorkflow),
@@ -57,6 +60,7 @@ export async function startApi(cfg: AppConfig, opts: { authenticate?: ApiDeps['a
       const withPolicy = async <R>(fn: (c: PolicyControl) => Promise<R>): Promise<R> => { const c = await connect(pools.policy)(); try { return await fn(new PolicyControl(c)); } finally { c.release(); } };
       return { state: () => withPolicy((c) => c.state()), setEnforcement: (p, a) => withPolicy((c) => c.setEnforcement(p, a)), setPolicy: (i, p, a) => withPolicy((c) => c.setPolicy(i, p, a)) };
     })(),
+    sync: new SyncAdmin({ connect: connect(pools.connectors), boss }),
     stats: async () => {
       const [w, dc] = [await connectWorkflow(), await connect(pools.decision)()];
       try {

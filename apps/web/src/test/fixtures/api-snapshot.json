@@ -1,0 +1,6982 @@
+{
+ "capturedFrom": "local seed (scripts/seed-lib.ts), 18 Nov 2026",
+ "nodes": {
+  "43000001": {
+   "id": "5e151776-9e11-400e-97aa-bed77e1d398b",
+   "type": "Person",
+   "qualified_name": "43000001",
+   "lifecycle": "discovered",
+   "attributes": {
+    "name": "Amy Adams",
+    "email": "amy.adams@example.test",
+    "staff_id": "43000001"
+   },
+   "attribute_sources": {
+    "email": "idp",
+    "staff_id": "idp",
+    "name": "idp",
+    "department": "idp"
+   },
+   "provenance": {
+    "name": {
+     "at": "2026-11-18T07:02:02.031Z",
+     "by": "idp"
+    },
+    "email": {
+     "at": "2026-11-18T07:02:02.031Z",
+     "by": "idp"
+    },
+    "staff_id": {
+     "at": "2026-11-18T07:02:02.031Z",
+     "by": "idp"
+    }
+   },
+   "valid_from": "2026-11-18T07:02:02.031Z",
+   "valid_to": null,
+   "recorded_from": "2026-11-18T07:02:02.031Z",
+   "allowed_actions": [
+    {
+     "id": "edit_dmc_fields",
+     "allowed": false,
+     "reason": "Needs one of: app-owner, steward, on an object you are responsible for"
+    }
+   ]
+  },
+  "43000002": {
+   "id": "9471caf0-a02e-45ee-8ea3-0c433c5582d8",
+   "type": "Person",
+   "qualified_name": "43000002",
+   "lifecycle": "discovered",
+   "attributes": {
+    "name": "Ben Brooks",
+    "email": "ben.brooks@example.test",
+    "staff_id": "43000002"
+   },
+   "attribute_sources": {
+    "email": "idp",
+    "staff_id": "idp",
+    "name": "idp",
+    "department": "idp"
+   },
+   "provenance": {
+    "name": {
+     "at": "2026-11-18T07:02:02.056Z",
+     "by": "idp"
+    },
+    "email": {
+     "at": "2026-11-18T07:02:02.056Z",
+     "by": "idp"
+    },
+    "staff_id": {
+     "at": "2026-11-18T07:02:02.056Z",
+     "by": "idp"
+    }
+   },
+   "valid_from": "2026-11-18T07:02:02.056Z",
+   "valid_to": null,
+   "recorded_from": "2026-11-18T07:02:02.056Z",
+   "allowed_actions": [
+    {
+     "id": "edit_dmc_fields",
+     "allowed": false,
+     "reason": "Needs one of: app-owner, steward, on an object you are responsible for"
+    }
+   ]
+  },
+  "43000003": {
+   "id": "ff6d3b2e-b315-480a-a0f2-72b47725da19",
+   "type": "Person",
+   "qualified_name": "43000003",
+   "lifecycle": "discovered",
+   "attributes": {
+    "name": "Dan Davies",
+    "email": "dan.davies@example.test",
+    "staff_id": "43000003"
+   },
+   "attribute_sources": {
+    "email": "idp",
+    "staff_id": "idp",
+    "name": "idp",
+    "department": "idp"
+   },
+   "provenance": {
+    "name": {
+     "at": "2026-11-18T07:02:02.062Z",
+     "by": "idp"
+    },
+    "email": {
+     "at": "2026-11-18T07:02:02.062Z",
+     "by": "idp"
+    },
+    "staff_id": {
+     "at": "2026-11-18T07:02:02.062Z",
+     "by": "idp"
+    }
+   },
+   "valid_from": "2026-11-18T07:02:02.062Z",
+   "valid_to": null,
+   "recorded_from": "2026-11-18T07:02:02.062Z",
+   "allowed_actions": [
+    {
+     "id": "edit_dmc_fields",
+     "allowed": false,
+     "reason": "Needs one of: app-owner, steward, on an object you are responsible for"
+    }
+   ]
+  },
+  "43000004": {
+   "id": "bd57e1eb-cced-49e3-82cc-d727d96ed620",
+   "type": "Person",
+   "qualified_name": "43000004",
+   "lifecycle": "discovered",
+   "attributes": {
+    "name": "Olive Okafor",
+    "email": "olive.okafor@example.test",
+    "staff_id": "43000004"
+   },
+   "attribute_sources": {
+    "email": "idp",
+    "staff_id": "idp",
+    "name": "idp",
+    "department": "idp"
+   },
+   "provenance": {
+    "name": {
+     "at": "2026-11-18T07:02:02.067Z",
+     "by": "idp"
+    },
+    "email": {
+     "at": "2026-11-18T07:02:02.067Z",
+     "by": "idp"
+    },
+    "staff_id": {
+     "at": "2026-11-18T07:02:02.067Z",
+     "by": "idp"
+    }
+   },
+   "valid_from": "2026-11-18T07:02:02.067Z",
+   "valid_to": null,
+   "recorded_from": "2026-11-18T07:02:02.067Z",
+   "allowed_actions": [
+    {
+     "id": "edit_dmc_fields",
+     "allowed": false,
+     "reason": "Needs one of: app-owner, steward, on an object you are responsible for"
+    }
+   ]
+  },
+  "43000005": {
+   "id": "b17bc42c-1e8b-4b4f-a0b0-77c233f07c73",
+   "type": "Person",
+   "qualified_name": "43000005",
+   "lifecycle": "discovered",
+   "attributes": {
+    "name": "Sam Shah",
+    "email": "sam.shah@example.test",
+    "staff_id": "43000005"
+   },
+   "attribute_sources": {
+    "email": "idp",
+    "staff_id": "idp",
+    "name": "idp",
+    "department": "idp"
+   },
+   "provenance": {
+    "name": {
+     "at": "2026-11-18T07:02:02.072Z",
+     "by": "idp"
+    },
+    "email": {
+     "at": "2026-11-18T07:02:02.072Z",
+     "by": "idp"
+    },
+    "staff_id": {
+     "at": "2026-11-18T07:02:02.072Z",
+     "by": "idp"
+    }
+   },
+   "valid_from": "2026-11-18T07:02:02.072Z",
+   "valid_to": null,
+   "recorded_from": "2026-11-18T07:02:02.072Z",
+   "allowed_actions": [
+    {
+     "id": "edit_dmc_fields",
+     "allowed": false,
+     "reason": "Needs one of: app-owner, steward, on an object you are responsible for"
+    }
+   ]
+  },
+  "43000006": {
+   "id": "60d2a963-3d09-498e-9ec2-34a75336658e",
+   "type": "Person",
+   "qualified_name": "43000006",
+   "lifecycle": "discovered",
+   "attributes": {
+    "name": "Priya Patel",
+    "email": "priya.patel@example.test",
+    "staff_id": "43000006"
+   },
+   "attribute_sources": {
+    "email": "idp",
+    "staff_id": "idp",
+    "name": "idp",
+    "department": "idp"
+   },
+   "provenance": {
+    "name": {
+     "at": "2026-11-18T07:02:02.079Z",
+     "by": "idp"
+    },
+    "email": {
+     "at": "2026-11-18T07:02:02.079Z",
+     "by": "idp"
+    },
+    "staff_id": {
+     "at": "2026-11-18T07:02:02.079Z",
+     "by": "idp"
+    }
+   },
+   "valid_from": "2026-11-18T07:02:02.079Z",
+   "valid_to": null,
+   "recorded_from": "2026-11-18T07:02:02.079Z",
+   "allowed_actions": [
+    {
+     "id": "edit_dmc_fields",
+     "allowed": false,
+     "reason": "Needs one of: app-owner, steward, on an object you are responsible for"
+    }
+   ]
+  },
+  "43000007": {
+   "id": "51c5da1c-6ba8-440c-9dfa-b19fd977a9ff",
+   "type": "Person",
+   "qualified_name": "43000007",
+   "lifecycle": "discovered",
+   "attributes": {
+    "name": "Carl Cho",
+    "email": "carl.cho@example.test",
+    "staff_id": "43000007"
+   },
+   "attribute_sources": {
+    "email": "idp",
+    "staff_id": "idp",
+    "name": "idp",
+    "department": "idp"
+   },
+   "provenance": {
+    "name": {
+     "at": "2026-11-18T07:02:02.084Z",
+     "by": "idp"
+    },
+    "email": {
+     "at": "2026-11-18T07:02:02.084Z",
+     "by": "idp"
+    },
+    "staff_id": {
+     "at": "2026-11-18T07:02:02.084Z",
+     "by": "idp"
+    }
+   },
+   "valid_from": "2026-11-18T07:02:02.084Z",
+   "valid_to": null,
+   "recorded_from": "2026-11-18T07:02:02.084Z",
+   "allowed_actions": [
+    {
+     "id": "edit_dmc_fields",
+     "allowed": false,
+     "reason": "Needs one of: app-owner, steward, on an object you are responsible for"
+    }
+   ]
+  },
+  "43000008": {
+   "id": "13c323bf-97fa-413a-9c07-fa5784c0e2db",
+   "type": "Person",
+   "qualified_name": "43000008",
+   "lifecycle": "discovered",
+   "attributes": {
+    "name": "Ava Archer",
+    "email": "ava.archer@example.test",
+    "staff_id": "43000008"
+   },
+   "attribute_sources": {
+    "email": "idp",
+    "staff_id": "idp",
+    "name": "idp",
+    "department": "idp"
+   },
+   "provenance": {
+    "name": {
+     "at": "2026-11-18T07:02:02.089Z",
+     "by": "idp"
+    },
+    "email": {
+     "at": "2026-11-18T07:02:02.089Z",
+     "by": "idp"
+    },
+    "staff_id": {
+     "at": "2026-11-18T07:02:02.089Z",
+     "by": "idp"
+    }
+   },
+   "valid_from": "2026-11-18T07:02:02.089Z",
+   "valid_to": null,
+   "recorded_from": "2026-11-18T07:02:02.089Z",
+   "allowed_actions": [
+    {
+     "id": "edit_dmc_fields",
+     "allowed": false,
+     "reason": "Needs one of: app-owner, steward, on an object you are responsible for"
+    }
+   ]
+  },
+  "43000009": {
+   "id": "973c2ed7-513b-4461-bfa9-370b9a088fc2",
+   "type": "Person",
+   "qualified_name": "43000009",
+   "lifecycle": "discovered",
+   "attributes": {
+    "name": "Anil Admin",
+    "email": "anil.admin@example.test",
+    "staff_id": "43000009"
+   },
+   "attribute_sources": {
+    "email": "idp",
+    "staff_id": "idp",
+    "name": "idp",
+    "department": "idp"
+   },
+   "provenance": {
+    "name": {
+     "at": "2026-11-18T07:02:02.095Z",
+     "by": "idp"
+    },
+    "email": {
+     "at": "2026-11-18T07:02:02.095Z",
+     "by": "idp"
+    },
+    "staff_id": {
+     "at": "2026-11-18T07:02:02.095Z",
+     "by": "idp"
+    }
+   },
+   "valid_from": "2026-11-18T07:02:02.095Z",
+   "valid_to": null,
+   "recorded_from": "2026-11-18T07:02:02.095Z",
+   "allowed_actions": [
+    {
+     "id": "edit_dmc_fields",
+     "allowed": false,
+     "reason": "Needs one of: app-owner, steward, on an object you are responsible for"
+    }
+   ]
+  },
+  "43000010": {
+   "id": "b58249fc-b9c8-4718-91cf-ddbaf8cfbe7a",
+   "type": "Person",
+   "qualified_name": "43000010",
+   "lifecycle": "discovered",
+   "attributes": {
+    "name": "Vera Vance",
+    "email": "vera.vance@example.test",
+    "staff_id": "43000010"
+   },
+   "attribute_sources": {
+    "email": "idp",
+    "staff_id": "idp",
+    "name": "idp",
+    "department": "idp"
+   },
+   "provenance": {
+    "name": {
+     "at": "2026-11-18T07:02:02.102Z",
+     "by": "idp"
+    },
+    "email": {
+     "at": "2026-11-18T07:02:02.102Z",
+     "by": "idp"
+    },
+    "staff_id": {
+     "at": "2026-11-18T07:02:02.102Z",
+     "by": "idp"
+    }
+   },
+   "valid_from": "2026-11-18T07:02:02.102Z",
+   "valid_to": null,
+   "recorded_from": "2026-11-18T07:02:02.102Z",
+   "allowed_actions": [
+    {
+     "id": "edit_dmc_fields",
+     "allowed": false,
+     "reason": "Needs one of: app-owner, steward, on an object you are responsible for"
+    }
+   ]
+  },
+  "43000098": {
+   "id": "7b88fdd7-8df0-498f-aa12-90bb9341d21e",
+   "type": "Person",
+   "qualified_name": "43000098",
+   "lifecycle": "deprecated",
+   "attributes": {
+    "name": "Rae Retired",
+    "email": "rae.retired@example.test",
+    "staff_id": "43000098"
+   },
+   "attribute_sources": {
+    "email": "idp",
+    "staff_id": "idp",
+    "name": "idp",
+    "department": "idp"
+   },
+   "provenance": {
+    "name": {
+     "at": "2026-11-18T07:02:02.112Z",
+     "by": "idp"
+    },
+    "email": {
+     "at": "2026-11-18T07:02:02.112Z",
+     "by": "idp"
+    },
+    "staff_id": {
+     "at": "2026-11-18T07:02:02.112Z",
+     "by": "idp"
+    }
+   },
+   "valid_from": "2026-11-18T07:02:02.119Z",
+   "valid_to": null,
+   "recorded_from": "2026-11-18T07:02:02.119Z",
+   "allowed_actions": [
+    {
+     "id": "edit_dmc_fields",
+     "allowed": false,
+     "reason": "Needs one of: app-owner, steward, on an object you are responsible for"
+    }
+   ]
+  },
+  "04300011": {
+   "id": "91fb6103-67ed-446e-a36d-401dd540521e",
+   "type": "Person",
+   "qualified_name": "04300011",
+   "lifecycle": "discovered",
+   "attributes": {
+    "name": "Zoe Zeroes",
+    "email": "zoe.zeroes@example.test",
+    "staff_id": "04300011"
+   },
+   "attribute_sources": {
+    "email": "idp",
+    "staff_id": "idp",
+    "name": "idp",
+    "department": "idp"
+   },
+   "provenance": {
+    "name": {
+     "at": "2026-11-18T07:02:02.107Z",
+     "by": "idp"
+    },
+    "email": {
+     "at": "2026-11-18T07:02:02.107Z",
+     "by": "idp"
+    },
+    "staff_id": {
+     "at": "2026-11-18T07:02:02.107Z",
+     "by": "idp"
+    }
+   },
+   "valid_from": "2026-11-18T07:02:02.107Z",
+   "valid_to": null,
+   "recorded_from": "2026-11-18T07:02:02.107Z",
+   "allowed_actions": [
+    {
+     "id": "edit_dmc_fields",
+     "allowed": false,
+     "reason": "Needs one of: app-owner, steward, on an object you are responsible for"
+    }
+   ]
+  },
+  "app-core-banking": {
+   "id": "4cf9d8bf-bc5f-49cf-bfbb-98b4e3c641fc",
+   "type": "Application",
+   "qualified_name": "app-core-banking",
+   "lifecycle": "discovered",
+   "attributes": {
+    "name": "Core Banking",
+    "owner": "43000002",
+    "status": "live",
+    "delegates": [],
+    "criticality": "critical",
+    "hosting_country": "HK"
+   },
+   "attribute_sources": {
+    "name": "servicenow",
+    "owner": "servicenow",
+    "delegates": "servicenow",
+    "criticality": "servicenow",
+    "status": "servicenow",
+    "hosting_country": "servicenow",
+    "description": "dmc"
+   },
+   "provenance": {
+    "name": {
+     "at": "2026-11-18T03:47:50.550Z",
+     "by": "servicenow"
+    },
+    "owner": {
+     "at": "2026-11-18T03:47:50.550Z",
+     "by": "servicenow"
+    },
+    "status": {
+     "at": "2026-11-18T03:47:50.550Z",
+     "by": "servicenow"
+    },
+    "delegates": {
+     "at": "2026-11-18T03:47:50.550Z",
+     "by": "servicenow"
+    },
+    "criticality": {
+     "at": "2026-11-18T03:47:50.550Z",
+     "by": "servicenow"
+    },
+    "hosting_country": {
+     "at": "2026-11-18T03:47:50.550Z",
+     "by": "servicenow"
+    }
+   },
+   "valid_from": "2026-11-18T03:47:50.550Z",
+   "valid_to": null,
+   "recorded_from": "2026-11-18T03:47:50.550Z",
+   "allowed_actions": [
+    {
+     "id": "edit_dmc_fields",
+     "allowed": false,
+     "reason": "Needs one of: app-owner, steward, on an object you are responsible for"
+    }
+   ]
+  },
+  "app-crm": {
+   "id": "a26249e8-1c17-4fdb-9d9b-f8a51fdb400e",
+   "type": "Application",
+   "qualified_name": "app-crm",
+   "lifecycle": "discovered",
+   "attributes": {
+    "name": "Customer CRM",
+    "owner": "43000003",
+    "status": "planned",
+    "delegates": [],
+    "criticality": "medium",
+    "hosting_country": "IN"
+   },
+   "attribute_sources": {
+    "name": "servicenow",
+    "owner": "servicenow",
+    "delegates": "servicenow",
+    "criticality": "servicenow",
+    "status": "servicenow",
+    "hosting_country": "servicenow",
+    "description": "dmc"
+   },
+   "provenance": {
+    "name": {
+     "at": "2026-11-18T03:47:50.569Z",
+     "by": "servicenow"
+    },
+    "owner": {
+     "at": "2026-11-18T03:47:50.569Z",
+     "by": "servicenow"
+    },
+    "status": {
+     "at": "2026-11-18T03:47:50.569Z",
+     "by": "servicenow"
+    },
+    "delegates": {
+     "at": "2026-11-18T03:47:50.569Z",
+     "by": "servicenow"
+    },
+    "criticality": {
+     "at": "2026-11-18T03:47:50.569Z",
+     "by": "servicenow"
+    },
+    "hosting_country": {
+     "at": "2026-11-18T03:47:50.569Z",
+     "by": "servicenow"
+    }
+   },
+   "valid_from": "2026-11-18T03:47:50.569Z",
+   "valid_to": null,
+   "recorded_from": "2026-11-18T03:47:50.569Z",
+   "allowed_actions": [
+    {
+     "id": "edit_dmc_fields",
+     "allowed": false,
+     "reason": "Needs one of: app-owner, steward, on an object you are responsible for"
+    }
+   ]
+  },
+  "app-data-lake": {
+   "id": "426d48d7-0bea-47df-9aa8-0b6a49d188c4",
+   "type": "Application",
+   "qualified_name": "app-data-lake",
+   "lifecycle": "discovered",
+   "attributes": {
+    "name": "Data Lake",
+    "owner": "43000001",
+    "status": "live",
+    "delegates": [],
+    "criticality": "medium",
+    "hosting_country": "GB"
+   },
+   "attribute_sources": {
+    "name": "servicenow",
+    "owner": "servicenow",
+    "delegates": "servicenow",
+    "criticality": "servicenow",
+    "status": "servicenow",
+    "hosting_country": "servicenow",
+    "description": "dmc"
+   },
+   "provenance": {
+    "name": {
+     "at": "2026-11-18T03:47:50.559Z",
+     "by": "servicenow"
+    },
+    "owner": {
+     "at": "2026-11-18T03:47:50.559Z",
+     "by": "servicenow"
+    },
+    "status": {
+     "at": "2026-11-18T03:47:50.559Z",
+     "by": "servicenow"
+    },
+    "delegates": {
+     "at": "2026-11-18T03:47:50.559Z",
+     "by": "servicenow"
+    },
+    "criticality": {
+     "at": "2026-11-18T03:47:50.559Z",
+     "by": "servicenow"
+    },
+    "hosting_country": {
+     "at": "2026-11-18T03:47:50.559Z",
+     "by": "servicenow"
+    }
+   },
+   "valid_from": "2026-11-18T03:47:50.559Z",
+   "valid_to": null,
+   "recorded_from": "2026-11-18T03:47:50.559Z",
+   "allowed_actions": [
+    {
+     "id": "edit_dmc_fields",
+     "allowed": false,
+     "reason": "Needs one of: app-owner, steward, on an object you are responsible for"
+    }
+   ]
+  },
+  "app-payments-hub": {
+   "id": "402cb7d8-58d1-4d9a-bbe0-df307341c1e4",
+   "type": "Application",
+   "qualified_name": "app-payments-hub",
+   "lifecycle": "discovered",
+   "attributes": {
+    "name": "Payments Hub",
+    "owner": "43000001",
+    "status": "live",
+    "delegates": [
+     "43000003"
+    ],
+    "criticality": "critical",
+    "hosting_country": "GB"
+   },
+   "attribute_sources": {
+    "name": "servicenow",
+    "owner": "servicenow",
+    "delegates": "servicenow",
+    "criticality": "servicenow",
+    "status": "servicenow",
+    "hosting_country": "servicenow",
+    "description": "dmc"
+   },
+   "provenance": {
+    "name": {
+     "at": "2026-11-18T03:47:50.532Z",
+     "by": "servicenow"
+    },
+    "owner": {
+     "at": "2026-11-18T03:47:50.532Z",
+     "by": "servicenow"
+    },
+    "status": {
+     "at": "2026-11-18T03:47:50.532Z",
+     "by": "servicenow"
+    },
+    "delegates": {
+     "at": "2026-11-18T03:47:50.532Z",
+     "by": "servicenow"
+    },
+    "criticality": {
+     "at": "2026-11-18T03:47:50.532Z",
+     "by": "servicenow"
+    },
+    "hosting_country": {
+     "at": "2026-11-18T03:47:50.532Z",
+     "by": "servicenow"
+    }
+   },
+   "valid_from": "2026-11-18T03:47:50.532Z",
+   "valid_to": null,
+   "recorded_from": "2026-11-18T03:47:50.532Z",
+   "allowed_actions": [
+    {
+     "id": "edit_dmc_fields",
+     "allowed": false,
+     "reason": "Needs one of: app-owner, steward, on an object you are responsible for"
+    }
+   ]
+  },
+  "app-reg-reporting": {
+   "id": "74d36df0-86e6-42b4-8048-fd94356a37bf",
+   "type": "Application",
+   "qualified_name": "app-reg-reporting",
+   "lifecycle": "discovered",
+   "attributes": {
+    "name": "Regulatory Reporting",
+    "owner": "43000004",
+    "status": "live",
+    "delegates": [],
+    "criticality": "high",
+    "hosting_country": "GB"
+   },
+   "attribute_sources": {
+    "name": "servicenow",
+    "owner": "servicenow",
+    "delegates": "servicenow",
+    "criticality": "servicenow",
+    "status": "servicenow",
+    "hosting_country": "servicenow",
+    "description": "dmc"
+   },
+   "provenance": {
+    "name": {
+     "at": "2026-11-18T03:47:50.564Z",
+     "by": "servicenow"
+    },
+    "owner": {
+     "at": "2026-11-18T03:47:50.564Z",
+     "by": "servicenow"
+    },
+    "status": {
+     "at": "2026-11-18T03:47:50.564Z",
+     "by": "servicenow"
+    },
+    "delegates": {
+     "at": "2026-11-18T03:47:50.564Z",
+     "by": "servicenow"
+    },
+    "criticality": {
+     "at": "2026-11-18T03:47:50.564Z",
+     "by": "servicenow"
+    },
+    "hosting_country": {
+     "at": "2026-11-18T03:47:50.564Z",
+     "by": "servicenow"
+    }
+   },
+   "valid_from": "2026-11-18T03:47:50.564Z",
+   "valid_to": null,
+   "recorded_from": "2026-11-18T03:47:50.564Z",
+   "allowed_actions": [
+    {
+     "id": "edit_dmc_fields",
+     "allowed": false,
+     "reason": "Needs one of: app-owner, steward, on an object you are responsible for"
+    }
+   ]
+  },
+  "app-risk-engine": {
+   "id": "24f84c3d-db8f-49d1-be64-29ed35339043",
+   "type": "Application",
+   "qualified_name": "app-risk-engine",
+   "lifecycle": "discovered",
+   "attributes": {
+    "name": "Risk Engine",
+    "owner": "43000002",
+    "status": "live",
+    "delegates": [],
+    "criticality": "high",
+    "hosting_country": "GB"
+   },
+   "attribute_sources": {
+    "name": "servicenow",
+    "owner": "servicenow",
+    "delegates": "servicenow",
+    "criticality": "servicenow",
+    "status": "servicenow",
+    "hosting_country": "servicenow",
+    "description": "dmc"
+   },
+   "provenance": {
+    "name": {
+     "at": "2026-11-18T03:47:50.555Z",
+     "by": "servicenow"
+    },
+    "owner": {
+     "at": "2026-11-18T03:47:50.555Z",
+     "by": "servicenow"
+    },
+    "status": {
+     "at": "2026-11-18T03:47:50.555Z",
+     "by": "servicenow"
+    },
+    "delegates": {
+     "at": "2026-11-18T03:47:50.555Z",
+     "by": "servicenow"
+    },
+    "criticality": {
+     "at": "2026-11-18T03:47:50.555Z",
+     "by": "servicenow"
+    },
+    "hosting_country": {
+     "at": "2026-11-18T03:47:50.555Z",
+     "by": "servicenow"
+    }
+   },
+   "valid_from": "2026-11-18T03:47:50.555Z",
+   "valid_to": null,
+   "recorded_from": "2026-11-18T03:47:50.555Z",
+   "allowed_actions": [
+    {
+     "id": "edit_dmc_fields",
+     "allowed": false,
+     "reason": "Needs one of: app-owner, steward, on an object you are responsible for"
+    }
+   ]
+  },
+  "int-crm-to-payments": {
+   "id": "88278498-c5c4-4aa2-b538-1ee664517727",
+   "type": "Integration",
+   "qualified_name": "int-crm-to-payments",
+   "lifecycle": "discovered",
+   "attributes": {
+    "status": "planned",
+    "frequency": "hourly",
+    "mechanism": "api"
+   },
+   "attribute_sources": {
+    "mechanism": "servicenow",
+    "frequency": "servicenow",
+    "status": "servicenow"
+   },
+   "provenance": {
+    "status": {
+     "at": "2026-11-18T03:47:50.631Z",
+     "by": "servicenow"
+    },
+    "frequency": {
+     "at": "2026-11-18T03:47:50.631Z",
+     "by": "servicenow"
+    },
+    "mechanism": {
+     "at": "2026-11-18T03:47:50.631Z",
+     "by": "servicenow"
+    }
+   },
+   "valid_from": "2026-11-18T03:47:50.631Z",
+   "valid_to": null,
+   "recorded_from": "2026-11-18T03:47:50.631Z",
+   "allowed_actions": [
+    {
+     "id": "edit_dmc_fields",
+     "allowed": false,
+     "reason": "Needs one of: app-owner, steward, on an object you are responsible for"
+    }
+   ]
+  },
+  "int-ledger-to-lake": {
+   "id": "42d97b80-930f-492b-8d58-038925cbcf9b",
+   "type": "Integration",
+   "qualified_name": "int-ledger-to-lake",
+   "lifecycle": "discovered",
+   "attributes": {
+    "status": "live",
+    "frequency": "daily",
+    "mechanism": "file"
+   },
+   "attribute_sources": {
+    "mechanism": "servicenow",
+    "frequency": "servicenow",
+    "status": "servicenow"
+   },
+   "provenance": {
+    "status": {
+     "at": "2026-11-18T03:47:50.618Z",
+     "by": "servicenow"
+    },
+    "frequency": {
+     "at": "2026-11-18T03:47:50.618Z",
+     "by": "servicenow"
+    },
+    "mechanism": {
+     "at": "2026-11-18T03:47:50.618Z",
+     "by": "servicenow"
+    }
+   },
+   "valid_from": "2026-11-18T03:47:50.618Z",
+   "valid_to": null,
+   "recorded_from": "2026-11-18T03:47:50.618Z",
+   "allowed_actions": [
+    {
+     "id": "edit_dmc_fields",
+     "allowed": false,
+     "reason": "Needs one of: app-owner, steward, on an object you are responsible for"
+    }
+   ]
+  },
+  "int-ledger-to-risk": {
+   "id": "55fa0395-1e15-4591-8161-bee99b133a4a",
+   "type": "Integration",
+   "qualified_name": "int-ledger-to-risk",
+   "lifecycle": "discovered",
+   "attributes": {
+    "status": "live",
+    "frequency": "daily",
+    "mechanism": "batch"
+   },
+   "attribute_sources": {
+    "mechanism": "servicenow",
+    "frequency": "servicenow",
+    "status": "servicenow"
+   },
+   "provenance": {
+    "status": {
+     "at": "2026-11-18T03:47:50.591Z",
+     "by": "servicenow"
+    },
+    "frequency": {
+     "at": "2026-11-18T03:47:50.591Z",
+     "by": "servicenow"
+    },
+    "mechanism": {
+     "at": "2026-11-18T03:47:50.591Z",
+     "by": "servicenow"
+    }
+   },
+   "valid_from": "2026-11-18T03:47:50.591Z",
+   "valid_to": null,
+   "recorded_from": "2026-11-18T03:47:50.591Z",
+   "allowed_actions": [
+    {
+     "id": "edit_dmc_fields",
+     "allowed": false,
+     "reason": "Needs one of: app-owner, steward, on an object you are responsible for"
+    }
+   ]
+  },
+  "int-payments-to-ledger": {
+   "id": "291dd821-ab7e-43a2-827f-a93361b51f58",
+   "type": "Integration",
+   "qualified_name": "int-payments-to-ledger",
+   "lifecycle": "discovered",
+   "attributes": {
+    "status": "live",
+    "frequency": "real-time",
+    "mechanism": "api"
+   },
+   "attribute_sources": {
+    "mechanism": "servicenow",
+    "frequency": "servicenow",
+    "status": "servicenow"
+   },
+   "provenance": {
+    "status": {
+     "at": "2026-11-18T03:47:50.574Z",
+     "by": "servicenow"
+    },
+    "frequency": {
+     "at": "2026-11-18T03:47:50.574Z",
+     "by": "servicenow"
+    },
+    "mechanism": {
+     "at": "2026-11-18T03:47:50.574Z",
+     "by": "servicenow"
+    }
+   },
+   "valid_from": "2026-11-18T03:47:50.574Z",
+   "valid_to": null,
+   "recorded_from": "2026-11-18T03:47:50.574Z",
+   "allowed_actions": [
+    {
+     "id": "edit_dmc_fields",
+     "allowed": false,
+     "reason": "Needs one of: app-owner, steward, on an object you are responsible for"
+    }
+   ]
+  },
+  "int-risk-to-reporting": {
+   "id": "5dd733c9-0acd-4fb0-a622-008673162c3d",
+   "type": "Integration",
+   "qualified_name": "int-risk-to-reporting",
+   "lifecycle": "discovered",
+   "attributes": {
+    "status": "live",
+    "frequency": "daily",
+    "mechanism": "batch"
+   },
+   "attribute_sources": {
+    "mechanism": "servicenow",
+    "frequency": "servicenow",
+    "status": "servicenow"
+   },
+   "provenance": {
+    "status": {
+     "at": "2026-11-18T03:47:50.605Z",
+     "by": "servicenow"
+    },
+    "frequency": {
+     "at": "2026-11-18T03:47:50.605Z",
+     "by": "servicenow"
+    },
+    "mechanism": {
+     "at": "2026-11-18T03:47:50.605Z",
+     "by": "servicenow"
+    }
+   },
+   "valid_from": "2026-11-18T03:47:50.605Z",
+   "valid_to": null,
+   "recorded_from": "2026-11-18T03:47:50.605Z",
+   "allowed_actions": [
+    {
+     "id": "edit_dmc_fields",
+     "allowed": false,
+     "reason": "Needs one of: app-owner, steward, on an object you are responsible for"
+    }
+   ]
+  },
+  "int-ledger-to-risk--account-exposures": {
+   "id": "9cb0386c-72eb-4a81-9b75-2d175ab79d8d",
+   "type": "Dataset",
+   "qualified_name": "int-ledger-to-risk--account-exposures",
+   "lifecycle": "discovered",
+   "attributes": {
+    "name": "Account exposures",
+    "description": "Balances sent for exposure calculation",
+    "business_context": "Used by credit risk"
+   },
+   "attribute_sources": {
+    "name": "dmc",
+    "description": "dmc",
+    "business_context": "dmc"
+   },
+   "provenance": {
+    "name": {
+     "at": "2026-11-18T03:47:50.961Z",
+     "by": "dmc"
+    },
+    "description": {
+     "at": "2026-11-18T03:47:50.961Z",
+     "by": "dmc"
+    },
+    "business_context": {
+     "at": "2026-11-18T03:47:50.961Z",
+     "by": "dmc"
+    }
+   },
+   "valid_from": "2026-11-18T03:47:50.961Z",
+   "valid_to": null,
+   "recorded_from": "2026-11-18T03:47:50.961Z",
+   "allowed_actions": [
+    {
+     "id": "edit_dmc_fields",
+     "allowed": false,
+     "reason": "Needs one of: app-owner, steward, on an object you are responsible for"
+    }
+   ]
+  },
+  "int-payments-to-ledger--payment-postings": {
+   "id": "997a50ca-e310-4f22-80e3-994ad21ef01e",
+   "type": "Dataset",
+   "qualified_name": "int-payments-to-ledger--payment-postings",
+   "lifecycle": "discovered",
+   "attributes": {
+    "name": "Payment postings",
+    "description": "Postings from payments into the ledger",
+    "business_context": "Used by finance close"
+   },
+   "attribute_sources": {
+    "name": "dmc",
+    "description": "dmc",
+    "business_context": "dmc"
+   },
+   "provenance": {
+    "name": {
+     "at": "2026-11-18T03:47:50.934Z",
+     "by": "dmc"
+    },
+    "description": {
+     "at": "2026-11-18T03:47:50.934Z",
+     "by": "dmc"
+    },
+    "business_context": {
+     "at": "2026-11-18T03:47:50.934Z",
+     "by": "dmc"
+    }
+   },
+   "valid_from": "2026-11-18T03:47:50.934Z",
+   "valid_to": null,
+   "recorded_from": "2026-11-18T03:47:50.934Z",
+   "allowed_actions": [
+    {
+     "id": "edit_dmc_fields",
+     "allowed": false,
+     "reason": "Needs one of: app-owner, steward, on an object you are responsible for"
+    }
+   ]
+  },
+  "git.core-banking/ledger/accounts": {
+   "id": "49cd925a-03cb-4162-8f87-15bf9c199edd",
+   "type": "Table",
+   "qualified_name": "git.core-banking/ledger/accounts",
+   "lifecycle": "discovered",
+   "attributes": {
+    "kind": "table",
+    "name": "accounts",
+    "description": "accounts (synthetic)"
+   },
+   "attribute_sources": {
+    "name": "git-json",
+    "kind": "git-json",
+    "description": "git-json",
+    "tags": "git-json",
+    "trust_tier": "derived",
+    "required_tier": "derived",
+    "trust_shortfall": "derived"
+   },
+   "provenance": {
+    "kind": {
+     "at": "2026-11-18T03:47:50.758Z",
+     "by": "git-json"
+    },
+    "name": {
+     "at": "2026-11-18T03:47:50.758Z",
+     "by": "git-json"
+    },
+    "description": {
+     "at": "2026-11-18T03:47:50.758Z",
+     "by": "git-json"
+    }
+   },
+   "valid_from": "2026-11-18T03:47:50.758Z",
+   "valid_to": null,
+   "recorded_from": "2026-11-18T03:47:50.758Z",
+   "allowed_actions": [
+    {
+     "id": "edit_dmc_fields",
+     "allowed": false,
+     "reason": "Needs one of: app-owner, steward, on an object you are responsible for"
+    }
+   ]
+  },
+  "git.reg-reporting/returns/pra110_lines": {
+   "id": "371a1c93-d509-40cd-8162-5ed09a109cfb",
+   "type": "Table",
+   "qualified_name": "git.reg-reporting/returns/pra110_lines",
+   "lifecycle": "discovered",
+   "attributes": {
+    "kind": "table",
+    "name": "pra110_lines",
+    "description": "pra110_lines (synthetic)"
+   },
+   "attribute_sources": {
+    "name": "git-json",
+    "kind": "git-json",
+    "description": "git-json",
+    "tags": "git-json",
+    "trust_tier": "derived",
+    "required_tier": "derived",
+    "trust_shortfall": "derived"
+   },
+   "provenance": {
+    "kind": {
+     "at": "2026-11-18T03:47:50.852Z",
+     "by": "git-json"
+    },
+    "name": {
+     "at": "2026-11-18T03:47:50.852Z",
+     "by": "git-json"
+    },
+    "description": {
+     "at": "2026-11-18T03:47:50.852Z",
+     "by": "git-json"
+    }
+   },
+   "valid_from": "2026-11-18T03:47:50.852Z",
+   "valid_to": null,
+   "recorded_from": "2026-11-18T03:47:50.852Z",
+   "allowed_actions": [
+    {
+     "id": "edit_dmc_fields",
+     "allowed": false,
+     "reason": "Needs one of: app-owner, steward, on an object you are responsible for"
+    }
+   ]
+  },
+  "git.risk-engine/exposure/positions": {
+   "id": "df7917d3-125f-4ca3-aaa6-eac05b23ff74",
+   "type": "Table",
+   "qualified_name": "git.risk-engine/exposure/positions",
+   "lifecycle": "discovered",
+   "attributes": {
+    "kind": "table",
+    "name": "positions",
+    "description": "positions (synthetic)"
+   },
+   "attribute_sources": {
+    "name": "git-json",
+    "kind": "git-json",
+    "description": "git-json",
+    "tags": "git-json",
+    "trust_tier": "derived",
+    "required_tier": "derived",
+    "trust_shortfall": "derived"
+   },
+   "provenance": {
+    "kind": {
+     "at": "2026-11-18T03:47:50.804Z",
+     "by": "git-json"
+    },
+    "name": {
+     "at": "2026-11-18T03:47:50.804Z",
+     "by": "git-json"
+    },
+    "description": {
+     "at": "2026-11-18T03:47:50.804Z",
+     "by": "git-json"
+    }
+   },
+   "valid_from": "2026-11-18T03:47:50.804Z",
+   "valid_to": null,
+   "recorded_from": "2026-11-18T03:47:50.804Z",
+   "allowed_actions": [
+    {
+     "id": "edit_dmc_fields",
+     "allowed": false,
+     "reason": "Needs one of: app-owner, steward, on an object you are responsible for"
+    }
+   ]
+  },
+  "git.core-banking/ledger/accounts/account_id": {
+   "id": "b4b3ae6a-e018-4574-bd33-4b030aed93da",
+   "type": "Column",
+   "qualified_name": "git.core-banking/ledger/accounts/account_id",
+   "lifecycle": "discovered",
+   "attributes": {
+    "name": "account_id",
+    "nullable": false,
+    "data_type": "varchar",
+    "description": "account id"
+   },
+   "attribute_sources": {
+    "name": "git-json",
+    "data_type": "git-json",
+    "nullable": "git-json",
+    "description": "git-json",
+    "tags": "git-json",
+    "criticality": "derived",
+    "trust_tier": "derived",
+    "required_tier": "derived",
+    "trust_shortfall": "derived",
+    "proposed_classification": "derived",
+    "proposed_from": "derived",
+    "rejected_classification": "dmc"
+   },
+   "provenance": {
+    "name": {
+     "at": "2026-11-18T03:47:50.767Z",
+     "by": "git-json"
+    },
+    "nullable": {
+     "at": "2026-11-18T03:47:50.767Z",
+     "by": "git-json"
+    },
+    "data_type": {
+     "at": "2026-11-18T03:47:50.767Z",
+     "by": "git-json"
+    },
+    "description": {
+     "at": "2026-11-18T03:47:50.767Z",
+     "by": "git-json"
+    }
+   },
+   "valid_from": "2026-11-18T03:47:50.767Z",
+   "valid_to": null,
+   "recorded_from": "2026-11-18T03:47:50.767Z",
+   "allowed_actions": [
+    {
+     "id": "edit_dmc_fields",
+     "allowed": false,
+     "reason": "Needs one of: app-owner, steward, on an object you are responsible for"
+    }
+   ]
+  },
+  "git.core-banking/ledger/accounts/closing_balance": {
+   "id": "036f8e6d-d0de-40d4-83dd-edb05f6c3226",
+   "type": "Column",
+   "qualified_name": "git.core-banking/ledger/accounts/closing_balance",
+   "lifecycle": "discovered",
+   "attributes": {
+    "name": "closing_balance",
+    "nullable": false,
+    "data_type": "decimal",
+    "description": "closing balance"
+   },
+   "attribute_sources": {
+    "name": "git-json",
+    "data_type": "git-json",
+    "nullable": "git-json",
+    "description": "git-json",
+    "tags": "git-json",
+    "criticality": "derived",
+    "trust_tier": "derived",
+    "required_tier": "derived",
+    "trust_shortfall": "derived",
+    "proposed_classification": "derived",
+    "proposed_from": "derived",
+    "rejected_classification": "dmc"
+   },
+   "provenance": {
+    "name": {
+     "at": "2026-11-18T03:47:50.786Z",
+     "by": "git-json"
+    },
+    "nullable": {
+     "at": "2026-11-18T03:47:50.786Z",
+     "by": "git-json"
+    },
+    "data_type": {
+     "at": "2026-11-18T03:47:50.786Z",
+     "by": "git-json"
+    },
+    "description": {
+     "at": "2026-11-18T03:47:50.786Z",
+     "by": "git-json"
+    }
+   },
+   "valid_from": "2026-11-18T03:47:50.786Z",
+   "valid_to": null,
+   "recorded_from": "2026-11-18T03:47:50.786Z",
+   "allowed_actions": [
+    {
+     "id": "edit_dmc_fields",
+     "allowed": false,
+     "reason": "Needs one of: app-owner, steward, on an object you are responsible for"
+    }
+   ]
+  },
+  "git.core-banking/ledger/accounts/customer_name": {
+   "id": "d0604b07-a7d1-4fa1-8df9-b240b188e3c7",
+   "type": "Column",
+   "qualified_name": "git.core-banking/ledger/accounts/customer_name",
+   "lifecycle": "discovered",
+   "attributes": {
+    "name": "customer_name",
+    "nullable": false,
+    "data_type": "varchar",
+    "description": "customer name"
+   },
+   "attribute_sources": {
+    "name": "git-json",
+    "data_type": "git-json",
+    "nullable": "git-json",
+    "description": "git-json",
+    "tags": "git-json",
+    "criticality": "derived",
+    "trust_tier": "derived",
+    "required_tier": "derived",
+    "trust_shortfall": "derived",
+    "proposed_classification": "derived",
+    "proposed_from": "derived",
+    "rejected_classification": "dmc"
+   },
+   "provenance": {
+    "name": {
+     "at": "2026-11-18T03:47:50.776Z",
+     "by": "git-json"
+    },
+    "nullable": {
+     "at": "2026-11-18T03:47:50.776Z",
+     "by": "git-json"
+    },
+    "data_type": {
+     "at": "2026-11-18T03:47:50.776Z",
+     "by": "git-json"
+    },
+    "description": {
+     "at": "2026-11-18T03:47:50.776Z",
+     "by": "git-json"
+    }
+   },
+   "valid_from": "2026-11-18T03:47:50.776Z",
+   "valid_to": null,
+   "recorded_from": "2026-11-18T03:47:50.776Z",
+   "allowed_actions": [
+    {
+     "id": "edit_dmc_fields",
+     "allowed": false,
+     "reason": "Needs one of: app-owner, steward, on an object you are responsible for"
+    }
+   ]
+  },
+  "git.reg-reporting/returns/pra110_lines/amount": {
+   "id": "603ad6ca-ada7-4ee1-9ad3-fba7e5967110",
+   "type": "Column",
+   "qualified_name": "git.reg-reporting/returns/pra110_lines/amount",
+   "lifecycle": "discovered",
+   "attributes": {
+    "name": "amount",
+    "nullable": false,
+    "data_type": "decimal",
+    "description": "amount"
+   },
+   "attribute_sources": {
+    "name": "git-json",
+    "data_type": "git-json",
+    "nullable": "git-json",
+    "description": "git-json",
+    "tags": "git-json",
+    "criticality": "derived",
+    "trust_tier": "derived",
+    "required_tier": "derived",
+    "trust_shortfall": "derived",
+    "proposed_classification": "derived",
+    "proposed_from": "derived",
+    "rejected_classification": "dmc"
+   },
+   "provenance": {
+    "name": {
+     "at": "2026-11-18T03:47:50.882Z",
+     "by": "git-json"
+    },
+    "nullable": {
+     "at": "2026-11-18T03:47:50.882Z",
+     "by": "git-json"
+    },
+    "data_type": {
+     "at": "2026-11-18T03:47:50.882Z",
+     "by": "git-json"
+    },
+    "description": {
+     "at": "2026-11-18T03:47:50.882Z",
+     "by": "git-json"
+    }
+   },
+   "valid_from": "2026-11-18T03:47:50.882Z",
+   "valid_to": null,
+   "recorded_from": "2026-11-18T03:47:50.882Z",
+   "allowed_actions": [
+    {
+     "id": "edit_dmc_fields",
+     "allowed": false,
+     "reason": "Needs one of: app-owner, steward, on an object you are responsible for"
+    }
+   ]
+  },
+  "git.reg-reporting/returns/pra110_lines/line_id": {
+   "id": "858b9dc2-f27b-4381-9f91-8f53bd40047f",
+   "type": "Column",
+   "qualified_name": "git.reg-reporting/returns/pra110_lines/line_id",
+   "lifecycle": "discovered",
+   "attributes": {
+    "name": "line_id",
+    "nullable": false,
+    "data_type": "varchar",
+    "description": "line id"
+   },
+   "attribute_sources": {
+    "name": "git-json",
+    "data_type": "git-json",
+    "nullable": "git-json",
+    "description": "git-json",
+    "tags": "git-json",
+    "criticality": "derived",
+    "trust_tier": "derived",
+    "required_tier": "derived",
+    "trust_shortfall": "derived",
+    "proposed_classification": "derived",
+    "proposed_from": "derived",
+    "rejected_classification": "dmc"
+   },
+   "provenance": {
+    "name": {
+     "at": "2026-11-18T03:47:50.862Z",
+     "by": "git-json"
+    },
+    "nullable": {
+     "at": "2026-11-18T03:47:50.862Z",
+     "by": "git-json"
+    },
+    "data_type": {
+     "at": "2026-11-18T03:47:50.862Z",
+     "by": "git-json"
+    },
+    "description": {
+     "at": "2026-11-18T03:47:50.862Z",
+     "by": "git-json"
+    }
+   },
+   "valid_from": "2026-11-18T03:47:50.862Z",
+   "valid_to": null,
+   "recorded_from": "2026-11-18T03:47:50.862Z",
+   "allowed_actions": [
+    {
+     "id": "edit_dmc_fields",
+     "allowed": false,
+     "reason": "Needs one of: app-owner, steward, on an object you are responsible for"
+    }
+   ]
+  },
+  "git.reg-reporting/returns/pra110_lines/position_id": {
+   "id": "873afef0-d52a-449f-a848-3f238fe30aa6",
+   "type": "Column",
+   "qualified_name": "git.reg-reporting/returns/pra110_lines/position_id",
+   "lifecycle": "discovered",
+   "attributes": {
+    "name": "position_id",
+    "nullable": false,
+    "data_type": "varchar",
+    "description": "position id"
+   },
+   "attribute_sources": {
+    "name": "git-json",
+    "data_type": "git-json",
+    "nullable": "git-json",
+    "description": "git-json",
+    "tags": "git-json",
+    "criticality": "derived",
+    "trust_tier": "derived",
+    "required_tier": "derived",
+    "trust_shortfall": "derived",
+    "proposed_classification": "derived",
+    "proposed_from": "derived",
+    "rejected_classification": "dmc"
+   },
+   "provenance": {
+    "name": {
+     "at": "2026-11-18T03:47:50.872Z",
+     "by": "git-json"
+    },
+    "nullable": {
+     "at": "2026-11-18T03:47:50.872Z",
+     "by": "git-json"
+    },
+    "data_type": {
+     "at": "2026-11-18T03:47:50.872Z",
+     "by": "git-json"
+    },
+    "description": {
+     "at": "2026-11-18T03:47:50.872Z",
+     "by": "git-json"
+    }
+   },
+   "valid_from": "2026-11-18T03:47:50.872Z",
+   "valid_to": null,
+   "recorded_from": "2026-11-18T03:47:50.872Z",
+   "allowed_actions": [
+    {
+     "id": "edit_dmc_fields",
+     "allowed": false,
+     "reason": "Needs one of: app-owner, steward, on an object you are responsible for"
+    }
+   ]
+  },
+  "git.risk-engine/exposure/positions/account_id": {
+   "id": "4d06af85-f90e-4913-912f-aae2924c4a90",
+   "type": "Column",
+   "qualified_name": "git.risk-engine/exposure/positions/account_id",
+   "lifecycle": "discovered",
+   "attributes": {
+    "name": "account_id",
+    "nullable": false,
+    "data_type": "varchar",
+    "description": "account id"
+   },
+   "attribute_sources": {
+    "name": "git-json",
+    "data_type": "git-json",
+    "nullable": "git-json",
+    "description": "git-json",
+    "tags": "git-json",
+    "criticality": "derived",
+    "trust_tier": "derived",
+    "required_tier": "derived",
+    "trust_shortfall": "derived",
+    "proposed_classification": "derived",
+    "proposed_from": "derived",
+    "rejected_classification": "dmc"
+   },
+   "provenance": {
+    "name": {
+     "at": "2026-11-18T03:47:50.823Z",
+     "by": "git-json"
+    },
+    "nullable": {
+     "at": "2026-11-18T03:47:50.823Z",
+     "by": "git-json"
+    },
+    "data_type": {
+     "at": "2026-11-18T03:47:50.823Z",
+     "by": "git-json"
+    },
+    "description": {
+     "at": "2026-11-18T03:47:50.823Z",
+     "by": "git-json"
+    }
+   },
+   "valid_from": "2026-11-18T03:47:50.823Z",
+   "valid_to": null,
+   "recorded_from": "2026-11-18T03:47:50.823Z",
+   "allowed_actions": [
+    {
+     "id": "edit_dmc_fields",
+     "allowed": false,
+     "reason": "Needs one of: app-owner, steward, on an object you are responsible for"
+    }
+   ]
+  },
+  "git.risk-engine/exposure/positions/exposure_at_default": {
+   "id": "94158f11-9586-4614-86e7-da896e281400",
+   "type": "Column",
+   "qualified_name": "git.risk-engine/exposure/positions/exposure_at_default",
+   "lifecycle": "discovered",
+   "attributes": {
+    "name": "exposure_at_default",
+    "nullable": false,
+    "data_type": "decimal",
+    "trust_tier": "unverified",
+    "description": "exposure at default",
+    "required_tier": "gold",
+    "trust_shortfall": true
+   },
+   "attribute_sources": {
+    "name": "git-json",
+    "data_type": "git-json",
+    "nullable": "git-json",
+    "description": "git-json",
+    "tags": "git-json",
+    "criticality": "derived",
+    "trust_tier": "derived",
+    "required_tier": "derived",
+    "trust_shortfall": "derived",
+    "proposed_classification": "derived",
+    "proposed_from": "derived",
+    "rejected_classification": "dmc"
+   },
+   "provenance": {
+    "name": {
+     "at": "2026-11-18T03:47:50.833Z",
+     "by": "git-json"
+    },
+    "nullable": {
+     "at": "2026-11-18T03:47:50.833Z",
+     "by": "git-json"
+    },
+    "data_type": {
+     "at": "2026-11-18T03:47:50.833Z",
+     "by": "git-json"
+    },
+    "trust_tier": {
+     "at": "2026-11-18T04:00:14.880Z",
+     "by": "derived"
+    },
+    "description": {
+     "at": "2026-11-18T03:47:50.833Z",
+     "by": "git-json"
+    },
+    "required_tier": {
+     "at": "2026-11-18T04:00:14.880Z",
+     "by": "derived"
+    },
+    "trust_shortfall": {
+     "at": "2026-11-18T04:00:14.880Z",
+     "by": "derived"
+    }
+   },
+   "valid_from": "2026-11-18T04:00:14.880Z",
+   "valid_to": null,
+   "recorded_from": "2026-11-18T04:00:14.880Z",
+   "allowed_actions": [
+    {
+     "id": "edit_dmc_fields",
+     "allowed": false,
+     "reason": "Needs one of: app-owner, steward, on an object you are responsible for"
+    }
+   ]
+  },
+  "git.risk-engine/exposure/positions/position_id": {
+   "id": "5c3b70da-9793-47ae-8280-9763b77b92ce",
+   "type": "Column",
+   "qualified_name": "git.risk-engine/exposure/positions/position_id",
+   "lifecycle": "discovered",
+   "attributes": {
+    "name": "position_id",
+    "nullable": false,
+    "data_type": "varchar",
+    "description": "position id"
+   },
+   "attribute_sources": {
+    "name": "git-json",
+    "data_type": "git-json",
+    "nullable": "git-json",
+    "description": "git-json",
+    "tags": "git-json",
+    "criticality": "derived",
+    "trust_tier": "derived",
+    "required_tier": "derived",
+    "trust_shortfall": "derived",
+    "proposed_classification": "derived",
+    "proposed_from": "derived",
+    "rejected_classification": "dmc"
+   },
+   "provenance": {
+    "name": {
+     "at": "2026-11-18T03:47:50.814Z",
+     "by": "git-json"
+    },
+    "nullable": {
+     "at": "2026-11-18T03:47:50.814Z",
+     "by": "git-json"
+    },
+    "data_type": {
+     "at": "2026-11-18T03:47:50.814Z",
+     "by": "git-json"
+    },
+    "description": {
+     "at": "2026-11-18T03:47:50.814Z",
+     "by": "git-json"
+    }
+   },
+   "valid_from": "2026-11-18T03:47:50.814Z",
+   "valid_to": null,
+   "recorded_from": "2026-11-18T03:47:50.814Z",
+   "allowed_actions": [
+    {
+     "id": "edit_dmc_fields",
+     "allowed": false,
+     "reason": "Needs one of: app-owner, steward, on an object you are responsible for"
+    }
+   ]
+  },
+  "gl:closing-balance": {
+   "id": "4e0f9ef8-109b-45e7-927e-e59dd346f381",
+   "type": "BusinessTerm",
+   "qualified_name": "gl:closing-balance",
+   "lifecycle": "discovered",
+   "attributes": {
+    "name": "Closing balance",
+    "status": "approved",
+    "definition": "Balance at the end of the day"
+   },
+   "attribute_sources": {
+    "name": "collibra",
+    "definition": "collibra",
+    "status": "collibra"
+   },
+   "provenance": {
+    "name": {
+     "at": "2026-11-18T03:47:50.682Z",
+     "by": "collibra"
+    },
+    "status": {
+     "at": "2026-11-18T03:47:50.682Z",
+     "by": "collibra"
+    },
+    "definition": {
+     "at": "2026-11-18T03:47:50.682Z",
+     "by": "collibra"
+    }
+   },
+   "valid_from": "2026-11-18T03:47:50.682Z",
+   "valid_to": null,
+   "recorded_from": "2026-11-18T03:47:50.682Z",
+   "allowed_actions": [
+    {
+     "id": "edit_glossary",
+     "allowed": false,
+     "reason": "Needs one of: steward, on an object you are responsible for"
+    }
+   ]
+  },
+  "gl:exposure-at-default": {
+   "id": "496e1008-435a-4ff1-8e73-c20c08547259",
+   "type": "BusinessTerm",
+   "qualified_name": "gl:exposure-at-default",
+   "lifecycle": "discovered",
+   "attributes": {
+    "name": "Exposure at default",
+    "status": "approved",
+    "definition": "Expected exposure if the counterparty defaults"
+   },
+   "attribute_sources": {
+    "name": "collibra",
+    "definition": "collibra",
+    "status": "collibra"
+   },
+   "provenance": {
+    "name": {
+     "at": "2026-11-18T03:47:50.692Z",
+     "by": "collibra"
+    },
+    "status": {
+     "at": "2026-11-18T03:47:50.692Z",
+     "by": "collibra"
+    },
+    "definition": {
+     "at": "2026-11-18T03:47:50.692Z",
+     "by": "collibra"
+    }
+   },
+   "valid_from": "2026-11-18T03:47:50.692Z",
+   "valid_to": null,
+   "recorded_from": "2026-11-18T03:47:50.692Z",
+   "allowed_actions": [
+    {
+     "id": "edit_glossary",
+     "allowed": false,
+     "reason": "Needs one of: steward, on an object you are responsible for"
+    }
+   ]
+  },
+  "gl:account-balance": {
+   "id": "37dae695-03ba-4ae7-a23d-d90a9d5f86df",
+   "type": "DataCategory",
+   "qualified_name": "gl:account-balance",
+   "lifecycle": "discovered",
+   "attributes": {
+    "name": "Account balance",
+    "definition": "Money held on an account"
+   },
+   "attribute_sources": {
+    "name": "collibra",
+    "definition": "collibra"
+   },
+   "provenance": {
+    "name": {
+     "at": "2026-11-18T03:47:50.664Z",
+     "by": "collibra"
+    },
+    "definition": {
+     "at": "2026-11-18T03:47:50.664Z",
+     "by": "collibra"
+    }
+   },
+   "valid_from": "2026-11-18T03:47:50.664Z",
+   "valid_to": null,
+   "recorded_from": "2026-11-18T03:47:50.664Z",
+   "allowed_actions": [
+    {
+     "id": "edit_glossary",
+     "allowed": false,
+     "reason": "Needs one of: steward, on an object you are responsible for"
+    }
+   ]
+  },
+  "gl:credit-exposure": {
+   "id": "79d6d42f-9857-49ed-9812-ab7b0bbffd45",
+   "type": "DataCategory",
+   "qualified_name": "gl:credit-exposure",
+   "lifecycle": "discovered",
+   "attributes": {
+    "name": "Credit exposure",
+    "definition": "Amount at risk with a counterparty"
+   },
+   "attribute_sources": {
+    "name": "collibra",
+    "definition": "collibra"
+   },
+   "provenance": {
+    "name": {
+     "at": "2026-11-18T03:47:50.673Z",
+     "by": "collibra"
+    },
+    "definition": {
+     "at": "2026-11-18T03:47:50.673Z",
+     "by": "collibra"
+    }
+   },
+   "valid_from": "2026-11-18T03:47:50.673Z",
+   "valid_to": null,
+   "recorded_from": "2026-11-18T03:47:50.673Z",
+   "allowed_actions": [
+    {
+     "id": "edit_glossary",
+     "allowed": false,
+     "reason": "Needs one of: steward, on an object you are responsible for"
+    }
+   ]
+  },
+  "gl:customer-pii": {
+   "id": "5d7c3415-1a21-4bdf-a20f-3859a75a4130",
+   "type": "DataCategory",
+   "qualified_name": "gl:customer-pii",
+   "lifecycle": "discovered",
+   "attributes": {
+    "name": "Customer personal data",
+    "definition": "Data that identifies a customer"
+   },
+   "attribute_sources": {
+    "name": "collibra",
+    "definition": "collibra"
+   },
+   "provenance": {
+    "name": {
+     "at": "2026-11-18T03:47:50.654Z",
+     "by": "collibra"
+    },
+    "definition": {
+     "at": "2026-11-18T03:47:50.654Z",
+     "by": "collibra"
+    }
+   },
+   "valid_from": "2026-11-18T03:47:50.654Z",
+   "valid_to": null,
+   "recorded_from": "2026-11-18T03:47:50.654Z",
+   "allowed_actions": [
+    {
+     "id": "edit_glossary",
+     "allowed": false,
+     "reason": "Needs one of: steward, on an object you are responsible for"
+    }
+   ]
+  },
+  "gl:finance": {
+   "id": "efd654fc-d580-436e-8c42-97b09d2f3541",
+   "type": "DataDomain",
+   "qualified_name": "gl:finance",
+   "lifecycle": "discovered",
+   "attributes": {
+    "name": "Finance",
+    "description": "Money, positions and the books"
+   },
+   "attribute_sources": {
+    "name": "collibra",
+    "description": "collibra"
+   },
+   "provenance": {
+    "name": {
+     "at": "2026-11-18T03:47:50.645Z",
+     "by": "collibra"
+    },
+    "description": {
+     "at": "2026-11-18T03:47:50.645Z",
+     "by": "collibra"
+    }
+   },
+   "valid_from": "2026-11-18T03:47:50.645Z",
+   "valid_to": null,
+   "recorded_from": "2026-11-18T03:47:50.645Z",
+   "allowed_actions": [
+    {
+     "id": "edit_glossary",
+     "allowed": false,
+     "reason": "Needs one of: steward, on an object you are responsible for"
+    }
+   ]
+  },
+  "gl:risk": {
+   "id": "6b61c3dd-0072-46be-b5d8-77eb42e55943",
+   "type": "DataDomain",
+   "qualified_name": "gl:risk",
+   "lifecycle": "discovered",
+   "attributes": {
+    "name": "Risk",
+    "description": "Exposure and capital"
+   },
+   "attribute_sources": {
+    "name": "collibra",
+    "description": "collibra"
+   },
+   "provenance": {
+    "name": {
+     "at": "2026-11-18T03:47:50.650Z",
+     "by": "collibra"
+    },
+    "description": {
+     "at": "2026-11-18T03:47:50.650Z",
+     "by": "collibra"
+    }
+   },
+   "valid_from": "2026-11-18T03:47:50.650Z",
+   "valid_to": null,
+   "recorded_from": "2026-11-18T03:47:50.650Z",
+   "allowed_actions": [
+    {
+     "id": "edit_glossary",
+     "allowed": false,
+     "reason": "Needs one of: steward, on an object you are responsible for"
+    }
+   ]
+  },
+  "scope-bcbs-var": {
+   "id": "0cbc9c7f-76f9-414b-a2e2-4cec7357ee50",
+   "type": "Scope",
+   "qualified_name": "scope-bcbs-var",
+   "lifecycle": "discovered",
+   "attributes": {
+    "kind": "report",
+    "name": "BCBS 239 exposure report",
+    "owner": "43000004",
+    "status": "draft",
+    "version": 1,
+    "required_tier": "silver"
+   },
+   "attribute_sources": {
+    "name": "scope-sources",
+    "owner": "scope-sources",
+    "kind": "scope-sources",
+    "regulation": "dmc",
+    "required_tier": "dmc",
+    "criticality": "dmc",
+    "version": "dmc",
+    "status": "dmc",
+    "locked_at": "dmc"
+   },
+   "provenance": {
+    "kind": {
+     "at": "2026-11-18T03:47:51.033Z",
+     "by": "scope-sources"
+    },
+    "name": {
+     "at": "2026-11-18T03:47:51.033Z",
+     "by": "scope-sources"
+    },
+    "owner": {
+     "at": "2026-11-18T03:47:51.033Z",
+     "by": "scope-sources"
+    },
+    "status": {
+     "at": "2026-11-18T03:47:51.037Z",
+     "by": "dmc"
+    },
+    "version": {
+     "at": "2026-11-18T03:47:51.037Z",
+     "by": "dmc"
+    },
+    "required_tier": {
+     "at": "2026-11-18T03:47:51.037Z",
+     "by": "dmc"
+    }
+   },
+   "valid_from": "2026-11-18T03:47:51.037Z",
+   "valid_to": null,
+   "recorded_from": "2026-11-18T03:47:51.037Z",
+   "allowed_actions": [
+    {
+     "id": "scope_write",
+     "allowed": false,
+     "reason": "Needs one of: scope-owner, on an object you are responsible for"
+    }
+   ]
+  },
+  "scope-legacy-loans": {
+   "id": "ee9c2777-c2da-4c05-96d7-d8b3adf0b8bb",
+   "type": "Scope",
+   "qualified_name": "scope-legacy-loans",
+   "lifecycle": "discovered",
+   "attributes": {
+    "kind": "report",
+    "name": "Legacy loan reporting",
+    "owner": "43000098",
+    "status": "draft",
+    "version": 1,
+    "required_tier": "bronze"
+   },
+   "attribute_sources": {
+    "name": "scope-sources",
+    "owner": "scope-sources",
+    "kind": "scope-sources",
+    "regulation": "dmc",
+    "required_tier": "dmc",
+    "criticality": "dmc",
+    "version": "dmc",
+    "status": "dmc",
+    "locked_at": "dmc"
+   },
+   "provenance": {
+    "kind": {
+     "at": "2026-11-18T07:02:02.499Z",
+     "by": "scope-sources"
+    },
+    "name": {
+     "at": "2026-11-18T07:02:02.499Z",
+     "by": "scope-sources"
+    },
+    "owner": {
+     "at": "2026-11-18T07:02:02.499Z",
+     "by": "scope-sources"
+    },
+    "status": {
+     "at": "2026-11-18T07:02:02.503Z",
+     "by": "dmc"
+    },
+    "version": {
+     "at": "2026-11-18T07:02:02.503Z",
+     "by": "dmc"
+    },
+    "required_tier": {
+     "at": "2026-11-18T07:02:02.503Z",
+     "by": "dmc"
+    }
+   },
+   "valid_from": "2026-11-18T07:02:02.503Z",
+   "valid_to": null,
+   "recorded_from": "2026-11-18T07:02:02.503Z",
+   "allowed_actions": [
+    {
+     "id": "scope_write",
+     "allowed": false,
+     "reason": "Needs one of: scope-owner, on an object you are responsible for"
+    }
+   ]
+  },
+  "scope-onboarding": {
+   "id": "e87576da-df18-4483-bbc1-e23091c1d0fc",
+   "type": "Scope",
+   "qualified_name": "scope-onboarding",
+   "lifecycle": "discovered",
+   "attributes": {
+    "kind": "business-process",
+    "name": "Customer onboarding",
+    "owner": "43000004",
+    "status": "draft",
+    "version": 1,
+    "required_tier": "bronze"
+   },
+   "attribute_sources": {
+    "name": "scope-sources",
+    "owner": "scope-sources",
+    "kind": "scope-sources",
+    "regulation": "dmc",
+    "required_tier": "dmc",
+    "criticality": "dmc",
+    "version": "dmc",
+    "status": "dmc",
+    "locked_at": "dmc"
+   },
+   "provenance": {
+    "kind": {
+     "at": "2026-11-18T03:47:51.065Z",
+     "by": "scope-sources"
+    },
+    "name": {
+     "at": "2026-11-18T03:47:51.065Z",
+     "by": "scope-sources"
+    },
+    "owner": {
+     "at": "2026-11-18T03:47:51.065Z",
+     "by": "scope-sources"
+    },
+    "status": {
+     "at": "2026-11-18T03:47:51.069Z",
+     "by": "dmc"
+    },
+    "version": {
+     "at": "2026-11-18T03:47:51.069Z",
+     "by": "dmc"
+    },
+    "required_tier": {
+     "at": "2026-11-18T03:47:51.069Z",
+     "by": "dmc"
+    }
+   },
+   "valid_from": "2026-11-18T03:47:51.069Z",
+   "valid_to": null,
+   "recorded_from": "2026-11-18T03:47:51.069Z",
+   "allowed_actions": [
+    {
+     "id": "scope_write",
+     "allowed": false,
+     "reason": "Needs one of: scope-owner, on an object you are responsible for"
+    }
+   ]
+  },
+  "scope-pra110": {
+   "id": "c0811083-aa55-493e-a78c-34984c3dfc67",
+   "type": "Scope",
+   "qualified_name": "scope-pra110",
+   "lifecycle": "discovered",
+   "attributes": {
+    "kind": "regulatory-return",
+    "name": "PRA110",
+    "owner": "43000004",
+    "status": "submitted",
+    "version": 1,
+    "locked_at": "2026-10-01T09:00:00.000Z",
+    "required_tier": "gold"
+   },
+   "attribute_sources": {
+    "name": "scope-sources",
+    "owner": "scope-sources",
+    "kind": "scope-sources",
+    "regulation": "dmc",
+    "required_tier": "dmc",
+    "criticality": "dmc",
+    "version": "dmc",
+    "status": "dmc",
+    "locked_at": "dmc"
+   },
+   "provenance": {
+    "kind": {
+     "at": "2026-11-18T03:47:50.984Z",
+     "by": "scope-sources"
+    },
+    "name": {
+     "at": "2026-11-18T03:47:50.984Z",
+     "by": "scope-sources"
+    },
+    "owner": {
+     "at": "2026-11-18T03:47:50.984Z",
+     "by": "scope-sources"
+    },
+    "status": {
+     "at": "2026-11-18T07:02:02.452Z",
+     "by": "dmc"
+    },
+    "version": {
+     "at": "2026-11-18T03:47:50.989Z",
+     "by": "dmc"
+    },
+    "locked_at": {
+     "at": "2026-11-18T03:47:51.028Z",
+     "by": "dmc"
+    },
+    "required_tier": {
+     "at": "2026-11-18T03:47:50.989Z",
+     "by": "dmc"
+    }
+   },
+   "valid_from": "2026-11-18T07:02:02.452Z",
+   "valid_to": null,
+   "recorded_from": "2026-11-18T07:02:02.452Z",
+   "allowed_actions": [
+    {
+     "id": "scope_write",
+     "allowed": false,
+     "reason": "This is locked; an amendment creates a new version"
+    }
+   ]
+  },
+  "scope-bcbs-var--core": {
+   "id": "e21d0247-1ff7-4526-8f57-86a3d1fc5702",
+   "type": "ScopeGroup",
+   "qualified_name": "scope-bcbs-var--core",
+   "lifecycle": "discovered",
+   "attributes": {
+    "name": "Core",
+    "order": 1
+   },
+   "attribute_sources": {
+    "name": "dmc",
+    "order": "dmc"
+   },
+   "provenance": {
+    "name": {
+     "at": "2026-11-18T03:47:51.042Z",
+     "by": "dmc"
+    },
+    "order": {
+     "at": "2026-11-18T03:47:51.042Z",
+     "by": "dmc"
+    }
+   },
+   "valid_from": "2026-11-18T03:47:51.042Z",
+   "valid_to": null,
+   "recorded_from": "2026-11-18T03:47:51.042Z",
+   "allowed_actions": [
+    {
+     "id": "scope_write",
+     "allowed": false,
+     "reason": "Needs one of: scope-owner, on an object you are responsible for"
+    }
+   ]
+  },
+  "scope-legacy-loans--core": {
+   "id": "8b7cd155-f422-47cb-8138-8a72f65f3a0a",
+   "type": "ScopeGroup",
+   "qualified_name": "scope-legacy-loans--core",
+   "lifecycle": "discovered",
+   "attributes": {
+    "name": "Core",
+    "order": 1
+   },
+   "attribute_sources": {
+    "name": "dmc",
+    "order": "dmc"
+   },
+   "provenance": {
+    "name": {
+     "at": "2026-11-18T07:02:02.509Z",
+     "by": "dmc"
+    },
+    "order": {
+     "at": "2026-11-18T07:02:02.509Z",
+     "by": "dmc"
+    }
+   },
+   "valid_from": "2026-11-18T07:02:02.509Z",
+   "valid_to": null,
+   "recorded_from": "2026-11-18T07:02:02.509Z",
+   "allowed_actions": [
+    {
+     "id": "scope_write",
+     "allowed": false,
+     "reason": "Needs one of: scope-owner, on an object you are responsible for"
+    }
+   ]
+  },
+  "scope-onboarding--core": {
+   "id": "3c77d59b-b28a-408b-96c1-37237f69ddc9",
+   "type": "ScopeGroup",
+   "qualified_name": "scope-onboarding--core",
+   "lifecycle": "discovered",
+   "attributes": {
+    "name": "Core",
+    "order": 1
+   },
+   "attribute_sources": {
+    "name": "dmc",
+    "order": "dmc"
+   },
+   "provenance": {
+    "name": {
+     "at": "2026-11-18T03:47:51.075Z",
+     "by": "dmc"
+    },
+    "order": {
+     "at": "2026-11-18T03:47:51.075Z",
+     "by": "dmc"
+    }
+   },
+   "valid_from": "2026-11-18T03:47:51.075Z",
+   "valid_to": null,
+   "recorded_from": "2026-11-18T03:47:51.075Z",
+   "allowed_actions": [
+    {
+     "id": "scope_write",
+     "allowed": false,
+     "reason": "Needs one of: scope-owner, on an object you are responsible for"
+    }
+   ]
+  },
+  "scope-pra110--core": {
+   "id": "c56869a9-becf-451d-8b85-94b4a458605a",
+   "type": "ScopeGroup",
+   "qualified_name": "scope-pra110--core",
+   "lifecycle": "discovered",
+   "attributes": {
+    "name": "Core",
+    "order": 1
+   },
+   "attribute_sources": {
+    "name": "dmc",
+    "order": "dmc"
+   },
+   "provenance": {
+    "name": {
+     "at": "2026-11-18T03:47:50.995Z",
+     "by": "dmc"
+    },
+    "order": {
+     "at": "2026-11-18T03:47:50.995Z",
+     "by": "dmc"
+    }
+   },
+   "valid_from": "2026-11-18T03:47:50.995Z",
+   "valid_to": null,
+   "recorded_from": "2026-11-18T03:47:50.995Z",
+   "allowed_actions": [
+    {
+     "id": "scope_write",
+     "allowed": false,
+     "reason": "This is locked; an amendment creates a new version"
+    }
+   ]
+  },
+  "scope-bcbs-var--core--exposure": {
+   "id": "d20813c1-824b-48b1-8485-3d820ba5b5c5",
+   "type": "BusinessElement",
+   "qualified_name": "scope-bcbs-var--core--exposure",
+   "lifecycle": "discovered",
+   "attributes": {
+    "name": "Exposure",
+    "definition": "What is at risk"
+   },
+   "attribute_sources": {
+    "name": "dmc",
+    "definition": "dmc",
+    "criticality": "dmc"
+   },
+   "provenance": {
+    "name": {
+     "at": "2026-11-18T03:47:51.051Z",
+     "by": "dmc"
+    },
+    "definition": {
+     "at": "2026-11-18T03:47:51.051Z",
+     "by": "dmc"
+    }
+   },
+   "valid_from": "2026-11-18T03:47:51.051Z",
+   "valid_to": null,
+   "recorded_from": "2026-11-18T03:47:51.051Z",
+   "allowed_actions": [
+    {
+     "id": "scope_write",
+     "allowed": false,
+     "reason": "Needs one of: scope-owner, on an object you are responsible for"
+    }
+   ]
+  },
+  "scope-legacy-loans--core--exposure": {
+   "id": "f85ee24b-3fd1-40f4-98d8-6034304783ba",
+   "type": "BusinessElement",
+   "qualified_name": "scope-legacy-loans--core--exposure",
+   "lifecycle": "discovered",
+   "attributes": {
+    "name": "Exposure",
+    "definition": "What is at risk"
+   },
+   "attribute_sources": {
+    "name": "dmc",
+    "definition": "dmc",
+    "criticality": "dmc"
+   },
+   "provenance": {
+    "name": {
+     "at": "2026-11-18T07:02:02.521Z",
+     "by": "dmc"
+    },
+    "definition": {
+     "at": "2026-11-18T07:02:02.521Z",
+     "by": "dmc"
+    }
+   },
+   "valid_from": "2026-11-18T07:02:02.521Z",
+   "valid_to": null,
+   "recorded_from": "2026-11-18T07:02:02.521Z",
+   "allowed_actions": [
+    {
+     "id": "scope_write",
+     "allowed": false,
+     "reason": "Needs one of: scope-owner, on an object you are responsible for"
+    }
+   ]
+  },
+  "scope-onboarding--core--exposure": {
+   "id": "63bb7840-b2f3-42d2-adac-ce5e9feb209e",
+   "type": "BusinessElement",
+   "qualified_name": "scope-onboarding--core--exposure",
+   "lifecycle": "discovered",
+   "attributes": {
+    "name": "Exposure",
+    "definition": "What is at risk"
+   },
+   "attribute_sources": {
+    "name": "dmc",
+    "definition": "dmc",
+    "criticality": "dmc"
+   },
+   "provenance": {
+    "name": {
+     "at": "2026-11-18T03:47:51.084Z",
+     "by": "dmc"
+    },
+    "definition": {
+     "at": "2026-11-18T03:47:51.084Z",
+     "by": "dmc"
+    }
+   },
+   "valid_from": "2026-11-18T03:47:51.084Z",
+   "valid_to": null,
+   "recorded_from": "2026-11-18T03:47:51.084Z",
+   "allowed_actions": [
+    {
+     "id": "scope_write",
+     "allowed": false,
+     "reason": "Needs one of: scope-owner, on an object you are responsible for"
+    }
+   ]
+  },
+  "scope-pra110--core--exposure": {
+   "id": "e00c18f2-092b-430e-83e0-cce3623a5402",
+   "type": "BusinessElement",
+   "qualified_name": "scope-pra110--core--exposure",
+   "lifecycle": "discovered",
+   "attributes": {
+    "name": "Exposure",
+    "definition": "What is at risk"
+   },
+   "attribute_sources": {
+    "name": "dmc",
+    "definition": "dmc",
+    "criticality": "dmc"
+   },
+   "provenance": {
+    "name": {
+     "at": "2026-11-18T03:47:51.005Z",
+     "by": "dmc"
+    },
+    "definition": {
+     "at": "2026-11-18T03:47:51.005Z",
+     "by": "dmc"
+    }
+   },
+   "valid_from": "2026-11-18T03:47:51.005Z",
+   "valid_to": null,
+   "recorded_from": "2026-11-18T03:47:51.005Z",
+   "allowed_actions": [
+    {
+     "id": "scope_write",
+     "allowed": false,
+     "reason": "This is locked; an amendment creates a new version"
+    }
+   ]
+  },
+  "req-dm-1": {
+   "id": "802357f1-bc55-475d-bcc1-65d8b73d7bce",
+   "type": "ControlRequirement",
+   "qualified_name": "req-dm-1",
+   "lifecycle": "discovered",
+   "attributes": {
+    "kind": "technical-control-requirement",
+    "owner": "43000006",
+    "title": "Every integration is linked to at least one dataset",
+    "version": 1,
+    "reference_id": "DM-1"
+   },
+   "attribute_sources": {
+    "reference_id": "dmc",
+    "title": "dmc",
+    "kind": "dmc",
+    "owner": "dmc",
+    "confluence_link": "dmc",
+    "version": "dmc"
+   },
+   "provenance": {
+    "kind": {
+     "at": "2026-11-18T03:47:51.098Z",
+     "by": "dmc"
+    },
+    "owner": {
+     "at": "2026-11-18T03:47:51.098Z",
+     "by": "dmc"
+    },
+    "title": {
+     "at": "2026-11-18T03:47:51.098Z",
+     "by": "dmc"
+    },
+    "version": {
+     "at": "2026-11-18T03:47:51.098Z",
+     "by": "dmc"
+    },
+    "reference_id": {
+     "at": "2026-11-18T03:47:51.098Z",
+     "by": "dmc"
+    }
+   },
+   "valid_from": "2026-11-18T03:47:51.098Z",
+   "valid_to": null,
+   "recorded_from": "2026-11-18T03:47:51.098Z",
+   "allowed_actions": [
+    {
+     "id": "edit_dmc_fields",
+     "allowed": false,
+     "reason": "Needs one of: app-owner, steward, on an object you are responsible for"
+    }
+   ]
+  },
+  "req-dm-2": {
+   "id": "4edad8cd-481e-4e01-8940-cde40adc2196",
+   "type": "ControlRequirement",
+   "qualified_name": "req-dm-2",
+   "lifecycle": "discovered",
+   "attributes": {
+    "kind": "operating-instruction",
+    "owner": "43000006",
+    "title": "Every application has an owner",
+    "version": 1,
+    "reference_id": "DM-2"
+   },
+   "attribute_sources": {
+    "reference_id": "dmc",
+    "title": "dmc",
+    "kind": "dmc",
+    "owner": "dmc",
+    "confluence_link": "dmc",
+    "version": "dmc"
+   },
+   "provenance": {
+    "kind": {
+     "at": "2026-11-18T03:47:51.103Z",
+     "by": "dmc"
+    },
+    "owner": {
+     "at": "2026-11-18T03:47:51.103Z",
+     "by": "dmc"
+    },
+    "title": {
+     "at": "2026-11-18T03:47:51.103Z",
+     "by": "dmc"
+    },
+    "version": {
+     "at": "2026-11-18T03:47:51.103Z",
+     "by": "dmc"
+    },
+    "reference_id": {
+     "at": "2026-11-18T03:47:51.103Z",
+     "by": "dmc"
+    }
+   },
+   "valid_from": "2026-11-18T03:47:51.103Z",
+   "valid_to": null,
+   "recorded_from": "2026-11-18T03:47:51.103Z",
+   "allowed_actions": [
+    {
+     "id": "edit_dmc_fields",
+     "allowed": false,
+     "reason": "Needs one of: app-owner, steward, on an object you are responsible for"
+    }
+   ]
+  },
+  "dv-as-payments-ledger": {
+   "id": "6516716e-3a1c-48c6-bae8-cc72d4e224ab",
+   "type": "Assessment",
+   "qualified_name": "dv-as-payments-ledger",
+   "lifecycle": "discovered",
+   "attributes": {
+    "outcome": "datavisa-required",
+    "review_due": "2027-02-01",
+    "assessed_on": "2026-02-01"
+   },
+   "attribute_sources": {
+    "outcome": "datavisa-tool",
+    "assessed_on": "datavisa-tool",
+    "review_due": "datavisa-tool"
+   },
+   "provenance": {
+    "outcome": {
+     "at": "2026-11-18T03:47:50.919Z",
+     "by": "datavisa-tool"
+    },
+    "review_due": {
+     "at": "2026-11-18T03:47:50.919Z",
+     "by": "datavisa-tool"
+    },
+    "assessed_on": {
+     "at": "2026-11-18T03:47:50.919Z",
+     "by": "datavisa-tool"
+    }
+   },
+   "valid_from": "2026-11-18T03:47:50.919Z",
+   "valid_to": null,
+   "recorded_from": "2026-11-18T03:47:50.919Z",
+   "allowed_actions": [
+    {
+     "id": "edit_dmc_fields",
+     "allowed": false,
+     "reason": "Needs one of: app-owner, steward, on an object you are responsible for"
+    }
+   ]
+  },
+  "dv-visa-gb-hk": {
+   "id": "80b10e5f-e5bc-47f7-8518-88f783519140",
+   "type": "DataVisa",
+   "qualified_name": "dv-visa-gb-hk",
+   "lifecycle": "discovered",
+   "attributes": {
+    "status": "valid",
+    "valid_to": "2027-02-14",
+    "valid_from": "2026-02-15",
+    "source_country": "GB",
+    "target_country": "HK",
+    "data_categories": [
+     "gl:account-balance"
+    ]
+   },
+   "attribute_sources": {
+    "source_country": "datavisa-tool",
+    "target_country": "datavisa-tool",
+    "data_categories": "datavisa-tool",
+    "valid_from": "datavisa-tool",
+    "valid_to": "datavisa-tool",
+    "status": "datavisa-tool"
+   },
+   "provenance": {
+    "status": {
+     "at": "2026-11-18T03:47:50.929Z",
+     "by": "datavisa-tool"
+    },
+    "valid_to": {
+     "at": "2026-11-18T03:47:50.929Z",
+     "by": "datavisa-tool"
+    },
+    "valid_from": {
+     "at": "2026-11-18T03:47:50.929Z",
+     "by": "datavisa-tool"
+    },
+    "source_country": {
+     "at": "2026-11-18T03:47:50.929Z",
+     "by": "datavisa-tool"
+    },
+    "target_country": {
+     "at": "2026-11-18T03:47:50.929Z",
+     "by": "datavisa-tool"
+    },
+    "data_categories": {
+     "at": "2026-11-18T03:47:50.929Z",
+     "by": "datavisa-tool"
+    }
+   },
+   "valid_from": "2026-11-18T03:47:50.929Z",
+   "valid_to": null,
+   "recorded_from": "2026-11-18T03:47:50.929Z",
+   "allowed_actions": [
+    {
+     "id": "edit_dmc_fields",
+     "allowed": false,
+     "reason": "Needs one of: app-owner, steward, on an object you are responsible for"
+    }
+   ]
+  },
+  "git.core-banking": {
+   "id": "da642a4a-49e4-443d-b938-c7c2211566e8",
+   "type": "System",
+   "qualified_name": "git.core-banking",
+   "lifecycle": "discovered",
+   "attributes": {
+    "name": "Core Banking DB",
+    "platform": "postgres",
+    "environment": "prod"
+   },
+   "attribute_sources": {
+    "name": "git-json",
+    "platform": "git-json",
+    "environment": "git-json",
+    "hosting_country": "derived"
+   },
+   "provenance": {
+    "name": {
+     "at": "2026-11-18T03:47:50.721Z",
+     "by": "git-json"
+    },
+    "platform": {
+     "at": "2026-11-18T03:47:50.721Z",
+     "by": "git-json"
+    },
+    "environment": {
+     "at": "2026-11-18T03:47:50.721Z",
+     "by": "git-json"
+    }
+   },
+   "valid_from": "2026-11-18T03:47:50.721Z",
+   "valid_to": null,
+   "recorded_from": "2026-11-18T03:47:50.721Z",
+   "allowed_actions": [
+    {
+     "id": "edit_dmc_fields",
+     "allowed": false,
+     "reason": "Needs one of: app-owner, steward, on an object you are responsible for"
+    }
+   ]
+  },
+  "git.reg-reporting": {
+   "id": "10d04e3d-8401-488a-83f7-92217475ca99",
+   "type": "System",
+   "qualified_name": "git.reg-reporting",
+   "lifecycle": "discovered",
+   "attributes": {
+    "name": "Reporting DB",
+    "platform": "postgres",
+    "environment": "prod"
+   },
+   "attribute_sources": {
+    "name": "git-json",
+    "platform": "git-json",
+    "environment": "git-json",
+    "hosting_country": "derived"
+   },
+   "provenance": {
+    "name": {
+     "at": "2026-11-18T03:47:50.739Z",
+     "by": "git-json"
+    },
+    "platform": {
+     "at": "2026-11-18T03:47:50.739Z",
+     "by": "git-json"
+    },
+    "environment": {
+     "at": "2026-11-18T03:47:50.739Z",
+     "by": "git-json"
+    }
+   },
+   "valid_from": "2026-11-18T03:47:50.739Z",
+   "valid_to": null,
+   "recorded_from": "2026-11-18T03:47:50.739Z",
+   "allowed_actions": [
+    {
+     "id": "edit_dmc_fields",
+     "allowed": false,
+     "reason": "Needs one of: app-owner, steward, on an object you are responsible for"
+    }
+   ]
+  },
+  "git.risk-engine": {
+   "id": "0173c5d7-fb84-41e6-beea-5715ba989769",
+   "type": "System",
+   "qualified_name": "git.risk-engine",
+   "lifecycle": "discovered",
+   "attributes": {
+    "name": "Risk Engine DB",
+    "platform": "postgres",
+    "environment": "prod"
+   },
+   "attribute_sources": {
+    "name": "git-json",
+    "platform": "git-json",
+    "environment": "git-json",
+    "hosting_country": "derived"
+   },
+   "provenance": {
+    "name": {
+     "at": "2026-11-18T03:47:50.730Z",
+     "by": "git-json"
+    },
+    "platform": {
+     "at": "2026-11-18T03:47:50.730Z",
+     "by": "git-json"
+    },
+    "environment": {
+     "at": "2026-11-18T03:47:50.730Z",
+     "by": "git-json"
+    }
+   },
+   "valid_from": "2026-11-18T03:47:50.730Z",
+   "valid_to": null,
+   "recorded_from": "2026-11-18T03:47:50.730Z",
+   "allowed_actions": [
+    {
+     "id": "edit_dmc_fields",
+     "allowed": false,
+     "reason": "Needs one of: app-owner, steward, on an object you are responsible for"
+    }
+   ]
+  },
+  "git.core-banking/ledger": {
+   "id": "e2d79cc3-d662-4472-8012-c4029eb74d6a",
+   "type": "Schema",
+   "qualified_name": "git.core-banking/ledger",
+   "lifecycle": "discovered",
+   "attributes": {
+    "name": "ledger"
+   },
+   "attribute_sources": {
+    "name": "git-json"
+   },
+   "provenance": {
+    "name": {
+     "at": "2026-11-18T03:47:50.749Z",
+     "by": "git-json"
+    }
+   },
+   "valid_from": "2026-11-18T03:47:50.749Z",
+   "valid_to": null,
+   "recorded_from": "2026-11-18T03:47:50.749Z",
+   "allowed_actions": [
+    {
+     "id": "edit_dmc_fields",
+     "allowed": false,
+     "reason": "Needs one of: app-owner, steward, on an object you are responsible for"
+    }
+   ]
+  },
+  "git.reg-reporting/returns": {
+   "id": "6026cad5-6529-49c7-b788-db79183fbc87",
+   "type": "Schema",
+   "qualified_name": "git.reg-reporting/returns",
+   "lifecycle": "discovered",
+   "attributes": {
+    "name": "returns"
+   },
+   "attribute_sources": {
+    "name": "git-json"
+   },
+   "provenance": {
+    "name": {
+     "at": "2026-11-18T03:47:50.843Z",
+     "by": "git-json"
+    }
+   },
+   "valid_from": "2026-11-18T03:47:50.843Z",
+   "valid_to": null,
+   "recorded_from": "2026-11-18T03:47:50.843Z",
+   "allowed_actions": [
+    {
+     "id": "edit_dmc_fields",
+     "allowed": false,
+     "reason": "Needs one of: app-owner, steward, on an object you are responsible for"
+    }
+   ]
+  },
+  "git.risk-engine/exposure": {
+   "id": "7e635429-34b5-49c8-b7f4-81fcfa95e6b2",
+   "type": "Schema",
+   "qualified_name": "git.risk-engine/exposure",
+   "lifecycle": "discovered",
+   "attributes": {
+    "name": "exposure"
+   },
+   "attribute_sources": {
+    "name": "git-json"
+   },
+   "provenance": {
+    "name": {
+     "at": "2026-11-18T03:47:50.795Z",
+     "by": "git-json"
+    }
+   },
+   "valid_from": "2026-11-18T03:47:50.795Z",
+   "valid_to": null,
+   "recorded_from": "2026-11-18T03:47:50.795Z",
+   "allowed_actions": [
+    {
+     "id": "edit_dmc_fields",
+     "allowed": false,
+     "reason": "Needs one of: app-owner, steward, on an object you are responsible for"
+    }
+   ]
+  },
+  "reg:bcbs239": {
+   "id": "7f2981ec-dc89-45a4-a8bc-10f1950e057d",
+   "type": "Regulation",
+   "qualified_name": "reg:bcbs239",
+   "lifecycle": "discovered",
+   "attributes": {
+    "code": "BCBS239",
+    "name": "BCBS 239 risk data aggregation"
+   },
+   "attribute_sources": {
+    "code": "dmc",
+    "name": "dmc"
+   },
+   "provenance": {
+    "code": {
+     "at": "2026-11-18T03:47:50.716Z",
+     "by": "dmc"
+    },
+    "name": {
+     "at": "2026-11-18T03:47:50.716Z",
+     "by": "dmc"
+    }
+   },
+   "valid_from": "2026-11-18T03:47:50.716Z",
+   "valid_to": null,
+   "recorded_from": "2026-11-18T03:47:50.716Z",
+   "allowed_actions": [
+    {
+     "id": "edit_dmc_fields",
+     "allowed": false,
+     "reason": "Needs one of: app-owner, steward, on an object you are responsible for"
+    }
+   ]
+  },
+  "reg:pra110": {
+   "id": "3c30a0dd-3094-4d8d-9c6b-93a5ff41ccc1",
+   "type": "Regulation",
+   "qualified_name": "reg:pra110",
+   "lifecycle": "discovered",
+   "attributes": {
+    "code": "PRA110",
+    "name": "PRA110 cash flow mismatch"
+   },
+   "attribute_sources": {
+    "code": "dmc",
+    "name": "dmc"
+   },
+   "provenance": {
+    "code": {
+     "at": "2026-11-18T03:47:50.711Z",
+     "by": "dmc"
+    },
+    "name": {
+     "at": "2026-11-18T03:47:50.711Z",
+     "by": "dmc"
+    }
+   },
+   "valid_from": "2026-11-18T03:47:50.711Z",
+   "valid_to": null,
+   "recorded_from": "2026-11-18T03:47:50.711Z",
+   "allowed_actions": [
+    {
+     "id": "edit_dmc_fields",
+     "allowed": false,
+     "reason": "Needs one of: app-owner, steward, on an object you are responsible for"
+    }
+   ]
+  },
+  "dstorm:rc-1y": {
+   "id": "6e13d517-82ac-475c-9b06-58b00fc4e158",
+   "type": "RecordClass",
+   "qualified_name": "dstorm:rc-1y",
+   "lifecycle": "discovered",
+   "attributes": {
+    "code": "RC-1Y",
+    "name": "One year",
+    "description": "Operational logs"
+   },
+   "attribute_sources": {
+    "code": "dstorm",
+    "name": "dstorm",
+    "description": "dstorm"
+   },
+   "provenance": {
+    "code": {
+     "at": "2026-11-18T03:47:50.706Z",
+     "by": "dstorm"
+    },
+    "name": {
+     "at": "2026-11-18T03:47:50.706Z",
+     "by": "dstorm"
+    },
+    "description": {
+     "at": "2026-11-18T03:47:50.706Z",
+     "by": "dstorm"
+    }
+   },
+   "valid_from": "2026-11-18T03:47:50.706Z",
+   "valid_to": null,
+   "recorded_from": "2026-11-18T03:47:50.706Z",
+   "allowed_actions": [
+    {
+     "id": "edit_dmc_fields",
+     "allowed": false,
+     "reason": "Needs one of: app-owner, steward, on an object you are responsible for"
+    }
+   ]
+  },
+  "dstorm:rc-7y": {
+   "id": "edbcf6b0-9766-45b9-aef5-a803f63997e8",
+   "type": "RecordClass",
+   "qualified_name": "dstorm:rc-7y",
+   "lifecycle": "discovered",
+   "attributes": {
+    "code": "RC-7Y",
+    "name": "Seven years",
+    "description": "Financial records kept seven years"
+   },
+   "attribute_sources": {
+    "code": "dstorm",
+    "name": "dstorm",
+    "description": "dstorm"
+   },
+   "provenance": {
+    "code": {
+     "at": "2026-11-18T03:47:50.701Z",
+     "by": "dstorm"
+    },
+    "name": {
+     "at": "2026-11-18T03:47:50.701Z",
+     "by": "dstorm"
+    },
+    "description": {
+     "at": "2026-11-18T03:47:50.701Z",
+     "by": "dstorm"
+    }
+   },
+   "valid_from": "2026-11-18T03:47:50.701Z",
+   "valid_to": null,
+   "recorded_from": "2026-11-18T03:47:50.701Z",
+   "allowed_actions": [
+    {
+     "id": "edit_dmc_fields",
+     "allowed": false,
+     "reason": "Needs one of: app-owner, steward, on an object you are responsible for"
+    }
+   ]
+  }
+ },
+ "rel": {
+  "43000001": {
+   "out": [],
+   "in": []
+  },
+  "43000002": {
+   "out": [],
+   "in": []
+  },
+  "43000003": {
+   "out": [],
+   "in": []
+  },
+  "43000004": {
+   "out": [],
+   "in": []
+  },
+  "43000005": {
+   "out": [],
+   "in": []
+  },
+  "43000006": {
+   "out": [],
+   "in": []
+  },
+  "43000007": {
+   "out": [],
+   "in": []
+  },
+  "43000008": {
+   "out": [],
+   "in": []
+  },
+  "43000009": {
+   "out": [],
+   "in": []
+  },
+  "43000010": {
+   "out": [],
+   "in": []
+  },
+  "43000098": {
+   "out": [],
+   "in": []
+  },
+  "04300011": {
+   "out": [],
+   "in": []
+  },
+  "app-core-banking": {
+   "out": [
+    {
+     "name": "target_of",
+     "from": "app-core-banking",
+     "to": "int-payments-to-ledger",
+     "lifecycle": "discovered",
+     "source": "servicenow",
+     "valid_from": "2026-11-18T03:47:50.588Z",
+     "valid_to": null
+    },
+    {
+     "name": "source_of",
+     "from": "app-core-banking",
+     "to": "int-ledger-to-risk",
+     "lifecycle": "discovered",
+     "source": "servicenow",
+     "valid_from": "2026-11-18T03:47:50.597Z",
+     "valid_to": null
+    },
+    {
+     "name": "source_of",
+     "from": "app-core-banking",
+     "to": "int-ledger-to-lake",
+     "lifecycle": "discovered",
+     "source": "servicenow",
+     "valid_from": "2026-11-18T03:47:50.624Z",
+     "valid_to": null
+    },
+    {
+     "name": "owns",
+     "from": "app-core-banking",
+     "to": "git.core-banking",
+     "lifecycle": "discovered",
+     "source": "servicenow",
+     "valid_from": "2026-11-18T03:47:50.727Z",
+     "valid_to": null
+    }
+   ],
+   "in": []
+  },
+  "app-crm": {
+   "out": [
+    {
+     "name": "source_of",
+     "from": "app-crm",
+     "to": "int-crm-to-payments",
+     "lifecycle": "discovered",
+     "source": "servicenow",
+     "valid_from": "2026-11-18T03:47:50.637Z",
+     "valid_to": null
+    }
+   ],
+   "in": []
+  },
+  "app-data-lake": {
+   "out": [
+    {
+     "name": "target_of",
+     "from": "app-data-lake",
+     "to": "int-ledger-to-lake",
+     "lifecycle": "discovered",
+     "source": "servicenow",
+     "valid_from": "2026-11-18T03:47:50.628Z",
+     "valid_to": null
+    }
+   ],
+   "in": []
+  },
+  "app-payments-hub": {
+   "out": [
+    {
+     "name": "source_of",
+     "from": "app-payments-hub",
+     "to": "int-payments-to-ledger",
+     "lifecycle": "discovered",
+     "source": "servicenow",
+     "valid_from": "2026-11-18T03:47:50.582Z",
+     "valid_to": null
+    },
+    {
+     "name": "target_of",
+     "from": "app-payments-hub",
+     "to": "int-crm-to-payments",
+     "lifecycle": "discovered",
+     "source": "servicenow",
+     "valid_from": "2026-11-18T03:47:50.642Z",
+     "valid_to": null
+    }
+   ],
+   "in": []
+  },
+  "app-reg-reporting": {
+   "out": [
+    {
+     "name": "target_of",
+     "from": "app-reg-reporting",
+     "to": "int-risk-to-reporting",
+     "lifecycle": "discovered",
+     "source": "servicenow",
+     "valid_from": "2026-11-18T03:47:50.615Z",
+     "valid_to": null
+    },
+    {
+     "name": "owns",
+     "from": "app-reg-reporting",
+     "to": "git.reg-reporting",
+     "lifecycle": "discovered",
+     "source": "servicenow",
+     "valid_from": "2026-11-18T03:47:50.745Z",
+     "valid_to": null
+    }
+   ],
+   "in": []
+  },
+  "app-risk-engine": {
+   "out": [
+    {
+     "name": "target_of",
+     "from": "app-risk-engine",
+     "to": "int-ledger-to-risk",
+     "lifecycle": "discovered",
+     "source": "servicenow",
+     "valid_from": "2026-11-18T03:47:50.601Z",
+     "valid_to": null
+    },
+    {
+     "name": "source_of",
+     "from": "app-risk-engine",
+     "to": "int-risk-to-reporting",
+     "lifecycle": "discovered",
+     "source": "servicenow",
+     "valid_from": "2026-11-18T03:47:50.610Z",
+     "valid_to": null
+    },
+    {
+     "name": "owns",
+     "from": "app-risk-engine",
+     "to": "git.risk-engine",
+     "lifecycle": "discovered",
+     "source": "servicenow",
+     "valid_from": "2026-11-18T03:47:50.736Z",
+     "valid_to": null
+    }
+   ],
+   "in": []
+  },
+  "int-crm-to-payments": {
+   "out": [],
+   "in": [
+    {
+     "name": "source_of",
+     "from": "app-crm",
+     "to": "int-crm-to-payments",
+     "lifecycle": "discovered",
+     "source": "servicenow",
+     "valid_from": "2026-11-18T03:47:50.637Z",
+     "valid_to": null
+    },
+    {
+     "name": "target_of",
+     "from": "app-payments-hub",
+     "to": "int-crm-to-payments",
+     "lifecycle": "discovered",
+     "source": "servicenow",
+     "valid_from": "2026-11-18T03:47:50.642Z",
+     "valid_to": null
+    },
+    {
+     "name": "flows_through",
+     "from": "scope-onboarding",
+     "to": "int-crm-to-payments",
+     "lifecycle": "discovered",
+     "source": "dmc",
+     "valid_from": "2026-11-18T03:47:51.094Z",
+     "valid_to": null
+    },
+    {
+     "name": "over",
+     "from": "int-crm-to-payments--in-gb",
+     "to": "int-crm-to-payments",
+     "lifecycle": "discovered",
+     "source": "derived",
+     "valid_from": "2026-11-18T04:00:14.741Z",
+     "valid_to": null
+    }
+   ]
+  },
+  "int-ledger-to-lake": {
+   "out": [],
+   "in": [
+    {
+     "name": "source_of",
+     "from": "app-core-banking",
+     "to": "int-ledger-to-lake",
+     "lifecycle": "discovered",
+     "source": "servicenow",
+     "valid_from": "2026-11-18T03:47:50.624Z",
+     "valid_to": null
+    },
+    {
+     "name": "target_of",
+     "from": "app-data-lake",
+     "to": "int-ledger-to-lake",
+     "lifecycle": "discovered",
+     "source": "servicenow",
+     "valid_from": "2026-11-18T03:47:50.628Z",
+     "valid_to": null
+    },
+    {
+     "name": "over",
+     "from": "int-ledger-to-lake--hk-gb",
+     "to": "int-ledger-to-lake",
+     "lifecycle": "discovered",
+     "source": "derived",
+     "valid_from": "2026-11-18T04:00:14.761Z",
+     "valid_to": null
+    },
+    {
+     "name": "flows_through",
+     "from": "scope-legacy-loans",
+     "to": "int-ledger-to-lake",
+     "lifecycle": "discovered",
+     "source": "dmc",
+     "valid_from": "2026-11-18T07:02:02.534Z",
+     "valid_to": null
+    }
+   ]
+  },
+  "int-ledger-to-risk": {
+   "out": [
+    {
+     "name": "transfers",
+     "from": "int-ledger-to-risk",
+     "to": "int-ledger-to-risk--account-exposures",
+     "lifecycle": "discovered",
+     "source": "dmc",
+     "valid_from": "2026-11-18T03:47:50.967Z",
+     "valid_to": null
+    }
+   ],
+   "in": [
+    {
+     "name": "source_of",
+     "from": "app-core-banking",
+     "to": "int-ledger-to-risk",
+     "lifecycle": "discovered",
+     "source": "servicenow",
+     "valid_from": "2026-11-18T03:47:50.597Z",
+     "valid_to": null
+    },
+    {
+     "name": "target_of",
+     "from": "app-risk-engine",
+     "to": "int-ledger-to-risk",
+     "lifecycle": "discovered",
+     "source": "servicenow",
+     "valid_from": "2026-11-18T03:47:50.601Z",
+     "valid_to": null
+    },
+    {
+     "name": "flows_through",
+     "from": "scope-pra110",
+     "to": "int-ledger-to-risk",
+     "lifecycle": "discovered",
+     "source": "dmc",
+     "valid_from": "2026-11-18T03:47:51.020Z",
+     "valid_to": null
+    },
+    {
+     "name": "flows_through",
+     "from": "scope-bcbs-var",
+     "to": "int-ledger-to-risk",
+     "lifecycle": "discovered",
+     "source": "dmc",
+     "valid_from": "2026-11-18T03:47:51.062Z",
+     "valid_to": null
+    },
+    {
+     "name": "over",
+     "from": "int-ledger-to-risk--hk-gb",
+     "to": "int-ledger-to-risk",
+     "lifecycle": "discovered",
+     "source": "derived",
+     "valid_from": "2026-11-18T04:00:14.782Z",
+     "valid_to": null
+    }
+   ]
+  },
+  "int-payments-to-ledger": {
+   "out": [
+    {
+     "name": "assessed_by",
+     "from": "int-payments-to-ledger",
+     "to": "dv-as-payments-ledger",
+     "lifecycle": "discovered",
+     "source": "datavisa-tool",
+     "valid_from": "2026-11-18T03:47:50.926Z",
+     "valid_to": null
+    },
+    {
+     "name": "transfers",
+     "from": "int-payments-to-ledger",
+     "to": "int-payments-to-ledger--payment-postings",
+     "lifecycle": "discovered",
+     "source": "dmc",
+     "valid_from": "2026-11-18T03:47:50.940Z",
+     "valid_to": null
+    }
+   ],
+   "in": [
+    {
+     "name": "source_of",
+     "from": "app-payments-hub",
+     "to": "int-payments-to-ledger",
+     "lifecycle": "discovered",
+     "source": "servicenow",
+     "valid_from": "2026-11-18T03:47:50.582Z",
+     "valid_to": null
+    },
+    {
+     "name": "target_of",
+     "from": "app-core-banking",
+     "to": "int-payments-to-ledger",
+     "lifecycle": "discovered",
+     "source": "servicenow",
+     "valid_from": "2026-11-18T03:47:50.588Z",
+     "valid_to": null
+    },
+    {
+     "name": "over",
+     "from": "int-payments-to-ledger--gb-hk",
+     "to": "int-payments-to-ledger",
+     "lifecycle": "discovered",
+     "source": "derived",
+     "valid_from": "2026-11-18T04:00:14.806Z",
+     "valid_to": null
+    }
+   ]
+  },
+  "int-risk-to-reporting": {
+   "out": [],
+   "in": [
+    {
+     "name": "source_of",
+     "from": "app-risk-engine",
+     "to": "int-risk-to-reporting",
+     "lifecycle": "discovered",
+     "source": "servicenow",
+     "valid_from": "2026-11-18T03:47:50.610Z",
+     "valid_to": null
+    },
+    {
+     "name": "target_of",
+     "from": "app-reg-reporting",
+     "to": "int-risk-to-reporting",
+     "lifecycle": "discovered",
+     "source": "servicenow",
+     "valid_from": "2026-11-18T03:47:50.615Z",
+     "valid_to": null
+    },
+    {
+     "name": "flows_through",
+     "from": "scope-pra110",
+     "to": "int-risk-to-reporting",
+     "lifecycle": "discovered",
+     "source": "dmc",
+     "valid_from": "2026-11-18T03:47:51.016Z",
+     "valid_to": null
+    }
+   ]
+  },
+  "int-ledger-to-risk--account-exposures": {
+   "out": [
+    {
+     "name": "recorded_as",
+     "from": "int-ledger-to-risk--account-exposures",
+     "to": "dstorm:rc-7y",
+     "lifecycle": "discovered",
+     "source": "dmc",
+     "valid_from": "2026-11-18T03:47:50.972Z",
+     "valid_to": null
+    },
+    {
+     "name": "in_category",
+     "from": "int-ledger-to-risk--account-exposures",
+     "to": "gl:credit-exposure",
+     "lifecycle": "discovered",
+     "source": "dmc",
+     "valid_from": "2026-11-18T03:47:50.977Z",
+     "valid_to": null
+    },
+    {
+     "name": "realised_by",
+     "from": "int-ledger-to-risk--account-exposures",
+     "to": "git.risk-engine/exposure/positions/exposure_at_default",
+     "lifecycle": "discovered",
+     "source": "dmc",
+     "valid_from": "2026-11-18T03:47:50.981Z",
+     "valid_to": null
+    }
+   ],
+   "in": [
+    {
+     "name": "transfers",
+     "from": "int-ledger-to-risk",
+     "to": "int-ledger-to-risk--account-exposures",
+     "lifecycle": "discovered",
+     "source": "dmc",
+     "valid_from": "2026-11-18T03:47:50.967Z",
+     "valid_to": null
+    }
+   ]
+  },
+  "int-payments-to-ledger--payment-postings": {
+   "out": [
+    {
+     "name": "recorded_as",
+     "from": "int-payments-to-ledger--payment-postings",
+     "to": "dstorm:rc-7y",
+     "lifecycle": "discovered",
+     "source": "dmc",
+     "valid_from": "2026-11-18T03:47:50.945Z",
+     "valid_to": null
+    },
+    {
+     "name": "in_category",
+     "from": "int-payments-to-ledger--payment-postings",
+     "to": "gl:account-balance",
+     "lifecycle": "discovered",
+     "source": "dmc",
+     "valid_from": "2026-11-18T03:47:50.949Z",
+     "valid_to": null
+    },
+    {
+     "name": "in_category",
+     "from": "int-payments-to-ledger--payment-postings",
+     "to": "gl:customer-pii",
+     "lifecycle": "discovered",
+     "source": "dmc",
+     "valid_from": "2026-11-18T03:47:50.954Z",
+     "valid_to": null
+    },
+    {
+     "name": "realised_by",
+     "from": "int-payments-to-ledger--payment-postings",
+     "to": "git.core-banking/ledger/accounts/closing_balance",
+     "lifecycle": "discovered",
+     "source": "dmc",
+     "valid_from": "2026-11-18T03:47:50.958Z",
+     "valid_to": null
+    }
+   ],
+   "in": [
+    {
+     "name": "transfers",
+     "from": "int-payments-to-ledger",
+     "to": "int-payments-to-ledger--payment-postings",
+     "lifecycle": "discovered",
+     "source": "dmc",
+     "valid_from": "2026-11-18T03:47:50.940Z",
+     "valid_to": null
+    }
+   ]
+  },
+  "git.core-banking/ledger/accounts": {
+   "out": [
+    {
+     "name": "contains",
+     "from": "git.core-banking/ledger/accounts",
+     "to": "git.core-banking/ledger/accounts/account_id",
+     "lifecycle": "discovered",
+     "source": "git-json",
+     "valid_from": "2026-11-18T03:47:50.774Z",
+     "valid_to": null
+    },
+    {
+     "name": "contains",
+     "from": "git.core-banking/ledger/accounts",
+     "to": "git.core-banking/ledger/accounts/customer_name",
+     "lifecycle": "discovered",
+     "source": "git-json",
+     "valid_from": "2026-11-18T03:47:50.783Z",
+     "valid_to": null
+    },
+    {
+     "name": "contains",
+     "from": "git.core-banking/ledger/accounts",
+     "to": "git.core-banking/ledger/accounts/closing_balance",
+     "lifecycle": "discovered",
+     "source": "git-json",
+     "valid_from": "2026-11-18T03:47:50.792Z",
+     "valid_to": null
+    }
+   ],
+   "in": [
+    {
+     "name": "contains",
+     "from": "git.core-banking/ledger",
+     "to": "git.core-banking/ledger/accounts",
+     "lifecycle": "discovered",
+     "source": "git-json",
+     "valid_from": "2026-11-18T03:47:50.764Z",
+     "valid_to": null
+    }
+   ]
+  },
+  "git.reg-reporting/returns/pra110_lines": {
+   "out": [
+    {
+     "name": "contains",
+     "from": "git.reg-reporting/returns/pra110_lines",
+     "to": "git.reg-reporting/returns/pra110_lines/line_id",
+     "lifecycle": "discovered",
+     "source": "git-json",
+     "valid_from": "2026-11-18T03:47:50.869Z",
+     "valid_to": null
+    },
+    {
+     "name": "contains",
+     "from": "git.reg-reporting/returns/pra110_lines",
+     "to": "git.reg-reporting/returns/pra110_lines/position_id",
+     "lifecycle": "discovered",
+     "source": "git-json",
+     "valid_from": "2026-11-18T03:47:50.879Z",
+     "valid_to": null
+    },
+    {
+     "name": "contains",
+     "from": "git.reg-reporting/returns/pra110_lines",
+     "to": "git.reg-reporting/returns/pra110_lines/amount",
+     "lifecycle": "discovered",
+     "source": "git-json",
+     "valid_from": "2026-11-18T03:47:50.889Z",
+     "valid_to": null
+    }
+   ],
+   "in": [
+    {
+     "name": "contains",
+     "from": "git.reg-reporting/returns",
+     "to": "git.reg-reporting/returns/pra110_lines",
+     "lifecycle": "discovered",
+     "source": "git-json",
+     "valid_from": "2026-11-18T03:47:50.859Z",
+     "valid_to": null
+    }
+   ]
+  },
+  "git.risk-engine/exposure/positions": {
+   "out": [
+    {
+     "name": "contains",
+     "from": "git.risk-engine/exposure/positions",
+     "to": "git.risk-engine/exposure/positions/position_id",
+     "lifecycle": "discovered",
+     "source": "git-json",
+     "valid_from": "2026-11-18T03:47:50.820Z",
+     "valid_to": null
+    },
+    {
+     "name": "contains",
+     "from": "git.risk-engine/exposure/positions",
+     "to": "git.risk-engine/exposure/positions/account_id",
+     "lifecycle": "discovered",
+     "source": "git-json",
+     "valid_from": "2026-11-18T03:47:50.830Z",
+     "valid_to": null
+    },
+    {
+     "name": "contains",
+     "from": "git.risk-engine/exposure/positions",
+     "to": "git.risk-engine/exposure/positions/exposure_at_default",
+     "lifecycle": "discovered",
+     "source": "git-json",
+     "valid_from": "2026-11-18T03:47:50.839Z",
+     "valid_to": null
+    }
+   ],
+   "in": [
+    {
+     "name": "contains",
+     "from": "git.risk-engine/exposure",
+     "to": "git.risk-engine/exposure/positions",
+     "lifecycle": "discovered",
+     "source": "git-json",
+     "valid_from": "2026-11-18T03:47:50.811Z",
+     "valid_to": null
+    }
+   ]
+  },
+  "git.core-banking/ledger/accounts/account_id": {
+   "out": [],
+   "in": [
+    {
+     "name": "contains",
+     "from": "git.core-banking/ledger/accounts",
+     "to": "git.core-banking/ledger/accounts/account_id",
+     "lifecycle": "discovered",
+     "source": "git-json",
+     "valid_from": "2026-11-18T03:47:50.774Z",
+     "valid_to": null
+    },
+    {
+     "name": "derives_from",
+     "from": "git.risk-engine/exposure/positions/account_id",
+     "to": "git.core-banking/ledger/accounts/account_id",
+     "lifecycle": "discovered",
+     "source": "git-json",
+     "valid_from": "2026-11-18T03:47:50.897Z",
+     "valid_to": null
+    }
+   ]
+  },
+  "git.core-banking/ledger/accounts/closing_balance": {
+   "out": [
+    {
+     "name": "represents",
+     "from": "git.core-banking/ledger/accounts/closing_balance",
+     "to": "gl:closing-balance",
+     "lifecycle": "discovered",
+     "source": "dmc",
+     "valid_from": "2026-11-18T03:47:50.911Z",
+     "valid_to": null
+    }
+   ],
+   "in": [
+    {
+     "name": "contains",
+     "from": "git.core-banking/ledger/accounts",
+     "to": "git.core-banking/ledger/accounts/closing_balance",
+     "lifecycle": "discovered",
+     "source": "git-json",
+     "valid_from": "2026-11-18T03:47:50.792Z",
+     "valid_to": null
+    },
+    {
+     "name": "derives_from",
+     "from": "git.risk-engine/exposure/positions/exposure_at_default",
+     "to": "git.core-banking/ledger/accounts/closing_balance",
+     "lifecycle": "discovered",
+     "source": "git-json",
+     "valid_from": "2026-11-18T03:47:50.893Z",
+     "valid_to": null
+    },
+    {
+     "name": "realised_by",
+     "from": "int-payments-to-ledger--payment-postings",
+     "to": "git.core-banking/ledger/accounts/closing_balance",
+     "lifecycle": "discovered",
+     "source": "dmc",
+     "valid_from": "2026-11-18T03:47:50.958Z",
+     "valid_to": null
+    }
+   ]
+  },
+  "git.core-banking/ledger/accounts/customer_name": {
+   "out": [],
+   "in": [
+    {
+     "name": "contains",
+     "from": "git.core-banking/ledger/accounts",
+     "to": "git.core-banking/ledger/accounts/customer_name",
+     "lifecycle": "discovered",
+     "source": "git-json",
+     "valid_from": "2026-11-18T03:47:50.783Z",
+     "valid_to": null
+    }
+   ]
+  },
+  "git.reg-reporting/returns/pra110_lines/amount": {
+   "out": [
+    {
+     "name": "derives_from",
+     "from": "git.reg-reporting/returns/pra110_lines/amount",
+     "to": "git.risk-engine/exposure/positions/exposure_at_default",
+     "lifecycle": "discovered",
+     "source": "git-json",
+     "valid_from": "2026-11-18T03:47:50.902Z",
+     "valid_to": null
+    }
+   ],
+   "in": [
+    {
+     "name": "contains",
+     "from": "git.reg-reporting/returns/pra110_lines",
+     "to": "git.reg-reporting/returns/pra110_lines/amount",
+     "lifecycle": "discovered",
+     "source": "git-json",
+     "valid_from": "2026-11-18T03:47:50.889Z",
+     "valid_to": null
+    }
+   ]
+  },
+  "git.reg-reporting/returns/pra110_lines/line_id": {
+   "out": [],
+   "in": [
+    {
+     "name": "contains",
+     "from": "git.reg-reporting/returns/pra110_lines",
+     "to": "git.reg-reporting/returns/pra110_lines/line_id",
+     "lifecycle": "discovered",
+     "source": "git-json",
+     "valid_from": "2026-11-18T03:47:50.869Z",
+     "valid_to": null
+    }
+   ]
+  },
+  "git.reg-reporting/returns/pra110_lines/position_id": {
+   "out": [
+    {
+     "name": "derives_from",
+     "from": "git.reg-reporting/returns/pra110_lines/position_id",
+     "to": "git.risk-engine/exposure/positions/position_id",
+     "lifecycle": "discovered",
+     "source": "git-json",
+     "valid_from": "2026-11-18T03:47:50.906Z",
+     "valid_to": null
+    }
+   ],
+   "in": [
+    {
+     "name": "contains",
+     "from": "git.reg-reporting/returns/pra110_lines",
+     "to": "git.reg-reporting/returns/pra110_lines/position_id",
+     "lifecycle": "discovered",
+     "source": "git-json",
+     "valid_from": "2026-11-18T03:47:50.879Z",
+     "valid_to": null
+    }
+   ]
+  },
+  "git.risk-engine/exposure/positions/account_id": {
+   "out": [
+    {
+     "name": "derives_from",
+     "from": "git.risk-engine/exposure/positions/account_id",
+     "to": "git.core-banking/ledger/accounts/account_id",
+     "lifecycle": "discovered",
+     "source": "git-json",
+     "valid_from": "2026-11-18T03:47:50.897Z",
+     "valid_to": null
+    }
+   ],
+   "in": [
+    {
+     "name": "contains",
+     "from": "git.risk-engine/exposure/positions",
+     "to": "git.risk-engine/exposure/positions/account_id",
+     "lifecycle": "discovered",
+     "source": "git-json",
+     "valid_from": "2026-11-18T03:47:50.830Z",
+     "valid_to": null
+    }
+   ]
+  },
+  "git.risk-engine/exposure/positions/exposure_at_default": {
+   "out": [
+    {
+     "name": "derives_from",
+     "from": "git.risk-engine/exposure/positions/exposure_at_default",
+     "to": "git.core-banking/ledger/accounts/closing_balance",
+     "lifecycle": "discovered",
+     "source": "git-json",
+     "valid_from": "2026-11-18T03:47:50.893Z",
+     "valid_to": null
+    },
+    {
+     "name": "represents",
+     "from": "git.risk-engine/exposure/positions/exposure_at_default",
+     "to": "gl:exposure-at-default",
+     "lifecycle": "discovered",
+     "source": "dmc",
+     "valid_from": "2026-11-18T03:47:50.916Z",
+     "valid_to": null
+    }
+   ],
+   "in": [
+    {
+     "name": "contains",
+     "from": "git.risk-engine/exposure/positions",
+     "to": "git.risk-engine/exposure/positions/exposure_at_default",
+     "lifecycle": "discovered",
+     "source": "git-json",
+     "valid_from": "2026-11-18T03:47:50.839Z",
+     "valid_to": null
+    },
+    {
+     "name": "derives_from",
+     "from": "git.reg-reporting/returns/pra110_lines/amount",
+     "to": "git.risk-engine/exposure/positions/exposure_at_default",
+     "lifecycle": "discovered",
+     "source": "git-json",
+     "valid_from": "2026-11-18T03:47:50.902Z",
+     "valid_to": null
+    },
+    {
+     "name": "realised_by",
+     "from": "int-ledger-to-risk--account-exposures",
+     "to": "git.risk-engine/exposure/positions/exposure_at_default",
+     "lifecycle": "discovered",
+     "source": "dmc",
+     "valid_from": "2026-11-18T03:47:50.981Z",
+     "valid_to": null
+    },
+    {
+     "name": "implemented_by",
+     "from": "scope-pra110--core--exposure",
+     "to": "git.risk-engine/exposure/positions/exposure_at_default",
+     "lifecycle": "discovered",
+     "source": "dmc",
+     "valid_from": "2026-11-18T03:47:51.024Z",
+     "valid_to": null
+    }
+   ]
+  },
+  "git.risk-engine/exposure/positions/position_id": {
+   "out": [],
+   "in": [
+    {
+     "name": "contains",
+     "from": "git.risk-engine/exposure/positions",
+     "to": "git.risk-engine/exposure/positions/position_id",
+     "lifecycle": "discovered",
+     "source": "git-json",
+     "valid_from": "2026-11-18T03:47:50.820Z",
+     "valid_to": null
+    },
+    {
+     "name": "derives_from",
+     "from": "git.reg-reporting/returns/pra110_lines/position_id",
+     "to": "git.risk-engine/exposure/positions/position_id",
+     "lifecycle": "discovered",
+     "source": "git-json",
+     "valid_from": "2026-11-18T03:47:50.906Z",
+     "valid_to": null
+    }
+   ]
+  },
+  "gl:closing-balance": {
+   "out": [
+    {
+     "name": "part_of",
+     "from": "gl:closing-balance",
+     "to": "gl:account-balance",
+     "lifecycle": "discovered",
+     "source": "collibra",
+     "valid_from": "2026-11-18T03:47:50.688Z",
+     "valid_to": null
+    }
+   ],
+   "in": [
+    {
+     "name": "represents",
+     "from": "git.core-banking/ledger/accounts/closing_balance",
+     "to": "gl:closing-balance",
+     "lifecycle": "discovered",
+     "source": "dmc",
+     "valid_from": "2026-11-18T03:47:50.911Z",
+     "valid_to": null
+    }
+   ]
+  },
+  "gl:exposure-at-default": {
+   "out": [
+    {
+     "name": "part_of",
+     "from": "gl:exposure-at-default",
+     "to": "gl:credit-exposure",
+     "lifecycle": "discovered",
+     "source": "collibra",
+     "valid_from": "2026-11-18T03:47:50.698Z",
+     "valid_to": null
+    }
+   ],
+   "in": [
+    {
+     "name": "represents",
+     "from": "git.risk-engine/exposure/positions/exposure_at_default",
+     "to": "gl:exposure-at-default",
+     "lifecycle": "discovered",
+     "source": "dmc",
+     "valid_from": "2026-11-18T03:47:50.916Z",
+     "valid_to": null
+    }
+   ]
+  },
+  "gl:account-balance": {
+   "out": [
+    {
+     "name": "part_of",
+     "from": "gl:account-balance",
+     "to": "gl:finance",
+     "lifecycle": "discovered",
+     "source": "collibra",
+     "valid_from": "2026-11-18T03:47:50.670Z",
+     "valid_to": null
+    }
+   ],
+   "in": [
+    {
+     "name": "part_of",
+     "from": "gl:closing-balance",
+     "to": "gl:account-balance",
+     "lifecycle": "discovered",
+     "source": "collibra",
+     "valid_from": "2026-11-18T03:47:50.688Z",
+     "valid_to": null
+    },
+    {
+     "name": "in_category",
+     "from": "int-payments-to-ledger--payment-postings",
+     "to": "gl:account-balance",
+     "lifecycle": "discovered",
+     "source": "dmc",
+     "valid_from": "2026-11-18T03:47:50.949Z",
+     "valid_to": null
+    }
+   ]
+  },
+  "gl:credit-exposure": {
+   "out": [
+    {
+     "name": "part_of",
+     "from": "gl:credit-exposure",
+     "to": "gl:risk",
+     "lifecycle": "discovered",
+     "source": "collibra",
+     "valid_from": "2026-11-18T03:47:50.679Z",
+     "valid_to": null
+    }
+   ],
+   "in": [
+    {
+     "name": "part_of",
+     "from": "gl:exposure-at-default",
+     "to": "gl:credit-exposure",
+     "lifecycle": "discovered",
+     "source": "collibra",
+     "valid_from": "2026-11-18T03:47:50.698Z",
+     "valid_to": null
+    },
+    {
+     "name": "in_category",
+     "from": "int-ledger-to-risk--account-exposures",
+     "to": "gl:credit-exposure",
+     "lifecycle": "discovered",
+     "source": "dmc",
+     "valid_from": "2026-11-18T03:47:50.977Z",
+     "valid_to": null
+    }
+   ]
+  },
+  "gl:customer-pii": {
+   "out": [
+    {
+     "name": "part_of",
+     "from": "gl:customer-pii",
+     "to": "gl:finance",
+     "lifecycle": "discovered",
+     "source": "collibra",
+     "valid_from": "2026-11-18T03:47:50.660Z",
+     "valid_to": null
+    }
+   ],
+   "in": [
+    {
+     "name": "in_category",
+     "from": "int-payments-to-ledger--payment-postings",
+     "to": "gl:customer-pii",
+     "lifecycle": "discovered",
+     "source": "dmc",
+     "valid_from": "2026-11-18T03:47:50.954Z",
+     "valid_to": null
+    }
+   ]
+  },
+  "gl:finance": {
+   "out": [],
+   "in": [
+    {
+     "name": "part_of",
+     "from": "gl:customer-pii",
+     "to": "gl:finance",
+     "lifecycle": "discovered",
+     "source": "collibra",
+     "valid_from": "2026-11-18T03:47:50.660Z",
+     "valid_to": null
+    },
+    {
+     "name": "part_of",
+     "from": "gl:account-balance",
+     "to": "gl:finance",
+     "lifecycle": "discovered",
+     "source": "collibra",
+     "valid_from": "2026-11-18T03:47:50.670Z",
+     "valid_to": null
+    }
+   ]
+  },
+  "gl:risk": {
+   "out": [],
+   "in": [
+    {
+     "name": "part_of",
+     "from": "gl:credit-exposure",
+     "to": "gl:risk",
+     "lifecycle": "discovered",
+     "source": "collibra",
+     "valid_from": "2026-11-18T03:47:50.679Z",
+     "valid_to": null
+    }
+   ]
+  },
+  "scope-bcbs-var": {
+   "out": [
+    {
+     "name": "includes",
+     "from": "scope-bcbs-var",
+     "to": "scope-bcbs-var--core",
+     "lifecycle": "discovered",
+     "source": "dmc",
+     "valid_from": "2026-11-18T03:47:51.048Z",
+     "valid_to": null
+    },
+    {
+     "name": "flows_through",
+     "from": "scope-bcbs-var",
+     "to": "int-ledger-to-risk",
+     "lifecycle": "discovered",
+     "source": "dmc",
+     "valid_from": "2026-11-18T03:47:51.062Z",
+     "valid_to": null
+    }
+   ],
+   "in": []
+  },
+  "scope-legacy-loans": {
+   "out": [
+    {
+     "name": "includes",
+     "from": "scope-legacy-loans",
+     "to": "scope-legacy-loans--core",
+     "lifecycle": "discovered",
+     "source": "dmc",
+     "valid_from": "2026-11-18T07:02:02.515Z",
+     "valid_to": null
+    },
+    {
+     "name": "flows_through",
+     "from": "scope-legacy-loans",
+     "to": "int-ledger-to-lake",
+     "lifecycle": "discovered",
+     "source": "dmc",
+     "valid_from": "2026-11-18T07:02:02.534Z",
+     "valid_to": null
+    }
+   ],
+   "in": []
+  },
+  "scope-onboarding": {
+   "out": [
+    {
+     "name": "includes",
+     "from": "scope-onboarding",
+     "to": "scope-onboarding--core",
+     "lifecycle": "discovered",
+     "source": "dmc",
+     "valid_from": "2026-11-18T03:47:51.081Z",
+     "valid_to": null
+    },
+    {
+     "name": "flows_through",
+     "from": "scope-onboarding",
+     "to": "int-crm-to-payments",
+     "lifecycle": "discovered",
+     "source": "dmc",
+     "valid_from": "2026-11-18T03:47:51.094Z",
+     "valid_to": null
+    }
+   ],
+   "in": []
+  },
+  "scope-pra110": {
+   "out": [
+    {
+     "name": "includes",
+     "from": "scope-pra110",
+     "to": "scope-pra110--core",
+     "lifecycle": "discovered",
+     "source": "dmc",
+     "valid_from": "2026-11-18T03:47:51.002Z",
+     "valid_to": null
+    },
+    {
+     "name": "flows_through",
+     "from": "scope-pra110",
+     "to": "int-risk-to-reporting",
+     "lifecycle": "discovered",
+     "source": "dmc",
+     "valid_from": "2026-11-18T03:47:51.016Z",
+     "valid_to": null
+    },
+    {
+     "name": "flows_through",
+     "from": "scope-pra110",
+     "to": "int-ledger-to-risk",
+     "lifecycle": "discovered",
+     "source": "dmc",
+     "valid_from": "2026-11-18T03:47:51.020Z",
+     "valid_to": null
+    }
+   ],
+   "in": []
+  },
+  "scope-bcbs-var--core": {
+   "out": [
+    {
+     "name": "includes",
+     "from": "scope-bcbs-var--core",
+     "to": "scope-bcbs-var--core--exposure",
+     "lifecycle": "discovered",
+     "source": "dmc",
+     "valid_from": "2026-11-18T03:47:51.057Z",
+     "valid_to": null
+    }
+   ],
+   "in": [
+    {
+     "name": "includes",
+     "from": "scope-bcbs-var",
+     "to": "scope-bcbs-var--core",
+     "lifecycle": "discovered",
+     "source": "dmc",
+     "valid_from": "2026-11-18T03:47:51.048Z",
+     "valid_to": null
+    }
+   ]
+  },
+  "scope-legacy-loans--core": {
+   "out": [
+    {
+     "name": "includes",
+     "from": "scope-legacy-loans--core",
+     "to": "scope-legacy-loans--core--exposure",
+     "lifecycle": "discovered",
+     "source": "dmc",
+     "valid_from": "2026-11-18T07:02:02.527Z",
+     "valid_to": null
+    }
+   ],
+   "in": [
+    {
+     "name": "includes",
+     "from": "scope-legacy-loans",
+     "to": "scope-legacy-loans--core",
+     "lifecycle": "discovered",
+     "source": "dmc",
+     "valid_from": "2026-11-18T07:02:02.515Z",
+     "valid_to": null
+    }
+   ]
+  },
+  "scope-onboarding--core": {
+   "out": [
+    {
+     "name": "includes",
+     "from": "scope-onboarding--core",
+     "to": "scope-onboarding--core--exposure",
+     "lifecycle": "discovered",
+     "source": "dmc",
+     "valid_from": "2026-11-18T03:47:51.090Z",
+     "valid_to": null
+    }
+   ],
+   "in": [
+    {
+     "name": "includes",
+     "from": "scope-onboarding",
+     "to": "scope-onboarding--core",
+     "lifecycle": "discovered",
+     "source": "dmc",
+     "valid_from": "2026-11-18T03:47:51.081Z",
+     "valid_to": null
+    }
+   ]
+  },
+  "scope-pra110--core": {
+   "out": [
+    {
+     "name": "includes",
+     "from": "scope-pra110--core",
+     "to": "scope-pra110--core--exposure",
+     "lifecycle": "discovered",
+     "source": "dmc",
+     "valid_from": "2026-11-18T03:47:51.011Z",
+     "valid_to": null
+    }
+   ],
+   "in": [
+    {
+     "name": "includes",
+     "from": "scope-pra110",
+     "to": "scope-pra110--core",
+     "lifecycle": "discovered",
+     "source": "dmc",
+     "valid_from": "2026-11-18T03:47:51.002Z",
+     "valid_to": null
+    }
+   ]
+  },
+  "scope-bcbs-var--core--exposure": {
+   "out": [],
+   "in": [
+    {
+     "name": "includes",
+     "from": "scope-bcbs-var--core",
+     "to": "scope-bcbs-var--core--exposure",
+     "lifecycle": "discovered",
+     "source": "dmc",
+     "valid_from": "2026-11-18T03:47:51.057Z",
+     "valid_to": null
+    }
+   ]
+  },
+  "scope-legacy-loans--core--exposure": {
+   "out": [],
+   "in": [
+    {
+     "name": "includes",
+     "from": "scope-legacy-loans--core",
+     "to": "scope-legacy-loans--core--exposure",
+     "lifecycle": "discovered",
+     "source": "dmc",
+     "valid_from": "2026-11-18T07:02:02.527Z",
+     "valid_to": null
+    }
+   ]
+  },
+  "scope-onboarding--core--exposure": {
+   "out": [],
+   "in": [
+    {
+     "name": "includes",
+     "from": "scope-onboarding--core",
+     "to": "scope-onboarding--core--exposure",
+     "lifecycle": "discovered",
+     "source": "dmc",
+     "valid_from": "2026-11-18T03:47:51.090Z",
+     "valid_to": null
+    }
+   ]
+  },
+  "scope-pra110--core--exposure": {
+   "out": [
+    {
+     "name": "implemented_by",
+     "from": "scope-pra110--core--exposure",
+     "to": "git.risk-engine/exposure/positions/exposure_at_default",
+     "lifecycle": "discovered",
+     "source": "dmc",
+     "valid_from": "2026-11-18T03:47:51.024Z",
+     "valid_to": null
+    }
+   ],
+   "in": [
+    {
+     "name": "includes",
+     "from": "scope-pra110--core",
+     "to": "scope-pra110--core--exposure",
+     "lifecycle": "discovered",
+     "source": "dmc",
+     "valid_from": "2026-11-18T03:47:51.011Z",
+     "valid_to": null
+    }
+   ]
+  },
+  "req-dm-1": {
+   "out": [],
+   "in": []
+  },
+  "req-dm-2": {
+   "out": [],
+   "in": []
+  },
+  "dv-as-payments-ledger": {
+   "out": [],
+   "in": [
+    {
+     "name": "assessed_by",
+     "from": "int-payments-to-ledger",
+     "to": "dv-as-payments-ledger",
+     "lifecycle": "discovered",
+     "source": "datavisa-tool",
+     "valid_from": "2026-11-18T03:47:50.926Z",
+     "valid_to": null
+    }
+   ]
+  },
+  "dv-visa-gb-hk": {
+   "out": [],
+   "in": []
+  },
+  "git.core-banking": {
+   "out": [
+    {
+     "name": "contains",
+     "from": "git.core-banking",
+     "to": "git.core-banking/ledger",
+     "lifecycle": "discovered",
+     "source": "git-json",
+     "valid_from": "2026-11-18T03:47:50.755Z",
+     "valid_to": null
+    }
+   ],
+   "in": [
+    {
+     "name": "owns",
+     "from": "app-core-banking",
+     "to": "git.core-banking",
+     "lifecycle": "discovered",
+     "source": "servicenow",
+     "valid_from": "2026-11-18T03:47:50.727Z",
+     "valid_to": null
+    }
+   ]
+  },
+  "git.reg-reporting": {
+   "out": [
+    {
+     "name": "contains",
+     "from": "git.reg-reporting",
+     "to": "git.reg-reporting/returns",
+     "lifecycle": "discovered",
+     "source": "git-json",
+     "valid_from": "2026-11-18T03:47:50.849Z",
+     "valid_to": null
+    }
+   ],
+   "in": [
+    {
+     "name": "owns",
+     "from": "app-reg-reporting",
+     "to": "git.reg-reporting",
+     "lifecycle": "discovered",
+     "source": "servicenow",
+     "valid_from": "2026-11-18T03:47:50.745Z",
+     "valid_to": null
+    }
+   ]
+  },
+  "git.risk-engine": {
+   "out": [
+    {
+     "name": "contains",
+     "from": "git.risk-engine",
+     "to": "git.risk-engine/exposure",
+     "lifecycle": "discovered",
+     "source": "git-json",
+     "valid_from": "2026-11-18T03:47:50.801Z",
+     "valid_to": null
+    }
+   ],
+   "in": [
+    {
+     "name": "owns",
+     "from": "app-risk-engine",
+     "to": "git.risk-engine",
+     "lifecycle": "discovered",
+     "source": "servicenow",
+     "valid_from": "2026-11-18T03:47:50.736Z",
+     "valid_to": null
+    }
+   ]
+  },
+  "git.core-banking/ledger": {
+   "out": [
+    {
+     "name": "contains",
+     "from": "git.core-banking/ledger",
+     "to": "git.core-banking/ledger/accounts",
+     "lifecycle": "discovered",
+     "source": "git-json",
+     "valid_from": "2026-11-18T03:47:50.764Z",
+     "valid_to": null
+    }
+   ],
+   "in": [
+    {
+     "name": "contains",
+     "from": "git.core-banking",
+     "to": "git.core-banking/ledger",
+     "lifecycle": "discovered",
+     "source": "git-json",
+     "valid_from": "2026-11-18T03:47:50.755Z",
+     "valid_to": null
+    }
+   ]
+  },
+  "git.reg-reporting/returns": {
+   "out": [
+    {
+     "name": "contains",
+     "from": "git.reg-reporting/returns",
+     "to": "git.reg-reporting/returns/pra110_lines",
+     "lifecycle": "discovered",
+     "source": "git-json",
+     "valid_from": "2026-11-18T03:47:50.859Z",
+     "valid_to": null
+    }
+   ],
+   "in": [
+    {
+     "name": "contains",
+     "from": "git.reg-reporting",
+     "to": "git.reg-reporting/returns",
+     "lifecycle": "discovered",
+     "source": "git-json",
+     "valid_from": "2026-11-18T03:47:50.849Z",
+     "valid_to": null
+    }
+   ]
+  },
+  "git.risk-engine/exposure": {
+   "out": [
+    {
+     "name": "contains",
+     "from": "git.risk-engine/exposure",
+     "to": "git.risk-engine/exposure/positions",
+     "lifecycle": "discovered",
+     "source": "git-json",
+     "valid_from": "2026-11-18T03:47:50.811Z",
+     "valid_to": null
+    }
+   ],
+   "in": [
+    {
+     "name": "contains",
+     "from": "git.risk-engine",
+     "to": "git.risk-engine/exposure",
+     "lifecycle": "discovered",
+     "source": "git-json",
+     "valid_from": "2026-11-18T03:47:50.801Z",
+     "valid_to": null
+    }
+   ]
+  },
+  "reg:bcbs239": {
+   "out": [],
+   "in": []
+  },
+  "reg:pra110": {
+   "out": [],
+   "in": []
+  },
+  "dstorm:rc-1y": {
+   "out": [],
+   "in": []
+  },
+  "dstorm:rc-7y": {
+   "out": [],
+   "in": [
+    {
+     "name": "recorded_as",
+     "from": "int-payments-to-ledger--payment-postings",
+     "to": "dstorm:rc-7y",
+     "lifecycle": "discovered",
+     "source": "dmc",
+     "valid_from": "2026-11-18T03:47:50.945Z",
+     "valid_to": null
+    },
+    {
+     "name": "recorded_as",
+     "from": "int-ledger-to-risk--account-exposures",
+     "to": "dstorm:rc-7y",
+     "lifecycle": "discovered",
+     "source": "dmc",
+     "valid_from": "2026-11-18T03:47:50.972Z",
+     "valid_to": null
+    }
+   ]
+  }
+ },
+ "hist": {
+  "43000001": {
+   "items": [
+    {
+     "lifecycle": "discovered",
+     "attributes": {
+      "name": "Amy Adams",
+      "email": "amy.adams@example.test",
+      "staff_id": "43000001"
+     },
+     "valid_from": "2026-11-18T07:02:02.031Z",
+     "valid_to": null,
+     "recorded_from": "2026-11-18T07:02:02.031Z",
+     "actor": "seed"
+    }
+   ]
+  },
+  "43000002": {
+   "items": [
+    {
+     "lifecycle": "discovered",
+     "attributes": {
+      "name": "Ben Brooks",
+      "email": "ben.brooks@example.test",
+      "staff_id": "43000002"
+     },
+     "valid_from": "2026-11-18T07:02:02.056Z",
+     "valid_to": null,
+     "recorded_from": "2026-11-18T07:02:02.056Z",
+     "actor": "seed"
+    }
+   ]
+  },
+  "43000003": {
+   "items": [
+    {
+     "lifecycle": "discovered",
+     "attributes": {
+      "name": "Dan Davies",
+      "email": "dan.davies@example.test",
+      "staff_id": "43000003"
+     },
+     "valid_from": "2026-11-18T07:02:02.062Z",
+     "valid_to": null,
+     "recorded_from": "2026-11-18T07:02:02.062Z",
+     "actor": "seed"
+    }
+   ]
+  },
+  "43000004": {
+   "items": [
+    {
+     "lifecycle": "discovered",
+     "attributes": {
+      "name": "Olive Okafor",
+      "email": "olive.okafor@example.test",
+      "staff_id": "43000004"
+     },
+     "valid_from": "2026-11-18T07:02:02.067Z",
+     "valid_to": null,
+     "recorded_from": "2026-11-18T07:02:02.067Z",
+     "actor": "seed"
+    }
+   ]
+  },
+  "43000005": {
+   "items": [
+    {
+     "lifecycle": "discovered",
+     "attributes": {
+      "name": "Sam Shah",
+      "email": "sam.shah@example.test",
+      "staff_id": "43000005"
+     },
+     "valid_from": "2026-11-18T07:02:02.072Z",
+     "valid_to": null,
+     "recorded_from": "2026-11-18T07:02:02.072Z",
+     "actor": "seed"
+    }
+   ]
+  },
+  "43000006": {
+   "items": [
+    {
+     "lifecycle": "discovered",
+     "attributes": {
+      "name": "Priya Patel",
+      "email": "priya.patel@example.test",
+      "staff_id": "43000006"
+     },
+     "valid_from": "2026-11-18T07:02:02.079Z",
+     "valid_to": null,
+     "recorded_from": "2026-11-18T07:02:02.079Z",
+     "actor": "seed"
+    }
+   ]
+  },
+  "43000007": {
+   "items": [
+    {
+     "lifecycle": "discovered",
+     "attributes": {
+      "name": "Carl Cho",
+      "email": "carl.cho@example.test",
+      "staff_id": "43000007"
+     },
+     "valid_from": "2026-11-18T07:02:02.084Z",
+     "valid_to": null,
+     "recorded_from": "2026-11-18T07:02:02.084Z",
+     "actor": "seed"
+    }
+   ]
+  },
+  "43000008": {
+   "items": [
+    {
+     "lifecycle": "discovered",
+     "attributes": {
+      "name": "Ava Archer",
+      "email": "ava.archer@example.test",
+      "staff_id": "43000008"
+     },
+     "valid_from": "2026-11-18T07:02:02.089Z",
+     "valid_to": null,
+     "recorded_from": "2026-11-18T07:02:02.089Z",
+     "actor": "seed"
+    }
+   ]
+  },
+  "43000009": {
+   "items": [
+    {
+     "lifecycle": "discovered",
+     "attributes": {
+      "name": "Anil Admin",
+      "email": "anil.admin@example.test",
+      "staff_id": "43000009"
+     },
+     "valid_from": "2026-11-18T07:02:02.095Z",
+     "valid_to": null,
+     "recorded_from": "2026-11-18T07:02:02.095Z",
+     "actor": "seed"
+    }
+   ]
+  },
+  "43000010": {
+   "items": [
+    {
+     "lifecycle": "discovered",
+     "attributes": {
+      "name": "Vera Vance",
+      "email": "vera.vance@example.test",
+      "staff_id": "43000010"
+     },
+     "valid_from": "2026-11-18T07:02:02.102Z",
+     "valid_to": null,
+     "recorded_from": "2026-11-18T07:02:02.102Z",
+     "actor": "seed"
+    }
+   ]
+  },
+  "43000098": {
+   "items": [
+    {
+     "lifecycle": "discovered",
+     "attributes": {
+      "name": "Rae Retired",
+      "email": "rae.retired@example.test",
+      "staff_id": "43000098"
+     },
+     "valid_from": "2026-11-18T07:02:02.112Z",
+     "valid_to": null,
+     "recorded_from": "2026-11-18T07:02:02.112Z",
+     "actor": "seed"
+    },
+    {
+     "lifecycle": "discovered",
+     "attributes": {
+      "name": "Rae Retired",
+      "email": "rae.retired@example.test",
+      "staff_id": "43000098"
+     },
+     "valid_from": "2026-11-18T07:02:02.112Z",
+     "valid_to": "2026-11-18T07:02:02.119Z",
+     "recorded_from": "2026-11-18T07:02:02.119Z",
+     "actor": "seed"
+    },
+    {
+     "lifecycle": "deprecated",
+     "attributes": {
+      "name": "Rae Retired",
+      "email": "rae.retired@example.test",
+      "staff_id": "43000098"
+     },
+     "valid_from": "2026-11-18T07:02:02.119Z",
+     "valid_to": null,
+     "recorded_from": "2026-11-18T07:02:02.119Z",
+     "actor": "seed"
+    }
+   ]
+  },
+  "04300011": {
+   "items": [
+    {
+     "lifecycle": "discovered",
+     "attributes": {
+      "name": "Zoe Zeroes",
+      "email": "zoe.zeroes@example.test",
+      "staff_id": "04300011"
+     },
+     "valid_from": "2026-11-18T07:02:02.107Z",
+     "valid_to": null,
+     "recorded_from": "2026-11-18T07:02:02.107Z",
+     "actor": "seed"
+    }
+   ]
+  },
+  "app-core-banking": {
+   "items": [
+    {
+     "lifecycle": "discovered",
+     "attributes": {
+      "name": "Core Banking",
+      "owner": "43000002",
+      "status": "live",
+      "delegates": [],
+      "criticality": "critical",
+      "hosting_country": "HK"
+     },
+     "valid_from": "2026-11-18T03:47:50.550Z",
+     "valid_to": null,
+     "recorded_from": "2026-11-18T03:47:50.550Z",
+     "actor": "seed"
+    }
+   ]
+  },
+  "app-crm": {
+   "items": [
+    {
+     "lifecycle": "discovered",
+     "attributes": {
+      "name": "Customer CRM",
+      "owner": "43000003",
+      "status": "planned",
+      "delegates": [],
+      "criticality": "medium",
+      "hosting_country": "IN"
+     },
+     "valid_from": "2026-11-18T03:47:50.569Z",
+     "valid_to": null,
+     "recorded_from": "2026-11-18T03:47:50.569Z",
+     "actor": "seed"
+    }
+   ]
+  },
+  "app-data-lake": {
+   "items": [
+    {
+     "lifecycle": "discovered",
+     "attributes": {
+      "name": "Data Lake",
+      "owner": "43000001",
+      "status": "live",
+      "delegates": [],
+      "criticality": "medium",
+      "hosting_country": "GB"
+     },
+     "valid_from": "2026-11-18T03:47:50.559Z",
+     "valid_to": null,
+     "recorded_from": "2026-11-18T03:47:50.559Z",
+     "actor": "seed"
+    }
+   ]
+  },
+  "app-payments-hub": {
+   "items": [
+    {
+     "lifecycle": "discovered",
+     "attributes": {
+      "name": "Payments Hub",
+      "owner": "43000001",
+      "status": "live",
+      "delegates": [
+       "43000003"
+      ],
+      "criticality": "critical",
+      "hosting_country": "GB"
+     },
+     "valid_from": "2026-11-18T03:47:50.532Z",
+     "valid_to": null,
+     "recorded_from": "2026-11-18T03:47:50.532Z",
+     "actor": "seed"
+    }
+   ]
+  },
+  "app-reg-reporting": {
+   "items": [
+    {
+     "lifecycle": "discovered",
+     "attributes": {
+      "name": "Regulatory Reporting",
+      "owner": "43000004",
+      "status": "live",
+      "delegates": [],
+      "criticality": "high",
+      "hosting_country": "GB"
+     },
+     "valid_from": "2026-11-18T03:47:50.564Z",
+     "valid_to": null,
+     "recorded_from": "2026-11-18T03:47:50.564Z",
+     "actor": "seed"
+    }
+   ]
+  },
+  "app-risk-engine": {
+   "items": [
+    {
+     "lifecycle": "discovered",
+     "attributes": {
+      "name": "Risk Engine",
+      "owner": "43000002",
+      "status": "live",
+      "delegates": [],
+      "criticality": "high",
+      "hosting_country": "GB"
+     },
+     "valid_from": "2026-11-18T03:47:50.555Z",
+     "valid_to": null,
+     "recorded_from": "2026-11-18T03:47:50.555Z",
+     "actor": "seed"
+    }
+   ]
+  },
+  "int-crm-to-payments": {
+   "items": [
+    {
+     "lifecycle": "discovered",
+     "attributes": {
+      "status": "planned",
+      "frequency": "hourly",
+      "mechanism": "api"
+     },
+     "valid_from": "2026-11-18T03:47:50.631Z",
+     "valid_to": null,
+     "recorded_from": "2026-11-18T03:47:50.631Z",
+     "actor": "seed"
+    }
+   ]
+  },
+  "int-ledger-to-lake": {
+   "items": [
+    {
+     "lifecycle": "discovered",
+     "attributes": {
+      "status": "live",
+      "frequency": "daily",
+      "mechanism": "file"
+     },
+     "valid_from": "2026-11-18T03:47:50.618Z",
+     "valid_to": null,
+     "recorded_from": "2026-11-18T03:47:50.618Z",
+     "actor": "seed"
+    }
+   ]
+  },
+  "int-ledger-to-risk": {
+   "items": [
+    {
+     "lifecycle": "discovered",
+     "attributes": {
+      "status": "live",
+      "frequency": "daily",
+      "mechanism": "batch"
+     },
+     "valid_from": "2026-11-18T03:47:50.591Z",
+     "valid_to": null,
+     "recorded_from": "2026-11-18T03:47:50.591Z",
+     "actor": "seed"
+    }
+   ]
+  },
+  "int-payments-to-ledger": {
+   "items": [
+    {
+     "lifecycle": "discovered",
+     "attributes": {
+      "status": "live",
+      "frequency": "real-time",
+      "mechanism": "api"
+     },
+     "valid_from": "2026-11-18T03:47:50.574Z",
+     "valid_to": null,
+     "recorded_from": "2026-11-18T03:47:50.574Z",
+     "actor": "seed"
+    }
+   ]
+  },
+  "int-risk-to-reporting": {
+   "items": [
+    {
+     "lifecycle": "discovered",
+     "attributes": {
+      "status": "live",
+      "frequency": "daily",
+      "mechanism": "batch"
+     },
+     "valid_from": "2026-11-18T03:47:50.605Z",
+     "valid_to": null,
+     "recorded_from": "2026-11-18T03:47:50.605Z",
+     "actor": "seed"
+    }
+   ]
+  },
+  "int-ledger-to-risk--account-exposures": {
+   "items": [
+    {
+     "lifecycle": "discovered",
+     "attributes": {
+      "name": "Account exposures",
+      "description": "Balances sent for exposure calculation",
+      "business_context": "Used by credit risk"
+     },
+     "valid_from": "2026-11-18T03:47:50.961Z",
+     "valid_to": null,
+     "recorded_from": "2026-11-18T03:47:50.961Z",
+     "actor": "seed"
+    }
+   ]
+  },
+  "int-payments-to-ledger--payment-postings": {
+   "items": [
+    {
+     "lifecycle": "discovered",
+     "attributes": {
+      "name": "Payment postings",
+      "description": "Postings from payments into the ledger",
+      "business_context": "Used by finance close"
+     },
+     "valid_from": "2026-11-18T03:47:50.934Z",
+     "valid_to": null,
+     "recorded_from": "2026-11-18T03:47:50.934Z",
+     "actor": "seed"
+    }
+   ]
+  },
+  "git.core-banking/ledger/accounts": {
+   "items": [
+    {
+     "lifecycle": "discovered",
+     "attributes": {
+      "kind": "table",
+      "name": "accounts",
+      "description": "accounts (synthetic)"
+     },
+     "valid_from": "2026-11-18T03:47:50.758Z",
+     "valid_to": null,
+     "recorded_from": "2026-11-18T03:47:50.758Z",
+     "actor": "seed"
+    }
+   ]
+  },
+  "git.reg-reporting/returns/pra110_lines": {
+   "items": [
+    {
+     "lifecycle": "discovered",
+     "attributes": {
+      "kind": "table",
+      "name": "pra110_lines",
+      "description": "pra110_lines (synthetic)"
+     },
+     "valid_from": "2026-11-18T03:47:50.852Z",
+     "valid_to": null,
+     "recorded_from": "2026-11-18T03:47:50.852Z",
+     "actor": "seed"
+    }
+   ]
+  },
+  "git.risk-engine/exposure/positions": {
+   "items": [
+    {
+     "lifecycle": "discovered",
+     "attributes": {
+      "kind": "table",
+      "name": "positions",
+      "description": "positions (synthetic)"
+     },
+     "valid_from": "2026-11-18T03:47:50.804Z",
+     "valid_to": null,
+     "recorded_from": "2026-11-18T03:47:50.804Z",
+     "actor": "seed"
+    }
+   ]
+  },
+  "git.core-banking/ledger/accounts/account_id": {
+   "items": [
+    {
+     "lifecycle": "discovered",
+     "attributes": {
+      "name": "account_id",
+      "nullable": false,
+      "data_type": "varchar",
+      "description": "account id"
+     },
+     "valid_from": "2026-11-18T03:47:50.767Z",
+     "valid_to": null,
+     "recorded_from": "2026-11-18T03:47:50.767Z",
+     "actor": "seed"
+    }
+   ]
+  },
+  "git.core-banking/ledger/accounts/closing_balance": {
+   "items": [
+    {
+     "lifecycle": "discovered",
+     "attributes": {
+      "name": "closing_balance",
+      "nullable": false,
+      "data_type": "decimal",
+      "description": "closing balance"
+     },
+     "valid_from": "2026-11-18T03:47:50.786Z",
+     "valid_to": null,
+     "recorded_from": "2026-11-18T03:47:50.786Z",
+     "actor": "seed"
+    }
+   ]
+  },
+  "git.core-banking/ledger/accounts/customer_name": {
+   "items": [
+    {
+     "lifecycle": "discovered",
+     "attributes": {
+      "name": "customer_name",
+      "nullable": false,
+      "data_type": "varchar",
+      "description": "customer name"
+     },
+     "valid_from": "2026-11-18T03:47:50.776Z",
+     "valid_to": null,
+     "recorded_from": "2026-11-18T03:47:50.776Z",
+     "actor": "seed"
+    }
+   ]
+  },
+  "git.reg-reporting/returns/pra110_lines/amount": {
+   "items": [
+    {
+     "lifecycle": "discovered",
+     "attributes": {
+      "name": "amount",
+      "nullable": false,
+      "data_type": "decimal",
+      "description": "amount"
+     },
+     "valid_from": "2026-11-18T03:47:50.882Z",
+     "valid_to": null,
+     "recorded_from": "2026-11-18T03:47:50.882Z",
+     "actor": "seed"
+    }
+   ]
+  },
+  "git.reg-reporting/returns/pra110_lines/line_id": {
+   "items": [
+    {
+     "lifecycle": "discovered",
+     "attributes": {
+      "name": "line_id",
+      "nullable": false,
+      "data_type": "varchar",
+      "description": "line id"
+     },
+     "valid_from": "2026-11-18T03:47:50.862Z",
+     "valid_to": null,
+     "recorded_from": "2026-11-18T03:47:50.862Z",
+     "actor": "seed"
+    }
+   ]
+  },
+  "git.reg-reporting/returns/pra110_lines/position_id": {
+   "items": [
+    {
+     "lifecycle": "discovered",
+     "attributes": {
+      "name": "position_id",
+      "nullable": false,
+      "data_type": "varchar",
+      "description": "position id"
+     },
+     "valid_from": "2026-11-18T03:47:50.872Z",
+     "valid_to": null,
+     "recorded_from": "2026-11-18T03:47:50.872Z",
+     "actor": "seed"
+    }
+   ]
+  },
+  "git.risk-engine/exposure/positions/account_id": {
+   "items": [
+    {
+     "lifecycle": "discovered",
+     "attributes": {
+      "name": "account_id",
+      "nullable": false,
+      "data_type": "varchar",
+      "description": "account id"
+     },
+     "valid_from": "2026-11-18T03:47:50.823Z",
+     "valid_to": null,
+     "recorded_from": "2026-11-18T03:47:50.823Z",
+     "actor": "seed"
+    }
+   ]
+  },
+  "git.risk-engine/exposure/positions/exposure_at_default": {
+   "items": [
+    {
+     "lifecycle": "discovered",
+     "attributes": {
+      "name": "exposure_at_default",
+      "nullable": false,
+      "data_type": "decimal",
+      "description": "exposure at default"
+     },
+     "valid_from": "2026-11-18T03:47:50.833Z",
+     "valid_to": null,
+     "recorded_from": "2026-11-18T03:47:50.833Z",
+     "actor": "seed"
+    },
+    {
+     "lifecycle": "discovered",
+     "attributes": {
+      "name": "exposure_at_default",
+      "nullable": false,
+      "data_type": "decimal",
+      "description": "exposure at default"
+     },
+     "valid_from": "2026-11-18T03:47:50.833Z",
+     "valid_to": "2026-11-18T04:00:14.880Z",
+     "recorded_from": "2026-11-18T04:00:14.880Z",
+     "actor": "seed"
+    },
+    {
+     "lifecycle": "discovered",
+     "attributes": {
+      "name": "exposure_at_default",
+      "nullable": false,
+      "data_type": "decimal",
+      "trust_tier": "unverified",
+      "description": "exposure at default",
+      "required_tier": "gold",
+      "trust_shortfall": true
+     },
+     "valid_from": "2026-11-18T04:00:14.880Z",
+     "valid_to": null,
+     "recorded_from": "2026-11-18T04:00:14.880Z",
+     "actor": "system/derive"
+    }
+   ]
+  },
+  "git.risk-engine/exposure/positions/position_id": {
+   "items": [
+    {
+     "lifecycle": "discovered",
+     "attributes": {
+      "name": "position_id",
+      "nullable": false,
+      "data_type": "varchar",
+      "description": "position id"
+     },
+     "valid_from": "2026-11-18T03:47:50.814Z",
+     "valid_to": null,
+     "recorded_from": "2026-11-18T03:47:50.814Z",
+     "actor": "seed"
+    }
+   ]
+  },
+  "gl:closing-balance": {
+   "items": [
+    {
+     "lifecycle": "discovered",
+     "attributes": {
+      "name": "Closing balance",
+      "status": "approved",
+      "definition": "Balance at the end of the day"
+     },
+     "valid_from": "2026-11-18T03:47:50.682Z",
+     "valid_to": null,
+     "recorded_from": "2026-11-18T03:47:50.682Z",
+     "actor": "seed"
+    }
+   ]
+  },
+  "gl:exposure-at-default": {
+   "items": [
+    {
+     "lifecycle": "discovered",
+     "attributes": {
+      "name": "Exposure at default",
+      "status": "approved",
+      "definition": "Expected exposure if the counterparty defaults"
+     },
+     "valid_from": "2026-11-18T03:47:50.692Z",
+     "valid_to": null,
+     "recorded_from": "2026-11-18T03:47:50.692Z",
+     "actor": "seed"
+    }
+   ]
+  },
+  "gl:account-balance": {
+   "items": [
+    {
+     "lifecycle": "discovered",
+     "attributes": {
+      "name": "Account balance",
+      "definition": "Money held on an account"
+     },
+     "valid_from": "2026-11-18T03:47:50.664Z",
+     "valid_to": null,
+     "recorded_from": "2026-11-18T03:47:50.664Z",
+     "actor": "seed"
+    }
+   ]
+  },
+  "gl:credit-exposure": {
+   "items": [
+    {
+     "lifecycle": "discovered",
+     "attributes": {
+      "name": "Credit exposure",
+      "definition": "Amount at risk with a counterparty"
+     },
+     "valid_from": "2026-11-18T03:47:50.673Z",
+     "valid_to": null,
+     "recorded_from": "2026-11-18T03:47:50.673Z",
+     "actor": "seed"
+    }
+   ]
+  },
+  "gl:customer-pii": {
+   "items": [
+    {
+     "lifecycle": "discovered",
+     "attributes": {
+      "name": "Customer personal data",
+      "definition": "Data that identifies a customer"
+     },
+     "valid_from": "2026-11-18T03:47:50.654Z",
+     "valid_to": null,
+     "recorded_from": "2026-11-18T03:47:50.654Z",
+     "actor": "seed"
+    }
+   ]
+  },
+  "gl:finance": {
+   "items": [
+    {
+     "lifecycle": "discovered",
+     "attributes": {
+      "name": "Finance",
+      "description": "Money, positions and the books"
+     },
+     "valid_from": "2026-11-18T03:47:50.645Z",
+     "valid_to": null,
+     "recorded_from": "2026-11-18T03:47:50.645Z",
+     "actor": "seed"
+    }
+   ]
+  },
+  "gl:risk": {
+   "items": [
+    {
+     "lifecycle": "discovered",
+     "attributes": {
+      "name": "Risk",
+      "description": "Exposure and capital"
+     },
+     "valid_from": "2026-11-18T03:47:50.650Z",
+     "valid_to": null,
+     "recorded_from": "2026-11-18T03:47:50.650Z",
+     "actor": "seed"
+    }
+   ]
+  },
+  "scope-bcbs-var": {
+   "items": [
+    {
+     "lifecycle": "discovered",
+     "attributes": {
+      "kind": "report",
+      "name": "BCBS 239 exposure report",
+      "owner": "43000004"
+     },
+     "valid_from": "2026-11-18T03:47:51.033Z",
+     "valid_to": null,
+     "recorded_from": "2026-11-18T03:47:51.033Z",
+     "actor": "seed"
+    },
+    {
+     "lifecycle": "discovered",
+     "attributes": {
+      "kind": "report",
+      "name": "BCBS 239 exposure report",
+      "owner": "43000004"
+     },
+     "valid_from": "2026-11-18T03:47:51.033Z",
+     "valid_to": "2026-11-18T03:47:51.037Z",
+     "recorded_from": "2026-11-18T03:47:51.037Z",
+     "actor": "seed"
+    },
+    {
+     "lifecycle": "discovered",
+     "attributes": {
+      "kind": "report",
+      "name": "BCBS 239 exposure report",
+      "owner": "43000004",
+      "status": "draft",
+      "version": 1,
+      "required_tier": "silver"
+     },
+     "valid_from": "2026-11-18T03:47:51.037Z",
+     "valid_to": null,
+     "recorded_from": "2026-11-18T03:47:51.037Z",
+     "actor": "seed"
+    }
+   ]
+  },
+  "scope-legacy-loans": {
+   "items": [
+    {
+     "lifecycle": "discovered",
+     "attributes": {
+      "kind": "report",
+      "name": "Legacy loan reporting",
+      "owner": "43000098"
+     },
+     "valid_from": "2026-11-18T07:02:02.499Z",
+     "valid_to": null,
+     "recorded_from": "2026-11-18T07:02:02.499Z",
+     "actor": "seed"
+    },
+    {
+     "lifecycle": "discovered",
+     "attributes": {
+      "kind": "report",
+      "name": "Legacy loan reporting",
+      "owner": "43000098"
+     },
+     "valid_from": "2026-11-18T07:02:02.499Z",
+     "valid_to": "2026-11-18T07:02:02.503Z",
+     "recorded_from": "2026-11-18T07:02:02.503Z",
+     "actor": "seed"
+    },
+    {
+     "lifecycle": "discovered",
+     "attributes": {
+      "kind": "report",
+      "name": "Legacy loan reporting",
+      "owner": "43000098",
+      "status": "draft",
+      "version": 1,
+      "required_tier": "bronze"
+     },
+     "valid_from": "2026-11-18T07:02:02.503Z",
+     "valid_to": null,
+     "recorded_from": "2026-11-18T07:02:02.503Z",
+     "actor": "seed"
+    }
+   ]
+  },
+  "scope-onboarding": {
+   "items": [
+    {
+     "lifecycle": "discovered",
+     "attributes": {
+      "kind": "business-process",
+      "name": "Customer onboarding",
+      "owner": "43000004"
+     },
+     "valid_from": "2026-11-18T03:47:51.065Z",
+     "valid_to": null,
+     "recorded_from": "2026-11-18T03:47:51.065Z",
+     "actor": "seed"
+    },
+    {
+     "lifecycle": "discovered",
+     "attributes": {
+      "kind": "business-process",
+      "name": "Customer onboarding",
+      "owner": "43000004"
+     },
+     "valid_from": "2026-11-18T03:47:51.065Z",
+     "valid_to": "2026-11-18T03:47:51.069Z",
+     "recorded_from": "2026-11-18T03:47:51.069Z",
+     "actor": "seed"
+    },
+    {
+     "lifecycle": "discovered",
+     "attributes": {
+      "kind": "business-process",
+      "name": "Customer onboarding",
+      "owner": "43000004",
+      "status": "draft",
+      "version": 1,
+      "required_tier": "bronze"
+     },
+     "valid_from": "2026-11-18T03:47:51.069Z",
+     "valid_to": null,
+     "recorded_from": "2026-11-18T03:47:51.069Z",
+     "actor": "seed"
+    }
+   ]
+  },
+  "scope-pra110": {
+   "items": [
+    {
+     "lifecycle": "discovered",
+     "attributes": {
+      "kind": "regulatory-return",
+      "name": "PRA110",
+      "owner": "43000004"
+     },
+     "valid_from": "2026-11-18T03:47:50.984Z",
+     "valid_to": null,
+     "recorded_from": "2026-11-18T03:47:50.984Z",
+     "actor": "seed"
+    },
+    {
+     "lifecycle": "discovered",
+     "attributes": {
+      "kind": "regulatory-return",
+      "name": "PRA110",
+      "owner": "43000004"
+     },
+     "valid_from": "2026-11-18T03:47:50.984Z",
+     "valid_to": "2026-11-18T03:47:50.989Z",
+     "recorded_from": "2026-11-18T03:47:50.989Z",
+     "actor": "seed"
+    },
+    {
+     "lifecycle": "discovered",
+     "attributes": {
+      "kind": "regulatory-return",
+      "name": "PRA110",
+      "owner": "43000004",
+      "status": "draft",
+      "version": 1,
+      "required_tier": "gold"
+     },
+     "valid_from": "2026-11-18T03:47:50.989Z",
+     "valid_to": null,
+     "recorded_from": "2026-11-18T03:47:50.989Z",
+     "actor": "seed"
+    },
+    {
+     "lifecycle": "discovered",
+     "attributes": {
+      "kind": "regulatory-return",
+      "name": "PRA110",
+      "owner": "43000004",
+      "status": "draft",
+      "version": 1,
+      "required_tier": "gold"
+     },
+     "valid_from": "2026-11-18T03:47:50.989Z",
+     "valid_to": "2026-11-18T03:47:51.028Z",
+     "recorded_from": "2026-11-18T03:47:51.028Z",
+     "actor": "seed"
+    },
+    {
+     "lifecycle": "discovered",
+     "attributes": {
+      "kind": "regulatory-return",
+      "name": "PRA110",
+      "owner": "43000004",
+      "status": "submitted",
+      "version": 1,
+      "locked_at": "2026-10-01T09:00:00.000Z",
+      "required_tier": "gold"
+     },
+     "valid_from": "2026-11-18T03:47:51.028Z",
+     "valid_to": null,
+     "recorded_from": "2026-11-18T03:47:51.028Z",
+     "actor": "seed"
+    },
+    {
+     "lifecycle": "discovered",
+     "attributes": {
+      "kind": "regulatory-return",
+      "name": "PRA110",
+      "owner": "43000004",
+      "status": "submitted",
+      "version": 1,
+      "locked_at": "2026-10-01T09:00:00.000Z",
+      "required_tier": "gold"
+     },
+     "valid_from": "2026-11-18T03:47:51.028Z",
+     "valid_to": "2026-11-18T07:02:02.425Z",
+     "recorded_from": "2026-11-18T07:02:02.425Z",
+     "actor": "seed"
+    },
+    {
+     "lifecycle": "discovered",
+     "attributes": {
+      "kind": "regulatory-return",
+      "name": "PRA110",
+      "owner": "43000004",
+      "status": "draft",
+      "version": 1,
+      "locked_at": "2026-10-01T09:00:00.000Z",
+      "required_tier": "gold"
+     },
+     "valid_from": "2026-11-18T07:02:02.425Z",
+     "valid_to": null,
+     "recorded_from": "2026-11-18T07:02:02.425Z",
+     "actor": "seed"
+    },
+    {
+     "lifecycle": "discovered",
+     "attributes": {
+      "kind": "regulatory-return",
+      "name": "PRA110",
+      "owner": "43000004",
+      "status": "draft",
+      "version": 1,
+      "locked_at": "2026-10-01T09:00:00.000Z",
+      "required_tier": "gold"
+     },
+     "valid_from": "2026-11-18T07:02:02.425Z",
+     "valid_to": "2026-11-18T07:02:02.452Z",
+     "recorded_from": "2026-11-18T07:02:02.452Z",
+     "actor": "seed"
+    },
+    {
+     "lifecycle": "discovered",
+     "attributes": {
+      "kind": "regulatory-return",
+      "name": "PRA110",
+      "owner": "43000004",
+      "status": "submitted",
+      "version": 1,
+      "locked_at": "2026-10-01T09:00:00.000Z",
+      "required_tier": "gold"
+     },
+     "valid_from": "2026-11-18T07:02:02.452Z",
+     "valid_to": null,
+     "recorded_from": "2026-11-18T07:02:02.452Z",
+     "actor": "seed"
+    }
+   ]
+  },
+  "scope-bcbs-var--core": {
+   "items": [
+    {
+     "lifecycle": "discovered",
+     "attributes": {
+      "name": "Core",
+      "order": 1
+     },
+     "valid_from": "2026-11-18T03:47:51.042Z",
+     "valid_to": null,
+     "recorded_from": "2026-11-18T03:47:51.042Z",
+     "actor": "seed"
+    }
+   ]
+  },
+  "scope-legacy-loans--core": {
+   "items": [
+    {
+     "lifecycle": "discovered",
+     "attributes": {
+      "name": "Core",
+      "order": 1
+     },
+     "valid_from": "2026-11-18T07:02:02.509Z",
+     "valid_to": null,
+     "recorded_from": "2026-11-18T07:02:02.509Z",
+     "actor": "seed"
+    }
+   ]
+  },
+  "scope-onboarding--core": {
+   "items": [
+    {
+     "lifecycle": "discovered",
+     "attributes": {
+      "name": "Core",
+      "order": 1
+     },
+     "valid_from": "2026-11-18T03:47:51.075Z",
+     "valid_to": null,
+     "recorded_from": "2026-11-18T03:47:51.075Z",
+     "actor": "seed"
+    }
+   ]
+  },
+  "scope-pra110--core": {
+   "items": [
+    {
+     "lifecycle": "discovered",
+     "attributes": {
+      "name": "Core",
+      "order": 1
+     },
+     "valid_from": "2026-11-18T03:47:50.995Z",
+     "valid_to": null,
+     "recorded_from": "2026-11-18T03:47:50.995Z",
+     "actor": "seed"
+    }
+   ]
+  },
+  "scope-bcbs-var--core--exposure": {
+   "items": [
+    {
+     "lifecycle": "discovered",
+     "attributes": {
+      "name": "Exposure",
+      "definition": "What is at risk"
+     },
+     "valid_from": "2026-11-18T03:47:51.051Z",
+     "valid_to": null,
+     "recorded_from": "2026-11-18T03:47:51.051Z",
+     "actor": "seed"
+    }
+   ]
+  },
+  "scope-legacy-loans--core--exposure": {
+   "items": [
+    {
+     "lifecycle": "discovered",
+     "attributes": {
+      "name": "Exposure",
+      "definition": "What is at risk"
+     },
+     "valid_from": "2026-11-18T07:02:02.521Z",
+     "valid_to": null,
+     "recorded_from": "2026-11-18T07:02:02.521Z",
+     "actor": "seed"
+    }
+   ]
+  },
+  "scope-onboarding--core--exposure": {
+   "items": [
+    {
+     "lifecycle": "discovered",
+     "attributes": {
+      "name": "Exposure",
+      "definition": "What is at risk"
+     },
+     "valid_from": "2026-11-18T03:47:51.084Z",
+     "valid_to": null,
+     "recorded_from": "2026-11-18T03:47:51.084Z",
+     "actor": "seed"
+    }
+   ]
+  },
+  "scope-pra110--core--exposure": {
+   "items": [
+    {
+     "lifecycle": "discovered",
+     "attributes": {
+      "name": "Exposure",
+      "definition": "What is at risk"
+     },
+     "valid_from": "2026-11-18T03:47:51.005Z",
+     "valid_to": null,
+     "recorded_from": "2026-11-18T03:47:51.005Z",
+     "actor": "seed"
+    }
+   ]
+  },
+  "req-dm-1": {
+   "items": [
+    {
+     "lifecycle": "discovered",
+     "attributes": {
+      "kind": "technical-control-requirement",
+      "owner": "43000006",
+      "title": "Every integration is linked to at least one dataset",
+      "version": 1,
+      "reference_id": "DM-1"
+     },
+     "valid_from": "2026-11-18T03:47:51.098Z",
+     "valid_to": null,
+     "recorded_from": "2026-11-18T03:47:51.098Z",
+     "actor": "seed"
+    }
+   ]
+  },
+  "req-dm-2": {
+   "items": [
+    {
+     "lifecycle": "discovered",
+     "attributes": {
+      "kind": "operating-instruction",
+      "owner": "43000006",
+      "title": "Every application has an owner",
+      "version": 1,
+      "reference_id": "DM-2"
+     },
+     "valid_from": "2026-11-18T03:47:51.103Z",
+     "valid_to": null,
+     "recorded_from": "2026-11-18T03:47:51.103Z",
+     "actor": "seed"
+    }
+   ]
+  },
+  "dv-as-payments-ledger": {
+   "items": [
+    {
+     "lifecycle": "discovered",
+     "attributes": {
+      "outcome": "datavisa-required",
+      "review_due": "2027-02-01",
+      "assessed_on": "2026-02-01"
+     },
+     "valid_from": "2026-11-18T03:47:50.919Z",
+     "valid_to": null,
+     "recorded_from": "2026-11-18T03:47:50.919Z",
+     "actor": "seed"
+    }
+   ]
+  },
+  "dv-visa-gb-hk": {
+   "items": [
+    {
+     "lifecycle": "discovered",
+     "attributes": {
+      "status": "valid",
+      "valid_to": "2027-02-14",
+      "valid_from": "2026-02-15",
+      "source_country": "GB",
+      "target_country": "HK",
+      "data_categories": [
+       "gl:account-balance"
+      ]
+     },
+     "valid_from": "2026-11-18T03:47:50.929Z",
+     "valid_to": null,
+     "recorded_from": "2026-11-18T03:47:50.929Z",
+     "actor": "seed"
+    }
+   ]
+  },
+  "git.core-banking": {
+   "items": [
+    {
+     "lifecycle": "discovered",
+     "attributes": {
+      "name": "Core Banking DB",
+      "platform": "postgres",
+      "environment": "prod"
+     },
+     "valid_from": "2026-11-18T03:47:50.721Z",
+     "valid_to": null,
+     "recorded_from": "2026-11-18T03:47:50.721Z",
+     "actor": "seed"
+    }
+   ]
+  },
+  "git.reg-reporting": {
+   "items": [
+    {
+     "lifecycle": "discovered",
+     "attributes": {
+      "name": "Reporting DB",
+      "platform": "postgres",
+      "environment": "prod"
+     },
+     "valid_from": "2026-11-18T03:47:50.739Z",
+     "valid_to": null,
+     "recorded_from": "2026-11-18T03:47:50.739Z",
+     "actor": "seed"
+    }
+   ]
+  },
+  "git.risk-engine": {
+   "items": [
+    {
+     "lifecycle": "discovered",
+     "attributes": {
+      "name": "Risk Engine DB",
+      "platform": "postgres",
+      "environment": "prod"
+     },
+     "valid_from": "2026-11-18T03:47:50.730Z",
+     "valid_to": null,
+     "recorded_from": "2026-11-18T03:47:50.730Z",
+     "actor": "seed"
+    }
+   ]
+  },
+  "git.core-banking/ledger": {
+   "items": [
+    {
+     "lifecycle": "discovered",
+     "attributes": {
+      "name": "ledger"
+     },
+     "valid_from": "2026-11-18T03:47:50.749Z",
+     "valid_to": null,
+     "recorded_from": "2026-11-18T03:47:50.749Z",
+     "actor": "seed"
+    }
+   ]
+  },
+  "git.reg-reporting/returns": {
+   "items": [
+    {
+     "lifecycle": "discovered",
+     "attributes": {
+      "name": "returns"
+     },
+     "valid_from": "2026-11-18T03:47:50.843Z",
+     "valid_to": null,
+     "recorded_from": "2026-11-18T03:47:50.843Z",
+     "actor": "seed"
+    }
+   ]
+  },
+  "git.risk-engine/exposure": {
+   "items": [
+    {
+     "lifecycle": "discovered",
+     "attributes": {
+      "name": "exposure"
+     },
+     "valid_from": "2026-11-18T03:47:50.795Z",
+     "valid_to": null,
+     "recorded_from": "2026-11-18T03:47:50.795Z",
+     "actor": "seed"
+    }
+   ]
+  },
+  "reg:bcbs239": {
+   "items": [
+    {
+     "lifecycle": "discovered",
+     "attributes": {
+      "code": "BCBS239",
+      "name": "BCBS 239 risk data aggregation"
+     },
+     "valid_from": "2026-11-18T03:47:50.716Z",
+     "valid_to": null,
+     "recorded_from": "2026-11-18T03:47:50.716Z",
+     "actor": "seed"
+    }
+   ]
+  },
+  "reg:pra110": {
+   "items": [
+    {
+     "lifecycle": "discovered",
+     "attributes": {
+      "code": "PRA110",
+      "name": "PRA110 cash flow mismatch"
+     },
+     "valid_from": "2026-11-18T03:47:50.711Z",
+     "valid_to": null,
+     "recorded_from": "2026-11-18T03:47:50.711Z",
+     "actor": "seed"
+    }
+   ]
+  },
+  "dstorm:rc-1y": {
+   "items": [
+    {
+     "lifecycle": "discovered",
+     "attributes": {
+      "code": "RC-1Y",
+      "name": "One year",
+      "description": "Operational logs"
+     },
+     "valid_from": "2026-11-18T03:47:50.706Z",
+     "valid_to": null,
+     "recorded_from": "2026-11-18T03:47:50.706Z",
+     "actor": "seed"
+    }
+   ]
+  },
+  "dstorm:rc-7y": {
+   "items": [
+    {
+     "lifecycle": "discovered",
+     "attributes": {
+      "code": "RC-7Y",
+      "name": "Seven years",
+      "description": "Financial records kept seven years"
+     },
+     "valid_from": "2026-11-18T03:47:50.701Z",
+     "valid_to": null,
+     "recorded_from": "2026-11-18T03:47:50.701Z",
+     "actor": "seed"
+    }
+   ]
+  }
+ },
+ "scopes": {
+  "scope-bcbs-var": {
+   "detail": {
+    "qualified_name": "scope-bcbs-var",
+    "name": "BCBS 239 exposure report",
+    "owner": "43000004",
+    "kind": "report",
+    "required_tier": "silver",
+    "version": 1,
+    "status": "draft",
+    "locked": false,
+    "versions": [],
+    "groups": [
+     {
+      "qualified_name": "scope-bcbs-var--core",
+      "name": "Core",
+      "order": 1,
+      "elements": [
+       {
+        "qualified_name": "scope-bcbs-var--core--exposure",
+        "name": "Exposure",
+        "definition": "What is at risk",
+        "links": []
+       }
+      ]
+     }
+    ],
+    "flows": [
+     "int-ledger-to-risk"
+    ]
+   },
+   "completeness": {
+    "qualified_name": "scope-bcbs-var",
+    "version": 1,
+    "submitted": false,
+    "complete": false,
+    "elements": {
+     "total": 1,
+     "linked": 0,
+     "unlinked": [
+      "scope-bcbs-var--core--exposure"
+     ]
+    },
+    "applications": [
+     {
+      "application": "app-core-banking",
+      "name": "Core Banking",
+      "owner": "43000002",
+      "task": "missing",
+      "links": 0
+     },
+     {
+      "application": "app-risk-engine",
+      "name": "Risk Engine",
+      "owner": "43000002",
+      "task": "missing",
+      "links": 0
+     }
+    ]
+   }
+  },
+  "scope-legacy-loans": {
+   "detail": {
+    "qualified_name": "scope-legacy-loans",
+    "name": "Legacy loan reporting",
+    "owner": "43000098",
+    "kind": "report",
+    "required_tier": "bronze",
+    "version": 1,
+    "status": "draft",
+    "locked": false,
+    "versions": [],
+    "groups": [
+     {
+      "qualified_name": "scope-legacy-loans--core",
+      "name": "Core",
+      "order": 1,
+      "elements": [
+       {
+        "qualified_name": "scope-legacy-loans--core--exposure",
+        "name": "Exposure",
+        "definition": "What is at risk",
+        "links": []
+       }
+      ]
+     }
+    ],
+    "flows": [
+     "int-ledger-to-lake"
+    ]
+   },
+   "completeness": {
+    "qualified_name": "scope-legacy-loans",
+    "version": 1,
+    "submitted": false,
+    "complete": false,
+    "elements": {
+     "total": 1,
+     "linked": 0,
+     "unlinked": [
+      "scope-legacy-loans--core--exposure"
+     ]
+    },
+    "applications": [
+     {
+      "application": "app-core-banking",
+      "name": "Core Banking",
+      "owner": "43000002",
+      "task": "missing",
+      "links": 0
+     },
+     {
+      "application": "app-data-lake",
+      "name": "Data Lake",
+      "owner": "43000001",
+      "task": "missing",
+      "links": 0
+     }
+    ]
+   }
+  },
+  "scope-onboarding": {
+   "detail": {
+    "qualified_name": "scope-onboarding",
+    "name": "Customer onboarding",
+    "owner": "43000004",
+    "kind": "business-process",
+    "required_tier": "bronze",
+    "version": 1,
+    "status": "draft",
+    "locked": false,
+    "versions": [],
+    "groups": [
+     {
+      "qualified_name": "scope-onboarding--core",
+      "name": "Core",
+      "order": 1,
+      "elements": [
+       {
+        "qualified_name": "scope-onboarding--core--exposure",
+        "name": "Exposure",
+        "definition": "What is at risk",
+        "links": []
+       }
+      ]
+     }
+    ],
+    "flows": [
+     "int-crm-to-payments"
+    ]
+   },
+   "completeness": {
+    "qualified_name": "scope-onboarding",
+    "version": 1,
+    "submitted": false,
+    "complete": false,
+    "elements": {
+     "total": 1,
+     "linked": 0,
+     "unlinked": [
+      "scope-onboarding--core--exposure"
+     ]
+    },
+    "applications": [
+     {
+      "application": "app-crm",
+      "name": "Customer CRM",
+      "owner": "43000003",
+      "task": "missing",
+      "links": 0
+     },
+     {
+      "application": "app-payments-hub",
+      "name": "Payments Hub",
+      "owner": "43000001",
+      "task": "missing",
+      "links": 0
+     }
+    ]
+   }
+  },
+  "scope-pra110": {
+   "detail": {
+    "qualified_name": "scope-pra110",
+    "name": "PRA110",
+    "owner": "43000004",
+    "kind": "regulatory-return",
+    "required_tier": "gold",
+    "version": 1,
+    "status": "submitted",
+    "locked": true,
+    "locked_at": "2026-10-01T09:00:00.000Z",
+    "versions": [
+     {
+      "version": 1,
+      "submitted_at": "2026-11-18T03:47:51.028Z"
+     }
+    ],
+    "groups": [
+     {
+      "qualified_name": "scope-pra110--core",
+      "name": "Core",
+      "order": 1,
+      "elements": [
+       {
+        "qualified_name": "scope-pra110--core--exposure",
+        "name": "Exposure",
+        "definition": "What is at risk",
+        "links": [
+         {
+          "target": "git.risk-engine/exposure/positions/exposure_at_default",
+          "app": "app-risk-engine",
+          "state": "confirmed"
+         }
+        ]
+       }
+      ]
+     }
+    ],
+    "flows": [
+     "int-ledger-to-risk",
+     "int-risk-to-reporting"
+    ]
+   },
+   "completeness": {
+    "qualified_name": "scope-pra110",
+    "version": 1,
+    "submitted": true,
+    "complete": false,
+    "elements": {
+     "total": 1,
+     "linked": 1,
+     "unlinked": []
+    },
+    "applications": [
+     {
+      "application": "app-risk-engine",
+      "name": "Risk Engine",
+      "owner": "43000002",
+      "task": "open",
+      "task_id": "afc5d62b-4200-4f82-9188-7616388630bb",
+      "escalated": false,
+      "due_at": "2026-12-02T03:48:44.732Z",
+      "links": 1
+     },
+     {
+      "application": "app-reg-reporting",
+      "name": "Regulatory Reporting",
+      "owner": "43000004",
+      "task": "open",
+      "task_id": "f1d4c393-60e1-4daa-b553-24f222d61a1d",
+      "escalated": false,
+      "due_at": "2026-12-02T03:48:44.741Z",
+      "links": 0
+     },
+     {
+      "application": "app-core-banking",
+      "name": "Core Banking",
+      "owner": "43000002",
+      "task": "open",
+      "task_id": "d00fefdb-9af8-4f75-a20b-e91c7673e036",
+      "escalated": false,
+      "due_at": "2026-12-02T03:48:44.747Z",
+      "links": 0
+     }
+    ]
+   }
+  }
+ },
+ "datasets": {
+  "int-crm-to-payments": {
+   "integration": "int-crm-to-payments",
+   "datasets": []
+  },
+  "int-ledger-to-lake": {
+   "integration": "int-ledger-to-lake",
+   "datasets": []
+  },
+  "int-ledger-to-risk": {
+   "integration": "int-ledger-to-risk",
+   "datasets": [
+    {
+     "qualified_name": "int-ledger-to-risk--account-exposures",
+     "name": "Account exposures",
+     "description": "Balances sent for exposure calculation",
+     "business_context": "Used by credit risk",
+     "categories": [
+      "gl:credit-exposure"
+     ],
+     "record_class": "dstorm:rc-7y",
+     "columns": [
+      "git.risk-engine/exposure/positions/exposure_at_default"
+     ],
+     "can_edit": false
+    }
+   ]
+  },
+  "int-payments-to-ledger": {
+   "integration": "int-payments-to-ledger",
+   "datasets": [
+    {
+     "qualified_name": "int-payments-to-ledger--payment-postings",
+     "name": "Payment postings",
+     "description": "Postings from payments into the ledger",
+     "business_context": "Used by finance close",
+     "categories": [
+      "gl:account-balance",
+      "gl:customer-pii"
+     ],
+     "record_class": "dstorm:rc-7y",
+     "columns": [
+      "git.core-banking/ledger/accounts/closing_balance"
+     ],
+     "can_edit": false
+    }
+   ]
+  },
+  "int-risk-to-reporting": {
+   "integration": "int-risk-to-reporting",
+   "datasets": []
+  }
+ },
+ "lineage": {
+  "git.core-banking/ledger/accounts/account_id": {
+   "upstream": {
+    "root": "git.core-banking/ledger/accounts/account_id",
+    "direction": "upstream",
+    "truncated": {
+     "depth": false,
+     "nodes": false
+    },
+    "nodes": [
+     {
+      "qualified_name": "git.core-banking/ledger/accounts/account_id",
+      "type": "Column",
+      "depth": 0,
+      "container": "git.core-banking/ledger/accounts"
+     }
+    ],
+    "edges": []
+   },
+   "downstream": {
+    "root": "git.core-banking/ledger/accounts/account_id",
+    "direction": "downstream",
+    "truncated": {
+     "depth": false,
+     "nodes": false
+    },
+    "nodes": [
+     {
+      "qualified_name": "git.core-banking/ledger/accounts/account_id",
+      "type": "Column",
+      "depth": 0,
+      "container": "git.core-banking/ledger/accounts"
+     },
+     {
+      "qualified_name": "git.risk-engine/exposure/positions/account_id",
+      "type": "Column",
+      "depth": 1,
+      "container": "git.risk-engine/exposure/positions"
+     }
+    ],
+    "edges": [
+     {
+      "from": "git.risk-engine/exposure/positions/account_id",
+      "to": "git.core-banking/ledger/accounts/account_id",
+      "source": "git-json"
+     }
+    ]
+   }
+  },
+  "git.core-banking/ledger/accounts/closing_balance": {
+   "upstream": {
+    "root": "git.core-banking/ledger/accounts/closing_balance",
+    "direction": "upstream",
+    "truncated": {
+     "depth": false,
+     "nodes": false
+    },
+    "nodes": [
+     {
+      "qualified_name": "git.core-banking/ledger/accounts/closing_balance",
+      "type": "Column",
+      "depth": 0,
+      "container": "git.core-banking/ledger/accounts"
+     }
+    ],
+    "edges": []
+   },
+   "downstream": {
+    "root": "git.core-banking/ledger/accounts/closing_balance",
+    "direction": "downstream",
+    "truncated": {
+     "depth": true,
+     "nodes": false
+    },
+    "nodes": [
+     {
+      "qualified_name": "git.core-banking/ledger/accounts/closing_balance",
+      "type": "Column",
+      "depth": 0,
+      "container": "git.core-banking/ledger/accounts"
+     },
+     {
+      "qualified_name": "git.risk-engine/exposure/positions/exposure_at_default",
+      "type": "Column",
+      "depth": 1,
+      "container": "git.risk-engine/exposure/positions"
+     }
+    ],
+    "edges": [
+     {
+      "from": "git.risk-engine/exposure/positions/exposure_at_default",
+      "to": "git.core-banking/ledger/accounts/closing_balance",
+      "source": "git-json"
+     }
+    ]
+   }
+  },
+  "git.core-banking/ledger/accounts/customer_name": {
+   "upstream": {
+    "root": "git.core-banking/ledger/accounts/customer_name",
+    "direction": "upstream",
+    "truncated": {
+     "depth": false,
+     "nodes": false
+    },
+    "nodes": [
+     {
+      "qualified_name": "git.core-banking/ledger/accounts/customer_name",
+      "type": "Column",
+      "depth": 0,
+      "container": "git.core-banking/ledger/accounts"
+     }
+    ],
+    "edges": []
+   },
+   "downstream": {
+    "root": "git.core-banking/ledger/accounts/customer_name",
+    "direction": "downstream",
+    "truncated": {
+     "depth": false,
+     "nodes": false
+    },
+    "nodes": [
+     {
+      "qualified_name": "git.core-banking/ledger/accounts/customer_name",
+      "type": "Column",
+      "depth": 0,
+      "container": "git.core-banking/ledger/accounts"
+     }
+    ],
+    "edges": []
+   }
+  },
+  "git.reg-reporting/returns/pra110_lines/amount": {
+   "upstream": {
+    "root": "git.reg-reporting/returns/pra110_lines/amount",
+    "direction": "upstream",
+    "truncated": {
+     "depth": true,
+     "nodes": false
+    },
+    "nodes": [
+     {
+      "qualified_name": "git.reg-reporting/returns/pra110_lines/amount",
+      "type": "Column",
+      "depth": 0,
+      "container": "git.reg-reporting/returns/pra110_lines"
+     },
+     {
+      "qualified_name": "git.risk-engine/exposure/positions/exposure_at_default",
+      "type": "Column",
+      "depth": 1,
+      "container": "git.risk-engine/exposure/positions"
+     }
+    ],
+    "edges": [
+     {
+      "from": "git.reg-reporting/returns/pra110_lines/amount",
+      "to": "git.risk-engine/exposure/positions/exposure_at_default",
+      "source": "git-json"
+     }
+    ]
+   },
+   "downstream": {
+    "root": "git.reg-reporting/returns/pra110_lines/amount",
+    "direction": "downstream",
+    "truncated": {
+     "depth": false,
+     "nodes": false
+    },
+    "nodes": [
+     {
+      "qualified_name": "git.reg-reporting/returns/pra110_lines/amount",
+      "type": "Column",
+      "depth": 0,
+      "container": "git.reg-reporting/returns/pra110_lines"
+     }
+    ],
+    "edges": []
+   }
+  },
+  "git.reg-reporting/returns/pra110_lines/line_id": {
+   "upstream": {
+    "root": "git.reg-reporting/returns/pra110_lines/line_id",
+    "direction": "upstream",
+    "truncated": {
+     "depth": false,
+     "nodes": false
+    },
+    "nodes": [
+     {
+      "qualified_name": "git.reg-reporting/returns/pra110_lines/line_id",
+      "type": "Column",
+      "depth": 0,
+      "container": "git.reg-reporting/returns/pra110_lines"
+     }
+    ],
+    "edges": []
+   },
+   "downstream": {
+    "root": "git.reg-reporting/returns/pra110_lines/line_id",
+    "direction": "downstream",
+    "truncated": {
+     "depth": false,
+     "nodes": false
+    },
+    "nodes": [
+     {
+      "qualified_name": "git.reg-reporting/returns/pra110_lines/line_id",
+      "type": "Column",
+      "depth": 0,
+      "container": "git.reg-reporting/returns/pra110_lines"
+     }
+    ],
+    "edges": []
+   }
+  },
+  "git.reg-reporting/returns/pra110_lines/position_id": {
+   "upstream": {
+    "root": "git.reg-reporting/returns/pra110_lines/position_id",
+    "direction": "upstream",
+    "truncated": {
+     "depth": false,
+     "nodes": false
+    },
+    "nodes": [
+     {
+      "qualified_name": "git.reg-reporting/returns/pra110_lines/position_id",
+      "type": "Column",
+      "depth": 0,
+      "container": "git.reg-reporting/returns/pra110_lines"
+     },
+     {
+      "qualified_name": "git.risk-engine/exposure/positions/position_id",
+      "type": "Column",
+      "depth": 1,
+      "container": "git.risk-engine/exposure/positions"
+     }
+    ],
+    "edges": [
+     {
+      "from": "git.reg-reporting/returns/pra110_lines/position_id",
+      "to": "git.risk-engine/exposure/positions/position_id",
+      "source": "git-json"
+     }
+    ]
+   },
+   "downstream": {
+    "root": "git.reg-reporting/returns/pra110_lines/position_id",
+    "direction": "downstream",
+    "truncated": {
+     "depth": false,
+     "nodes": false
+    },
+    "nodes": [
+     {
+      "qualified_name": "git.reg-reporting/returns/pra110_lines/position_id",
+      "type": "Column",
+      "depth": 0,
+      "container": "git.reg-reporting/returns/pra110_lines"
+     }
+    ],
+    "edges": []
+   }
+  },
+  "git.risk-engine/exposure/positions/account_id": {
+   "upstream": {
+    "root": "git.risk-engine/exposure/positions/account_id",
+    "direction": "upstream",
+    "truncated": {
+     "depth": false,
+     "nodes": false
+    },
+    "nodes": [
+     {
+      "qualified_name": "git.risk-engine/exposure/positions/account_id",
+      "type": "Column",
+      "depth": 0,
+      "container": "git.risk-engine/exposure/positions"
+     },
+     {
+      "qualified_name": "git.core-banking/ledger/accounts/account_id",
+      "type": "Column",
+      "depth": 1,
+      "container": "git.core-banking/ledger/accounts"
+     }
+    ],
+    "edges": [
+     {
+      "from": "git.risk-engine/exposure/positions/account_id",
+      "to": "git.core-banking/ledger/accounts/account_id",
+      "source": "git-json"
+     }
+    ]
+   },
+   "downstream": {
+    "root": "git.risk-engine/exposure/positions/account_id",
+    "direction": "downstream",
+    "truncated": {
+     "depth": false,
+     "nodes": false
+    },
+    "nodes": [
+     {
+      "qualified_name": "git.risk-engine/exposure/positions/account_id",
+      "type": "Column",
+      "depth": 0,
+      "container": "git.risk-engine/exposure/positions"
+     }
+    ],
+    "edges": []
+   }
+  },
+  "git.risk-engine/exposure/positions/exposure_at_default": {
+   "upstream": {
+    "root": "git.risk-engine/exposure/positions/exposure_at_default",
+    "direction": "upstream",
+    "truncated": {
+     "depth": false,
+     "nodes": false
+    },
+    "nodes": [
+     {
+      "qualified_name": "git.risk-engine/exposure/positions/exposure_at_default",
+      "type": "Column",
+      "depth": 0,
+      "container": "git.risk-engine/exposure/positions"
+     },
+     {
+      "qualified_name": "git.core-banking/ledger/accounts/closing_balance",
+      "type": "Column",
+      "depth": 1,
+      "container": "git.core-banking/ledger/accounts"
+     }
+    ],
+    "edges": [
+     {
+      "from": "git.risk-engine/exposure/positions/exposure_at_default",
+      "to": "git.core-banking/ledger/accounts/closing_balance",
+      "source": "git-json"
+     }
+    ]
+   },
+   "downstream": {
+    "root": "git.risk-engine/exposure/positions/exposure_at_default",
+    "direction": "downstream",
+    "truncated": {
+     "depth": false,
+     "nodes": false
+    },
+    "nodes": [
+     {
+      "qualified_name": "git.risk-engine/exposure/positions/exposure_at_default",
+      "type": "Column",
+      "depth": 0,
+      "container": "git.risk-engine/exposure/positions"
+     },
+     {
+      "qualified_name": "git.reg-reporting/returns/pra110_lines/amount",
+      "type": "Column",
+      "depth": 1,
+      "container": "git.reg-reporting/returns/pra110_lines"
+     }
+    ],
+    "edges": [
+     {
+      "from": "git.reg-reporting/returns/pra110_lines/amount",
+      "to": "git.risk-engine/exposure/positions/exposure_at_default",
+      "source": "git-json"
+     }
+    ]
+   }
+  },
+  "git.risk-engine/exposure/positions/position_id": {
+   "upstream": {
+    "root": "git.risk-engine/exposure/positions/position_id",
+    "direction": "upstream",
+    "truncated": {
+     "depth": false,
+     "nodes": false
+    },
+    "nodes": [
+     {
+      "qualified_name": "git.risk-engine/exposure/positions/position_id",
+      "type": "Column",
+      "depth": 0,
+      "container": "git.risk-engine/exposure/positions"
+     }
+    ],
+    "edges": []
+   },
+   "downstream": {
+    "root": "git.risk-engine/exposure/positions/position_id",
+    "direction": "downstream",
+    "truncated": {
+     "depth": false,
+     "nodes": false
+    },
+    "nodes": [
+     {
+      "qualified_name": "git.risk-engine/exposure/positions/position_id",
+      "type": "Column",
+      "depth": 0,
+      "container": "git.risk-engine/exposure/positions"
+     },
+     {
+      "qualified_name": "git.reg-reporting/returns/pra110_lines/position_id",
+      "type": "Column",
+      "depth": 1,
+      "container": "git.reg-reporting/returns/pra110_lines"
+     }
+    ],
+    "edges": [
+     {
+      "from": "git.reg-reporting/returns/pra110_lines/position_id",
+      "to": "git.risk-engine/exposure/positions/position_id",
+      "source": "git-json"
+     }
+    ]
+   }
+  }
+ },
+ "measures": [
+  {
+   "id": "applications_taken_on",
+   "label": "Applications taken on",
+   "value": 0,
+   "target": 10,
+   "unit": "percent",
+   "detail": "0 of 6 applications in the catalog"
+  },
+  {
+   "id": "scopes_submitted",
+   "label": "Priority returns with scopes submitted",
+   "value": 1,
+   "target": 50,
+   "unit": "count"
+  },
+  {
+   "id": "scopes_complete",
+   "label": "Submitted scopes with every element linked",
+   "value": 1,
+   "target": null,
+   "unit": "count",
+   "detail": "1 of 1 submitted scopes"
+  },
+  {
+   "id": "element_links",
+   "label": "Elements of submitted scopes with confirmed column links",
+   "value": 100,
+   "target": 70,
+   "unit": "percent",
+   "detail": "1 of 1 elements"
+  },
+  {
+   "id": "cross_border_assessed",
+   "label": "Cross-border integrations with a current assessment",
+   "value": 25,
+   "target": 70,
+   "unit": "percent",
+   "detail": "1 of 4 cross-border integrations"
+  },
+  {
+   "id": "trust_at_required",
+   "label": "Assets of submitted scopes at their required trust tier",
+   "value": 0,
+   "target": 40,
+   "unit": "percent",
+   "detail": "0 of 1 assets"
+  },
+  {
+   "id": "trust_unverified",
+   "label": "Assets graded unverified",
+   "value": 1,
+   "target": null,
+   "unit": "count"
+  },
+  {
+   "id": "trust_bronze",
+   "label": "Assets graded bronze",
+   "value": 0,
+   "target": null,
+   "unit": "count"
+  },
+  {
+   "id": "trust_silver",
+   "label": "Assets graded silver",
+   "value": 0,
+   "target": null,
+   "unit": "count"
+  },
+  {
+   "id": "trust_gold",
+   "label": "Assets graded gold",
+   "value": 0,
+   "target": null,
+   "unit": "count"
+  },
+  {
+   "id": "requirements_enforced",
+   "label": "Requirements with an enforced policy",
+   "value": 0,
+   "target": null,
+   "unit": "percent",
+   "detail": "0 of 2 requirements"
+  },
+  {
+   "id": "exceptions_open",
+   "label": "Open exceptions",
+   "value": 0,
+   "target": null,
+   "unit": "count"
+  },
+  {
+   "id": "exceptions_overdue",
+   "label": "Exceptions past their due date",
+   "value": 0,
+   "target": 0,
+   "unit": "count"
+  },
+  {
+   "id": "exception_age_median",
+   "label": "Exception age, median",
+   "value": 0,
+   "target": 15,
+   "unit": "days"
+  },
+  {
+   "id": "exception_age_p95",
+   "label": "Exception age, 95th percentile",
+   "value": 0,
+   "target": 45,
+   "unit": "days"
+  },
+  {
+   "id": "automation_rate",
+   "label": "Decisions made without a person",
+   "value": 0,
+   "target": 30,
+   "unit": "percent",
+   "detail": "0 of 0 applied decisions"
+  },
+  {
+   "id": "evidence_checks",
+   "label": "Evidence checks passing",
+   "value": 100,
+   "target": 100,
+   "unit": "percent",
+   "detail": "173 recent ledger entries checked"
+  }
+ ],
+ "requirements": {
+  "items": [
+   {
+    "reference_id": "DM-1",
+    "title": "Every integration is linked to at least one dataset",
+    "kind": "technical-control-requirement",
+    "version": 1,
+    "qualified_name": "req-dm-1",
+    "status": "none",
+    "policies": []
+   },
+   {
+    "reference_id": "DM-2",
+    "title": "Every application has an owner",
+    "kind": "operating-instruction",
+    "version": 1,
+    "qualified_name": "req-dm-2",
+    "status": "none",
+    "policies": []
+   }
+  ],
+  "summary": {
+   "none": 2,
+   "shadow_only": 0,
+   "enforced": 0
+  },
+  "unknown_references": [
+   {
+    "policy": "classification-proposed",
+    "implements": "TCR-0005"
+   },
+   {
+    "policy": "cross-border-covered",
+    "implements": "TCR-0004"
+   },
+   {
+    "policy": "integration-has-dataset",
+    "implements": "TCR-0001"
+   },
+   {
+    "policy": "required-trust-tier",
+    "implements": "TCR-0003"
+   }
+  ]
+ },
+ "inboxBen": {
+  "items": [
+   {
+    "id": "afc5d62b-4200-4f82-9188-7616388630bb",
+    "assignee": "43000002",
+    "kind": "scope-links",
+    "title": "Link your tables and columns to this scope",
+    "message": "Link Risk Engine's tables and columns to the business elements of PRA110 (version 1).",
+    "subject_ref": "Scope:scope-pra110",
+    "decisions": [
+     "done",
+     "none_held"
+    ],
+    "raised_at": "2026-11-18T03:48:44.728Z",
+    "due_at": "2026-12-02T03:48:44.732Z",
+    "escalated": false
+   },
+   {
+    "id": "d00fefdb-9af8-4f75-a20b-e91c7673e036",
+    "assignee": "43000002",
+    "kind": "scope-links",
+    "title": "Link your tables and columns to this scope",
+    "message": "Link Core Banking's tables and columns to the business elements of PRA110 (version 1).",
+    "subject_ref": "Scope:scope-pra110",
+    "decisions": [
+     "done",
+     "none_held"
+    ],
+    "raised_at": "2026-11-18T03:48:44.745Z",
+    "due_at": "2026-12-02T03:48:44.747Z",
+    "escalated": false
+   }
+  ],
+  "count": 2
+ }
+}

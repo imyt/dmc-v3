@@ -94,6 +94,9 @@ export class SyncService {
     const known = new Map<string, { hash: string; state: string }>();
     for (const r of (await db.query<{ key: string; hash: string; state: string }>(`select key, hash, state from ${M}.record_state where job = $1 and environment = $2`, [job, environment])).rows) known.set(r.key, { hash: r.hash, state: r.state });
     const activeBefore = [...known.values()].filter((k) => k.state === 'active').length;
+    // records the catalog refused in the last run come back as created/updated/missing again; they are not new changes (ADR 0027)
+    const lastRefused = new Set<string>(((await db.query<{ refused_keys: string[] | null }>(
+      `select refused_keys from ${M}.run where job = $1 and environment = $2 and status = 'succeeded' order by started_at desc limit 1`, [job, environment])).rows[0]?.refused_keys) ?? []);
 
     const seen = new Set<string>();
     const pending: Pending[] = [];
@@ -149,17 +152,19 @@ export class SyncService {
 
     if (failure) { await finish('failed', failure); return result('failed', failure); }
 
-    const changes = counts.created + counts.updated + counts.deprecated;
+    const changes = pending.filter((p) => !lastRefused.has(p.key)).length;
     const max = def.limits?.max_changes_pct;
     if (max !== undefined && activeBefore > 0 && (changes / activeBefore) * 100 > max) {
       for (const p of pending) await db.query(`insert into ${M}.staging (run_id, key, change, hash, attrs) values ($1,$2,$3,$4,$5)`, [runId, p.key, p.change, p.hash, p.attrs ? JSON.stringify(p.attrs) : null]);
       const note = `${changes} of ${activeBefore} records would change (limit ${max}%)`;
-      await finish('paused_limit', note, highWater);
+      await finish('paused_limit', note, counts.errors ? null : highWater); // a row that did not map holds the cursor back (ADR 0027)
       await this.d.exceptions.raise({ kind: 'sync.change_limit', severity: 'high', subjectRef: subjectOf(environment, job), message: `${job} paused: ${note}`, route: 'platform-admin', actor });
       return result('paused_limit', note);
     }
 
-    const refused = await this.commit(db, { runId, job, environment, def, pending, highWater, since, actor });
+    const refusedKeys = await this.commit(db, { runId, job, environment, def, pending, highWater: counts.errors ? null : highWater, since, actor });
+    const refused = refusedKeys.length;
+    if (refused) await db.query(`update ${M}.run set refused_keys = $2 where id = $1`, [runId, JSON.stringify(refusedKeys)]);
     const rnote = [
       counts.errors ? `${counts.errors} record${counts.errors === 1 ? '' : 's'} not mapped (${errorNotes.join('; ')}${counts.errors > errorNotes.length ? '; ...' : ''})` : '',
       refused ? `${refused} record${refused === 1 ? '' : 's'} refused by the catalog; they are sent again next run` : '',
@@ -169,9 +174,11 @@ export class SyncService {
   }
 
   /** Signals first (delivery is idempotent by source + key), then state. A crash in between replays safely. */
-  private async commit(db: Queryable, a: { runId: string; job: string; environment: string; def: import('./definition.js').JobDef; pending: Pending[]; highWater: string | null; since: string | null; actor: string }): Promise<number> {
+  private async commit(db: Queryable, a: { runId: string; job: string; environment: string; def: import('./definition.js').JobDef; pending: Pending[]; highWater: string | null; since: string | null; actor: string }): Promise<string[]> {
     const edge = a.def.target.edge;
-    const signals: Signal[] = a.pending.map((p): Signal => {
+    // An end of an edge goes before a new one starts: an owner transfer on a many-to-one edge is "unlink old, link new" in one run (ADR 0027). Stable, so the rest keeps its order.
+    const ordered = [...a.pending.filter((p) => p.change === 'missing'), ...a.pending.filter((p) => p.change !== 'missing')];
+    const signals: Signal[] = ordered.map((p): Signal => {
       if (!edge) return {
         source: a.job,
         key: p.change === 'missing' ? `${p.key}@missing:${a.runId}` : `${p.key}@${p.hash}`,
@@ -183,7 +190,8 @@ export class SyncService {
       };
       // an edge record becomes a link (or an unlink when the edge has gone from a complete run); the ingest applies it to the catalog
       const [from, to] = splitEdgeKey(p.key);
-      const { from: _f, to: _t, ...attributes } = p.attrs ?? {};
+      // a NULL edge attribute is no attribute (it is still part of the hash, so clearing one re-describes the edge)
+      const attributes = Object.fromEntries(Object.entries(p.attrs ?? {}).filter(([k, v]) => k !== 'from' && k !== 'to' && v !== null));
       return {
         source: a.job,
         key: p.change === 'missing' ? `${p.key}@missing:${a.runId}` : `${p.key}@${p.hash}`,
@@ -197,8 +205,8 @@ export class SyncService {
     // a record the sink refused (for example an edge whose end is not in the catalog yet) is not recorded as seen: the next run sends it again (ADR 0024)
     const res = signals.length ? await this.d.signals.submit(signals) : undefined;
     const refusedKeys = new Set(res?.rejected ?? []);
-    const refused = signals.length ? a.pending.filter((_p, i) => refusedKeys.has(signals[i]!.key)) : [];
-    const accepted = a.pending.filter((p) => !refused.includes(p));
+    const refused = signals.length ? ordered.filter((_p, i) => refusedKeys.has(signals[i]!.key)) : [];
+    const accepted = ordered.filter((p) => !refused.includes(p));
     await db.query('begin');
     try {
       for (const p of accepted) {
@@ -214,7 +222,7 @@ export class SyncService {
       await db.query(`delete from ${M}.staging where run_id = $1`, [a.runId]);
       await db.query('commit');
     } catch (e) { await db.query('rollback'); throw e; }
-    return refused.length;
+    return refused.map((p) => p.key);
   }
 
   /** An admin accepts a paused run: its held changes go out as signals. */
@@ -223,7 +231,8 @@ export class SyncService {
     if (!r || r.status !== 'paused_limit') throw new Error('Run is not waiting for review');
     const job = (await db.query<{ definition: any }>(`select definition from ${M}.job where name = $1 and environment = $2`, [r.job, r.environment])).rows[0]!;
     const pending = (await db.query<{ key: string; change: Pending['change']; hash: string | null; attrs: Record<string, unknown> | null }>(`select key, change, hash, attrs from ${M}.staging where run_id = $1`, [runId])).rows;
-    await this.commit(db, { runId, job: r.job, environment: r.environment, def: job.definition, pending, highWater: r.pending_cursor, since: null, actor });
+    const refusedKeys = await this.commit(db, { runId, job: r.job, environment: r.environment, def: job.definition, pending, highWater: r.pending_cursor, since: null, actor });
+    if (refusedKeys.length) await db.query(`update ${M}.run set refused_keys = $2 where id = $1`, [runId, JSON.stringify(refusedKeys)]);
     await db.query(`update ${M}.run set status = 'succeeded', note = $2 where id = $1`, [runId, `approved by ${actor}`]);
     await writeOutbox(db, M, { type: 'sync.run.approved', subjectRef: subjectOf(r.environment, r.job), actor, payload: { runId } });
     return { runId, status: 'succeeded', complete: r.complete, read: r.read_count, created: r.created, updated: r.updated, unchanged: r.unchanged, deprecated: r.deprecated, errors: r.errors };

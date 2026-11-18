@@ -6,6 +6,8 @@ import { PageHeader } from '@/components/patterns/page-header';
 import { ErrorState, LoadingState } from '@/components/patterns/states';
 import { notify } from '@/components/patterns/toast';
 import { ApiProblem, useData } from '@/lib/data';
+import { PersonRef, PersonRefs, looksLikeStaffId } from '@/lib/people';
+import { objectHref } from '@/features/object/model';
 import { useAsync } from '@/lib/use-async';
 
 const problem = (e: unknown) => (e instanceof ApiProblem ? e.detail : 'Something went wrong. Try again.');
@@ -16,6 +18,16 @@ export function DatasetsRoute({ integration }: { integration: string }) {
   const data = useData();
   const [v, setV] = useState(0);
   const st = useAsync(() => data.datasets(integration), [integration, v]);
+  // who looks after the integration: the applications at either end, with their owner and delegates
+  const apps = useAsync(async () => {
+    const edges = (await data.relationships(integration, 'in')).items.filter((e) => e.name === 'source_of' || e.name === 'target_of');
+    return Promise.all(edges.map(async (e) => {
+      const n = await data.node(e.from).catch(() => undefined);
+      const a = (n?.attributes ?? {}) as Record<string, unknown>;
+      return { qn: e.from, name: typeof a.name === 'string' ? a.name : e.from, end: e.name === 'source_of' ? 'Sends the data' : 'Receives the data',
+        owner: looksLikeStaffId(a.owner) ? a.owner : undefined, delegates: Array.isArray(a.delegates) ? a.delegates.filter(looksLikeStaffId) : [] };
+    }));
+  }, [integration]);
   const [f, setF] = useState({ name: '', business_context: '', categories: '', record_class: '', columns: '' });
   const [editing, setEditing] = useState<string>();
   const can = st.status === 'done' && st.value.datasets.some((d) => d.can_edit);
@@ -29,10 +41,19 @@ export function DatasetsRoute({ integration }: { integration: string }) {
   const field = (k: keyof typeof f, label: string) => (<label className="block text-sm">{label}<Input value={f[k]} onChange={(e) => setF({ ...f, [k]: e.target.value })} /></label>);
   return (
     <>
-      <PageHeader title="Datasets" description={`What ${integration} carries: category, business context, record class and the columns behind it.`} crumbs={[{ label: 'Home', to: '/' }, { label: integration, to: `/o/${integration}` }, { label: 'Datasets' }]} />
+      <PageHeader title="Datasets" description={`What ${integration} carries: category, business context, record class and the columns behind it.`} crumbs={[{ label: 'Home', to: '/' }, { label: integration, to: objectHref(integration) }, { label: 'Datasets' }]} />
       <div className="mx-auto max-w-[var(--content-max)] space-y-6 px-8 py-6">
         {st.status === 'loading' && <LoadingState label="Loading datasets" />}
         {st.status === 'error' && <ErrorState message={problem(st.error)} />}
+        {apps.status === 'done' && apps.value.length > 0 && (
+          <section aria-labelledby="apps">
+            <h2 id="apps" className="mb-2 text-lg font-semibold">Applications on this integration</h2>
+            <DataTable label="Applications" exportName={`${integration}-applications`} rowId={(a) => `${a.qn}:${a.end}`} rows={apps.value}
+              columns={[{ id: 'a', header: 'Application', cell: (a) => <a className="text-brand-text underline underline-offset-2" href={objectHref(a.qn)}>{a.name}</a>, text: (a) => a.name },
+                { id: 'e', header: 'Role', cell: (a) => a.end, text: (a) => a.end },
+                { id: 'o', header: 'Owner', cell: (a) => (a.owner ? <PersonRef id={a.owner} role="Owner" /> : 'Not set'), text: (a) => a.owner ?? '' },
+                { id: 'd', header: 'Delegates', cell: (a) => <PersonRefs ids={a.delegates} role="Delegate" />, text: (a) => a.delegates.join('; ') }]} />
+          </section>)}
         {st.status === 'done' && (<>
           <DataTable label="Datasets" exportName={`${integration}-datasets`} rowId={(d) => d.qualified_name} rows={st.value.datasets}
             empty={{ title: 'No datasets yet', doing: 'The owner of an application on this integration adds what it carries; a policy asks for at least one.' }}

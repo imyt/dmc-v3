@@ -484,6 +484,40 @@ export interface paths {
         patch: operations["updateDataset"];
         trace?: never;
     };
+    "/v1/policies": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Every policy in the policies folder, with the mode in force here, whether it is paused and whether it is effective in this environment (policy authors, control owners, auditors, administrators) */
+        get: operations["listPolicies"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/policies/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** One policy with its YAML source, its golden cases as stored, and a checksum the editor can send back when proposing a change */
+        get: operations["getPolicy"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/v1/policies/check": {
         parameters: {
             query?: never;
@@ -648,6 +682,125 @@ export interface paths {
         put?: never;
         /** Pause or resume one policy (its control owner, or an administrator) */
         post: operations["setPolicyPaused"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/sync/jobs": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Sync jobs in every environment, with whether they are enabled or paused, their schedule and their last run (administrators) */
+        get: operations["listSyncJobs"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/sync/jobs/{environment}/{name}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** One job in one environment (administrators) */
+        get: operations["getSyncJob"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/sync/jobs/{environment}/{name}/runs": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Runs of a job, newest first, with counts and notes (administrators) */
+        get: operations["listSyncRuns"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/sync/jobs/{environment}/{name}/pause": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Pause or resume a job. A paused job still wakes on its schedule but records a skipped run (administrators) */
+        post: operations["setSyncJobPaused"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/sync/jobs/{environment}/{name}/run": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Queue a run now, on the queue the schedule uses. 409 when the job is paused, disabled, waiting for review, running or already queued (administrators) */
+        post: operations["runSyncJobNow"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/sync/runs/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** One run, with its counts and notes (administrators) */
+        get: operations["getSyncRun"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/sync/runs/{id}/approve": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Accept a run the change limit held, so its changes go out. The worker applies it; 409 when the run is not waiting for review (administrators) */
+        post: operations["approveSyncRun"];
         delete?: never;
         options?: never;
         head?: never;
@@ -959,6 +1112,41 @@ export interface components {
             golden?: string;
             message?: string;
         };
+        PolicySummary: {
+            id: string;
+            control: string;
+            /** @description The metamodel type the policy applies to */
+            type: string;
+            /** @description The control requirement reference */
+            implements?: string;
+            /**
+             * @description The mode in force in this environment
+             * @enum {string}
+             */
+            mode: "shadow" | "enforced";
+            /**
+             * @description The mode the policy file says; the environment overlay may differ
+             * @enum {string}
+             */
+            source_mode: "shadow" | "enforced";
+            /** @description Enforcement is paused */
+            paused: boolean;
+            /** @description False when this environment's overlay disables the policy */
+            effective: boolean;
+        };
+        PolicyList: {
+            items: components["schemas"]["PolicySummary"][];
+        };
+        PolicyDetail: components["schemas"]["PolicySummary"] & {
+            /** @description Where the file is in the repository */
+            path: string;
+            /** @description The policy file as stored */
+            yaml: string;
+            /** @description The golden cases file as stored */
+            golden: string | null;
+            /** @description sha256 over the YAML and golden text */
+            checksum: string;
+        };
         PolicyDraftReport: {
             ok: boolean;
             policy?: {
@@ -1025,6 +1213,75 @@ export interface components {
                 mode: "shadow" | "enforced";
                 paused: boolean;
             }[];
+        };
+        SyncRun: {
+            /** Format: uuid */
+            id: string;
+            job: string;
+            environment: string;
+            /** @enum {string} */
+            trigger: "schedule" | "manual";
+            /** @enum {string} */
+            status: "running" | "succeeded" | "failed" | "paused_limit" | "discarded" | "skipped";
+            /** @description full or incremental */
+            mode: string;
+            /** @description Every page was read and every record mapped */
+            complete: boolean;
+            /** Format: date-time */
+            started_at: string;
+            /** Format: date-time */
+            finished_at: string | null;
+            /** @description Numbers only. DMC holds no source values. */
+            counts: {
+                read: number;
+                created: number;
+                updated: number;
+                unchanged: number;
+                /** @description Records gone from a complete full run */
+                missing: number;
+                /** @description Records that could not be mapped */
+                errors: number;
+                /** @description Records the catalog refused; sent again next run */
+                refused: number;
+            };
+            note: string | null;
+            etag: string;
+        };
+        SyncJob: {
+            name: string;
+            environment: string;
+            version: number;
+            /** @description Set in the repository's environment overlay */
+            enabled: boolean;
+            paused: boolean;
+            /** @description Cron expression */
+            schedule: string;
+            /** @description The connection's name only. Its configuration and secret are never returned. */
+            connection: string;
+            connection_type: string | null;
+            mode: string;
+            /** @description A run that would change more than this share of records waits for review */
+            max_changes_pct: number | null;
+            last_run: components["schemas"]["SyncRun"] | null;
+            /** Format: date-time */
+            last_success_at: string | null;
+            /**
+             * Format: uuid
+             * @description The run held by the change limit
+             */
+            awaiting_review: string | null;
+            etag: string;
+        };
+        SyncJobList: {
+            items: components["schemas"]["SyncJob"][];
+        };
+        SyncRunPage: {
+            items: components["schemas"]["SyncRun"][];
+            next_cursor: string | null;
+        };
+        SyncQueued: {
+            /** @enum {boolean} */
+            queued: true;
         };
         DashboardMeasures: {
             measures: {
@@ -2246,6 +2503,50 @@ export interface operations {
             default: components["responses"]["Problem"];
         };
     };
+    listPolicies: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Policies */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PolicyList"];
+                };
+            };
+            default: components["responses"]["Problem"];
+        };
+    };
+    getPolicy: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description The policy */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PolicyDetail"];
+                };
+            };
+            default: components["responses"]["Problem"];
+        };
+    };
     checkPolicyDraft: {
         parameters: {
             query?: never;
@@ -2508,6 +2809,195 @@ export interface operations {
                         paused: boolean;
                         changed: boolean;
                     };
+                };
+            };
+            default: components["responses"]["Problem"];
+        };
+    };
+    listSyncJobs: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Jobs */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["SyncJobList"];
+                };
+            };
+            default: components["responses"]["Problem"];
+        };
+    };
+    getSyncJob: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                environment: string;
+                name: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description The job */
+            200: {
+                headers: {
+                    ETag: components["headers"]["ETag"];
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["SyncJob"];
+                };
+            };
+            default: components["responses"]["Problem"];
+        };
+    };
+    listSyncRuns: {
+        parameters: {
+            query?: {
+                limit?: components["parameters"]["Limit"];
+                /** @description Opaque value from the previous page's next_cursor */
+                cursor?: components["parameters"]["Cursor"];
+            };
+            header?: never;
+            path: {
+                environment: string;
+                name: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description One page */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["SyncRunPage"];
+                };
+            };
+            default: components["responses"]["Problem"];
+        };
+    };
+    setSyncJobPaused: {
+        parameters: {
+            query?: never;
+            header: {
+                /** @description Same key and same body returns the first result; same key and different body is a 422 */
+                "Idempotency-Key": components["parameters"]["IdempotencyKey"];
+                /** @description ETag from the last read; a mismatch returns 412 */
+                "If-Match": components["parameters"]["IfMatch"];
+            };
+            path: {
+                environment: string;
+                name: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    paused: boolean;
+                };
+            };
+        };
+        responses: {
+            /** @description The job as it is now */
+            200: {
+                headers: {
+                    ETag: components["headers"]["ETag"];
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["SyncJob"];
+                };
+            };
+            default: components["responses"]["Problem"];
+        };
+    };
+    runSyncJobNow: {
+        parameters: {
+            query?: never;
+            header: {
+                /** @description Same key and same body returns the first result; same key and different body is a 422 */
+                "Idempotency-Key": components["parameters"]["IdempotencyKey"];
+            };
+            path: {
+                environment: string;
+                name: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Queued. The run appears in the job's runs when the worker starts it */
+            202: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["SyncQueued"];
+                };
+            };
+            default: components["responses"]["Problem"];
+        };
+    };
+    getSyncRun: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description The run */
+            200: {
+                headers: {
+                    ETag: components["headers"]["ETag"];
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["SyncRun"];
+                };
+            };
+            default: components["responses"]["Problem"];
+        };
+    };
+    approveSyncRun: {
+        parameters: {
+            query?: never;
+            header: {
+                /** @description Same key and same body returns the first result; same key and different body is a 422 */
+                "Idempotency-Key": components["parameters"]["IdempotencyKey"];
+                /** @description ETag from the last read; a mismatch returns 412 */
+                "If-Match": components["parameters"]["IfMatch"];
+            };
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Queued for the worker */
+            202: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["SyncQueued"];
                 };
             };
             default: components["responses"]["Problem"];

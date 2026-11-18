@@ -23,15 +23,21 @@ export function classifyPersonRef(raw: unknown, pattern: RegExp): PersonRef {
   return { kind: 'error', message: `"${v}" is neither a staff ID (${pattern.source}) nor an email address` };
 }
 
-/** email (lower case) -> staff ID, for the Person nodes in a list; an email held by two people is ambiguous and resolves to nothing */
-export function emailIndex(people: { qualifiedName: string; email?: unknown }[]): Map<string, string | null> {
-  const m = new Map<string, string | null>();
+/**
+ * email (lower case) -> staff ID, for the Person nodes in a list; an email held by two people is ambiguous and resolves to nothing.
+ * A deprecated Person (a leaver) counts only when no active Person has the email (so ownership is not lost), and with `activeOnly` not at all (a new hire may reuse a leaver's email, ADR 0027).
+ * A person with no `lifecycle` is treated as active.
+ */
+export function emailIndex(people: { qualifiedName: string; email?: unknown; lifecycle?: string }[], opts: { activeOnly?: boolean } = {}): Map<string, string | null> {
+  const active = new Map<string, string | null>(); const gone = new Map<string, string | null>();
   for (const p of people) {
     if (typeof p.email !== 'string' || !p.email) continue;
     const k = p.email.trim().toLowerCase();
+    const m = p.lifecycle === 'deprecated' ? gone : active;
     m.set(k, m.has(k) && m.get(k) !== p.qualifiedName ? null : p.qualifiedName);
   }
-  return m;
+  if (!opts.activeOnly) for (const [k, v] of gone) if (!active.has(k)) active.set(k, v);
+  return active;
 }
 
 /** Staff ID of the person a source value names, or why it cannot be resolved. */

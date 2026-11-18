@@ -8,9 +8,13 @@ import { DataTable } from '@/components/patterns/data-table';
 import { PageHeader } from '@/components/patterns/page-header';
 import { EmptyState, ErrorState, LoadingState } from '@/components/patterns/states';
 import { notify } from '@/components/patterns/toast';
-import { ApiProblem, useData, type Tier } from '@/lib/data';
+import { humanise } from '@/features/object/model';
+import { ApiProblem, useData, type ApiNode, type Tier } from '@/lib/data';
+import { PersonRef } from '@/lib/people';
+import { StatusBadge } from '@/components/patterns/status-badge';
 import { useAsync } from '@/lib/use-async';
 
+const nameOf = (n: ApiNode) => (typeof n.attributes.name === 'string' && n.attributes.name ? n.attributes.name : n.qualified_name);
 const problem = (e: unknown) => (e instanceof ApiProblem ? e.detail : 'Something went wrong. Try again.');
 const TIERS: { id: Tier; label: string }[] = [{ id: 'bronze', label: 'Bronze' }, { id: 'silver', label: 'Silver' }, { id: 'gold', label: 'Gold' }];
 
@@ -19,8 +23,9 @@ function LinkEditor({ qn, element, apps, onDone }: { qn: string; element: string
   const data = useData();
   const [app, setApp] = useState(apps[0]?.application ?? '');
   const cands = useAsync(async () => {
-    const [c, t] = await Promise.all([data.search('', { types: ['Column'], limit: 100 }), data.search('', { types: ['Table'], limit: 100 })]);
-    return [...c.hits, ...t.hits].map((h) => ({ id: h.qualified_name, label: h.name, group: h.type }));
+    const [c, t] = await Promise.all([data.listNodes('Column'), data.listNodes('Table')]);
+    // a column name alone is ambiguous (account_id is in three tables), so say which table
+    return [...c, ...t].map((n) => ({ id: n.qualified_name, label: n.qualified_name.split('/').slice(-2).join('/'), group: n.type }));
   }, []);
   if (cands.status === 'loading') return <LoadingState label="Loading columns" />;
   if (cands.status === 'error') return <ErrorState message={problem(cands.error)} />;
@@ -40,7 +45,7 @@ function LinkEditor({ qn, element, apps, onDone }: { qn: string; element: string
 /** The integrations the scope's data flows through, chosen with the same picker. */
 function FlowsEditor({ initial, onSave }: { initial: string[]; onSave(ids: string[]): void }) {
   const data = useData();
-  const cands = useAsync(async () => (await data.search('', { types: ['Integration'], limit: 100 })).hits.map((h) => ({ id: h.qualified_name, label: h.name, group: 'Integration' })), []);
+  const cands = useAsync(async () => (await data.listNodes('Integration')).map((n) => ({ id: n.qualified_name, label: nameOf(n), group: 'Integration' })), []);
   if (cands.status === 'loading') return <LoadingState label="Loading integrations" />;
   if (cands.status === 'error') return <ErrorState message={problem(cands.error)} />;
   return <LinkPicker label="Integrations the data flows through" candidates={cands.value} initial={initial} onConfirm={onSave} />;
@@ -51,18 +56,25 @@ const Wrap = ({ children }: { children: React.ReactNode }) => <div className="mx
 /** C6. Every scope the person can see. */
 export function ScopeListRoute() {
   const data = useData();
-  const s = useAsync(() => data.search('', { types: ['Scope'], limit: 100 }), []);
+  const s = useAsync(() => data.listNodes('Scope'), []);
+  const attr = (n: ApiNode, k: string) => (typeof n.attributes[k] === 'string' ? n.attributes[k] as string : '');
+  const STATUS: Record<string, string> = { draft: 'Draft', submitted: 'Submitted and locked', amended: 'Amended, being rewritten' };
   return (
     <>
       <PageHeader title="Scopes" description="Regulatory returns, reports and processes, and where their data lives." crumbs={[{ label: 'Home', to: '/' }, { label: 'Scopes' }]} />
       <Wrap>
         {s.status === 'loading' && <LoadingState label="Loading scopes" />}
-        {s.status === 'error' && <ErrorState message={problem(s.error)} />}
+        {s.status === 'error' && <ErrorState message={problem(s.error)} requestId={s.error instanceof ApiProblem ? s.error.requestId : undefined} />}
         {s.status === 'done' && (
-          <DataTable label="Scopes" exportName="scopes" rowId={(h) => h.qualified_name} rows={s.value.hits}
+          <DataTable label="Scopes" exportName="scopes" rowId={(n) => n.qualified_name} rows={s.value}
             empty={{ title: 'No scopes yet', doing: 'Scopes arrive from the scope sources, or a scope owner defines one.' }}
-            columns={[{ id: 'name', header: 'Name', cell: (h) => <Link to="/scopes/$qn" params={{ qn: h.qualified_name }} className="underline">{h.name}</Link>, text: (h) => h.name },
-              { id: 'qn', header: 'Identifier', cell: (h) => h.qualified_name, text: (h) => h.qualified_name }]} />
+            columns={[
+              { id: 'name', header: 'Name', cell: (n) => <Link to="/scopes/$qn" params={{ qn: n.qualified_name }} className="text-brand-text underline underline-offset-2">{nameOf(n)}</Link>, text: nameOf },
+              { id: 'kind', header: 'Kind', cell: (n) => humanise(attr(n, 'kind')), text: (n) => attr(n, 'kind') },
+              { id: 'owner', header: 'Owner', cell: (n) => (attr(n, 'owner') ? <PersonRef id={attr(n, 'owner')} role="Owner" /> : 'Not set'), text: (n) => attr(n, 'owner') },
+              { id: 'status', header: 'Status', cell: (n) => STATUS[attr(n, 'status')] ?? humanise(attr(n, 'status') || 'draft'), text: (n) => attr(n, 'status') },
+              { id: 'tier', header: 'Trust tier to reach', cell: (n) => (attr(n, 'required_tier') ? <StatusBadge kind="tier" value={attr(n, 'required_tier') as 'gold'} /> : 'Not chosen yet'), text: (n) => attr(n, 'required_tier') },
+              { id: 'qn', header: 'Identifier', cell: (n) => n.qualified_name, text: (n) => n.qualified_name, hidden: true }]} />
         )}
       </Wrap>
     </>
@@ -89,7 +101,7 @@ export function ScopeRoute({ qn }: { qn: string }) {
         {st.status === 'done' && (() => {
           const { scope, done } = st.value;
           return (<>
-            <p className="text-sm">Version {scope.version} · {scope.locked ? 'submitted and locked' : scope.status === 'amended' ? 'amended, being rewritten' : 'draft'} · owner {scope.owner ?? 'unknown'}</p>
+            <p className="flex flex-wrap items-center gap-x-2 text-sm">Version {scope.version} · {scope.locked ? 'submitted and locked' : scope.status === 'amended' ? 'amended, being rewritten' : 'draft'} · owner {scope.owner ? <PersonRef id={scope.owner} role="Owner" /> : 'unknown'}</p>
             <Completeness label="Ready for use" steps={[
               { label: `Every element linked (${done.elements.linked} of ${done.elements.total})`, done: done.elements.unlinked.length === 0 && done.elements.total > 0 },
               { label: 'Every application has finished its task', done: done.applications.length > 0 && done.applications.every((a) => a.task === 'done' || a.task === 'none_held') }]} />
@@ -131,7 +143,7 @@ export function ScopeRoute({ qn }: { qn: string }) {
             <section aria-labelledby="apps"><h2 id="apps" className="mb-2 text-lg font-semibold">Applications on the flows</h2>
               <DataTable label="Applications" exportName={`${qn}-applications`} rowId={(a) => a.application} rows={done.applications}
                 empty={{ title: 'No applications', doing: 'Applications appear once the scope’s integrations are known.' }}
-                columns={[{ id: 'a', header: 'Application', cell: (a) => a.name, text: (a) => a.name }, { id: 'o', header: 'Owner', cell: (a) => a.owner ?? '', text: (a) => a.owner ?? '' },
+                columns={[{ id: 'a', header: 'Application', cell: (a) => a.name, text: (a) => a.name }, { id: 'o', header: 'Owner', cell: (a) => (a.owner ? <PersonRef id={a.owner} role="Owner" /> : ''), text: (a) => a.owner ?? '' },
                   { id: 't', header: 'Link task', cell: (a) => a.task + (a.escalated ? ' (escalated)' : ''), text: (a) => a.task }, { id: 'l', header: 'Links', cell: (a) => a.links, text: (a) => String(a.links) }]} />
             </section>
           </>);

@@ -23,6 +23,9 @@ export async function seed(store: CatalogStore, db: Queryable, root: string): Pr
   // People as the identity provider holds them: the key is the STAFF ID, a string of 8 digits (ADR 0026), read as text from the local user list so leading zeros survive
   type User = { staffID: string; displayName: string; email?: string };
   for (const u of JSON.parse(readFileSync(join(root, 'config/local-users.json'), 'utf8')) as User[]) await node('Person', u.staffID, { email: u.email ?? `${u.staffID}@example.test`, staff_id: u.staffID, name: u.displayName }, sync('idp'));
+  // Someone who has left the organisation: the identity provider no longer lists them, so the person is deprecated. They still own one scope, so the app shows the "Owner has left" flag (local testing only).
+  await node('Person', '43000098', { email: 'rae.retired@example.test', staff_id: '43000098', name: 'Rae Retired' }, sync('idp'));
+  await store.tx(db, () => store.applyNode(db, { type: 'Person', qualifiedName: '43000098', attributes: {}, writer: sync('idp'), actor: ACTOR, lifecycle: 'deprecated' }));
 
   // ServiceNow: applications and integrations (the same fixtures the mock source serves to the sync job)
   type App = { sys_id: string; name: string; owned_by: string; delegates: string[]; criticality: string; install_status: string; country: string };
@@ -89,9 +92,10 @@ export async function seed(store: CatalogStore, db: Queryable, root: string): Pr
     ['scope-pra110', 'PRA110', 'regulatory-return', 'gold', 'submitted', ['int-risk-to-reporting', 'int-ledger-to-risk']],
     ['scope-bcbs-var', 'BCBS 239 exposure report', 'report', 'silver', 'draft', ['int-ledger-to-risk']],
     ['scope-onboarding', 'Customer onboarding', 'business-process', 'bronze', 'draft', ['int-crm-to-payments']],
+    ['scope-legacy-loans', 'Legacy loan reporting', 'report', 'bronze', 'draft', ['int-ledger-to-lake']],
   ];
   for (const [qn, name, kind, tier, status, flows] of scopes) {
-    await node('Scope', qn, { name, owner: '43000004', kind }, sync('scope-sources'));
+    await node('Scope', qn, { name, owner: qn === 'scope-legacy-loans' ? '43000098' : '43000004', kind }, sync('scope-sources'));
     await node('Scope', qn, { required_tier: tier, version: 1, status: 'draft' }, USER);
     const g = `${qn}--core`; await node('ScopeGroup', g, { name: 'Core', order: 1 }, USER); await link('includes', qn, g, 'dmc');
     const e = `${g}--exposure`; await node('BusinessElement', e, { name: 'Exposure', definition: 'What is at risk' }, USER); await link('includes', g, e, 'dmc');

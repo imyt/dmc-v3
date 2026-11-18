@@ -51,3 +51,48 @@ describe('boundary check (F1: a cross-module import fails CI)', () => {
     expect(checkBoundaries(root)).toHaveLength(1);
   });
 });
+
+describe('R1: shared code only through package names (a relative import across deployables fails CI)', () => {
+  it('fails when one deployable reaches into another by relative path', () => {
+    put('apps/api/src/a.ts', `import { w } from '../../worker/src/jobs';`);
+    const v = checkBoundaries(root);
+    expect(v).toHaveLength(1);
+    expect(v[0]).toMatchObject({ file: 'apps/api/src/a.ts', rule: expect.stringMatching(/relative import leaves its package/) });
+  });
+
+  it('fails when a deployable reaches into packages/*/src by relative path, even into a module it may import by name', () => {
+    put('apps/worker/src/a.ts', `import { x } from '../../../packages/catalog/src/index';`);
+    put('apps/api/src/b.ts', `export { y } from '../../../packages/platform/src/authz';`);
+    put('apps/connectors/src/c.ts', `const m = await import('../../../packages/contracts/src/index');`);
+    expect(checkBoundaries(root).map((x) => x.file).sort()).toEqual(['apps/api/src/b.ts', 'apps/connectors/src/c.ts', 'apps/worker/src/a.ts']);
+  });
+
+  it('fails when a package imports a deployable, by relative path or by name', () => {
+    put('packages/platform/src/a.ts', `import { x } from '../../../apps/api/src/server';`);
+    put('packages/catalog/src/b.ts', `import { x } from '@dmc/app-api';`);
+    put('packages/contracts/src/c.ts', `import { x } from '@dmc/app-worker';`);
+    expect(checkBoundaries(root)).toHaveLength(3);
+  });
+
+  it('fails when a deployable imports another deployable by package name', () => {
+    put('apps/api/src/a.ts', `import { x } from '@dmc/app-worker';`);
+    expect(checkBoundaries(root)[0].rule).toMatch(/may not import @dmc\/app-worker/);
+  });
+
+  it('fails on an absolute path import', () => {
+    put('apps/api/src/a.ts', `import { x } from '/repo/packages/catalog/src/index';`);
+    put('apps/api/src/b.ts', `import { x } from 'C:\\repo\\apps\\worker\\x';`);
+    expect(checkBoundaries(root)).toHaveLength(2);
+  });
+
+  it('allows relative imports that stay inside one deployable', () => {
+    put('apps/api/src/a.ts', `import { x } from './b';\nimport { y } from '../test/helper';`);
+    put('apps/api/test/helper.ts', `export const y = 1;`);
+    expect(checkBoundaries(root)).toEqual([]);
+  });
+
+  it('does not scan the top-level tests/ directory (it exercises packages by relative path on purpose)', () => {
+    put('tests/a.test.ts', `import { x } from '../packages/catalog/src/index';\nimport { y } from '../apps/api/src/index';`);
+    expect(checkBoundaries(root)).toEqual([]);
+  });
+});

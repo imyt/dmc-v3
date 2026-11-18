@@ -10,7 +10,7 @@ export function SideNav({ items }: { items: NavItem[] }) {
           <li key={to}>
             <Link
               to={to}
-              activeOptions={{ exact: to === '/' }}
+              activeOptions={{ exact: to === '/' || to === '/admin' }}
               title={label}
               className="flex h-11 items-center gap-3 border-l-4 border-transparent px-4 text-sm hover:bg-muted data-[status=active]:border-brand data-[status=active]:bg-muted data-[status=active]:font-semibold"
             >

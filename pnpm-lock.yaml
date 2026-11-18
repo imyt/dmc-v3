@@ -53,6 +53,9 @@ importers:
       '@dmc/catalog':
         specifier: workspace:*
         version: link:../../packages/catalog
+      '@dmc/connectors':
+        specifier: workspace:*
+        version: link:../../packages/connectors
       '@dmc/contracts':
         specifier: workspace:*
         version: link:../../packages/contracts
